@@ -16,10 +16,10 @@ const DimissKeyboard = ({children}) => (
     </TouchableWithoutFeedback>
 );
 class crear_mision extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            PickerValue : '',
+            PickerValue : 0,
             nombre_mision : '',
             desc_mision: ''
 
@@ -31,8 +31,29 @@ class crear_mision extends Component {
             <Icon name='today' style = {{fontSize:24,color:tintColor}} />
         )
     }
-    clickme = () =>{
-        alert('ok');
+    crearMision = () =>{
+        console.log(this.state);
+        fetch('http://192.168.2.98/crearMision.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+
+            },
+            body:JSON.stringify({
+                tipo_mision:this.state.PickerValue,
+                nombre_mision:this.state.nombre_mision,
+                descripcion_mision:this.state.desc_mision
+            })
+        })
+        .then(response => response.json())
+            .then((responseJson) => {
+                alert(responseJson);
+            })
+            .catch((error)=>{
+                console.error(error);
+            });
+
     }
     render() {
 
@@ -53,10 +74,10 @@ class crear_mision extends Component {
                         mode = 'dropdown'
                         selectedValue = {this.state.PickerValue}
                         onValueChange ={ (itemValue,itemIndex) => this.setState({PickerValue: itemValue}) }>
-                        <Picker.Item label = "Elija un tipo de misión" value = "" />
-                        <Picker.Item label = "Misión Tipo 1" value = "Tipo_1" />
-                        <Picker.Item label = "Mision Tipo 2" value = "Tipo_2" />
-                        <Picker.Item label = "Mision Tipo 3" value = "Tipo_3" />
+                        <Picker.Item label = "Elija un tipo de misión" value = {0} />
+                        <Picker.Item label = "Misión Tipo 1" value = {1} />
+                        <Picker.Item label = "Mision Tipo 2" value = {2} />
+                        <Picker.Item label = "Mision Tipo 3" value = {3} />
                     </Picker>
                 </View>
                 <View style = {styles.misionInput}>
@@ -86,7 +107,7 @@ class crear_mision extends Component {
                 <Button 
                     title = "Crear"
                     backgroundColor = 'blue'
-                    onPress = {this.clickme}
+                    onPress = {this.crearMision}
                     //console.log({tipo_mision:this.state.PickerValue,nombre_mision:this.state.nombre_mision,descripcion:this.state.desc_mision})
                     />
             </View>
