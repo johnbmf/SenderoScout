@@ -9,18 +9,15 @@ public class OnTouching : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (isInFront)
-        {
+        if (isInFront) {
             DetalleMisionCanvas.SetActive(!DetalleMisionCanvas.activeSelf);
             isInFront = false;
         }
     }
 
-    public void HideMissionDetails()
-    {
+    public void HideMissionDetails() {
         DetalleMisionCanvas.SetActive(!DetalleMisionCanvas.activeSelf);
         isInFront = true;
     }
-
+        
 }
-

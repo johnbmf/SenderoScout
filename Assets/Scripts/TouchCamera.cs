@@ -9,10 +9,10 @@ public class TouchCamera : MonoBehaviour {
 	};
 	Vector2 oldTouchVector;
 	float oldTouchDistance;
-    float max_movement_X = 322f;
-    float max_movement_Y = 400f;
-    float min_movement_X = -322f;
-    float min_movement_Y = -400f;
+    float max_movement_X = 578f;
+    float max_movement_Y = 518f;
+    float min_movement_X = -578f;
+    float min_movement_Y = -518f;
 
     void Update() {
 		if (Input.touchCount == 0) {
@@ -26,7 +26,7 @@ public class TouchCamera : MonoBehaviour {
             }
             else {
                 Vector2 newTouchPosition = Input.GetTouch(0).position;
-
+                
                 Vector3 New_camera_pos = transform.position + transform.TransformDirection((Vector3)((oldTouchPositions[0] - newTouchPosition) * GetComponent<Camera>().orthographicSize / GetComponent<Camera>().pixelHeight * 2f));
                 if (New_camera_pos[0] > max_movement_X) {
                     New_camera_pos[0] = max_movement_X;
@@ -45,7 +45,7 @@ public class TouchCamera : MonoBehaviour {
                 {
                     New_camera_pos[1] = min_movement_Y;
                 }
-
+                
                 //transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] - newTouchPosition) * GetComponent<Camera>().orthographicSize / GetComponent<Camera>().pixelHeight * 2f));
                 transform.position = New_camera_pos;
 				oldTouchPositions[0] = newTouchPosition;
@@ -76,8 +76,8 @@ public class TouchCamera : MonoBehaviour {
                 GetComponent<Camera>().orthographicSize *= oldTouchDistance / newTouchDistance;
             
                 //Limites del zoom: se cambia el ultimo valor de la funcion max para limitar zoom in, y min para limitar zoom out;
-                GetComponent<Camera>().orthographicSize = Mathf.Max(GetComponent<Camera>().orthographicSize, 20.0f);
-                GetComponent<Camera>().orthographicSize = Mathf.Min(GetComponent<Camera>().orthographicSize, 100f);
+                GetComponent<Camera>().orthographicSize = Mathf.Max(GetComponent<Camera>().orthographicSize, 150.0f);
+                GetComponent<Camera>().orthographicSize = Mathf.Min(GetComponent<Camera>().orthographicSize, 250f);
 
                 transform.position -= transform.TransformDirection((newTouchPositions[0] + newTouchPositions[1] - screen) * GetComponent<Camera>().orthographicSize / screen.y);
 

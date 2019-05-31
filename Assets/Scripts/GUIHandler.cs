@@ -22,7 +22,7 @@ public class GUIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     IEnumerator GetSpotsMision()
