@@ -33,7 +33,7 @@ class crear_mision extends Component {
     }
     crearMision = () =>{
         console.log(this.state);
-        fetch('http://192.168.2.98/crearMision.php',{
+        fetch('http://10.6.43.98/crearMision.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -70,7 +70,8 @@ class crear_mision extends Component {
                         <Text style = {styles.header} >C R E A R  M I S I O N</Text>
                     </View>
                 <View style= {styles.pickerMenu}>
-                    <Picker style = {{width:'80%', borderColor:'grey', borderWidth:1}}
+                    <Picker 
+                        style = {{width:'80%', borderColor:'gray', borderWidth:1}}
                         mode = 'dropdown'
                         selectedValue = {this.state.PickerValue}
                         onValueChange ={ (itemValue,itemIndex) => this.setState({PickerValue: itemValue}) }>
@@ -82,7 +83,8 @@ class crear_mision extends Component {
                 </View>
                 <View style = {styles.misionInput}>
                     <TextInput 
-                        style = {{height:60, width:'90%'}}
+                        style = {{flex:0,height:40, width:'95%', borderColor: 'gray', borderWidth:1, marginBottom:20, textAlign:'center'}}
+                        underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
                         multiline = {true}
@@ -94,7 +96,7 @@ class crear_mision extends Component {
                 </View>
                 <View style = {styles.misionDesc}>
                     <TextInput 
-                        style = {{height:50, width:'90%'}}
+                        style = {{height:200, width:'95%', borderColor: 'gray', borderWidth:1, marginBottom:20,textAlign:'center'}}
                         placeholder = "Descripción de la misión"
                         maxLength = {240}
                         //{...this.props}
@@ -105,6 +107,8 @@ class crear_mision extends Component {
                         />
                 </View>
                 <Button 
+                    style = {{flex:0,width:60,height:30}}
+                    type = "outline"
                     title = "Crear"
                     backgroundColor = 'blue'
                     onPress = {this.crearMision}
@@ -152,7 +156,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        paddingTop:30,
+        paddingTop:60,
+        paddingBottom:30
     },
     misionInput:{
         flex:1,
@@ -161,6 +166,7 @@ const styles = StyleSheet.create({
         width:'90%',
         height:60,
         paddingLeft:25,
+        paddingBottom:120
 
     },
     misionDesc:{
@@ -168,8 +174,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width:'90%',
-        height:100,
-        paddingBottom: 300,
+        height:200,
+        paddingBottom: 230,
         paddingLeft:25,
         backgroundColor:'white'
 
