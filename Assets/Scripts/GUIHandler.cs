@@ -56,14 +56,14 @@ public class GUIHandler : MonoBehaviour
                 {
                     Debug.Log("Se ha encontrado una mision.");
                     //Desplegar acciones asociadas a la visualizacion de la mision.
-                    Text textotitulomision;
-                    Text textoInstruccionesMision;
+                    //Text textotitulomision;
+                    //Text textoInstruccionesMision;
 
-                    textotitulomision = TituloMision.GetComponent<Text>();
-                    textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+                    //textotitulomision = TituloMision.GetComponent<Text>();
+                    //textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
 
-                    textotitulomision.text = "Mision spot 1";
-                    textoInstruccionesMision.text = "Instrucciones de mision del spot 1";
+                    //textotitulomision.text = "Mision spot 1";
+                    //textoInstruccionesMision.text = "Instrucciones de mision del spot 1";
                     Spot1.SetActive(true);
                     yield return new WaitForSeconds(30.0f);
                 }

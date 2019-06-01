@@ -68,7 +68,7 @@ public class TouchCamera : MonoBehaviour {
 				Vector2 newTouchVector = newTouchPositions[0] - newTouchPositions[1];
 				float newTouchDistance = newTouchVector.magnitude;
 
-				transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] + oldTouchPositions[1] - screen) * GetComponent<Camera>().orthographicSize / screen.y));
+				//transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] + oldTouchPositions[1] - screen) * GetComponent<Camera>().orthographicSize / screen.y));
 
                 //Rotacion;
                 //transform.localRotation *= Quaternion.Euler(new Vector3(0, 0, Mathf.Asin(Mathf.Clamp((oldTouchVector.y * newTouchVector.x - oldTouchVector.x * newTouchVector.y) / oldTouchDistance / newTouchDistance, -1f, 1f)) / 0.0174532924f));
@@ -79,7 +79,7 @@ public class TouchCamera : MonoBehaviour {
                 GetComponent<Camera>().orthographicSize = Mathf.Max(GetComponent<Camera>().orthographicSize, 150.0f);
                 GetComponent<Camera>().orthographicSize = Mathf.Min(GetComponent<Camera>().orthographicSize, 250f);
 
-                transform.position -= transform.TransformDirection((newTouchPositions[0] + newTouchPositions[1] - screen) * GetComponent<Camera>().orthographicSize / screen.y);
+                //transform.position -= transform.TransformDirection((newTouchPositions[0] + newTouchPositions[1] - screen) * GetComponent<Camera>().orthographicSize / screen.y);
 
 				oldTouchPositions[0] = newTouchPositions[0];
 				oldTouchPositions[1] = newTouchPositions[1];
