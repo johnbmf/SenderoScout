@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.UI;
+using SimpleJSON;
 
 public class GUIHandler : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GUIHandler : MonoBehaviour
     public GameObject DetalleMisionCanvas;
     public GameObject TituloMision;
     public GameObject InstruccionesMision;
+
+    private WaitForSeconds UpdateCooldown = new WaitForSeconds(30.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -44,17 +47,18 @@ public class GUIHandler : MonoBehaviour
                 string respuesta = www.downloadHandler.text;
                 Debug.Log("Respuesta del servidor: " + respuesta);
 
+                var RespuestaJson = JSON.Parse(respuesta);
+                int numMisiones = RespuestaJson["num_rows"];
                 //Aqui deberian parsearse los datos entregados por el servidor.
 
-                if (respuesta == "0")
+                if (numMisiones == -1)
                 {
-                    Debug.Log("El script no se pudo conectar a la base de datos");
-                    yield return new WaitForSeconds(30.0f);
+                    Debug.Log("El script no se pudo conectar a la base de datos");                   
                 }
 
-                else if (respuesta == "1")
+                else if (numMisiones > 0)
                 {
-                    Debug.Log("Se ha encontrado una mision.");
+                    Debug.Log("Se han encontrado misiones.");
                     //Desplegar acciones asociadas a la visualizacion de la mision.
                     //Text textotitulomision;
                     //Text textoInstruccionesMision;
@@ -64,17 +68,16 @@ public class GUIHandler : MonoBehaviour
 
                     //textotitulomision.text = "Mision spot 1";
                     //textoInstruccionesMision.text = "Instrucciones de mision del spot 1";
-                    Spot1.SetActive(true);
-                    yield return new WaitForSeconds(30.0f);
+                    Spot1.SetActive(true);                    
                 }
 
-                else if (respuesta == "2")
+                else if (numMisiones == 0)
                 {
                     Debug.Log("No se han encontrado misiones para el jugador actual.");
-                    Spot1.SetActive(false);
-                    yield return new WaitForSeconds(30.0f);
+                    Spot1.SetActive(false);                  
                 }
             }
+            yield return UpdateCooldown;
         }
     }
 
