@@ -9,10 +9,15 @@ public class TouchCamera : MonoBehaviour {
 	};
 	Vector2 oldTouchVector;
 	float oldTouchDistance;
-    float max_movement_X = 578f;
-    float max_movement_Y = 518f;
-    float min_movement_X = -578f;
-    float min_movement_Y = -518f;
+    float max_movement_X = 450f;
+    float max_movement_Y = 435f;
+    float min_movement_X = -450f;
+    float min_movement_Y = -435f;
+
+    void Start()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
 
     void Update() {
 		if (Input.touchCount == 0) {
@@ -76,8 +81,8 @@ public class TouchCamera : MonoBehaviour {
                 GetComponent<Camera>().orthographicSize *= oldTouchDistance / newTouchDistance;
             
                 //Limites del zoom: se cambia el ultimo valor de la funcion max para limitar zoom in, y min para limitar zoom out;
-                GetComponent<Camera>().orthographicSize = Mathf.Max(GetComponent<Camera>().orthographicSize, 150.0f);
-                GetComponent<Camera>().orthographicSize = Mathf.Min(GetComponent<Camera>().orthographicSize, 250f);
+                GetComponent<Camera>().orthographicSize = Mathf.Max(GetComponent<Camera>().orthographicSize, 200f);
+                GetComponent<Camera>().orthographicSize = Mathf.Min(GetComponent<Camera>().orthographicSize, 300f);
 
                 //transform.position -= transform.TransformDirection((newTouchPositions[0] + newTouchPositions[1] - screen) * GetComponent<Camera>().orthographicSize / screen.y);
 
