@@ -33,7 +33,7 @@ class crear_mision extends Component {
     }
     crearMision = () =>{
         console.log(this.state);
-        fetch('http://10.6.43.98/crearMision.php',{
+        fetch('http://192.168.2.28/crearMision.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
