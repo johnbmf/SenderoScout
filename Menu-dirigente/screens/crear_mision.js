@@ -7,7 +7,8 @@ import {
     TextInput,
     Button,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Alert
 } from "react-native";
 import { Header,Left,Right,Icon} from 'native-base'
 const DimissKeyboard = ({children}) => (
@@ -33,32 +34,45 @@ class crear_mision extends Component {
     }
     crearMision = () =>{
         console.log(this.state);
-        fetch('http://192.168.2.28/crearMision.php',{
-            method: 'post',
-            header:{
-                'Accept': 'application/json',
-                'Content/Type': 'application/json',
-
-            },
-            body:JSON.stringify({
-                tipo_mision:this.state.PickerValue,
-                nombre_mision:this.state.nombre_mision,
-                descripcion_mision:this.state.desc_mision
+        if(this.state.PickerValue==0){
+            Alert.alert("Error","Es necesario elegir el tipo de misión");
+            return;
+        }
+        else if (!this.state.desc_mision || !this.state.desc_mision.trim()) {
+            Alert.alert("Error","Es necesaria una descripción de la misión");
+            return;
+        } if (!this.state.nombre_mision || this.state.nombre_mision.trim()) {
+            Alert.alert("Error","Es necesario un nombre para la misión");
+            return;
+        } else {
+            
+            fetch('http://192.168.2.28/crearMision.php',{
+                method: 'post',
+                header:{
+                    'Accept': 'application/json',
+                    'Content/Type': 'application/json',
+                    
+                },
+                body:JSON.stringify({
+                    tipo_mision:this.state.PickerValue,
+                    nombre_mision:this.state.nombre_mision,
+                    descripcion_mision:this.state.desc_mision
+                })
             })
-        })
-        .then(response => response.json())
+            .then(response => response.json())
             .then((responseJson) => {
                 alert(responseJson);
             })
             .catch((error)=>{
                 console.error(error);
             });
-
-    }
-    render() {
-
-        return (
-            <DimissKeyboard>
+        }
+            
+        }
+        render() {
+            
+            return (
+                <DimissKeyboard>
                 <View style={styles.container}>
                     <Header style={{height:80,backgroundColor:'orange'}}>
                         <Left style = {{flex:1, flexDirection:'row'}}>
