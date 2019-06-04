@@ -1,4 +1,9 @@
-<?php include 'config.php';
+<?php
+	require_once('db_conn.php');
+  //Poner una app verification con post.
+
+  //Generar conexion a BD.
+    $mysqli = db_conn();
 
 
 	$json = file_get_contents('php://input');
