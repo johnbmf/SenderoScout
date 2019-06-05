@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing.unity
     guid: ad5d958add848224aaad07075f333f91
   - enabled: 1
-    path: Assets/Scenes/Otra.unity
+    path: Assets/Scenes/EscenaMapa.unity
     guid: 5c29e1c14746c2040970e758024b2b6b
   m_configObjects: {}
