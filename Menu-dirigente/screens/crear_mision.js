@@ -74,6 +74,7 @@ class crear_mision extends Component {
         render() {
             
             return (
+<<<<<<< HEAD
                     <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
                         <ScrollView> 
                         <DimissKeyboard>
@@ -135,6 +136,66 @@ class crear_mision extends Component {
                 </DimissKeyboard>
                 </ScrollView>
             </KeyboardAvoidingView>
+=======
+                <DimissKeyboard>
+                <View style={styles.container}>
+                    <Header style={{height:80,backgroundColor:'#81C14B',font:'Roboto'}}>
+                        <Left style = {{flex:1, flexDirection:'row'}}>
+                            <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                            <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
+                        </Left>
+                    </Header >
+                    <View style = {styles.top}>
+                        <Text style = {styles.header} >C R E A R  M I S I O N</Text>
+                    </View>
+                <View style= {styles.pickerMenu}>
+                    <Picker 
+                        style = {{width:'80%', borderColor:'gray', borderWidth:1}}
+                        mode = 'dropdown'
+                        selectedValue = {this.state.PickerValue}
+                        onValueChange ={ (itemValue,itemIndex) => this.setState({PickerValue: itemValue}) }>
+                        <Picker.Item label = "Elija un tipo de misión" value = {0} />
+                        <Picker.Item label = "Misión Tipo 1" value = {1} />
+                        <Picker.Item label = "Mision Tipo 2" value = {2} />
+                        <Picker.Item label = "Mision Tipo 3" value = {3} />
+                    </Picker>
+                </View>
+                <View style = {styles.misionInput}>
+                    <TextInput 
+                        style = {{flex:0,height:40, width:'95%', borderColor: 'gray', borderWidth:1, marginBottom:20, textAlign:'center'}}
+                        underlineColorAndroid = "transparent"
+                        maxLength = {60}
+                        //{...this.props}
+                        multiline = {true}
+                        numberOfLines = {4}
+                        onChangeText={(valor) => this.setState({nombre_mision : valor})}
+                        placeholder = "Nombre de la misión"
+                        value={this.state.nombre_mision}
+                        />
+                </View>
+                <View style = {styles.misionDesc}>
+                    <TextInput 
+                        style = {{height:200, width:'95%', borderColor: 'gray', borderWidth:1, marginBottom:20,textAlign:'center'}}
+                        placeholder = "Descripción de la misión"
+                        maxLength = {240}
+                        //{...this.props}
+                        multiline = {true}
+                        numberOfLines = {20}
+                        onChangeText={(valor) => this.setState({desc_mision : valor})}
+                        value={this.state.desc_mision}
+                        />
+                </View>
+                <Button 
+                    style = {{flex:0,width:60,height:30}}
+                    type = "outline"
+                    title = "Crear"
+                    backgroundColor = '#104F55'
+                    onPress = {this.crearMision}
+                    //console.log({tipo_mision:this.state.PickerValue,nombre_mision:this.state.nombre_mision,descripcion:this.state.desc_mision})
+                    />
+            </View>
+        </DimissKeyboard>
+>>>>>>> 933215af6487f8da6efb7963d056c86c4ff444e5
         );
     }
 }
