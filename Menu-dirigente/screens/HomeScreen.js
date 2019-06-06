@@ -18,7 +18,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header style={{height:80,backgroundColor:'orange'}}>
+                <Header style={{height:80,backgroundColor:'#81C14B',font:'Roboto'}}>
                     <Left style = {{flex:1, flexDirection:'row'}}>
                         <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
@@ -36,8 +36,8 @@ class HomeScreen extends Component {
                 <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
                     <TouchableOpacity
                     onPress = {() => alert("HOLA") }
-                    style = {{margin:10, flex:1, height:60, backgroundColor: 'dodgerblue', justifyContent:'center'}}>
-                        <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Esta es una notificación </Text>
+                    style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
+                        <Text style = {{color: 'white', textAlign:'center', fontSize:18, backgroundColor: '#104F55'}}> Esta es una notificación </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -50,7 +50,8 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#F4F0BB'
     },
     top:{
         flex:1,
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
         height:'100%',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        
     },
     header:{
         color: 'black',

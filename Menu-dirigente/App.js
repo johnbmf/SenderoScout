@@ -20,9 +20,8 @@ export default class App extends React.Component {
 }
 const CustomDrawerComponent = (props)=>(
   <SafeAreaView style = {{flex : 1}}>
-    <View style = {{height:150,backgroundColor:'white', alignItems:'flex-start',justifyContent:'flex-start'}}>
+    <View style = {{height:150,backgroundColor:'#81C14B',font:'Roboto', alignItems:'flex-start',justifyContent:'flex-start'}}>
       <Image source = {require('./assets/perfil.png')} style={{height:120, width:120, borderRadius:60}}/>
-      <Text style = {{alignItems:'flex-end'}}>Holas</Text>
     </View>
     <ScrollView>
       <DrawerItems {...props}/>
