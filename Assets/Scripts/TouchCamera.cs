@@ -9,9 +9,9 @@ public class TouchCamera : MonoBehaviour {
 	};
 	Vector2 oldTouchVector;
 	float oldTouchDistance;
-    float max_movement_X = 450f;
+    float max_movement_X = 365f;
     float max_movement_Y = 435f;
-    float min_movement_X = -450f;
+    float min_movement_X = -365f;
     float min_movement_Y = -435f;
 
     void Start()

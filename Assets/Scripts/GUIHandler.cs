@@ -14,7 +14,7 @@ public class GUIHandler : MonoBehaviour
     public GameObject TituloMision;
     public GameObject InstruccionesMision;
 
-    private WaitForSeconds UpdateCooldown = new WaitForSeconds(30.0f);
+    private WaitForSeconds UpdateCooldown = new WaitForSeconds(10.0f);
 
     // Start is called before the first frame update
     void Start()
