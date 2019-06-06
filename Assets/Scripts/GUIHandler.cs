@@ -31,7 +31,7 @@ public class GUIHandler : MonoBehaviour
     IEnumerator GetSpotsMision()
     {
         WWWForm form = new WWWForm();
-        form.AddField("player_id", "PlayerName");
+        form.AddField("player_id", PlayerPrefs.GetString("user", ""));//"PlayerName");
 
         while (true)
         {
