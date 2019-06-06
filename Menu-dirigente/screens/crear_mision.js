@@ -94,7 +94,7 @@ class crear_mision extends Component {
                                 selectedValue = {this.state.PickerValue}
                                 onValueChange ={ (itemValue,itemIndex) => this.setState({PickerValue: itemValue}) }>
                                 <Picker.Item label = "Elija un tipo de misión" value = {0} />
-                                <Picker.Item label = "Misión Tipo: Pregunta Abierta" value = {1} />
+                                <Picker.Item label = "Tipo misión: Pregunta Abierta" value = {1} />
                             </Picker>
                         </View>
                         <View style = {styles.misionInput}>
