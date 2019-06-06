@@ -74,7 +74,7 @@ class crear_mision extends Component {
             return (
                 <DimissKeyboard>
                 <View style={styles.container}>
-                    <Header style={{height:80,backgroundColor:'orange'}}>
+                    <Header style={{height:80,backgroundColor:'#81C14B',font:'Roboto'}}>
                         <Left style = {{flex:1, flexDirection:'row'}}>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                             <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
@@ -124,7 +124,7 @@ class crear_mision extends Component {
                     style = {{flex:0,width:60,height:30}}
                     type = "outline"
                     title = "Crear"
-                    backgroundColor = 'blue'
+                    backgroundColor = '#104F55'
                     onPress = {this.crearMision}
                     //console.log({tipo_mision:this.state.PickerValue,nombre_mision:this.state.nombre_mision,descripcion:this.state.desc_mision})
                     />
