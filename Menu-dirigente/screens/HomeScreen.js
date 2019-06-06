@@ -35,9 +35,8 @@ class HomeScreen extends Component {
                 </View>
                 <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
                     <TouchableOpacity
-                    onPress = {() => alert("HOLA") }
                     style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                        <Text style = {{color: 'white', textAlign:'center', fontSize:18, backgroundColor: '#104F55'}}> Esta es una notificación </Text>
+                        <Text style = {{color: 'white', textAlign:'center', fontSize:18, backgroundColor: '#104F55'}}> Tienes 3 misiones sin evaluar </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        backgroundColor: '#F4F0BB'
+        backgroundColor: 'white'  //'#F4F0BB'
     },
     top:{
         flex:1,
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
         padding:20,
         paddingLeft:40,
         paddingRight:40,
+
     },
     menuContainer : {
         height : '70%',
@@ -81,8 +81,9 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center', 
         color:'white',
-        paddingLeft:70, 
+        paddingLeft:50, 
         fontSize:28,
-        paddingTop:20
+        paddingTop:20,
+        fontFamily:'Roboto'
     }
 });
