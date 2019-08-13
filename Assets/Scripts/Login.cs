@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SimpleJSON;
 using System;
 
 public class Login : MonoBehaviour{
@@ -31,45 +33,78 @@ public class Login : MonoBehaviour{
 
 
     public void CallLogin(){
-        StartCoroutine(LoginUsr());
+        StartCoroutine(LoginUser());
     }
       
-    IEnumerator LoginUsr(){
+    IEnumerator LoginUser(){
         WWWForm form = new WWWForm();
         form.AddField("name", nameField.text.Trim());//el mismo del php
         form.AddField("password", passwordField.text);
-        //form.AddField("tipo", tipeField.text);
-        WWW www = new WWW("http://mitra.cl/SS/login.php", form);/*   http://localhost/SenderoScout/login3.php*/
-        yield return www;
 
-        // www.text.Split('\t') = ["0", $user, $email, $unidad1, $unidad2, $edad, $tipo, $nombre, $pseudonimo] 
+        UnityWebRequest www = UnityWebRequest.Post("http://mitra.cl/SS/login2.php", form);
+        yield return www.SendWebRequest();
 
-        if (www.text[0] == '0'){
-            //DBManager.username = nameField.text;
-            //DBManager.tipo = www.text.Split('\t')[6];
-            //setear el nombre y el tipo en el player pref
-            PlayerPrefs.SetInt("sesion", 1);
-            PlayerPrefs.SetString("user", www.text.Split('\t')[1]);
-            PlayerPrefs.SetString("mail", www.text.Split('\t')[2]);
-            PlayerPrefs.SetString("unidad1", www.text.Split('\t')[3]);
-            PlayerPrefs.SetString("unidad2", www.text.Split('\t')[4]);
-            PlayerPrefs.SetString("edad", www.text.Split('\t')[5]);
-            PlayerPrefs.SetString("tipo", www.text.Split('\t')[6]);
-            PlayerPrefs.SetString("nombre", www.text.Split('\t')[7]);
-            PlayerPrefs.SetString("pseudonimo", www.text.Split('\t')[8]);
-            //cargar escena de entrada
-            SceneManager.LoadScene("EscenaMapa");
-            SceneManager.UnloadSceneAsync("LoginMenu");
-        }   
-        else{
-            char[] toTrim1 = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', '-'};
-            errorIngreso.text = www.text.Trim(toTrim1);
-            nameField.text = "";
-            passwordField.text = "";
-
-            Debug.Log("falló el ingreso. Error # " + www.text);
+        //Verificar error en la red.
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+            errorIngreso.text = "Error de conexion. Comprueba tu conexion a internet.";
+            yield break;
         }
 
+        string respuesta = www.downloadHandler.text;
+
+        var respuestaJson = JSON.Parse(respuesta);
+
+        //Caso respuesta -1 -> fallo en la conexion entre php y BD.
+        if (respuestaJson["response"] == -1)
+        {
+            errorIngreso.text = "Fallo en la conexión. Intente más tarde.";
+            yield break;
+        }
+
+        //Caso respuesta 0 -> Nombre de usuario o pass incorrectos.
+        else if (respuestaJson["response"] == 0)
+        {
+            errorIngreso.text = "Nombre de usuario o contraseña incorrectos.";
+            yield break;
+        }
+
+        //Caso respuesta 1 -> Acceso OK.
+        else if (respuestaJson["response"] == 1)
+        {
+            //Se registran las variables en PlayerPrefs para recordarlos.
+            PlayerPrefs.SetInt("sesion", 1);
+            PlayerPrefs.SetString("user", respuestaJson["user"]);
+            //PlayerPrefs.SetString("pass", respuestaJson["password"]);
+            PlayerPrefs.SetString("email", respuestaJson["email"]);
+            //PlayerPrefs.SetString("confirmacion_email", respuestaJson["confirmacion_email"]);
+            PlayerPrefs.SetString("unidad1", respuestaJson["unidad1"]);
+            PlayerPrefs.SetString("unidad2", respuestaJson["unidad2"]);
+            PlayerPrefs.SetString("edad", respuestaJson["edad"]);
+            PlayerPrefs.SetString("tipo", respuestaJson["tipo"]);
+            PlayerPrefs.SetString("nombre", respuestaJson["nombre"]);
+            PlayerPrefs.SetString("pseudonimo", respuestaJson["pseudonimo"]);
+
+            //Se carga escena del juego.
+            SceneManager.LoadScene("EscenaMapa");
+            SceneManager.UnloadSceneAsync("LoginMenu");
+            //yield return null;
+        }
+
+        //Caso respuesta 2 -> User no es un nino.
+        else if (respuestaJson["response"] == 2)
+        {
+            errorIngreso.text = "Acceso de dirigentes solo disponible en aplicación de dirigentes.";
+            yield break;
+        }
+
+        //Caso respuesta 3 -> Email no confirmado.
+        else if (respuestaJson["response"] == 2)
+        {
+            errorIngreso.text = "Deber verificar tu dirección email antes de poder acceder.";
+            yield break;
+        }
     }
 
     public void VerifyInputs(){
