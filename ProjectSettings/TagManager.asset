@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Fondo
+    uniqueID: 3042191621
+    locked: 0
+  - name: Elementos
+    uniqueID: 892028543
+    locked: 0
+  - name: Paneles
+    uniqueID: 1154222575
+    locked: 0
+  - name: Top
+    uniqueID: 3119179795
+    locked: 0

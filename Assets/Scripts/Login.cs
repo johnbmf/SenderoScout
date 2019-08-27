@@ -16,21 +16,48 @@ public class Login : MonoBehaviour{
     private int inicioSesion;
     private string user, email, tipo, nombre, pseudonimo, unidad1, unidad2, edad;
 
+    //Debug mode: Permite saltarse el login usando datos STUB.
+    private bool debugMode = true;
+
     void Start(){
-        //reiniciar player
-        PlayerPrefs.DeleteAll();
+        if (debugMode)
+        {
+            StartDebugMode();
+        }
 
-        inicioSesion = PlayerPrefs.GetInt("sesion", 0);// (string clave, valor por defecto si es que no existe)
-        user = PlayerPrefs.GetString("user", "");
-        tipo = PlayerPrefs.GetString("tipo", "");
-        /* saltarse el login si ya inició sesión
-        if (inicioSesion == 1){
-            SceneManager.LoadScene("EscenaMapa");
-            SceneManager.UnloadSceneAsync("LoginMenu");
-        }*/
-    } // hasta acá
+        else
+        {
+            PlayerPrefs.DeleteAll();
 
+            inicioSesion = PlayerPrefs.GetInt("sesion", 0);// (string clave, valor por defecto si es que no existe)
+            user = PlayerPrefs.GetString("user", "");
+            tipo = PlayerPrefs.GetString("tipo", "");
+            /* saltarse el login si ya inició sesión
+            if (inicioSesion == 1){
+                SceneManager.LoadScene("EscenaMapa");
+                SceneManager.UnloadSceneAsync("LoginMenu");
+            }*/
+        }
 
+    }
+
+    public void StartDebugMode() {
+        PlayerPrefs.SetInt("sesion", 1);
+        PlayerPrefs.SetString("user", "miembrounidad1");
+        //PlayerPrefs.SetString("pass", "holi");
+        PlayerPrefs.SetString("email", "test@ss.cl");
+        //PlayerPrefs.SetString("confirmacion_email", "1");
+        PlayerPrefs.SetString("unidad1", "Sol Naciente");
+        PlayerPrefs.SetString("unidad2", "Luna Luna");
+        PlayerPrefs.SetString("edad", "10");
+        PlayerPrefs.SetString("tipo", "nino");
+        PlayerPrefs.SetString("nombre", "Sir Test Testeador");
+        PlayerPrefs.SetString("pseudonimo", "Testcito");
+
+        //Se carga escena del juego.
+        SceneManager.LoadScene("EscenaMapa");
+        SceneManager.UnloadSceneAsync("LoginMenu");
+    }
 
     public void CallLogin(){
         StartCoroutine(LoginUser());
@@ -38,7 +65,7 @@ public class Login : MonoBehaviour{
       
     IEnumerator LoginUser(){
         WWWForm form = new WWWForm();
-        form.AddField("name", nameField.text.Trim());//el mismo del php
+        form.AddField("name", nameField.text.Trim());
         form.AddField("password", passwordField.text);
 
         UnityWebRequest www = UnityWebRequest.Post("http://mitra.cl/SS/login2.php", form);

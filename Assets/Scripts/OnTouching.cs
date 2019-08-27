@@ -6,14 +6,9 @@ using UnityEngine.UI;
 public class OnTouching : MonoBehaviour
 {
     public GameObject DetalleMisionCanvas;
-    public GameObject BotonSonido;
     public GameObject MainCamera;
     public GameObject PanelMision;
 
-    public Sprite SoundOn;
-    public Sprite SoundOff;
-
-    public bool activeSound;
     public bool isInFront = true;
 
     //Variables para movimiento del panel de mision
@@ -36,21 +31,6 @@ public class OnTouching : MonoBehaviour
     public void HideMissionDetails()
     {
         StartCoroutine(HideMissionPanel());       
-    }
-
-    public void ToggleMusic()
-    {
-        if (activeSound)
-        {
-            activeSound = !activeSound;
-            BotonSonido.GetComponent<Image>().sprite = SoundOff;
-        }
-
-        else
-        {
-            activeSound = !activeSound;
-            BotonSonido.GetComponent<Image>().sprite = SoundOn;
-        }
     }
 
     IEnumerator ShowMissionPanel()
