@@ -61,6 +61,16 @@ h6 {
     line-height: 1.2;
 }
 
+
+.special-area{
+
+    height: 900px;
+    position: relative;
+    z-index: 1;
+    background-position: bottom center;
+    background-size: cover;
+}
+
 .section_padding_100 {
     padding-top: 100px;
     padding-bottom: 100px;
@@ -97,7 +107,7 @@ h6 {
 }
 
 .section_padding_0_100 {
-    padding-top: 0;
+    padding-top: 220px;
     padding-bottom: 100px;
 }
 
@@ -227,6 +237,12 @@ p {
     margin-top: 0;
 }
 
+.container{
+    position: relative;
+    top: calc(20% - 20px);
+
+}
+
 .heading-text > p {
     font-size: 16px;
 }
@@ -324,6 +340,14 @@ p {
 -------------------------- */
 
 .header_area {
+        position: absolute;
+    background-color: #104F55;
+    -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    height: 110px;
+    position: fixed;
+    top: 0;
+    z-index: 99;
     left: 0;
     position: absolute;
     width: 100%;
@@ -339,18 +363,26 @@ p {
     margin: 0;
     line-height: 1;
     padding: 0;
+
 }
 
 
 .menu_area .navbar-brand:hover,
 .menu_area .navbar-brand:focus {
     color: #fff;
+
 }
 
 
 .menu_area {
+
     position: relative;
     z-index: 2;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 30px;
 }
 
 .menu_area #nav .nav-link {
@@ -396,7 +428,7 @@ p {
 }
 
 /* stcicky css */
-
+/*Check here*/
 .header_area.sticky {
     background-color: #104F55;
     -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -455,7 +487,7 @@ p {
     height: auto;
     width: 100%;
 }
-
+/*InitialFont*/
 .wellcome-heading > h2 {
     font-size: 100px;
     color: #ffffff;
@@ -524,7 +556,7 @@ p {
 .wellcome-heading > p {
     color: #fff;
 }
-
+/*BigLetter*/
 .wellcome-heading > h3 {
     font-size: 332px;
     position: absolute;
@@ -1217,7 +1249,7 @@ p {
     -o-transition-duration: 500ms;
     transition-duration: 500ms;
 }
-
+/*ColorBackground*/
 .footer-contact-area {
     background: #f5f9fc;
 }
