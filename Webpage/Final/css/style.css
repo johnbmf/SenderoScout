@@ -8275,9 +8275,10 @@ h1, h2, h3, h4, h5,
     left: -25px; }
   .owl-carousel:hover .owl-nav .owl-next {
     right: -25px; }
+    /*HERE HEIGHT*/
   .owl-carousel.home-slider {
     position: relative;
-    height: 600px;
+    height: 500px;
     z-index: 0; }
     .owl-carousel.home-slider .slider-item {
       background-size: cover;
@@ -8513,7 +8514,7 @@ h1, h2, h3, h4, h5,
   position: relative; }
   .wrap-about h2 {
     font-weight: 500; }
-
+/*HEIGHT*/
 .ftco-services {
   padding: 0 0 5em 0; }
   .ftco-services .services {
