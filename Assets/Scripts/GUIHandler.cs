@@ -9,7 +9,9 @@ public class GUIHandler : MonoBehaviour
 {
     public GameObject Spot1;
     public GameObject Spot2;
+    public GameObject Spot3;
 
+    #region 1erSpot variables
     //Variables del panel de misiones
     public GameObject TituloMision;
     public GameObject InstruccionesMision;
@@ -20,6 +22,31 @@ public class GUIHandler : MonoBehaviour
     public GameObject NombreMision;
     public GameObject MensajeEnvio;
     public GameObject BotonVolver;
+    #endregion
+
+    #region 2Spot variables
+    public GameObject TituloMision2;
+    public GameObject InstruccionesMision2;
+    public GameObject InputRespuesta2;
+    public GameObject TextRespuesta2;
+    public GameObject BotonEnviar2;
+    public GameObject BotonCerrar2;
+    public GameObject NombreMision2;
+    public GameObject MensajeEnvio2;
+    public GameObject BotonVolver2;
+    #endregion
+
+    #region 3Spot variables
+    public GameObject TituloMision3;
+    public GameObject InstruccionesMision3;
+    public GameObject InputRespuesta3;
+    public GameObject TextRespuesta3;
+    public GameObject BotonEnviar3;
+    public GameObject BotonCerrar3;
+    public GameObject NombreMision3;
+    public GameObject MensajeEnvio3;
+    public GameObject BotonVolver3;
+    #endregion
 
     private WaitForSeconds UpdateCooldown = new WaitForSeconds(60.0f);
 
@@ -74,15 +101,149 @@ public class GUIHandler : MonoBehaviour
                 {
                     Debug.Log("Se han encontrado misiones.");
                     //Desplegar acciones asociadas a la visualizacion de la mision.
-                    Text textotitulomision;
-                    Text textoInstruccionesMision;
 
-                    textotitulomision = TituloMision.GetComponent<Text>();
-                    textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+                    //Spot 1
+                    if (RespuestaJson["campamento"] != null)
+                    {
+                        //Mision no completada.
+                        if (RespuestaJson["campamento"]["estado"] == 0)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
 
-                    textotitulomision.text = RespuestaJson["1"]["nombre_mision"];
-                    textoInstruccionesMision.text = RespuestaJson["1"]["descripcion_mision"];
-                    Spot1.SetActive(true);                    
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+
+                        //Mision en revision
+                        /*
+                        else if (RespuestaJson["campamento"]["estado"] == 1)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+
+                        //Mision completa
+                        else if (RespuestaJson["campamento"]["estado"] == 2)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+                        */
+                    }
+
+                    else if (RespuestaJson["caverna"] != null)
+                    {
+                        //Mision no completada.
+                        if (RespuestaJson["caverna"]["estado"] == 0)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision2.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision2.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["caverna"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["caverna"]["descripcion_mision"];
+                            Spot2.SetActive(true);
+                        }
+
+                        //Mision en revision
+                        /*
+                        else if (RespuestaJson["campamento"]["estado"] == 1)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+
+                        //Mision completa
+                        else if (RespuestaJson["campamento"]["estado"] == 2)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+                        */
+                    }
+
+                    else if (RespuestaJson["bosque"] != null)
+                    {
+                        //Mision no completada.
+                        if (RespuestaJson["bosque"]["estado"] == 0)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision3.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision3.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["bosque"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["bosque"]["descripcion_mision"];
+                            Spot3.SetActive(true);
+                        }
+
+                        //Mision en revision
+                        /*
+                        else if (RespuestaJson["campamento"]["estado"] == 1)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+
+                        //Mision completa
+                        else if (RespuestaJson["campamento"]["estado"] == 2)
+                        {
+                            Text textotitulomision;
+                            Text textoInstruccionesMision;
+
+                            textotitulomision = TituloMision.GetComponent<Text>();
+                            textoInstruccionesMision = InstruccionesMision.GetComponent<Text>();
+
+                            textotitulomision.text = RespuestaJson["campamento"]["nombre_mision"];
+                            textoInstruccionesMision.text = RespuestaJson["campamento"]["descripcion_mision"];
+                            Spot1.SetActive(true);
+                        }
+                        */
+                    }
+
                 }
 
                 else if (numMisiones == 0)
@@ -90,6 +251,7 @@ public class GUIHandler : MonoBehaviour
                     Debug.Log("No se han encontrado misiones para el jugador actual.");
                     Spot1.SetActive(false);                  
                 }
+
             }
             yield return UpdateCooldown;
         }
