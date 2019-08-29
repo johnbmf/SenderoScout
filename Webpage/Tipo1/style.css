@@ -241,7 +241,7 @@ p {
 /*Container*/
 .container{
     position: relative;
-    top: calc(20% - 20px);
+    top: calc(20% );
 }
 
 .heading-text > p {
@@ -350,7 +350,7 @@ p {
     background-color: #104F55;
     -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    height: 110px;
+    height: 10%;
     position: fixed;
     top: 0;
     z-index: 99;
@@ -360,29 +360,32 @@ p {
     top: 0;
     padding: 0 4%;
 }
+
+.container-fluid{
+        height: 100%;
+}
+
 /*Mueve las cosas*/
 .menu_area .navbar-brand {
     font-size: 72px;
     font-weight: 700;
-
     margin: 0;
     line-height: 1;
     padding: 0;
-
+    height: 10%;
 }
 
-/*
+
 .menu_area {
     position: relative;
     z-index: 2;
     color: #fff;
     display: block;
-    font-size: px;
-    font-weight: 500;
-    border-radius: 30px;
-}*/
+
+    height: 10%;
+}
 .navbar-nav .active{
-    color: #fff;
+    color: #c3e8c8;
 }
 
 /*Color*/
@@ -392,15 +395,13 @@ p {
     font-size: 16px;
     font-weight: 500;
     border-radius: 30px;
-
-    padding: 35px 15px;  /*orden letras*/
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 35px 15px;
 }
 
 
-.menu_area #nav .nav-link :hover{
-    color: #104F55;
-
-}
 
 .nav-item > a:hover{
     color: #104F55;
@@ -418,7 +419,7 @@ p {
     transition-duration: 500ms;
     padding: 35px 15px;
 }
-
+.menu_area a:hover {background-color: #c3e8c8;}
 
 .dropdown-content {
   display: none;
@@ -427,6 +428,7 @@ p {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  border-radius: 25px 25px 25px 25px;
 }
 
 .dropdown-content a {
@@ -435,6 +437,7 @@ p {
   text-decoration: none;
   display: block;
   text-align: left;
+  border-radius: 25px 25px 25px 25px;
 }
 
 .dropdown-content a:hover {background-color: #c3e8c8;}
@@ -511,7 +514,7 @@ p {
 
 
 .wellcome_area {
-    background-image: url(img/bg-img/Background.1.png);
+    background-image: url(img/bg-img/Backgroundf.png);
     height: 800px;
     position: relative;
     z-index: 1;
