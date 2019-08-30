@@ -35,9 +35,14 @@
 @import 'css/themify-icons.css';
 @import 'css/ionicons.min.css';
 
-/* --------------------------
-:: 1.0 Base CSS Start
--------------------------- */
+
+
+h2.headertekst {
+  text-align: center;
+}
+
+
+
 
 * {
     margin: 0;
@@ -308,48 +313,7 @@ p {
     width: 100%;
     z-index: 999999;
 }
-/*
-.colorlib-load {
-    -webkit-animation: 2000ms linear 0s normal none infinite running colorlib-load;
-    animation: 2000ms linear 0s normal none infinite running colorlib-load;
-    background: transparent none repeat scroll 0 0;
-    border-color: #dddddd #dddddd #81C14B;
-    border-radius: 50%;
-    border-style: solid;
-    border-width: 2px;
-    height: 40px;
-    left: calc(50% - 20px);
-    position: relative;
-    top: calc(50% - 20px);
-    width: 40px;
-    z-index: 9;
-}
 
-@-webkit-keyframes colorlib-load {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes colorlib-load {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-*/
-/* --------------------------
-:: 2.0 Header Area CSS
--------------------------- */
 
 .header_area {
     position: absolute;
@@ -466,6 +430,8 @@ p {
 
 .dropdown-content a:hover {background-color: #c3e8c8;}
 
+
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -477,57 +443,9 @@ p {
 }
 
 
-/*
-.sing-up-button {
-    text-align: right;
-}
 
-.sing-up-button > a {
-    color: #fff;
-    font-weight: 500;
-    display: inline-block;
-    border: 2px solid #81C14B;
-    height: 50px;
-    min-width: 178px;
-    line-height: 46px;
-    text-align: center;
-    border-radius: 24px 24px 24px 0px;
-}
 
-.sing-up-button > a:hover {
-    background: #81C14B;
-    color: #fff;
-    border-color: transparent;
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
-}*/
 
-/* stcicky css */
-/*Check here*/
-/*
-.header_area.sticky {
-    background-color: #104F55;
-    -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    height: 100px;
-    position: fixed;
-    top: 0;
-    z-index: 99;
-}
-
-.header_area.sticky .menu_area .navbar-brand {
-    font-size: 50px;
-}
-
-.header_area.sticky .menu_area #nav .nav-link {
-    padding: 23px 15px;
-}
-.header_area.sticky .navbar {
-    padding: 0;
-}
-
-*/
 .footer > img{
     max-width: 10%;
     max-height: 13%; 
@@ -539,9 +457,10 @@ p {
     /*height: 200px;*/ 
 }
 
-/* --------------------------
-:: 3.0 Wellcome Area CSS
--------------------------- */
+
+
+
+
 .welcome-thumb > img {
     max-width: 80%;
     max-height: 80%;
@@ -662,9 +581,13 @@ p {
     margin-bottom: 100px;
 }
 
-/* --------------------------
-:: 4.0 Special Area CSS
--------------------------- */
+
+
+
+
+
+
+
 
 .single-icon > i {
     font-size: 36px;
@@ -710,78 +633,8 @@ p {
 .single-special p {
     margin-bottom: 0;
 }
-/*
-.app-download-area {
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-preferred-size: 1;
-    flex-basis: 1;
-    margin-top: 50px;
-}
 
-.app-download-btn a {
-    border: 1px solid #ddd;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 15px 30px;
-    border-radius: 30px 30px 30px 0;
-    -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-}
 
-.app-download-btn.active a,
-.app-download-btn a:hover {
-    border-color: transparent;
-    background-color: #81C14B;
-}
-
-.app-download-btn a i {
-    color: #47425d;
-    font-size: 24px;
-    margin-right: 15px;
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
-}
-
-.app-download-btn a p {
-    font-size: 16px;
-    line-height: 1;
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
-}
-
-.app-download-btn a p span {
-    font-size: 12px;
-    display: block;
-}
-
-.app-download-btn:first-child {
-    margin-right: 20px;
-}
-
-.app-download-btn a:hover i,
-.app-download-btn.active a i,
-.app-download-btn.active a p,
-.app-download-btn a:hover p {
-    color: #fff;
-}
-*/
-/* --------------------------
-:: 5.0 Features Area CSS
--------------------------- */
 
 .single-feature {
     margin-bottom: 50px;
@@ -808,9 +661,18 @@ p {
     margin-top: 15px;
 }
 
-/* --------------------------
-:: 6.0 Video Area CSS
--------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
 
 .video-area {
     position: relative;
@@ -862,9 +724,11 @@ p {
     color: #fff;
 }
 
-/* --------------------------
-:: 7.0 Cool Facts Area CSS
--------------------------- */
+
+
+
+
+
 
 .cool_facts_area {
     position: relative;
@@ -915,9 +779,14 @@ p {
     margin-bottom: 0;
 }
 
-/* --------------------------
-:: 8.0 Screenshots Area CSS
--------------------------- */
+
+
+
+
+
+
+
+
 
 .app_screenshots_slides {
     padding: 0 6%;
@@ -972,9 +841,7 @@ p {
 
 
 
-/* --------------------------
-:: 9.0 Pricing Plan Area CSS
--------------------------- */
+
 
 .pricing-plane-area {
     background: #f5f9fc;
@@ -1065,9 +932,13 @@ margin: 20px;
     color: #fff;
 }
 
-/* --------------------------
-:: 10.0 Testimonials Area CSS
--------------------------- */
+
+
+
+
+
+
+
 
 .clients-feedback-area .client-name > h5 {
     color: #104F55;
@@ -1178,9 +1049,16 @@ margin: 20px;
     top: 0;
 }
 
-/* --------------------------
-:: 11.0 CTA Area CSS Start
--------------------------- */
+
+
+
+
+
+
+
+
+
+
 
 .our-monthly-membership {
     background: #CAE168;
@@ -1225,9 +1103,14 @@ margin: 20px;
     text-align: right;
 }
 
-/* --------------------------
-:: 12.0 Team Area CSS Start
--------------------------- */
+
+
+
+
+
+
+
+
 
 .member-image {
     margin-bottom: 30px;
@@ -1309,9 +1192,11 @@ margin: 20px;
     margin-bottom: 50px;
 }
 
-/* --------------------------
-:: 13.0 Contact Area CSS Start
--------------------------- */
+
+
+
+
+
 
 .address-text > p,
 .phone-text > p,
@@ -1379,9 +1264,20 @@ margin: 20px;
     margin-bottom: 50px;
 }
 
-/* --------------------------
-:: 14.0 Footer Area CSS Start
--------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .footer-text > h2 {
     color: #104F55;
