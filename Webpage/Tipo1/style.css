@@ -71,6 +71,12 @@ h6 {
     background-size: cover;
 }
 
+.section_padding_team {
+    padding-top: 20px;
+    padding-bottom: 1000px;
+    margin-top: 20px;
+}
+
 .section_padding_100 {
     padding-top: 100px;
     padding-bottom: 100px;
@@ -419,7 +425,7 @@ p {
     transition-duration: 500ms;
     padding: 35px 15px;
 }
-.menu_area a:hover {background-color: #c3e8c8;}
+
 
 .dropdown-content {
   display: none;
@@ -504,18 +510,28 @@ p {
 }
 
 */
+.footer > img{
+    max-width: 10%;
+    max-height: 13%; 
+}
+
+.navbar-brand > img {
+    max-width: 100%;
+    max-height: 13%;    
+}
+
 /* --------------------------
 :: 3.0 Wellcome Area CSS
 -------------------------- */
 .welcome-thumb > img {
-    max-width: 40%;
-    max-height: 40%;    
+    max-width: 50%;
+    max-height: 50%;    
 }
 
 
 .wellcome_area {
     background-image: url(img/bg-img/Backgroundf.png);
-    height: 800px;
+    height: 700px;
     position: relative;
     z-index: 1;
     background-position: bottom center;
