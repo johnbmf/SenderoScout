@@ -18,7 +18,7 @@
 :: 7.0 Cool Facts Area CSS
 :: 8.0 Screenshots Area CSS
 :: 9.0 Pricing Plan Area CSS
-:: 10.0 Testimonials Area CSS
+:: 10.0 Testimonials Area CSS   
 :: 11.0 CTA Area CSS Start
 :: 12.0 Team Area CSS Start
 :: 13.0 Contact Area CSS Start
@@ -364,7 +364,7 @@ p {
     width: 100%;
     z-index: 99;
     top: 0;
-    padding: 0 4%;
+    padding: 0 10%;
 }
 
 .container-fluid{
@@ -390,23 +390,41 @@ p {
 
     height: 10%;
 }
-.navbar-nav .active{
-    color: #c3e8c8;
+
+
+.menu_area .active{
+
+    color: !important#CAE168;
+}
+
+.navbar-nav .active > a{
+    color: #CAE168 ;
 }
 
 /*Color*/
 .menu_area #nav .nav-link {
-    color: #fff;
+    
     display: block;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 100;
     border-radius: 30px;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
     transition-duration: 500ms;
-    padding: 35px 15px;
+    padding: 0px 20px;
 }
 
+.menu_area #nav .nav-link .active{
+    color: #CAE168;
+    display: block;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 30px;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 0px 20px;
+}
 
 
 .nav-item > a:hover{
@@ -423,7 +441,7 @@ p {
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
     transition-duration: 500ms;
-    padding: 35px 15px;
+    padding: 0px 20px;
 }
 
 
@@ -516,26 +534,30 @@ p {
 }
 
 .navbar-brand > img {
-    max-width: 100%;
-    max-height: 13%;    
+    max-width: 120%;
+    max-height: 120%;   
+    /*height: 200px;*/ 
 }
 
 /* --------------------------
 :: 3.0 Wellcome Area CSS
 -------------------------- */
 .welcome-thumb > img {
-    max-width: 50%;
-    max-height: 50%;    
+    max-width: 80%;
+    max-height: 80%;
+    position:left;
+
 }
 
 
 .wellcome_area {
     background-image: url(img/bg-img/Backgroundf.png);
-    height: 700px;
+    height: 580px;
     position: relative;
     z-index: 1;
     background-position: bottom center;
-    background-size: cover;
+     background-repeat: no-repeat;
+    background-size: 1800px 600px;
 }
 
 .wellcome_area:after {
@@ -550,9 +572,9 @@ p {
 }
 
 .welcome-thumb {
-    width: 30%;
+    width: 25%;
     position: absolute;
-    bottom: 350px;
+    bottom: 30px;
     right: 85px;
     z-index: 9;
 }
