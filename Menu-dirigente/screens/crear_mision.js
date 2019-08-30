@@ -74,67 +74,15 @@ class crear_mision extends Component {
         render() {
             
             return (
-                    <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
-                        <ScrollView> 
+                <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
+                    <ScrollView> 
                         <DimissKeyboard>
-                        <View style={styles.container}>
-                            <Header style={{height:80,backgroundColor: '#81C14B',font:'Roboto'}}>
-                                <Left style = {{flex:1, flexDirection:'row'}}>
-                                    <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
-                                    <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
-                                </Left>
-                            </Header >
-                            <View style = {styles.top}>
-                                <Text style = {styles.header} >C R E A R  M I S I O N</Text>
+                            <View style = {styles.container}>
+                                <View style={{width: '100%', height: '25%', backgroundColor: 'powderblue'}} />
                             </View>
-                        <View style= {styles.pickerMenu}>
-                            <Picker 
-                                style = {{width:'80%', borderColor:'gray', borderWidth:1}}
-                                mode = 'dropdown'
-                                selectedValue = {this.state.PickerValue}
-                                onValueChange ={ (itemValue,itemIndex) => this.setState({PickerValue: itemValue}) }>
-                                <Picker.Item label = "Elija un tipo de misión" value = {0} />
-                                <Picker.Item label = "Tipo misión: Pregunta Abierta" value = {1} />
-                            </Picker>
-                        </View>
-                        <View style = {styles.misionInput}>
-                            <TextInput 
-                                style = {{flex:0,height:40, width:'95%', borderColor: 'gray', borderWidth:1, marginBottom:20, textAlign:'center'}}
-                                underlineColorAndroid = "transparent"
-                                maxLength = {60}
-                                //{...this.props}
-                                multiline = {true}
-                                numberOfLines = {4}
-                                onChangeText={(valor) => this.setState({nombre_mision : valor})}
-                                placeholder = "Nombre de la misión"
-                                value={this.state.nombre_mision}
-                                />
-                        </View>
-                        <View style = {styles.misionDesc}>
-                            <TextInput 
-                                style = {{height:200, width:'95%', borderColor: 'gray', borderWidth:1, marginBottom:20,textAlign:'center'}}
-                                placeholder = "Descripción de la misión"
-                                maxLength = {240}
-                                //{...this.props}
-                                multiline = {true}
-                                numberOfLines = {20}
-                                onChangeText={(valor) => this.setState({desc_mision : valor})}
-                                value={this.state.desc_mision}
-                                />
-                        </View>
-                        <Button 
-                            style = {{flex:1,width:60,height:30, paddingTop:100}}
-                            type = "outline"
-                            title = "Crear"
-                            backgroundColor = '#104F55'
-                            color = '#104F55'
-                            onPress = {this.crearMision}
-                            //console.log({tipo_mision:this.state.PickerValue,nombre_mision:this.state.nombre_mision,descripcion:this.state.desc_mision})
-                            />
-                    </View>
-                </DimissKeyboard>
-                </ScrollView>
-            </KeyboardAvoidingView>
+                        </DimissKeyboard>
+                    </ScrollView>
+                </KeyboardAvoidingView>
         );
     }
 }
@@ -144,63 +92,6 @@ export default crear_mision;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
-        height:'100%',
-        backgroundColor: 'white' //'#F4F0BB'
-    },
-    top:{
-        flex:1,
-        flexDirection: 'column',
-        height:'100%',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    header:{
-        color: 'black',
-        fontSize: 28,
-        borderColor: 'black',
-        padding:20,
-        paddingLeft:40,
-        paddingRight:40,
-    },
-    banner:{
-        justifyContent:'center', 
-        alignItems:'center', 
-        color:'white',
-        paddingLeft:50, 
-        fontSize:28,
-        paddingTop:20,
-        fontFamily:'Roboto'
-    },
-    pickerMenu: {
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '90%',
-        paddingTop:20,
-        paddingBottom:30
-    },
-    misionInput:{
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:'90%',
-        height:60,
-        paddingLeft:25,
-        paddingBottom:130
-
-    },
-    misionDesc:{
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:'90%',
-        height:180,
-        paddingBottom: 218,
-        paddingLeft:25,
-        backgroundColor: 'white'   //'#F4F0BB'
-
-
-
+        flexDirection: 'row',
     }
 });
