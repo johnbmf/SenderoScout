@@ -877,8 +877,10 @@ p {
 }
 
 .single-price-plan .package-plan > h5 {
-    color: #5b32b4;
+    color: #104f55;
     font-size: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 
@@ -897,9 +899,10 @@ p {
 }
 
 .single-price-plan .plan-button > a {
-    background: #726a84;
+    background: #81c14b;
     padding: 10px 0;
-    border-bottom-right-radius: 30px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
     color: #ffffff;
     font-size: 16px;
     font-weight: 500;
@@ -907,6 +910,10 @@ p {
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
     transition-duration: 500ms;
+}
+
+.single-price-plan .plan-button > a:hover {
+    color: #fff;
 }
 
 .single-price-plan .package-description > p {
@@ -920,10 +927,11 @@ p {
     border-top: 1px solid #ebebeb;
 }
 
+
 .single-price-plan.active .package-plan,
 .single-price-plan.active .plan-button > a,
 .single-price-plan:hover .plan-button > a {
-    background-color: #a865e1;
+    background-color: #81c14b;
 }
 
 .single-price-plan.active .package-plan .ca-price > h4,

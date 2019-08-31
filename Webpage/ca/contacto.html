@@ -51,7 +51,7 @@
                                         </div>
                                       </li>
                                     <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#pricing">Contacto</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -74,29 +74,64 @@
     </section>
     <!-- ***** Wellcome Area End ***** -->
 
-    <!-- ***** Special Area Start ***** -->
-    <section class="special-area bg-white" id="about">
-
-        <!-- Special Description Area -->
-        <div class="special_description_area mt-150">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="special_description_img">
-                            <img src="img/bg-img/special.png" alt="">
-                        </div>
+    <!-- ***** Contact Us Area Start ***** -->
+    <section class="special-area bg-white section_padding_100" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Heading Text  -->
+                    <div class="section-heading">
+                        <h2>Comunícate con nosotros</h2>
+                        <div class="line-shape"></div>
                     </div>
-                    <div class="col-lg-6 col-xl-5 ml-xl-auto">
-                        <div class="special_description_content">
-                            <h2>Hammersoft en FESW2019</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                        </div>
+                    <div class="address-text">
+                        <p><span>Dirección:</p></span>
+                        <p>Avda. Vicuña Mackenna 3939,</p>
+                        <p>San Joaquín, Santiago. </p>
+                        <p>U. Técnica Federico Santa María.</p>
+                    </div>
+
+                    <div class="email-text">
+                        <p><span>Email:</span></p><p> hammersoft.fesw@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact_from">
+                        <form method="post" action = "contact.php">
+
+                            <div class="contact_input_area">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="sender" id="name" placeholder="Nombre" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" name="senderEmail" id="email" placeholder="Direccion de E-mail" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Mensaje" required></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- Single Input Area Start -->
+                                    <div class="col-12">
+                                        <button type="submit" name="submit" class="btn submit-btn">Enviar</button>
+                                    </div>
+                                </div>
+                              </div>
+                              </form>
+                            </div>
+                            <!-- Message Input Area End -->
+
                     </div>
                 </div>
             </div>
-        </div>
     </section>
-    <!-- ***** Special Area End ***** -->
+    <!-- ***** Contact Us Area End ***** -->
 
     <!-- ***** Footer Area Start ***** -->
     <footer class="footer-social-icon text-center section_padding_70 clearfix">
