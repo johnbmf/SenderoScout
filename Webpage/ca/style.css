@@ -356,9 +356,9 @@ p {
     z-index: 2;
 }
 
-.menu_area .active{
+.menu_area .active > a{
 
-    color: !important#CAE168;
+    color: #81C14B !important;
 }
 
 /*Color letras menu*/
