@@ -22,6 +22,30 @@
 
 </head>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Colorlib App - App Landing Page</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet">
+
+</head>
+
 <body>
     <!-- Preloader Start -->
     <div id="preloader">
@@ -37,16 +61,16 @@
                     <div class="menu_area">
                         <nav class="navbar navbar-expand-lg navbar-light">
                             <!-- Logo -->
-                            <a class="navbar-brand" href="#">Ca.</a>
+                            <a class="navbar-brand" href="javascript:void(0)"> <img src="img/core-img/LogoBlanco2.png" alt="" height="40"></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                             <!-- Menu Area -->
                             <div class="collapse navbar-collapse" id="ca-navbar">
                                 <ul class="navbar-nav ml-auto" id="nav">
-                                    <li class="nav-item active"><a class="nav-link" href="#home">Inicio</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#about">¿Quiénes somos?</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="index.html">Inicio</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="about.html">¿Quiénes somos?</a></li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Nuestros proyectos</a>
-                                        <div class="dropdown-menu">
+                                        <div class="dropdown-menu" id"dropa">
                                           <a class="dropdown-item" href="#">Sendero Scout</a>
                                         </div>
                                       </li>
@@ -74,117 +98,185 @@
     </section>
     <!-- ***** Wellcome Area End ***** -->
 
-    <!-- ***** Special Area Start ***** -->
-    <section class="special-area bg-white section_padding_100" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading Area -->
-                    <div class="section-heading text-center">
-                        <h2>Why Is It Special</h2>
-                        <div class="line-shape"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Single Special Area -->
-                <div class="col-12 col-md-4">
-                    <div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="single-icon">
-                            <i class="ti-mobile" aria-hidden="true"></i>
-                        </div>
-                        <h4>Easy to use</h4>
-                        <p>We build pretty complex tools and this allows us to take designs and turn them into functional quickly and easily</p>
-                    </div>
-                </div>
-                <!-- Single Special Area -->
-                <div class="col-12 col-md-4">
-                    <div class="single-special text-center wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="single-icon">
-                            <i class="ti-ruler-pencil" aria-hidden="true"></i>
-                        </div>
-                        <h4>Powerful Design</h4>
-                        <p>We build pretty complex tools and this allows us to take designs and turn them into functional quickly and easily</p>
-                    </div>
-                </div>
-                <!-- Single Special Area -->
-                <div class="col-12 col-md-4">
-                    <div class="single-special text-center wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="single-icon">
-                            <i class="ti-settings" aria-hidden="true"></i>
-                        </div>
-                        <h4>Customizability</h4>
-                        <p>We build pretty complex tools and this allows us to take designs and turn them into functional quickly and easily</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Special Description Area -->
+    <section class="special-area bg-light section_padding_30" id="team">
         <div class="special_description_area mt-150">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="special_description_img">
-                            <img src="img/bg-img/special.png" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="section-heading">
+                                <h2 class="headertekst">Acerca de Hammersoft</h2>
+                                <div class="line-shape"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-5 ml-xl-auto">
-                        <div class="special_description_content">
-                            <h2>Our Best Propositions for You!</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                            <div class="app-download-area">
-                                <div class="app-download-btn wow fadeInUp" data-wow-delay="0.2s">
-                                    <!-- Google Store Btn -->
-                                    <a href="#">
-                                        <i class="fa fa-android"></i>
-                                        <p class="mb-0"><span>available on</span> Google Store</p>
-                                    </a>
-                                </div>
-                                <div class="app-download-btn wow fadeInDown" data-wow-delay="0.4s">
-                                    <!-- Apple Store Btn -->
-                                    <a href="#">
-                                        <i class="fa fa-apple"></i>
-                                        <p class="mb-0"><span>available on</span> Apple Store</p>
-                                    </a>
-                                </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-xl-5 ml-xl-auto">
+                            <div class="special_description_content">
+                                <h2 class="headertekst">Misión</h2>
+                                <p align="justify">Desarrollar soluciones tecnológicas con compromiso social, buscando entregar herramientas que ayuden construir un futuro mejor.</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-5 ml-xl-auto">
+                            <div class="special_description_content">
+                                <h2 class="headertekst">Visión</h2>
+                                <p align="justify">Como Hammersoft buscamos ser líderes de vanguardia en el país de estrategias y desarrollo de soluciones que tengan un alto impacto social, promoviendo el uso eficaz y eficiente de la tecnología en cada solución otorgada.</p>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </section>
-    <!-- ***** Special Area End ***** -->
 
+    <!-- ***** Our Team Area Start ***** -->
+    <section class="special-area bg-light section_padding_team" id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <!-- Heading Text  -->
+                    <div class="section-heading">
+                        <h2>Equipo Hammersoft</h2>
+                        <div class="line-shape"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="img/team-img/Ian.png" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Ian Mora</h4>
+                            <p>Comunity Manager</p>
+                            <p>Desarollador full stack</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="img/team-img/Joni2.png" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Jonathan Mendoza</h4>
+                            <p>Jefe de proyecto</p>
+                            <p>Desarollador full stack</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="img/team-img/Peter.png" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Pedro Chacón</h4>
+                            <p>Jefe de tecnología</p>
+                            <p>Desarollador full stack</p>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <div class="row">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="img/team-img/Diego.png" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Diego Montecinos</h4>
+                            <p>Product Owner</p>
+                            <p>Desarollador full stack</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="img/team-img/Claudia.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="claudia.hazard.14@sansano.usm.cl"><i class="fa fa-google" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="#"> <i class="fa fa-github" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Claudia Hazard</h4>
+                            <p>Testing developer</p>
+                            <p>Desarollador full stack</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+    </section>
+    <!-- ***** Our Team Area End ***** -->
 
     <!-- ***** Footer Area Start ***** -->
     <footer class="footer-social-icon text-center section_padding_70 clearfix">
-        <!-- footer logo -->
-        <div class="footer-text">
-            <h2>Ca.</h2>
+        <div class="container">
+            <div class="row">
+                <!-- Single Special Area -->
+                <div class="col-12 col-md-4">
+                        <h4>Auspician:</h4>
+                        <div class="row">
+                        <div class="col-12 col-md-6">
+                        <a class="navbar-brand" href="http://www.feriadesoftware.cl/"><img src="img/scr-img/LOGO_FESW.png" alt=""></a>
+                   		</div>
+
+                   		<div class="col-12 col-md-6">
+                        <a class="navbar-brand" href="https://www.usm.cl/"><img src="img/scr-img/LOGO_USM.png" alt=""></a>
+                   		</div>
+                   		</div>
+                </div>
+                <div class="col-12 col-md-4">
+
+                </div>
+                <div class="col-12 col-md-4 col-md-offset-4">
+                   	<h4>Redes Sociales:</h4>
+			                 <div class="footer-social-icon">
+        			            <a href="https://www.facebook.com/hammersoft.fesw19"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        			            <a href="https://www.instagram.com/hammersoft.fesw"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+        			            <a href="https://www.youtube.com/channel/UCc_3KkF3Xb5mbUP_LtFGS1A"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+        			        </div>
+                </div>
+
+            </div>
         </div>
-        <!-- social icon-->
-        <div class="footer-social-icon">
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="active fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-        </div>
-        <div class="footer-menu">
-            <nav>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- Foooter Text-->
-        <div class="copyright-text">
-            <!-- ***** Removing this text is now allowed! This template is licensed under CC BY 3.0 ***** -->
-            <p>Copyright ©2017 Ca. Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+            <p>© Desarrollado por Hammersoft 2019.</a></p>
         </div>
     </footer>
     <!-- ***** Footer Area Start ***** -->
@@ -195,7 +287,7 @@
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap-4 Beta JS -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- All Plugins JS-->
+    <!-- All Plugins JS -->
     <script src="js/plugins.js"></script>
     <!-- Slick Slider Js-->
     <script src="js/slick.min.js"></script>
