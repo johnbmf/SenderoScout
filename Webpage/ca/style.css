@@ -361,6 +361,11 @@ p {
     color: #81C14B !important;
 }
 
+.dropdown-menu .active {
+
+    color: #81C14B !important;
+    background-color:  #104f55 !important;
+}
 /*Color letras menu*/
 .menu_area #nav .nav-link {
     color: #fff;
