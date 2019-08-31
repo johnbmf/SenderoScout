@@ -15,10 +15,9 @@ $cabeceras = 'From: ' . $email . "\r\n" .
      'X-Mailer: PHP/' . phpversion();
 
 if (mail($para, $titulo, $enviar, $cabeceras)){
-    //header('Location: RUTA');
-    echo "Ok";
+    header('Location: contacto-ok.html');
 }
 else{
-    echo "Error.";
+    header('Location: contacto-error.html');
 }
 ?>
