@@ -356,6 +356,11 @@ p {
     z-index: 2;
 }
 
+.menu_area .active{
+
+    color: !important#CAE168;
+}
+
 /*Color letras menu*/
 .menu_area #nav .nav-link {
     color: #fff;
@@ -867,20 +872,27 @@ p {
 .single-price-plan {
     background: #ffffff;
     border: 1px solid #ebebeb;
-    border-radius: 30px 30px 30px 0;
+    border-radius: 30px 30px 30px 30px;
     margin-bottom: 30px;
+
 }
 
+
+
 .single-price-plan .package-plan {
+
     padding: 40px 0;
-    border-radius: 30px 30px 0 0;
+    border-radius: 30px 30px 30px 30px;
 }
 
 .single-price-plan .package-plan > h5 {
+
     color: #104f55;
     font-size: 18px;
     margin-left: 5px;
     margin-right: 5px;
+    margin: 20px;
+
 }
 
 
@@ -891,25 +903,43 @@ p {
     z-index: 1;
     margin-bottom: 0;
     line-height: 1;
+    margin: 35px;
 }
 
 .single-price-plan .package-plan .ca-price span {
     font-size: 18px;
     color: #fb397d;
+
 }
 
-.single-price-plan .plan-button > a {
-    background: #81c14b;
-    padding: 10px 0;
+
+.single-price-plan .plan-button {
+        background: #81c14b;
+    padding: 10px 10px;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     display: block;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
     transition-duration: 500ms;
+}
+.single-price-plan .plan-button > a {
+    background: #81c14b;
+    padding: 10px 10px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    display: block;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+
+
 }
 
 .single-price-plan .plan-button > a:hover {
@@ -921,6 +951,9 @@ p {
     line-height: 1;
     padding: 15px 0;
     border-bottom: 1px solid #ebebeb;
+    text-align: right;
+    margin: 5px 10px;
+
 }
 
 .single-price-plan .package-description > p:first-child {

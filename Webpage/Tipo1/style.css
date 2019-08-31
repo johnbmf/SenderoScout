@@ -446,10 +446,6 @@ p {
 
 
 
-.footer > img{
-    max-width: 10%;
-    max-height: 13%; 
-}
 
 .navbar-brand > img {
     max-width: 120%;
@@ -471,12 +467,12 @@ p {
 
 .wellcome_area {
     background-image: url(img/bg-img/Backgroundf.png);
-    height: 580px;
+    height: 700px;
     position: relative;
     z-index: 1;
     background-position: bottom center;
      background-repeat: no-repeat;
-    background-size: 1800px 600px;
+    background-size: 2000px 700px;
 }
 
 .wellcome_area:after {
@@ -504,8 +500,10 @@ p {
     font-size: 100px;
     color: #ffffff;
     font-weight: 700;
-    position: relative;
+    position: absolute;
     z-index: 3;
+    top: 40%;
+
 }
 
 .get-start-area .email {
@@ -563,6 +561,7 @@ p {
 
 .wellcome-heading > p {
     color: #fff;
+
 }
 /*BigLetter*/
 .wellcome-heading > h3 {
@@ -592,11 +591,13 @@ p {
 .single-icon > i {
     font-size: 36px;
     color: #81C14B;
+       top: 40%;
 }
 
 .single-special > h4 {
     font-size: 22px;
     color: #104F55;
+       top: 40%;
 }
 
 .single-icon {
@@ -787,7 +788,7 @@ p {
 
 
 
-
+/*
 .app_screenshots_slides {
     padding: 0 6%;
 }
@@ -829,14 +830,11 @@ p {
     text-align: center;
 }
 
+*/
+
+
 
 /*News*/
-
-.single-price-plan .package-plan1 {
-    padding: 40px 0;
-    border-radius: 30px 30px 0 0;
-}
-
 
 
 
@@ -911,7 +909,7 @@ margin: 20px;
 }
 
 .single-price-plan .package-description > p {
-    margin-bottom: 0;
+    margin-bottom: 10;
     line-height: 1;
     height:100;
     padding: 15px 15px;
