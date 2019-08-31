@@ -447,7 +447,7 @@ p {
 
 .wellcome_area {
     background-image: url(img/bg-img/backgroundf.png);
-    height: 500px;
+    height: 650px;
     position: relative;
     z-index: 1;
     background-position: bottom center;
@@ -547,7 +547,7 @@ p {
 .wellcome-heading > p {
     color: #fff;
     position: absolute;
-    top: 150%;
+    top: 100%;
 }
 
 .wellcome-heading > h3 {
