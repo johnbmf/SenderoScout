@@ -221,7 +221,7 @@ li {
 }
 
 p {
-    color: #726a84;
+    color: #368073;
     font-size: 16px;
     font-weight: 300;
     margin-top: 0;
@@ -285,7 +285,7 @@ p {
     -webkit-animation: 2000ms linear 0s normal none infinite running colorlib-load;
     animation: 2000ms linear 0s normal none infinite running colorlib-load;
     background: transparent none repeat scroll 0 0;
-    border-color: #dddddd #dddddd #fb397d;
+    border-color: #dddddd #dddddd #81C14B;
     border-radius: 50%;
     border-style: solid;
     border-width: 2px;
@@ -409,7 +409,7 @@ p {
 }
 
 .sing-up-button > a:hover {
-    background: #fb397d;
+    background: #81C14B;
     color: #fff;
     border-color: transparent;
     -webkit-transition-duration: 500ms;
@@ -532,7 +532,7 @@ p {
 }
 
 .get-start-area .submit {
-    background-color: #fb397d;
+    background-color: #81C14B;
     color: #fff;
     font-weight: 500;
     display: inline-block;
@@ -583,12 +583,12 @@ p {
 
 .single-icon > i {
     font-size: 36px;
-    color: #fb397d;
+    color: #81C14B;
 }
 
 .single-special > h4 {
     font-size: 22px;
-    color: #5b32b4;
+    color: #002642;
 }
 
 .single-icon {
@@ -597,7 +597,7 @@ p {
 
 .single-special > h4 {
     font-size: 22px;
-    color: #5b32b4;
+    color: #002642;
     margin-bottom: 15px;
 }
 
@@ -658,7 +658,7 @@ p {
 .app-download-btn.active a,
 .app-download-btn a:hover {
     border-color: transparent;
-    background-color: #fb397d;
+    background-color: #81C14B;
 }
 
 .app-download-btn a i {
@@ -707,7 +707,7 @@ p {
 }
 
 .single-feature > i {
-    color: #fb397d;
+    color: #81C14B;
     font-size: 30px;
     display: inline-block;
     float: left;
@@ -716,7 +716,7 @@ p {
 
 .single-feature > h5 {
     font-size: 22px;
-    color: #5b32b4;
+    color: #002642;
 }
 
 .single-feature > p {
@@ -755,7 +755,7 @@ p {
 .video-area .video-play-btn a {
     width: 80px;
     height: 80px;
-    background-color: #fb397d;
+    background-color: #81C14B;
     color: #fff;
     text-align: center;
     display: block;
@@ -865,7 +865,7 @@ p {
 }
 
 .app-screenshots-area .owl-dot.active {
-    background-color: #fb397d;
+    background-color: #81C14B;
     border: transparent;
 }
 
@@ -911,7 +911,7 @@ p {
 
 
 .single-price-plan .package-plan .ca-price h4 {
-    color: #fb397d;
+    color: #81C14B;
     font-size: 48px;
     position: relative;
     z-index: 1;
@@ -922,7 +922,7 @@ p {
 
 .single-price-plan .package-plan .ca-price span {
     font-size: 18px;
-    color: #fb397d;
+    color: #81C14B;
 
 }
 
@@ -993,7 +993,7 @@ p {
 -------------------------- */
 
 .clients-feedback-area .client-name > h5 {
-    color: #5b32b4;
+    color: #002642;
     font-size: 22px;
     margin-top: 5px;
 }
@@ -1044,8 +1044,8 @@ p {
 }
 
 .clients-feedback-area .slick-dots li.slick-active button {
-    background-color: #fb397d;
-    border-color: #fb397d;
+    background-color: #81C14B;
+    border-color: #81C14B;
 }
 
 .clients-feedback-area .slick-slide.client-thumbnail {
@@ -1131,13 +1131,13 @@ p {
     display: inline-block;
     text-align: center;
     line-height: 45px;
-    color: #fb397d;
+    color: #81C14B;
     font-weight: 500;
     border-radius: 23px 23px 23px 0;
 }
 
 .get-started-button > a:hover {
-    background: #5b32b4;
+    background: #002642;
     color: #fff;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
@@ -1241,7 +1241,7 @@ p {
 .address-text > p > span,
 .phone-text > p > span,
 .email-text > p > span {
-    color: #5b32b4;
+    color: #002642;
 }
 
 .footer-contact-area .line-shape {
@@ -1273,7 +1273,7 @@ p {
 }
 
 .btn.submit-btn {
-    background: #fb397d;
+    background: #81C14B;
     height: 48px;
     min-width: 185px;
     color: #ffffff;
@@ -1282,7 +1282,7 @@ p {
 }
 
 .btn.submit-btn:hover {
-    background: #5b32b4;
+    background: #002642;
     color: #fff;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
@@ -1302,7 +1302,7 @@ p {
 -------------------------- */
 
 .footer-text > h2 {
-    color: #5b32b4;
+    color: #002642;
     font-size: 72px;
     font-weight: 700;
 }
@@ -1340,14 +1340,14 @@ p {
 }
 
 .footer-menu ul li a {
-    border-right: 2px solid #726a84;
+    border-right: 2px solid #368073;
     display: block;
     padding: 0 7.5px;
-    color: #726a84;
+    color: #368073;
 }
 
 .footer-social-icon > a .active {
-    background: #fb397d;
+    background: #81C14B;
 }
 
 .footer-menu ul li:last-child a {
