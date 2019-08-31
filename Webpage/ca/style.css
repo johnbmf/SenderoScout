@@ -469,16 +469,20 @@ p {
 }
 
 .welcome-thumb {
-    width: 35%;
+    width: 100%;
     position: absolute;
-    bottom: -10px;
-    right: 85px;
+    bottom: -100px;
+    left: 3px;
     z-index: 9;
 }
 
 .welcome-thumb img {
     height: auto;
     width: 40%;
+}
+
+.fixspace{
+  padding-top: 130px;
 }
 
 
@@ -532,7 +536,7 @@ p {
 }
 
 .get-start-area .submit {
-    background-color: #81C14B;
+    background-color: #104f55;
     color: #fff;
     font-weight: 500;
     display: inline-block;
@@ -541,12 +545,12 @@ p {
     min-width: 167px;
     line-height: 46px;
     text-align: center;
-    border-radius: 24px 24px 24px 0px;
+    border-radius: 24px 24px 24px 24px;
     margin-left: 10px;
 }
 
 .get-start-area .submit:hover {
-    background: #6f52e5;
+    background: #81C14B;
     color: #fff;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
