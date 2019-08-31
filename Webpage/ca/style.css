@@ -506,22 +506,22 @@ p {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: #cec1f4;
+    color: #6B9C81;
     opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-    color: #cec1f4;
+    color: #6B9C81;
     opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-    color: #cec1f4;
+    color: #6B9C81;
     opacity: 1;
 }
 
 .form-control::placeholder {
-    color: #cec1f4;
+    color: #6B9C81;
     opacity: 1;
 }
 
