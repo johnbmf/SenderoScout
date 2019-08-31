@@ -370,7 +370,21 @@ p {
 }
 
 .menu_area #nav li > a:hover {
-    color: #fb397d;
+    color: #81c14b;
+}
+
+.dropdown-menu{
+  background-color: #104f55;
+  border: 0px;
+}
+
+.dropdown-item{
+  color: #fff;
+}
+
+.dropdown-menu > a:hover{
+  background-color: #104f55;
+  color: #81c14b;
 }
 
 .sing-up-button {
