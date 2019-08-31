@@ -482,8 +482,9 @@ p {
     font-size: 100px;
     color: #ffffff;
     font-weight: 700;
-    position: relative;
+    position: absolute;
     z-index: 3;
+    top: 80%;
 }
 
 .get-start-area .email {
@@ -545,6 +546,8 @@ p {
 
 .wellcome-heading > p {
     color: #fff;
+    position: absolute;
+    top: 150%;
 }
 
 .wellcome-heading > h3 {
@@ -562,6 +565,8 @@ p {
 .wellcome-heading {
     margin-bottom: 100px;
 }
+
+
 
 /* --------------------------
 :: 4.0 Special Area CSS
