@@ -3,9 +3,11 @@ import {
     View,
     Text,
     StyleSheet,
-    Picker
+    Picker,
+    FlatList,
+    
 } from "react-native";
-import { Header,Left,Right,Icon ,Body } from 'native-base'
+import { Header,Left,Right,Icon ,Body} from 'native-base'
 
 class evalaptitudes extends Component {
     
@@ -21,31 +23,40 @@ class evalaptitudes extends Component {
         this.state = {
             isLoading: true,
             PickerValue: "",
-            dataSource: []
+            dataSource: [],
+            seisena: "",
         };
     }
-/*
+
     updateAptitud = (aptitud) =>{
         this.setState({PickerValue:aptitud})
     }
-*/
+
     componentDidMount(){
-        fetch('localhost/SS/GetNinosSeisenas.php',{
+        fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
-                'Content/Type': 'application/json',
+                'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                'nombre' : 'nombre',
+            }),
         }).then((Response) => Response.json())
         .then((responseJson) =>{
+            console.log(responseJson);
             this.setState({
                 isLoading: false,
                 dataSource: responseJson
-            });
-        });
+            })   
+        }).catch((error) => {
+            console.error(error);
+        }); 
     }
-
+   
     render() {
+        var seisena = this.state.dataSource[0].seisena1;
+        console.log(seisena);
         return (
             <View style={styles.container}>
                     
@@ -85,8 +96,22 @@ class evalaptitudes extends Component {
                             </Picker>
                         </View>
                     </View>
-                <   View style = {{width: '100%', height: '74%'}}>
+                <View style ={ {width: '100%', height: '10%' }}>
+
+                    <View syle = {styles.UserRating}>
+                            
+
+
+                    </View>
+
+                </View>
+                <View style = {{width: '100%', height: '64%'}}>
                         <Text>consejo de la tarde</Text>
+                        <FlatList
+                            data={this.state.dataSource}
+                            renderItem = {({item}) => <Text>{item.nombre}</Text>}
+                            keyExtractor={(item, idex) => idex}
+                        />
                     </View>
             </View>
         );
