@@ -9,7 +9,7 @@ using System;
 //using UnityEngine.SceneManagement;
 //using System;
 
-public class VerMisiones : MonoBehaviour
+public class VerMisiones1 : MonoBehaviour
 {
     //activador del panel
     public GameObject botonVerMision;

@@ -47,8 +47,8 @@ public class Login : MonoBehaviour{
         //PlayerPrefs.SetString("pass", "holi");
         PlayerPrefs.SetString("email", "test@ss.cl");
         //PlayerPrefs.SetString("confirmacion_email", "1");
-        PlayerPrefs.SetString("unidad1", "Sol Naciente");
-        PlayerPrefs.SetString("unidad2", "Luna Luna");
+        PlayerPrefs.SetInt("unidad1", 1);
+        PlayerPrefs.SetInt("unidad2", 2);
         PlayerPrefs.SetString("edad", "10");
         PlayerPrefs.SetString("tipo", "nino");
         PlayerPrefs.SetString("nombre", "Sir Test Testeador");
