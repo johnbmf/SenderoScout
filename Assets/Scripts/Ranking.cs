@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Ranking : MonoBehaviour
 {
     public GameObject RankingCanvas;
+    public GameObject LoadingCanvas;
     public GameObject[] Banners;
     public GameObject[] Puntos;
     public GameObject[] Avatar;
@@ -28,6 +29,7 @@ public class Ranking : MonoBehaviour
     public void AbrirRanking()
     {
         //Activar Loading...
+        LoadingCanvas.SetActive(true);
         //Mientras se ejecuta la coroutine.
         StartCoroutine(OpenRanking());
     }
@@ -113,6 +115,7 @@ public class Ranking : MonoBehaviour
                     }
                 }
                 //Despues de seteados todos los gameobjects -> Mostrar el panel.
+                LoadingCanvas.SetActive(false);
                 RankingCanvas.SetActive(true);
             }
         }
