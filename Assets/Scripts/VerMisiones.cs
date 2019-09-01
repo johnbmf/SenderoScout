@@ -659,8 +659,8 @@ public class VerMisiones : MonoBehaviour
                         //falta arreglar lo de la foto (activar)
                     }
                 }
-                //caso 6 filas *******faltan activar lasimagenes
-                else if(RespuestaJson["columnas"] == 6)
+                //caso 6 filas *******de momento alcanzan 6 misiones en el panel
+                else if(RespuestaJson["columnas"] >= 6)
                 {
                     //primera fila
                     if (RespuestaJson["1"]["estado"] == 0)
@@ -694,6 +694,8 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM1;
                         fotoM1 = imagenMision1.GetComponent<Image>();
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
+
+                        imagenMision1.SetActive(true);
                         //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
@@ -728,6 +730,8 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM2;
                         fotoM2 = imagenMision2.GetComponent<Image>();
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
+
+                        imagenMision2.SetActive(true);
                         //falta arreglar lo de la foto (activar)
                     }
                     //tercera fila
@@ -762,6 +766,8 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM3;
                         fotoM3 = imagenMision3.GetComponent<Image>();
                         fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
+
+                        imagenMision3.SetActive(true);
                         //falta arreglar lo de la foto (activar)
                     }
                     //cuarta fila
@@ -796,6 +802,8 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM4;
                         fotoM4 = imagenMision4.GetComponent<Image>();
                         fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
+
+                        imagenMision4.SetActive(true);
                         //falta arreglar lo de la foto (activar)
                     }
                     //quinta fila
@@ -830,6 +838,8 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM5;
                         fotoM5 = imagenMision5.GetComponent<Image>();
                         fotoM5.sprite = listaImagen[RespuestaJson["5"]["puntaje"]];
+
+                        imagenMision5.SetActive(true);
                         //falta arreglar lo de la foto (activar)
                     }
                     //sexta fila
@@ -862,8 +872,10 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision6.text = RespuestaJson["6"]["nombre_mision"];
 
                         Image fotoM6;
-                        fotoM6 = imagenMision5.GetComponent<Image>();
+                        fotoM6 = imagenMision6.GetComponent<Image>();
                         fotoM6.sprite = listaImagen[RespuestaJson["6"]["puntaje"]];
+
+                        imagenMision6.SetActive(true);
                         //falta arreglar lo de la foto (activar)
                     }
                 }
