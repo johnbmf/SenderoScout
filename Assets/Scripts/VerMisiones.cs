@@ -52,8 +52,9 @@ public class VerMisiones : MonoBehaviour
     }
 
     public void CallMisiones()
-    {   //asignar esta función al botón que activa la mierda
+    {   //asignar esta función al botón que activa el panel
         StartCoroutine(Misiones());
+        //debería abrir el panel 
     }
 
     IEnumerator Misiones()
@@ -70,7 +71,7 @@ public class VerMisiones : MonoBehaviour
             Debug.Log(www.error);
         }
 
-        else
+        else//no hay errores y el Json tiene respestas
         {
             string respuesta = www.downloadHandler.text;
             Debug.Log("Respuesta del servidor: " + respuesta);
@@ -84,39 +85,21 @@ public class VerMisiones : MonoBehaviour
                 //error.text = "Fallo en la conexión. Intente más tarde.";
                 //yield break;
             }
-            //caso respuesta 1 -> no hay misiones para mostrar
+            //caso respuesta 0 -> no hay misiones para mostrar
             else if(RespuestaJson["response"] == 0)
             {
                 error.text = "Actualmente no posees cacerías para mostrar.";
-            }
+            }            
             //caso respuesta 1 -> si hay misiones
             else if (RespuestaJson["response"] == 1)
             {
-                /*int col = RespuestaJson["columnas"];
-                for (int i = 0; i<= col; i++)
-                {
-
-                }*/
+                Debug.Log("filas de la query");
+                Debug.Log(RespuestaJson);
                 //caso de una sola fila
                 if (RespuestaJson["columnas"] == 1)
-                {
+                {   //primera fila
                     if (RespuestaJson["1"]["estado"] == 0)
                     {
-                        /*
-                         * Text textotitulomision; nuevo
-                        Text textoInstruccionesMision; nuevo
-
-                        textotitulomision = NombreMision.GetComponent<Text>(); nuevo =object
-                        textoInstruccionesMision = InstruccionesMision.GetComponent<Text>(); nuevo = object
-
-                        textotitulomision.text = RespuestaJson[nombreSpot]["nombre_mision"];
-                        textoInstruccionesMision.text = RespuestaJson[nombreSpot]["descripcion_mision"];
-
-                        Spot1_estado1.SetActive(false);
-                        Spot1_estado2.SetActive(false);
-
-                        Spot1_estado0.SetActive(true);
-                         */
                         Text textonombreMision1;
                         Text textoDescripMision1;
 
@@ -125,9 +108,6 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
-
-                        //tituloMision1.text = "¡Nueva caceria!";
-                        //descripcionMision1.text = "¡Busca en el mapa esta nueva caceria!";
                         //tituloMision1.SetActive(true);
                         //descripcionMision1.SetActive(true);
                     }
@@ -142,8 +122,6 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
                         /*
-                        tituloMision1.Text = RespuestaJson["1"]["nombre_mision"];
-                        descripcionMision1.Text = "Caceria enviada para calificar";
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);*/
                     }
@@ -156,16 +134,13 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM1;
                         fotoM1 = imagenMision1.GetComponent<Image>();
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
-                        //falta arreglar lo de la foto
+                        imagenMision1.SetActive(true);
                         /*
-                        tituloMision1.Text = RespuestaJson["1"]["nombre_mision"];
-                        imagenMision1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
                         tituloMision1.SetActive(true);
                         imagenMision1.SetActive(true);*/
                     }
 
                 }
-
                 //caso 2 filas
                 else if (RespuestaJson["columnas"] == 2)
                 {   //primera fila
@@ -199,7 +174,9 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM1;
                         fotoM1 = imagenMision1.GetComponent<Image>();
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
-                        //falta arreglar lo de la foto
+
+                        imagenMision1.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
                     if (RespuestaJson["2"]["estado"] == 0)
@@ -233,10 +210,11 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM2;
                         fotoM2 = imagenMision2.GetComponent<Image>();
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
-                        //falta arreglar lo de la foto
+
+                        imagenMision2.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
                     }
                 }
-
                 //caso 3 filas
                 else if (RespuestaJson["columnas"] == 3)
                 {
@@ -272,7 +250,9 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM1;
                         fotoM1 = imagenMision1.GetComponent<Image>();
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
-                        //falta arreglar lo de la foto
+
+                        imagenMision1.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
                     if (RespuestaJson["2"]["estado"] == 0)
@@ -306,7 +286,9 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM2;
                         fotoM2 = imagenMision2.GetComponent<Image>();
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
-                        //falta arreglar lo de la foto
+
+                        imagenMision2.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
                     }
                     //tercera fila
                     if (RespuestaJson["3"]["estado"] == 0)
@@ -340,14 +322,552 @@ public class VerMisiones : MonoBehaviour
                         Image fotoM3;
                         fotoM3 = imagenMision3.GetComponent<Image>();
                         fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
-                        //falta arreglar lo de la foto
+
+                        imagenMision3.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
                     }
                 }
+                //caso 4 filas
+                else if (RespuestaJson["columnas"] == 4)
+                {
+                    //primera fila
+                    if (RespuestaJson["1"]["estado"] == 0)
+                    {
+                        Text textonombreMision1;
+                        Text textoDescripMision1;
 
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
+                        textonombreMision1.text = "¡Nueva caceria!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["1"]["estado"] == 1)
+                    {
+                        Text textonombreMision1;
+                        Text textoDescripMision1;
 
-            }
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-        }
-    }
+                        textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
+                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["1"]["estado"] == 2)
+                    {
+                        Text textonombreMision1;
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
+
+                        Image fotoM1;
+                        fotoM1 = imagenMision1.GetComponent<Image>();
+                        fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
+                        imagenMision1.SetActive(true);
+
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //segunda fila
+                    if (RespuestaJson["2"]["estado"] == 0)
+                    {
+                        Text textonombreMision2;
+                        Text textoDescripMision2;
+
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textoDescripMision2 = descripcionMision2.GetComponent<Text>();
+
+                        textonombreMision2.text = "¡Nueva caceria!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["2"]["estado"] == 1)
+                    {
+                        Text textonombreMision2;
+                        Text textoDescripMision2;
+
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textoDescripMision2 = descripcionMision2.GetComponent<Text>();
+
+                        textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
+                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["2"]["estado"] == 2)
+                    {
+                        Text textonombreMision2;
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
+
+                        Image fotoM2;
+                        fotoM2 = imagenMision2.GetComponent<Image>();
+                        fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
+
+                        imagenMision2.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //tercera fila
+                    if (RespuestaJson["3"]["estado"] == 0)
+                    {
+                        Text textonombreMision3;
+                        Text textoDescripMision3;
+
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textoDescripMision3 = descripcionMision3.GetComponent<Text>();
+
+                        textonombreMision3.text = "¡Nueva caceria!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["3"]["estado"] == 1)
+                    {
+                        Text textonombreMision3;
+                        Text textoDescripMision3;
+
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textoDescripMision3 = descripcionMision3.GetComponent<Text>();
+
+                        textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
+                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["3"]["estado"] == 2)
+                    {
+                        Text textonombreMision3;
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
+
+                        Image fotoM3;
+                        fotoM3 = imagenMision3.GetComponent<Image>();
+                        fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
+
+                        imagenMision3.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //cuarta fila
+                    if (RespuestaJson["4"]["estado"] == 0)
+                    {
+                        Text textonombreMision4;
+                        Text textoDescripMision4;
+
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textoDescripMision4 = descripcionMision4.GetComponent<Text>();
+
+                        textonombreMision4.text = "¡Nueva caceria!";
+                        textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["4"]["estado"] == 1)
+                    {
+                        Text textonombreMision4;
+                        Text textoDescripMision4;
+
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textoDescripMision4 = descripcionMision4.GetComponent<Text>();
+
+                        textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
+                        textoDescripMision4.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["4"]["estado"] == 2)
+                    {
+                        Text textonombreMision4;
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
+
+                        Image fotoM4;
+                        fotoM4 = imagenMision4.GetComponent<Image>();
+                        fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
+
+                        imagenMision4.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                }
+                //caso 5 filas
+                else if(RespuestaJson["columnas"] == 5)
+                {
+                    //primera fila
+                    if (RespuestaJson["1"]["estado"] == 0)
+                    {
+                        Text textonombreMision1;
+                        Text textoDescripMision1;
+
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textoDescripMision1 = descripcionMision1.GetComponent<Text>();
+
+                        textonombreMision1.text = "¡Nueva caceria!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["1"]["estado"] == 1)
+                    {
+                        Text textonombreMision1;
+                        Text textoDescripMision1;
+
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textoDescripMision1 = descripcionMision1.GetComponent<Text>();
+
+                        textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
+                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["1"]["estado"] == 2)
+                    {
+                        Text textonombreMision1;
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
+
+                        Image fotoM1;
+                        fotoM1 = imagenMision1.GetComponent<Image>();
+                        fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
+
+                        imagenMision1.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //segunda fila
+                    if (RespuestaJson["2"]["estado"] == 0)
+                    {
+                        Text textonombreMision2;
+                        Text textoDescripMision2;
+
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textoDescripMision2 = descripcionMision2.GetComponent<Text>();
+
+                        textonombreMision2.text = "¡Nueva caceria!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["2"]["estado"] == 1)
+                    {
+                        Text textonombreMision2;
+                        Text textoDescripMision2;
+
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textoDescripMision2 = descripcionMision2.GetComponent<Text>();
+
+                        textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
+                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["2"]["estado"] == 2)
+                    {
+                        Text textonombreMision2;
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
+
+                        Image fotoM2;
+                        fotoM2 = imagenMision2.GetComponent<Image>();
+                        fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
+
+                        imagenMision2.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //tercera fila
+                    if (RespuestaJson["3"]["estado"] == 0)
+                    {
+                        Text textonombreMision3;
+                        Text textoDescripMision3;
+
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textoDescripMision3 = descripcionMision3.GetComponent<Text>();
+
+                        textonombreMision3.text = "¡Nueva caceria!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["3"]["estado"] == 1)
+                    {
+                        Text textonombreMision3;
+                        Text textoDescripMision3;
+
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textoDescripMision3 = descripcionMision3.GetComponent<Text>();
+
+                        textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
+                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["3"]["estado"] == 2)
+                    {
+                        Text textonombreMision3;
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
+
+                        Image fotoM3;
+                        fotoM3 = imagenMision3.GetComponent<Image>();
+                        fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
+
+                        imagenMision3.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //cuarta fila
+                    if (RespuestaJson["4"]["estado"] == 0)
+                    {
+                        Text textonombreMision4;
+                        Text textoDescripMision4;
+
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textoDescripMision4 = descripcionMision4.GetComponent<Text>();
+
+                        textonombreMision4.text = "¡Nueva caceria!";
+                        textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["4"]["estado"] == 1)
+                    {
+                        Text textonombreMision4;
+                        Text textoDescripMision4;
+
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textoDescripMision4 = descripcionMision4.GetComponent<Text>();
+
+                        textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
+                        textoDescripMision4.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["4"]["estado"] == 2)
+                    {
+                        Text textonombreMision4;
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
+
+                        Image fotoM4;
+                        fotoM4 = imagenMision4.GetComponent<Image>();
+                        fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
+
+                        imagenMision4.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //quinta fila
+                    if (RespuestaJson["5"]["estado"] == 0)
+                    {
+                        Text textonombreMision5;
+                        Text textoDescripMision5;
+
+                        textonombreMision5 = tituloMision5.GetComponent<Text>();
+                        textoDescripMision5 = descripcionMision5.GetComponent<Text>();
+
+                        textonombreMision5.text = "¡Nueva caceria!";
+                        textoDescripMision5.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["5"]["estado"] == 1)
+                    {
+                        Text textonombreMision5;
+                        Text textoDescripMision5;
+
+                        textonombreMision5 = tituloMision5.GetComponent<Text>();
+                        textoDescripMision5 = descripcionMision5.GetComponent<Text>();
+
+                        textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
+                        textoDescripMision5.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["5"]["estado"] == 2)
+                    {
+                        Text textonombreMision5;
+                        textonombreMision5 = tituloMision5.GetComponent<Text>();
+                        textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
+
+                        Image fotoM5;
+                        fotoM5 = imagenMision5.GetComponent<Image>();
+                        fotoM5.sprite = listaImagen[RespuestaJson["5"]["puntaje"]];
+
+                        imagenMision5.SetActive(true);
+                        //falta arreglar lo de la foto (activar)
+                    }
+                }
+                //caso 6 filas *******faltan activar lasimagenes
+                else if(RespuestaJson["columnas"] == 6)
+                {
+                    //primera fila
+                    if (RespuestaJson["1"]["estado"] == 0)
+                    {
+                        Text textonombreMision1;
+                        Text textoDescripMision1;
+
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textoDescripMision1 = descripcionMision1.GetComponent<Text>();
+
+                        textonombreMision1.text = "¡Nueva caceria!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["1"]["estado"] == 1)
+                    {
+                        Text textonombreMision1;
+                        Text textoDescripMision1;
+
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textoDescripMision1 = descripcionMision1.GetComponent<Text>();
+
+                        textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
+                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["1"]["estado"] == 2)
+                    {
+                        Text textonombreMision1;
+                        textonombreMision1 = tituloMision1.GetComponent<Text>();
+                        textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
+
+                        Image fotoM1;
+                        fotoM1 = imagenMision1.GetComponent<Image>();
+                        fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //segunda fila
+                    if (RespuestaJson["2"]["estado"] == 0)
+                    {
+                        Text textonombreMision2;
+                        Text textoDescripMision2;
+
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textoDescripMision2 = descripcionMision2.GetComponent<Text>();
+
+                        textonombreMision2.text = "¡Nueva caceria!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["2"]["estado"] == 1)
+                    {
+                        Text textonombreMision2;
+                        Text textoDescripMision2;
+
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textoDescripMision2 = descripcionMision2.GetComponent<Text>();
+
+                        textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
+                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["2"]["estado"] == 2)
+                    {
+                        Text textonombreMision2;
+                        textonombreMision2 = tituloMision2.GetComponent<Text>();
+                        textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
+
+                        Image fotoM2;
+                        fotoM2 = imagenMision2.GetComponent<Image>();
+                        fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //tercera fila
+                    if (RespuestaJson["3"]["estado"] == 0)
+                    {
+                        Text textonombreMision3;
+                        Text textoDescripMision3;
+
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textoDescripMision3 = descripcionMision3.GetComponent<Text>();
+
+                        textonombreMision3.text = "¡Nueva caceria!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["3"]["estado"] == 1)
+                    {
+                        Text textonombreMision3;
+                        Text textoDescripMision3;
+
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textoDescripMision3 = descripcionMision3.GetComponent<Text>();
+
+                        textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
+                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["3"]["estado"] == 2)
+                    {
+                        Text textonombreMision3;
+                        textonombreMision3 = tituloMision3.GetComponent<Text>();
+                        textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
+
+                        Image fotoM3;
+                        fotoM3 = imagenMision3.GetComponent<Image>();
+                        fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //cuarta fila
+                    if (RespuestaJson["4"]["estado"] == 0)
+                    {
+                        Text textonombreMision4;
+                        Text textoDescripMision4;
+
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textoDescripMision4 = descripcionMision4.GetComponent<Text>();
+
+                        textonombreMision4.text = "¡Nueva caceria!";
+                        textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["4"]["estado"] == 1)
+                    {
+                        Text textonombreMision4;
+                        Text textoDescripMision4;
+
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textoDescripMision4 = descripcionMision4.GetComponent<Text>();
+
+                        textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
+                        textoDescripMision4.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["4"]["estado"] == 2)
+                    {
+                        Text textonombreMision4;
+                        textonombreMision4 = tituloMision4.GetComponent<Text>();
+                        textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
+
+                        Image fotoM4;
+                        fotoM4 = imagenMision4.GetComponent<Image>();
+                        fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //quinta fila
+                    if (RespuestaJson["5"]["estado"] == 0)
+                    {
+                        Text textonombreMision5;
+                        Text textoDescripMision5;
+
+                        textonombreMision5 = tituloMision5.GetComponent<Text>();
+                        textoDescripMision5 = descripcionMision5.GetComponent<Text>();
+
+                        textonombreMision5.text = "¡Nueva caceria!";
+                        textoDescripMision5.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["5"]["estado"] == 1)
+                    {
+                        Text textonombreMision5;
+                        Text textoDescripMision5;
+
+                        textonombreMision5 = tituloMision5.GetComponent<Text>();
+                        textoDescripMision5 = descripcionMision5.GetComponent<Text>();
+
+                        textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
+                        textoDescripMision5.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["5"]["estado"] == 2)
+                    {
+                        Text textonombreMision5;
+                        textonombreMision5 = tituloMision5.GetComponent<Text>();
+                        textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
+
+                        Image fotoM5;
+                        fotoM5 = imagenMision5.GetComponent<Image>();
+                        fotoM5.sprite = listaImagen[RespuestaJson["5"]["puntaje"]];
+                        //falta arreglar lo de la foto (activar)
+                    }
+                    //sexta fila
+                    if (RespuestaJson["6"]["estado"] == 0)
+                    {
+                        Text textonombreMision6;
+                        Text textoDescripMision6;
+
+                        textonombreMision6 = tituloMision6.GetComponent<Text>();
+                        textoDescripMision6 = descripcionMision6.GetComponent<Text>();
+
+                        textonombreMision6.text = "¡Nueva caceria!";
+                        textoDescripMision6.text = "¡Busca en el mapa esta nueva caceria!";
+                    }
+                    else if (RespuestaJson["6"]["estado"] == 1)
+                    {
+                        Text textonombreMision6;
+                        Text textoDescripMision6;
+
+                        textonombreMision6 = tituloMision6.GetComponent<Text>();
+                        textoDescripMision6 = descripcionMision6.GetComponent<Text>();
+
+                        textonombreMision6.text = RespuestaJson["6"]["nombre_mision"];
+                        textoDescripMision6.text = "Caceria enviada para calificar.";
+                    }
+                    else if (RespuestaJson["6"]["estado"] == 2)
+                    {
+                        Text textonombreMision6;
+                        textonombreMision6 = tituloMision6.GetComponent<Text>();
+                        textonombreMision6.text = RespuestaJson["6"]["nombre_mision"];
+
+                        Image fotoM6;
+                        fotoM6 = imagenMision5.GetComponent<Image>();
+                        fotoM6.sprite = listaImagen[RespuestaJson["6"]["puntaje"]];
+                        //falta arreglar lo de la foto (activar)
+                    }
+                }
+            }//fin de casos con filas en el Json
+        }//fin del else (no hay errores con y hay respuesta en el Json)
+    }//fin del IEnumerator Misiones()
 }
