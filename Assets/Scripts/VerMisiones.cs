@@ -14,6 +14,7 @@ public class VerMisiones : MonoBehaviour
     public GameObject botonVerMision;
 
     //variables del panel
+    public GameObject canvasMision;
     public GameObject tituloMision1;//nombre de las misiones
     public GameObject tituloMision2;
     public GameObject tituloMision3;
@@ -55,6 +56,7 @@ public class VerMisiones : MonoBehaviour
     {   //asignar esta función al botón que activa el panel
         StartCoroutine(Misiones());
         //debería abrir el panel 
+        canvasMision.SetActive(true);
     }
 
     IEnumerator Misiones()
