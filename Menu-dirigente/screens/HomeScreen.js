@@ -6,16 +6,76 @@ import {
     Button,
     TouchableOpacity
 } from "react-native";
+import {createStackNavigator} from 'react-navigation';
 import { Header,Left,Right,Icon} from 'native-base'
 import MenuItem from './../components/menuitems'
 class HomeScreen extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isLoading: true,
+            dataSource: []
+
+        }
+    }
     static navigationOptions = {
         drawerLabel: 'Inicio',
         drawerIcon: ({tintColor}) => (
             <Icon name='home' style = {{fontSize:24,color:tintColor}} />
         )
     }
+    componentDidMount(){        
+        fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+                
+            },
+            body:JSON.stringify({
+                "unidad":1
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            if(responseJson != null){
+                console.log((typeof(responseJson[0].fecha_expiracion)));
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson,
+                })
+            }else{
+                this.setState({
+                    isLoading: false,
+                    dataSource: []
+                })
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+
+    mostrar_mensaje = () => {
+        
+        if ((this.state.dataSource.length)>0){
+            console.log(this.state.dataSource.length);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    fechas = () =>{
+        console.log("hola");
+        
+        date2 = new Date('2019-09-04');
+        //date2.setDate(date2 + 2);
+        console.log(date2);
+        
+    }
+
     render() {
+        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Header style={{height:80,backgroundColor:'#81C14B',font:'Roboto'}}>
@@ -24,9 +84,6 @@ class HomeScreen extends Component {
                         <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
                     </Left>
                 </Header >
-                <View style = {styles.top}>
-                    <Text style = {styles.header} >D A S H B O A R D</Text>
-                </View>
                 <View style = {styles.menuContainer } >
                     <MenuItem itemImage = {require('./../assets/chart1.png')} />
                     <MenuItem itemImage = {require('./../assets/chart2.png')} />
@@ -35,8 +92,9 @@ class HomeScreen extends Component {
                 </View>
                 <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
                     <TouchableOpacity
+                    onPress = {this.fechas}
                     style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                        <Text style = {{color: 'white', textAlign:'center', fontSize:18, backgroundColor: '#104F55'}}> Tienes 3 misiones sin evaluar </Text>
+                        <Text style = {{color: 'white', textAlign:'center', fontSize:18}}>Tienes {this.state.dataSource.length} misiones sin evaluar</Text>
                     </TouchableOpacity>
                 </View>
             </View>

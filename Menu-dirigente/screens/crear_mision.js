@@ -95,15 +95,9 @@ class crear_mision extends Component {
                                 <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                             </Left>
                             <Body style = {{justifyContent:'center'}}> 
-                                <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
+                                <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Crear Misión</Text>
                             </Body>
                         </Header >                    
-                    </View>
-
-                    <View style={{width: '100%', height: '7%'}} >
-                        <View style = {styles.top}>
-                            <Text style = {styles.header} >C R E A R  M I S I O N</Text>
-                        </View>
                     </View>
                     <View style={{width: '100%', height: '7%'}} > 
                         <View style= {styles.pickerMenu}>
@@ -147,7 +141,7 @@ class crear_mision extends Component {
                     </View>
                     <View style={{width: '100%', height: '7%'}} >
                                 <TextInput 
-                                    style = {{height:'100%', width:'95%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
                                     maxLength = {60}
                                     //{...this.props}
@@ -158,9 +152,9 @@ class crear_mision extends Component {
                                     value={this.state.nombre_mision}
                                     />
                     </View>
-                    <View style={{width: '100%', height: '40%'}} >
+                    <View style={{width: '100%', height: '30%'}} >
                                 <TextInput 
-                                    style = {{height:'100%', width:'95%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     placeholder = "Descripción de la misión"
                                     maxLength = {240}
                                     //{...this.props}
