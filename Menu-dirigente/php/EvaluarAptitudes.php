@@ -4,11 +4,12 @@
 
 	$json = file_get_contents('php://input'); // recivir Json desde React
   $obj = json_decode($json,true); //convertir json en objeto
+  $response = new stdClass;
   $fecha = new DateTime();
   //SETEAR VARIABLES DESDE JSON
   $usuario = $obj['usuario'];
   $nombre = $obj['nombre'];
-  $fecha = date("Y-m-d H:i:s");
+  $fecha = date("Y-m-d");
 	$corporalidad = $obj['corporalidad'];
   $creatividad = $obj['creatividad'];
   $caracter =$obj['caracter'];
@@ -17,12 +18,18 @@
   $espiritualidad =$obj['espiritualidad'];
 
 
-	$add = $mysqli->query("INSERT INTO evalaptitud (fecha, usuario, nombre, corporalidad, creatividad, caracter, afectividad, sociabilidad, espiritualidad) values('$fecha','$usuario','$nombre', '$corporalidad', '$creatividad', '$caracter','$afectividad','$sociabilidad','$espiritualidad')");
+	$add = $mysqli->query("INSERT INTO EvaluacionSemanal (fecha, usuario, nombre, corporalidad, creatividad, caracter, afectividad, sociabilidad, espiritualidad) values('$fecha','$usuario','$nombre', '$corporalidad', '$creatividad', '$caracter','$afectividad','$sociabilidad','$espiritualidad')");
 	if($add){
-		echo  json_encode('Evaluacion enviada con exito'); // alert msg in react native
+    $response -> data = null;
+    $response -> type = 1;
+    $response -> message = "Evaluacion enviada con exito";
+		echo  json_encode($response);
 	}
 	else{
-		echo json_encode('Compruebe su conexion a internet.'); // our query fail
+    $response -> data = null;
+    $response -> type = -1;
+    $response -> message = "Error al enviar la evaluacion, por favor intente nuevamente.";
+		echo  json_encode($response);
 	  }
   mysqli_close($mysqli);
 ?>
