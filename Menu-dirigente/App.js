@@ -46,7 +46,6 @@ const AppDrawerNavigator = createDrawerNavigator({
   MiManada:MiManadaScreen,
   CrearMision:CrearMisionScreen,
   Pendientes: PendientesScreen,
-  Evaluacion: EvaluacionScreen,
   EvalAptitudes: EvalAptitudesScreen,
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
