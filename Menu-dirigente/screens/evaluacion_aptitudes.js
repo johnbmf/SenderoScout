@@ -223,7 +223,8 @@ class evalaptitudes extends Component {
                         <View syle ={styles.Picker}>
                             <Picker 
                                 selectedValue = {this.state.PickerValue}
-                                style = {{width: '80%', height: '100%', borderColor:'gray', borderWidth:1}}
+                                style = {{width: '80%', height: '100%', borderColor:'gray', borderWidth: 5, alignItems:'center'}}
+                                itemStyle={{height: 50, width: 150,fontSize: 50}}
                                 onValueChange = {(itemValue, itemIndex) => this.setState({PickerValue : itemValue})}>
                                 <Picker.Item label = 'Seleccione un Lobato' value = {'default'}/>
                                 {this.state.nombres.map((item, index) => {return (<Picker.Item label={item} value={item} key={index}/>)})}
@@ -435,7 +436,7 @@ const styles = StyleSheet.create({
     Picker:{
         flex:1,
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         width: '100%',
         height: '100%'
     },
