@@ -6,10 +6,15 @@ import {
     Button,
     TouchableOpacity
 } from "react-native";
-import {createStackNavigator} from 'react-navigation';
 import { Header,Left,Right,Icon} from 'native-base'
 import MenuItem from './../components/menuitems'
 class HomeScreen extends Component {
+    static navigationOptions = {
+        drawerLabel: 'Inicio',
+        drawerIcon: ({tintColor}) => (
+            <Icon name='home' style = {{fontSize:24,color:tintColor}} />
+        )
+    }
     constructor(props){
         super(props);
         this.state = {
@@ -17,12 +22,6 @@ class HomeScreen extends Component {
             dataSource: []
 
         }
-    }
-    static navigationOptions = {
-        drawerLabel: 'Inicio',
-        drawerIcon: ({tintColor}) => (
-            <Icon name='home' style = {{fontSize:24,color:tintColor}} />
-        )
     }
     componentDidMount(){        
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
@@ -39,7 +38,7 @@ class HomeScreen extends Component {
         .then(response => response.json())
         .then((responseJson) => {
             if(responseJson != null){
-                console.log((typeof(responseJson[0].fecha_expiracion)));
+                //console.log((typeof(responseJson[0].fecha_expiracion)));
                 this.setState({
                     isLoading: false,
                     dataSource: responseJson,
@@ -92,7 +91,7 @@ class HomeScreen extends Component {
                 </View>
                 <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
                     <TouchableOpacity
-                    onPress = {this.fechas}
+                    onPress = {()=> this.props.navigation.navigate('Pendientes')}
                     style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
                         <Text style = {{color: 'white', textAlign:'center', fontSize:18}}>Tienes {this.state.dataSource.length} misiones sin evaluar</Text>
                     </TouchableOpacity>

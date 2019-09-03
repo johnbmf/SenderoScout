@@ -16,19 +16,49 @@ import {
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import { Rating, AirbnbRating } from 'react-native-elements';
 const paw_image = require('../assets/paw.png')
-const nombre_nino = 'Pedro Chacon';
-const nombre_mision = 'Mision 20';
 ratingCompleted = (rating) => {
-    console.log("Rating is: " + rating);
+     this.state.rating = rating;
   }
-class evaluacion extends Component {
-    static navigationOptions = {
-        drawerLabel: 'Evaluación',
-        drawerIcon: ({tintColor}) => (
-            <Icon name='star' style = {{fontSize:24,color:tintColor}} />
-        )
+class evaluacion extends Component { 
+    constructor(props){
+        super(props);
+        this.state = {
+            rating : 0
+        }
+    }
+    enviarEvaluacion = () =>{   
+        fetch('http://www.mitra.cl/SS/evaluar_mision.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+                
+            },
+            body:JSON.stringify({
+                "user": data.user,
+                "unidad1": "1",
+                "nombre": data.nombre,
+                "id": data.id,
+                "estado": data.estado,
+                "fecha_expiracion": data.fecha_expiracion,
+                "fecha_borrado": data.fecha_borrado,
+                "id_mision": data.id_mision,
+                "respuesta": data.respuesta,
+                "nombre_mision": data.nombre_mision,
+                "descripcion_mision": data.descripcion_mision,
+                "rating" : this.state.rating
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            alert(responseJson);
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
     }
     render() {
+        const data = this.props.navigation.getParam('data', {});  
         return (
 <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
@@ -47,11 +77,11 @@ class evaluacion extends Component {
                     <View style={{width:'100%', height:'10%'}}> 
                         <View style={{width:'90%', height:'50%'}}>
                             <Text style={{fontSize:20,marginLeft:20,borderBottomColor:'black', borderBottomWidth:1,fontFamily:'Roboto'}}
-                            >{nombre_mision} </Text>
+                            >{data.nombre_mision} </Text>
                         </View>
                         <View style={{width:'90%', height:'50%'}}>
                             <Text style={{fontSize:20,marginLeft:20,borderBottomColor:'black', borderBottomWidth:1,fontFamily:'Roboto'}}
-                            >{nombre_nino} </Text>
+                            >{data.nombre} </Text>
                         </View>
                     </View>
                     <View style={{width:'100%', height:'30%'}}>
@@ -60,8 +90,9 @@ class evaluacion extends Component {
                             >Descripción de la mision: 
                         </Text>
                         <ScrollView>
-                            <Text style={{fontSize:20,marginLeft:25, width:'90%'}}
-                            >s simplemente el texto de relleno de las imprentas y archivos de texto.(N. del T.s simplemente el texto de relleno de las imprentas y archivos de texto.(N. del T.s simplemente el texto de relleno de las imprentas y archivos de texto.(N. del T.s simplemente el texto de relleno de las imprentas y archivos de texto.(N. del T.s simplemente el texto de relleno de las imprentas y archivos de texto.(N. del T.s simplemente el texto de relleno de las imprentas y archivos de texto.(N. del T.</Text>
+                            <Text style={{fontSize:20,marginLeft:25, width:'90%'}}>
+                                {data.descripcion_mision}
+                            </Text>
                         </ScrollView>
                         </View>
                     <View style={{width:'100%', height:'50%'}}>
@@ -69,7 +100,7 @@ class evaluacion extends Component {
                             >Respuesta: </Text>
                             <ScrollView>
                                 <Text style={{fontSize:20,marginLeft:25, width:'90%'}}
-                                >Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el</Text>
+                                >{data.respuesta}</Text>
                             </ScrollView>
                         </View>
                     </View>
@@ -84,6 +115,7 @@ class evaluacion extends Component {
                             ratingBackgroundColor='#c8c7c8'
                             ratingCount={5}
                             defaultRating={0}
+                            startingValue = {0}
                             imageSize={50}
                             onFinishRating={ratingCompleted}
                             style={{marginBottom:20}}
@@ -91,7 +123,7 @@ class evaluacion extends Component {
                     </View>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center', marginBottom:10}} >
                         <TouchableOpacity 
-                        onPress = {this.crearMision}
+                        onPress = {this.enviarEvaluacion}
                         style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
                             <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Enviar </Text>
                         </TouchableOpacity>
