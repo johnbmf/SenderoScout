@@ -16,9 +16,7 @@ import {
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import { Rating, AirbnbRating } from 'react-native-elements';
 const paw_image = require('../assets/paw.png')
-ratingCompleted = (rating) => {
-     this.state.rating = rating;
-  }
+
 class evaluacion extends Component { 
     constructor(props){
         super(props);
@@ -26,8 +24,13 @@ class evaluacion extends Component {
             rating : 0
         }
     }
-    enviarEvaluacion = () =>{   
-        fetch('http://www.mitra.cl/SS/evaluar_mision.php',{
+    ratingCompleted = (rating2) => {
+        this.setState({rating : rating2})
+     }
+    enviarEvaluacion = (data) =>{   
+        console.log(data);
+        
+        fetch('http://www.mitra.cl/SS/evluar_mision.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -51,6 +54,7 @@ class evaluacion extends Component {
         })
         .then(response => response.json())
         .then((responseJson) => {
+            console.log(responseJson);
             alert(responseJson);
         })
         .catch((error)=>{
@@ -104,11 +108,10 @@ class evaluacion extends Component {
                             </ScrollView>
                         </View>
                     </View>
-                    <View>
+                    <View style = {{backgroundColor: 'pink'}} >
                     <Text style={{fontSize:20,marginLeft:20,fontFamily:'Roboto',fontWeight:'bold'}}
                             > Puntaje: </Text>
                         <Rating
-                            swipeable={'false'}
                             type='custom'
                             ratingImage={paw_image}
                             ratingColor='#f1c40f'
@@ -117,13 +120,13 @@ class evaluacion extends Component {
                             defaultRating={0}
                             startingValue = {0}
                             imageSize={50}
-                            onFinishRating={ratingCompleted}
+                            onFinishRating={this.ratingCompleted}
                             style={{marginBottom:20}}
                             />
                     </View>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center', marginBottom:10}} >
                         <TouchableOpacity 
-                        onPress = {this.enviarEvaluacion}
+                        onPress = {() => this.enviarEvaluacion(data)}
                         style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
                             <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Enviar </Text>
                         </TouchableOpacity>
