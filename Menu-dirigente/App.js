@@ -10,6 +10,7 @@ import EstadisticasScreen from './screens/estadisticas'
 import AgregarUsuariosScreen from './screens/agregar_usuarios'
 import MiManadaScreen from './screens/mi_manada'
 import PendientesScreen from './screens/misiones_pendietes'
+import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
@@ -45,6 +46,8 @@ const AppDrawerNavigator = createDrawerNavigator({
   MiManada:MiManadaScreen,
   CrearMision:CrearMisionScreen,
   Pendientes: PendientesScreen,
+  Evaluacion: EvaluacionScreen,
+  EvalAptitudes: EvalAptitudesScreen,
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
