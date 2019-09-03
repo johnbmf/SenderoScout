@@ -39,6 +39,7 @@ public class Ranking : MonoBehaviour
         WWWForm form = new WWWForm();
         Debug.Log("Enviando " + PlayerPrefs.GetInt("unidad1", 0) + " al server");
         form.AddField("unidad", PlayerPrefs.GetInt("unidad1", 0));
+        form.AddField("user", PlayerPrefs.GetString("user", ""));
 
         UnityWebRequest www = UnityWebRequest.Post("http://www.mitra.cl/SS/getRanking.php", form);
         yield return www.SendWebRequest();
