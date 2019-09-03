@@ -1122,6 +1122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f8f18e863fd343b29e68655a08d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainCamera: {fileID: 1760466119}
   RankingCanvas: {fileID: 1475195836}
   LoadingCanvas: {fileID: 765834570}
   Banners:
@@ -1149,6 +1150,7 @@ MonoBehaviour:
   - {fileID: 1288554768}
   - {fileID: 874499341}
   - {fileID: 1706204039}
+  CerrarButton: {fileID: 1140912511}
 --- !u!114 &138313442
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class Ranking : MonoBehaviour
 {
+    public GameObject MainCamera;
     public GameObject RankingCanvas;
     public GameObject LoadingCanvas;
     public GameObject[] Banners;
     public GameObject[] Puntos;
     public GameObject[] Avatar;
     public GameObject[] Pseudonimo;
+    public GameObject CerrarButton;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,10 @@ public class Ranking : MonoBehaviour
     {
         //Activar Loading...
         LoadingCanvas.SetActive(true);
+
+        //Desactivar movimiento de camara.
+        MainCamera.GetComponent<TouchCamera>().enabled = false;
+
         //Mientras se ejecuta la coroutine.
         StartCoroutine(OpenRanking());
     }
@@ -116,6 +122,7 @@ public class Ranking : MonoBehaviour
                     }
                 }
                 //Despues de seteados todos los gameobjects -> Mostrar el panel.
+                CerrarButton.SetActive(true);
                 LoadingCanvas.SetActive(false);
                 RankingCanvas.SetActive(true);
             }
@@ -143,8 +150,12 @@ public class Ranking : MonoBehaviour
             Puntos[i].SetActive(false);
         }
 
+        CerrarButton.SetActive(false);
         //Desactivar el canvas.
         RankingCanvas.SetActive(false);
+
+        //Activamos movimiento camara
+        MainCamera.GetComponent<TouchCamera>().enabled = true;
         yield break;
     }
 
