@@ -30,6 +30,7 @@ public class Spot2Mision : MonoBehaviour
     public GameObject Felicitaciones;
     public GameObject MsgEvaluacion;
     public GameObject ImgPatas;
+    public GameObject ErrorText;
     #endregion
 
     private string nombreSpot = "caverna";
@@ -171,6 +172,7 @@ public class Spot2Mision : MonoBehaviour
             Felicitaciones.SetActive(false);
             MsgEvaluacion.SetActive(false);
             ImgPatas.SetActive(false);
+            ErrorText.SetActive(false);
 
             //Activamos todo lo que hay que mostrar en el estado 0
             TituloMision.SetActive(true);
@@ -207,6 +209,7 @@ public class Spot2Mision : MonoBehaviour
             Felicitaciones.SetActive(false);
             MsgEvaluacion.SetActive(false);
             ImgPatas.SetActive(false);
+            ErrorText.SetActive(false);
 
             //Activamos todo lo que hay que mostrar en el estado 1
             MensajeEnvio.SetActive(true);
@@ -238,6 +241,7 @@ public class Spot2Mision : MonoBehaviour
             InstruccionesMision.SetActive(false);
             InputRespuesta.SetActive(false);
             MensajeEnvio.SetActive(false);
+            ErrorText.SetActive(false);
 
             //Activamos todo lo que hay que mostrar en el estado 2
             Puntaje.SetActive(true);
@@ -318,6 +322,7 @@ public class Spot2Mision : MonoBehaviour
         Felicitaciones.SetActive(false);
         MsgEvaluacion.SetActive(false);
         ImgPatas.SetActive(false);
+        ErrorText.SetActive(false);
 
         DetalleMisionCanvas.SetActive(false);
         isPanelActive = false;
@@ -344,6 +349,8 @@ public class Spot2Mision : MonoBehaviour
         {
             Debug.Log(www.error);
             //Mostrar que hubo un error enviando la informacion.
+            ErrorText.GetComponent<Text>().text = "Lo sentimos. Hubo un error procesando tu respuesta. Comprueba tu conexión a internet.";
+            ErrorText.SetActive(true);
             yield break;
         }
 
@@ -381,6 +388,8 @@ public class Spot2Mision : MonoBehaviour
         {
             Debug.Log("Not Ok");
             //Mostrar que hubo un error en el envio de info.
+            ErrorText.GetComponent<Text>().text = "Lo sentimos. Hubo un error procesando tu respuesta. Inténtalo más tarde.";
+            ErrorText.SetActive(true);
             yield break;
         }
     }
