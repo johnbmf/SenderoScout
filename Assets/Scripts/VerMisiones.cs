@@ -59,6 +59,11 @@ public class VerMisiones : MonoBehaviour
         canvasMision.SetActive(true);
     }
 
+    public void CerrarCanvas()
+    {
+        canvasMision.SetActive(false);
+    }
+
     IEnumerator Misiones()
     {
         WWWForm form = new WWWForm();
