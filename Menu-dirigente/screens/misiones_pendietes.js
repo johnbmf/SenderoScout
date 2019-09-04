@@ -14,6 +14,7 @@ import {
     ScrollView
 } from "react-native";
 import {Header,Left,Right,Icon, Body} from 'native-base'
+import { NavigationEvents } from 'react-navigation';
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -69,6 +70,37 @@ class crear_mision extends Component {
                 console.error(error);
             });
         }
+        getPendientes(){
+            fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+                method: 'post',
+                header:{
+                    'Accept': 'application/json',
+                    'Content/Type': 'application/json',
+                    
+                },
+                body:JSON.stringify({
+                    "unidad":1
+                })
+            })
+            .then(response => response.json())
+            .then((responseJson) => {
+                if(responseJson != null){
+                    this.setState({
+                        isLoading: false,
+                        dataSource: responseJson,
+                    })
+                }else{
+                    this.setState({
+                        isLoading: false,
+                        dataSource: []
+                    })
+                }
+            })
+            .catch((error)=>{
+                console.error(error);
+            });
+        }
+
         render() {
             responseJ = this.props.navigation.getParam('data', {})
             console.log(responseJ);
@@ -86,16 +118,17 @@ class crear_mision extends Component {
                                 </Body>
                             </Header >                    
                         </View>
-                        <View style = {{width:'100%', height:'80%'}}> 
-                        <View>{this.state.dataSource.map(((obj,i) => 
-                        <View key = {i}>{                    
+                            <View style = {{width:'100%', height:'80%'}}> 
+                            <NavigationEvents onWillFocus={() => this.getPendientes()}/> 
+                            <View>{this.state.dataSource.map(((obj,i) => 
+                            <View key = {i}>{                    
                                 <TouchableOpacity
-                                    onPress = {()=> this.props.navigation.navigate('Evaluacion', {data : obj})}
-                                    style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                                    <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {obj.nombre}</Text>
-                                </TouchableOpacity>}</View>))}
+                                onPress = {()=> this.props.navigation.navigate('Evaluacion', {data : obj})}
+                                style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
+                                        <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {obj.nombre}</Text>
+                                    </TouchableOpacity>}</View>))}
+                                </View>
                             </View>
-                        </View>
                     </View>
                 </ScrollView>
                 </KeyboardAvoidingView>

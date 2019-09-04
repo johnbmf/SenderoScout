@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView,ScrollView,Dimensions,Image } from 'react-native';
 import {createDrawerNavigator, createAppContainer, DrawerItems, createStackNavigator} from 'react-navigation'
+import { Header,Left,Right,Icon} from 'native-base'
 import HomeScreen from './screens/HomeScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import EvaluacionScreen from './screens/evaluacion'
@@ -32,7 +33,14 @@ const CustomDrawerComponent = (props)=>(
   </SafeAreaView>
 )
 const StackNavigator = createStackNavigator({
-  Home: HomeScreen,
+  Home: {screen : HomeScreen,
+    NavigationOptions: {
+      drawerLabel: 'Inicio',
+      drawerIcon: ({tintColor}) => (
+          <Icon name='home' style = {{fontSize:24,color:tintColor}} />
+      )
+    }
+  },
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen
   }, {
@@ -56,7 +64,9 @@ const AppDrawerNavigator = createDrawerNavigator({
   contentOptions:{
     activeTintColor:'orange',
     inactiveTintColor:'black'
-  }
+  }, 
+  lazy : true,
+
   //drawerWidth: 200
 }
 )

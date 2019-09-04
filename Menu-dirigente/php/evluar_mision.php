@@ -4,7 +4,7 @@
   //Generar conexion a BD.
     $mysqli = db_conn();
 	$json = file_get_contents('php://input');
-	
+	$response = new stdClass;
 	 // decoding the received JSON and store into $obj variable.
 	$obj = json_decode($json,true);
     $user = $obj['user'];
@@ -21,18 +21,25 @@
         $add = $mysqli->query("UPDATE mision_mapa SET mision_mapa.estado = 2, mision_mapa.puntaje = $rating, mision_mapa.fecha_borrado = DATE_ADD('$expiracion', INTERVAL 2 DAY) Where mision_mapa.id = $id_mision_mapa ");
         $add_puntos = $mysqli->query("UPDATE Usuario SET Usuario.puntos = Usuario.puntos + $rating WHERE Usuario.user = '$user'");
             if($add and $add_puntos){
-                echo  json_encode('Mision creada con exito');
+                $response -> message = "Mision evaluada con éxito";
+                $response -> alert_type = 1;
+                echo json_encode($response);
             }else{
-                echo $date3;
-                echo  json_encode('Ocurrio un error1');
+                $response -> message = "Algo inesperado ha ocurrido, por favor intente nuevamente";
+                $response -> alert_type = -1;
+                echo json_encode($response);
             }
     }else{
         $add = $mysqli->query("UPDATE mision_mapa SET mision_mapa.estado = 2, mision_mapa.puntaje = $rating, Where mision_mapa.id = $id_mision_mapa ");
         $add_puntos = $mysqli->query("UPDATE Usuario SET Usuario.puntos = Usuario.puntos + $rating WHERE Usuario.user = '$user'");
             if($add and $add_puntos){
-                echo  json_encode('Mision creada con exito');
+                $response -> message = "Mision evaluada con éxito";
+                $response -> alert_type = 1;
+                echo json_encode($response);
             }else{
-                echo  json_encode('Ocurrio un error2');
+                $response -> message = "Algo inesperado ha ocurrido, por favor intente nuevamente";
+                $response -> alert_type = -1;
+                echo json_encode($response);
             }
     }
   mysqli_close($mysqli);

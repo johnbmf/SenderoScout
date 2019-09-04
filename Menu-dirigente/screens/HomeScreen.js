@@ -7,6 +7,7 @@ import {
     TouchableOpacity
 } from "react-native";
 import { Header,Left,Right,Icon} from 'native-base'
+import { NavigationEvents } from 'react-navigation';
 import MenuItem from './../components/menuitems'
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -39,6 +40,36 @@ class HomeScreen extends Component {
         .then((responseJson) => {
             if(responseJson != null){
                 //console.log((typeof(responseJson[0].fecha_expiracion)));
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson,
+                })
+            }else{
+                this.setState({
+                    isLoading: false,
+                    dataSource: []
+                })
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+    getPendientes(){
+        fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+                
+            },
+            body:JSON.stringify({
+                "unidad":1
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            if(responseJson != null){
                 this.setState({
                     isLoading: false,
                     dataSource: responseJson,
@@ -90,6 +121,7 @@ class HomeScreen extends Component {
                     <MenuItem itemImage = {require('./../assets/chart6.png')} />
                 </View>
                 <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
+                    <NavigationEvents onWillFocus={() => this.getPendientes()}/> 
                     <TouchableOpacity
                     onPress = {()=> this.props.navigation.navigate('Pendientes')}
                     style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
