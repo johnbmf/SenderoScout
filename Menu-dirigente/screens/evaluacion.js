@@ -94,7 +94,6 @@ class evaluacion extends Component {
     handleOpen = () => {
         
         this.setState({ SendAlertState: true }, () => {
-            console.log("hola");
             console.log(this.state.SendAlertType);
         });
       }

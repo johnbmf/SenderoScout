@@ -6,14 +6,18 @@ import {
     Picker,
     TextInput,
     Button,
+    Modal,
     TouchableWithoutFeedback,
     Keyboard,
     Alert,
     TouchableOpacity,
     KeyboardAvoidingView,
-    ScrollView
+    ScrollView,
+    ActivityIndicator
 } from "react-native";
 import {Header,Left,Right,Icon, Body} from 'native-base'
+import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
+import { NavigationEvents } from 'react-navigation';
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -27,7 +31,11 @@ class crear_mision extends Component {
             nombre_mision : '',
             desc_mision: '',
             Spot: '',
-            Expiracion: 0
+            Expiracion: 0,
+            SendAlertState: false,
+            SendAlertMessage: "Mision creada con éxito.",
+            SendAlertType: 2,
+            isLoading:false,
 
         }
     }
@@ -37,26 +45,62 @@ class crear_mision extends Component {
             <Icon name='today' style = {{fontSize:24,color:tintColor}} />
         )
     }
+    clearText(){
+        this.setState(
+            {
+                nombre_mision : '',
+                desc_mision: ''
+            }
+        )
+    }
     crearMision = () =>{
         console.log(this.state);
         if(this.state.TipoMision==0){
-            Alert.alert("Error","Es necesario elegir el tipo de misión");
+            this.setState({
+                isLoading : true,
+                SendAlertType : 2,
+                SendAlertState: true,
+                SendAlertMessage: "Es necesario elegir el tipo de misión"
+            }, ()=> {this.handleOpen()});
+            //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
         }
         else if (!this.state.Spot || !this.state.Spot.trim()) {
-            Alert.alert("Error","Es necesario asignar una ubicación a la misión");
+            this.setState({
+                isLoading : true,
+                SendAlertType : 2,
+                SendAlertState: true,
+                SendAlertMessage: "Es necesario asignar una ubicación a la misión"
+            }, ()=> {this.handleOpen()});
+            //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
         }else if (this.state.Expiracion==0) {
-            Alert.alert("Error","Es necesario asignar un tiempo de expiración de la misión");
+            this.setState({
+                isLoading : true,
+                SendAlertType : 2,
+                SendAlertState: true,
+                SendAlertMessage: "Es necesario asignar un tiempo de expiración de la misión"
+            }, ()=> {this.handleOpen()});
+            //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
         }else if (!this.state.desc_mision || !this.state.desc_mision.trim()) {
-            Alert.alert("Error","Es necesaria una descripción de la misión");
+            this.setState(
+                {
+                    isLoading : true,
+                    SendAlertType : 2,
+                    SendAlertMessage: "Es necesaria una descripción de la misión",
+                    SendAlertState: true
+                }, ()=> {this.handleOpen()});
             return;
         }else if (!this.state.nombre_mision || !this.state.nombre_mision.trim()) {
-            Alert.alert("Error","Es necesario un nombre para la misión");
+            this.setState({
+                isLoading : true,
+                SendAlertType : 2,
+                SendAlertMessage: "Es necesario un nombre para la misión",
+                SendAlertState: true}, ()=> {this.handleOpen()});
             return;
         } else {
-            
+            this.setState({isLoading:true});
             fetch('http://www.mitra.cl/SS/crearMision.php',{
                 method: 'post',
                 header:{
@@ -74,13 +118,120 @@ class crear_mision extends Component {
             })
             .then(response => response.json())
             .then((responseJson) => {
-                alert(responseJson);
+                this.setState({
+                    isLoading : false,
+                    SendAlertType:1
+                }, ()=> {this.handleOpen()})
             })
             .catch((error)=>{
                 console.error(error);
             });
         }
             
+        }
+        SendAlert = () => {
+            if(this.state.SendAlertType == -1){
+                Alert.alert("")
+    
+            }
+            else if (this.SendAlertType == 1){
+    
+            }
+            else {
+    
+            };
+        };
+    
+        handleOpen = () => {
+            
+            this.setState({ 
+                SendAlertState: true,
+                isLoading : false 
+            }, () => {
+                console.log(this.state.SendAlertType);
+            });
+          }
+        
+        handleClose = () => {
+
+            this.setState({ SendAlertState: false });
+            this.setState({isLoading : false})
+
+        }
+    
+        ShowSendAlert(){
+            if (this.state.SendAlertType == 0){
+                return(
+                <ActivityIndicator
+                    animating = {this.state.SendAlertState}
+                    size="large" 
+                    color="#00ff00" 
+                />);
+            }
+            else if(this.state.SendAlertType == 1){
+                return(
+                    <SCLAlert
+                    theme="success"
+                    show={this.state.SendAlertState}
+                    title="Felicidades"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
+                    >
+                    <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
+                    </SCLAlert>
+                );
+            }
+            else if(this.state.SendAlertType == -1){
+                return(
+                    <SCLAlert
+                    theme="danger"
+                    show={this.state.SendAlertState}
+                    title="Ooops"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
+                    >
+                    <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
+                    </SCLAlert>
+                );
+            }
+            else{
+                console.log("ALERTA DE ERROR NO IDENTIFICADO")
+                return(
+                    <SCLAlert
+                    theme="warning"
+                    show={this.state.SendAlertState}
+                    title="Estoy Confundido"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
+                    >
+                    <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
+                    </SCLAlert>
+                );
+            }
+    
+        }
+        LoadingState(){
+            console.log(this.state.isLoading)
+            if(this.state.isLoading){
+                return(
+    
+                    <Modal
+    
+                        transparent = {true}
+                        visible = {this.state.isLoading}
+                        animationType = 'none'
+                        onRequestClose = {()=>{console.log("Closing Modal")}}
+                    > 
+                        <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+                            <ActivityIndicator
+                            animating = {this.state.isLoading}
+                            size="large" 
+                            color="#00ff00" 
+                            />    
+                        </View> 
+                    </Modal>
+                );   
+            }
         }
         render() {
             
@@ -100,6 +251,7 @@ class crear_mision extends Component {
                         </Header >                    
                     </View>
                     <View style={{width: '100%', height: '7%'}} > 
+                    <NavigationEvents onWillFocus={() => this.clearText()}/> 
                         <View style= {styles.pickerMenu}>
                             <Picker 
                                 style = {{width:'70%', borderColor:'gray', borderWidth:1,alignSelf: 'center',flexDirection: 'row'}}
@@ -110,6 +262,10 @@ class crear_mision extends Component {
                                 <Picker.Item label = "Tipo misión: Pregunta Abierta" value = {1} />
                             </Picker>
                         </View>
+                    </View>
+                    <View>
+                        {this.LoadingState()}
+                        {this.ShowSendAlert()}
                     </View>
                     <View style={{width: '100%', height: '7%'}} > 
                         <View style= {styles.pickerMenu}>
@@ -166,9 +322,9 @@ class crear_mision extends Component {
                     </View>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
                         <TouchableOpacity 
-                        onPress = {this.crearMision}
+                        onPress = {() => {this.crearMision(() => {this.handleOpen()})}}
                         style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
-                            <Text style = {{color: 'white', textAlign:'center', fontSize:18, backgroundColor: '#104F55'}}> Crear </Text>
+                            <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Crear </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
