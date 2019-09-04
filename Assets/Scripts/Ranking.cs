@@ -1,6 +1,7 @@
 ﻿using SimpleJSON;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class Ranking : MonoBehaviour
     public GameObject[] Puntos;
     public GameObject[] Avatar;
     public GameObject[] Pseudonimo;
+    public GameObject[] Pos;
     public GameObject CerrarButton;
 
     // Start is called before the first frame update
@@ -42,6 +44,7 @@ public class Ranking : MonoBehaviour
 
     IEnumerator OpenRanking()
     {
+        bool UserInRank = false;
         WWWForm form = new WWWForm();
         Debug.Log("Enviando " + PlayerPrefs.GetInt("unidad1", 0) + " al server");
         form.AddField("unidad", PlayerPrefs.GetInt("unidad1", 0));
@@ -96,6 +99,12 @@ public class Ranking : MonoBehaviour
                         Puntos[i - 1].SetActive(true);
                         Avatar[i - 1].SetActive(true);
                         Pseudonimo[i - 1].SetActive(true);
+
+                        //Si el user esta en estos lugares, seter true
+                        if (RespuestaJson[i.ToString()]["pseudonimo"] == PlayerPrefs.GetString("pseudonimo", "NOUSARESTEPSEUDONIMO"))
+                        {
+                            UserInRank = true;
+                        }
                     }
 
                     //Ranking 1,2 o 3. Cuando no existe alguien en una de esas pos -> poner solo el banner.
@@ -116,10 +125,24 @@ public class Ranking : MonoBehaviour
                         Puntos[i - 1].GetComponent<Text>().text = RespuestaJson[i.ToString()]["puntos"];
 
                         //Activar los gameobjects
-                        Banners[i - 1].SetActive(true);
                         Puntos[i - 1].SetActive(true);
                         Pseudonimo[i - 1].SetActive(true);
+                        Pos[i - 4].SetActive(true);
+
+                        //Si el user esta en estos lugares, seter true
+                        if (RespuestaJson[i.ToString()]["pseudonimo"] == PlayerPrefs.GetString("pseudonimo", "NOUSARESTEPSEUDONIMO"))
+                        {
+                            UserInRank = true;
+                        }
                     }
+                }
+
+                //En caso de que no haya estado el user actual en el ranking, poner en ultimo lugar.
+                if (!UserInRank)
+                {
+                    Pos.Last().GetComponent<Text>().text = "U";
+                    Pseudonimo.Last().GetComponent<Text>().text = RespuestaJson["player"]["pseudonimo"];
+                    Puntos.Last().GetComponent<Text>().text = RespuestaJson["player"]["puntos"];
                 }
                 //Despues de seteados todos los gameobjects -> Mostrar el panel.
                 CerrarButton.SetActive(true);
@@ -143,9 +166,8 @@ public class Ranking : MonoBehaviour
             if (i < 3)
             {
                 Avatar[i].SetActive(false);
+                Banners[i].SetActive(false);
             }
-
-            Banners[i].SetActive(false);
             Pseudonimo[i].SetActive(false);
             Puntos[i].SetActive(false);
         }
