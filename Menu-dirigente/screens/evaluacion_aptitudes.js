@@ -150,7 +150,7 @@ class evalaptitudes extends Component {
                         animationType = 'none'
                         onRequestClose = {()=>{console.log("Closion Modal")}}
                     > 
-                        <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center'}}>
+                        <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
                             <ActivityIndicator
                             animating = {this.state.isLoading}
                             size="large" 
@@ -213,11 +213,11 @@ class evalaptitudes extends Component {
                     animationType = 'none'
                     onRequestClose = {()=>{console.log("Closing Modal")}}
                 > 
-                    <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center'}}>
+                    <View style = {{ position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
                         <ActivityIndicator
-                        animating = {this.state.isLoading}
-                        size="large" 
-                        color="#00ff00" 
+                            animating = {this.state.isLoading}
+                            size="large" 
+                            color="#00ff00" 
                         />    
                     </View> 
                 </Modal>
