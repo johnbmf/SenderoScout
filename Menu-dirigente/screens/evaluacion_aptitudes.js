@@ -6,7 +6,7 @@ import {
     Modal,
     ActivityIndicator,
 } from "react-native";
-import { Icon,Header,Left,Body,Picker} from 'native-base'
+import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 
@@ -227,12 +227,17 @@ class evalaptitudes extends Component {
 
 
     render() {
+
+        /*
         //let nombres = this.state.dataSource.map(({nombre, user}) => ({nombre,user}));
 
         if(this.state.nombres.length < 1){//para que solo serealice una vez y no en cada render
             this.state.nombres = this.state.dataSource.map(({nombre}) => nombre);
             this.state.users = this.state.dataSource.map(({user}) => user);
         };
+        */
+        this.state.nombres = this.state.dataSource.map(({nombre}) => nombre);
+        this.state.users = this.state.dataSource.map(({user}) => user);
 
         //const {SendAlertState} = this.state;
         console.log(this.state.nombres)
@@ -245,9 +250,10 @@ class evalaptitudes extends Component {
                         <Left>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
-                        <Body style = {{justifyContent:'center'}}> 
-                            <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Consejo de la tarde</Text>
+                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Consejo de la tarde</Text>
                         </Body>
+                        <Right></Right>
                     </Header >                    
                 </View>
 
@@ -283,11 +289,11 @@ class evalaptitudes extends Component {
                         </View>
                     </View>
                     
-                    <View style ={ {width: '100%', height: '50%',paddingLeft: 10 }}>
+                    <View style ={ {width: '100%', height: '50%',paddingLeft: 5, paddingRight:10 }}>
                         <View style = {styles.AreasContainer}>
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                     Corporalidad:
                                     </Text>
                                 </View>
@@ -310,7 +316,7 @@ class evalaptitudes extends Component {
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                         Creatividad:
                                     </Text>
                                 </View>
@@ -333,7 +339,7 @@ class evalaptitudes extends Component {
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems: 'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems: 'flex-start'}}>
                                     Carácter:
                                     </Text>
                                 </View>
@@ -356,7 +362,7 @@ class evalaptitudes extends Component {
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                     Afectividad:
                                     </Text>
                                 </View>
@@ -379,7 +385,7 @@ class evalaptitudes extends Component {
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                     Sociabilidad:
                                     </Text>
                                 </View>
@@ -402,7 +408,7 @@ class evalaptitudes extends Component {
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25, justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text numberOfLines={1} style = {{ fontSize: 20, justifyContent:'center', alignItems:'flex-start'}}>
                                     Espiritualidad:
                                     </Text>
                                 </View>
@@ -464,8 +470,8 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize:28,
         justifyContent:'center', 
-        alignItems:'center',
-        alignContent:'center',
+        alignItems: 'flex-start',
+        alignContent:'flex-start',
         fontFamily:'Roboto',
         paddingTop:20
     },
@@ -507,12 +513,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     TextArea: {
-        width: '40%',
+        width: '48%',
         justifyContent: 'space-between',
         alignItems: 'flex-start'
     },
     Rating:{
-        width: '60%',
+        width: '48%',
         justifyContent:'flex-start',
         alignItems: 'flex-start'
 
