@@ -81,6 +81,10 @@ public class VerMisiones : MonoBehaviour
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
+            error.text = "Lo sentimos, no se pudo obtener tus cacerías en este momento. Comprueba tu conexión a internet.";
+            Loading.SetActive(false);
+            canvasMision.SetActive(true);
+            StartCoroutine(MovePanel());
         }
 
         else//no hay errores y el Json tiene respestas
@@ -94,7 +98,10 @@ public class VerMisiones : MonoBehaviour
             if (RespuestaJson["response"] == -1)
             {
                 Debug.Log("El script no se pudo conectar a la base de datos");
-                //error.text = "Fallo en la conexión. Intente más tarde.";
+                error.text = "Lo sentimos, no se pudo obtener tus caerías en este momento. Inténtelo más tarde.";
+                //Loading.SetActive(false);
+                //canvasMision.SetActive(true);
+                //StartCoroutine(MovePanel());
                 //yield break;
             }
             //caso respuesta 0 -> no hay misiones para mostrar
