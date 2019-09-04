@@ -7,6 +7,8 @@ using SimpleJSON;
 
 public class Spot2Mision : MonoBehaviour
 {
+    public GameObject MisionRedDot;
+
     public GameObject Spot2_estado0;
     public GameObject Spot2_estado1;
     public GameObject Spot2_estado2;
@@ -67,6 +69,7 @@ public class Spot2Mision : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.Log(www.error);
+                //MisionRedDot.SetActive(false);
             }
 
             else
@@ -81,6 +84,7 @@ public class Spot2Mision : MonoBehaviour
                 if (numMisiones == -1)
                 {
                     Debug.Log("El script no se pudo conectar a la base de datos");
+                    //MisionRedDot.SetActive(false);
                 }
 
                 //Respuesta de que no hay misiones activas.
@@ -90,6 +94,7 @@ public class Spot2Mision : MonoBehaviour
                     Spot2_estado0.SetActive(false);
                     Spot2_estado1.SetActive(false);
                     Spot2_estado2.SetActive(false);
+                    //MisionRedDot.SetActive(false);
                 }
 
                 //Respuesta de que hay una mision que desplegar
@@ -116,6 +121,7 @@ public class Spot2Mision : MonoBehaviour
                         Spot2_estado2.SetActive(false);
 
                         Spot2_estado0.SetActive(true);
+                        //MisionRedDot.SetActive(true);
                     }
 
                     //Estado 1 -> mision en revision.
@@ -130,6 +136,7 @@ public class Spot2Mision : MonoBehaviour
                         Spot2_estado2.SetActive(false);
 
                         Spot2_estado1.SetActive(true);
+                        //MisionRedDot.SetActive(false);
                     }
 
                     //Estado 2 -> mision completada.
@@ -147,6 +154,7 @@ public class Spot2Mision : MonoBehaviour
                         Spot2_estado1.SetActive(false);
 
                         Spot2_estado2.SetActive(true);
+                        //MisionRedDot.SetActive(false);
                     }
 
 

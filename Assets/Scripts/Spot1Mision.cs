@@ -7,6 +7,8 @@ using SimpleJSON;
 
 public class Spot1Mision : MonoBehaviour
 {
+    public GameObject MisionRedDot;
+
     public GameObject Spot1_estado0;
     public GameObject Spot1_estado1;
     public GameObject Spot1_estado2;
@@ -67,6 +69,7 @@ public class Spot1Mision : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.Log(www.error);
+                //MisionRedDot.SetActive(false);
             }
 
             else
@@ -81,12 +84,14 @@ public class Spot1Mision : MonoBehaviour
                 if (numMisiones == -1)
                 {
                     Debug.Log("El script no se pudo conectar a la base de datos");
+                    //MisionRedDot.SetActive(false);
                 }
 
                 //Respuesta de que no hay misiones activas.
                 else if (numMisiones == 0)
                 {
                     Debug.Log("No se han encontrado misiones para el jugador actual.");
+                    //MisionRedDot.SetActive(false);
                     Spot1_estado0.SetActive(false);
                     Spot1_estado1.SetActive(false);
                     Spot1_estado2.SetActive(false);
@@ -116,6 +121,7 @@ public class Spot1Mision : MonoBehaviour
                         Spot1_estado2.SetActive(false);
 
                         Spot1_estado0.SetActive(true);
+                        //MisionRedDot.SetActive(true);
                     }
 
                     //Estado 1 -> mision en revision.
@@ -130,6 +136,7 @@ public class Spot1Mision : MonoBehaviour
                         Spot1_estado2.SetActive(false);
 
                         Spot1_estado1.SetActive(true);
+                        //MisionRedDot.SetActive(false);
                     }
 
                     //Estado 2 -> mision completada.
@@ -147,6 +154,7 @@ public class Spot1Mision : MonoBehaviour
                         Spot1_estado1.SetActive(false);
 
                         Spot1_estado2.SetActive(true);
+                        //MisionRedDot.SetActive(false);
                     }
 
 

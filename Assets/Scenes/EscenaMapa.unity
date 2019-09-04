@@ -989,6 +989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ac3eb33348d5d488d26f814dd30567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MisionRedDot: {fileID: 0}
   Spot2_estado0: {fileID: 636104208}
   Spot2_estado1: {fileID: 774013973}
   Spot2_estado2: {fileID: 1070259111}
@@ -3548,7 +3549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.36218086, g: 0, b: 0.8962264, a: 1}
+  m_Color: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3556,12 +3557,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: 25e9c364116b1814d843717f16d9e97c, type: 3}
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
-    m_MaxSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3689,6 +3690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b776b83c262e3342b341206026d2c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MisionRedDot: {fileID: 0}
   Spot3_estado0: {fileID: 926653886}
   Spot3_estado1: {fileID: 1599808378}
   Spot3_estado2: {fileID: 1496339991}
@@ -7728,6 +7730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ce4723e077e2747a03f9099e97f1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MisionRedDot: {fileID: 0}
   Spot1_estado0: {fileID: 1586035331}
   Spot1_estado1: {fileID: 177993995}
   Spot1_estado2: {fileID: 842916235}
