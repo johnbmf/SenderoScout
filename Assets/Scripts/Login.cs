@@ -44,15 +44,16 @@ public class Login : MonoBehaviour{
     public void StartDebugMode() {
         PlayerPrefs.SetInt("sesion", 1);
         PlayerPrefs.SetString("user", "miembrounidad1");
-        //PlayerPrefs.SetString("pass", "holi");
-        PlayerPrefs.SetString("email", "test@ss.cl");
+        //PlayerPrefs.SetString("pass", "123456");
+        PlayerPrefs.SetString("email", "n1@gmail.com");
         //PlayerPrefs.SetString("confirmacion_email", "1");
         PlayerPrefs.SetInt("unidad1", 1);
         PlayerPrefs.SetInt("unidad2", 2);
-        PlayerPrefs.SetString("edad", "10");
+        PlayerPrefs.SetInt("edad", 10);
         PlayerPrefs.SetString("tipo", "nino");
-        PlayerPrefs.SetString("nombre", "Sir Test Testeador");
-        PlayerPrefs.SetString("pseudonimo", "Testcito");
+        PlayerPrefs.SetString("nombre", "Petercito Chaconcito");
+        PlayerPrefs.SetString("pseudonimo", "Petercito");
+        PlayerPrefs.SetInt("puntos", 265);
 
         //Se carga escena del juego.
         SceneManager.LoadScene("EscenaMapa");
@@ -106,12 +107,13 @@ public class Login : MonoBehaviour{
             //PlayerPrefs.SetString("pass", respuestaJson["password"]);
             PlayerPrefs.SetString("email", respuestaJson["email"]);
             //PlayerPrefs.SetString("confirmacion_email", respuestaJson["confirmacion_email"]);
-            PlayerPrefs.SetString("unidad1", respuestaJson["unidad1"]);
-            PlayerPrefs.SetString("unidad2", respuestaJson["unidad2"]);
-            PlayerPrefs.SetString("edad", respuestaJson["edad"]);
+            PlayerPrefs.SetInt("unidad1", respuestaJson["unidad1"]);
+            PlayerPrefs.SetInt("unidad2", respuestaJson["unidad2"]);
+            PlayerPrefs.SetInt("edad", respuestaJson["edad"]);
             PlayerPrefs.SetString("tipo", respuestaJson["tipo"]);
             PlayerPrefs.SetString("nombre", respuestaJson["nombre"]);
             PlayerPrefs.SetString("pseudonimo", respuestaJson["pseudonimo"]);
+            PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
 
             //Se carga escena del juego.
             SceneManager.LoadScene("EscenaMapa");

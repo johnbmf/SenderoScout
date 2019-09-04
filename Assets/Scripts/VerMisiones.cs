@@ -13,6 +13,11 @@ public class VerMisiones : MonoBehaviour
     //activador del panel
     public GameObject botonVerMision;
 
+    //Jony variables
+    public GameObject Panel;
+    public GameObject PanelOverlay;
+    public GameObject Loading;
+
     //variables del panel
     public GameObject canvasMision;
     public GameObject tituloMision1;//nombre de las misiones
@@ -54,14 +59,14 @@ public class VerMisiones : MonoBehaviour
 
     public void CallMisiones()
     {   //asignar esta función al botón que activa el panel
-        StartCoroutine(Misiones());
-        //debería abrir el panel 
-        canvasMision.SetActive(true);
+        PanelOverlay.SetActive(true);
+        Loading.SetActive(true);
+        StartCoroutine(Misiones());       
     }
 
     public void CerrarCanvas()
     {
-        canvasMision.SetActive(false);
+        StartCoroutine(HidePanel());
     }
 
     IEnumerator Misiones()
@@ -887,6 +892,61 @@ public class VerMisiones : MonoBehaviour
                     }
                 }
             }//fin de casos con filas en el Json
+            Loading.SetActive(false);
+            canvasMision.SetActive(true);
+            StartCoroutine(MovePanel());
         }//fin del else (no hay errores con y hay respuesta en el Json)
     }//fin del IEnumerator Misiones()
+
+    IEnumerator MovePanel()
+    {
+        PanelOverlay.SetActive(true);
+        //Posiciones inicial y final del panel.
+        Vector3 PanelMisionPosShow = new Vector2(0, 0);
+        Vector3 PanelMisionPosHide = new Vector2(0, -2160);
+
+        //el divisor de rateTiempo indica el tiempo que toma en aparecer el panel completamente.
+        float t = 0.0f;
+        float rateTiempo = 1f / 0.2f;
+
+        //Mientras la posicion del panel no sea la correcta (y=0), hay que seguirlo moviendo.
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rateTiempo;
+            Panel.GetComponent<RectTransform>().offsetMin = Vector2.Lerp(PanelMisionPosHide, PanelMisionPosShow, t);
+            //Esperamos al next frame para seguir moviendo.
+            yield return null;
+        }
+
+        t = 0.0f;
+        yield break;
+    }
+
+    IEnumerator HidePanel()
+    {
+        //Posiciones inicial y final del panel.
+        Vector3 PanelMisionPosShow = new Vector2(0, 0);
+        Vector3 PanelMisionPosHide = new Vector2(0, -2160);
+
+        //el divisor de rateTiempo indica el tiempo que toma en aparecer el panel completamente.
+        float t = 0.0f;
+        float rateTiempo = 1f / 0.2f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rateTiempo;
+            Panel.GetComponent<RectTransform>().offsetMin = Vector2.Lerp(PanelMisionPosShow, PanelMisionPosHide, t);
+            //Esperamos al next frame para seguir moviendo.
+            yield return null;
+        }
+
+        t = 0.0f;
+        
+
+        //HAY QUE SETACTIVA FALSE TODOS LOS GAMEOBJECTS QUE NO SEAN ESTATICOS.
+        canvasMision.SetActive(false);
+        PanelOverlay.SetActive(false);
+
+        yield break;
+    }
 }

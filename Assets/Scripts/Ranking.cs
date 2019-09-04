@@ -10,18 +10,25 @@ public class Ranking : MonoBehaviour
 {
     public GameObject MainCamera;
     public GameObject RankingCanvas;
-    public GameObject LoadingCanvas;
+    public GameObject Panel;
+    public GameObject PanelOverlay;
+    public GameObject Loading;
     public GameObject[] Banners;
     public GameObject[] Puntos;
     public GameObject[] Avatar;
     public GameObject[] Pseudonimo;
     public GameObject[] Pos;
-    public GameObject CerrarButton;
+    public GameObject ErrorText;
+
+    public GameObject PuntajeVisible;
+
+    private WaitForSeconds UpdateCooldown = new WaitForSeconds(30.0f);
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        PuntajeVisible.GetComponent<Text>().text = PlayerPrefs.GetInt("puntos").ToString();
+        StartCoroutine(RefreshPatitas());  
     }
 
     // Update is called once per frame
@@ -33,7 +40,8 @@ public class Ranking : MonoBehaviour
     public void AbrirRanking()
     {
         //Activar Loading...
-        LoadingCanvas.SetActive(true);
+        PanelOverlay.SetActive(true);
+        Loading.SetActive(true);
 
         //Desactivar movimiento de camara.
         MainCamera.GetComponent<TouchCamera>().enabled = false;
@@ -53,10 +61,14 @@ public class Ranking : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Post("http://www.mitra.cl/SS/getRanking.php", form);
         yield return www.SendWebRequest();
 
-        //Si hay error de conexion de red, debugLog y esperar el cooldown de refresh.
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
+            Loading.SetActive(false);
+            ErrorText.GetComponent<Text>().text = "Lo sentimos, no se pudo obtener el ranking en este momento. Comprueba tu conexión a internet.";
+            ErrorText.SetActive(true);
+            RankingCanvas.SetActive(true);
+            StartCoroutine(MovePanel());
         }
 
         else
@@ -71,12 +83,22 @@ public class Ranking : MonoBehaviour
             if (numRows == -1)
             {
                 Debug.Log("El script no se pudo conectar a la base de datos");
+                Loading.SetActive(false);
+                ErrorText.GetComponent<Text>().text = "Lo sentimos, no se pudo obtener el ranking en este momento. Inténtalo más tarde.";
+                ErrorText.SetActive(true);
+                RankingCanvas.SetActive(true);
+                StartCoroutine(MovePanel());
             }
 
             //Respuesta de que no hay nadie en el ranking. ¿Creo que es imposible en una bd integra? Just4Catch.
             else if (numRows == 0)
             {
                 Debug.Log("No se han encontrado misiones para el jugador actual.");
+                Loading.SetActive(false);
+                ErrorText.GetComponent<Text>().text = "Lo sentimos, no se pudo obtener el ranking en este momento. Inténtalo más tarde.";
+                ErrorText.SetActive(true);
+                RankingCanvas.SetActive(true);
+                StartCoroutine(MovePanel());
             }
 
             //Respuesta con el ranking.
@@ -145,9 +167,9 @@ public class Ranking : MonoBehaviour
                     Puntos.Last().GetComponent<Text>().text = RespuestaJson["player"]["puntos"];
                 }
                 //Despues de seteados todos los gameobjects -> Mostrar el panel.
-                CerrarButton.SetActive(true);
-                LoadingCanvas.SetActive(false);
+                Loading.SetActive(false);
                 RankingCanvas.SetActive(true);
+                StartCoroutine(MovePanel());
             }
         }
         yield break;
@@ -160,6 +182,7 @@ public class Ranking : MonoBehaviour
 
     IEnumerator CloseRanking()
     {
+        yield return StartCoroutine(HidePanel());
         //Desactivar todos los gameobjects.
         for (int i = 0; i < 6; i++)
         {
@@ -172,15 +195,107 @@ public class Ranking : MonoBehaviour
             Puntos[i].SetActive(false);
         }
 
-        CerrarButton.SetActive(false);
+        ErrorText.SetActive(false);
         //Desactivar el canvas.
         RankingCanvas.SetActive(false);
-
+        PanelOverlay.SetActive(false);
         //Activamos movimiento camara
         MainCamera.GetComponent<TouchCamera>().enabled = true;
         yield break;
     }
 
+    IEnumerator RefreshPatitas()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("user", PlayerPrefs.GetString("user", ""));
+
+        while (true)
+        {
+            UnityWebRequest www = UnityWebRequest.Post("http://mitra.cl/SS/getPatitas.php", form);
+            yield return www.SendWebRequest();
+
+            //Verificar error en la red.
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+
+            string respuesta = www.downloadHandler.text;
+
+            var respuestaJson = JSON.Parse(respuesta);
+
+            //Caso respuesta -1 -> fallo en la conexion entre php y BD.
+            if (respuestaJson["response"] == -1)
+            {
+                Debug.Log("getPatitas.php no se pudo conectar a BD");
+            }
+
+            //Caso respuesta 0 -> Nombre de usuario incorrecto.
+            else if (respuestaJson["response"] == 0)
+            {
+                Debug.Log("getPatitas.php no arrojo resultados con user actual");
+            }
+
+            //Caso respuesta 1 -> Patitas.
+            else if (respuestaJson["response"] == 1)
+            {
+                if (respuestaJson["puntos"] != PlayerPrefs.GetInt("puntos", -1))
+                {
+                    PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
+                    PuntajeVisible.GetComponent<Text>().text = respuestaJson["puntos"].ToString();
+                }
+            }
+
+            yield return UpdateCooldown;
+        }
+        
+    }
+
+    IEnumerator MovePanel()
+    {
+        PanelOverlay.SetActive(true);
+        //Posiciones inicial y final del panel.
+        Vector3 PanelMisionPosShow = new Vector2(0, 0);
+        Vector3 PanelMisionPosHide = new Vector2(0, -2160);
+
+        //el divisor de rateTiempo indica el tiempo que toma en aparecer el panel completamente.
+        float t = 0.0f;
+        float rateTiempo = 1f / 0.2f;
+
+        //Mientras la posicion del panel no sea la correcta (y=0), hay que seguirlo moviendo.
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rateTiempo;
+            Panel.GetComponent<RectTransform>().offsetMin = Vector2.Lerp(PanelMisionPosHide, PanelMisionPosShow, t);
+            //Esperamos al next frame para seguir moviendo.
+            yield return null;
+        }
+
+        t = 0.0f;
+        yield break;
+    }
+
+    IEnumerator HidePanel()
+    {
+        //Posiciones inicial y final del panel.
+        Vector3 PanelMisionPosShow = new Vector2(0, 0);
+        Vector3 PanelMisionPosHide = new Vector2(0, -2160);
+
+        //el divisor de rateTiempo indica el tiempo que toma en aparecer el panel completamente.
+        float t = 0.0f;
+        float rateTiempo = 1f / 0.2f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rateTiempo;
+            Panel.GetComponent<RectTransform>().offsetMin = Vector2.Lerp(PanelMisionPosShow, PanelMisionPosHide, t);
+            //Esperamos al next frame para seguir moviendo.
+            yield return null;
+        }
+
+        t = 0.0f;
+        yield break;
+    }
 
 //Terminal de clase.
 }

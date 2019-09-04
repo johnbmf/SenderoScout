@@ -8,12 +8,15 @@ using SimpleJSON;
 public class Spot3Mision : MonoBehaviour
 {
     public GameObject MisionRedDot;
+    public GameObject PanelOverlay;
 
     public GameObject Spot3_estado0;
     public GameObject Spot3_estado1;
     public GameObject Spot3_estado2;
 
     public GameObject MainCamera;
+
+    public Sprite[] SpritesPatas;
 
     #region 3erSpot variables
     //Variables del panel de misiones
@@ -27,8 +30,6 @@ public class Spot3Mision : MonoBehaviour
     public GameObject BotonCerrar;
     public GameObject NombreMision;
     public GameObject MensajeEnvio;
-    public GameObject BotonVolver;
-    public GameObject Puntaje;
     public GameObject Felicitaciones;
     public GameObject MsgEvaluacion;
     public GameObject ImgPatas;
@@ -38,6 +39,7 @@ public class Spot3Mision : MonoBehaviour
     private string nombreSpot = "bosque";
     private int id_mision_mapa;
     private bool isPanelActive = false;
+    private int puntos;
 
     private WaitForSeconds UpdateCooldown = new WaitForSeconds(30.0f);
 
@@ -69,7 +71,7 @@ public class Spot3Mision : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.Log(www.error);
-                //MisionRedDot.SetActive(false);
+                
             }
 
             else
@@ -84,7 +86,7 @@ public class Spot3Mision : MonoBehaviour
                 if (numMisiones == -1)
                 {
                     Debug.Log("El script no se pudo conectar a la base de datos");
-                    //MisionRedDot.SetActive(false);
+                    
                 }
 
                 //Respuesta de que no hay misiones activas.
@@ -94,7 +96,7 @@ public class Spot3Mision : MonoBehaviour
                     Spot3_estado0.SetActive(false);
                     Spot3_estado1.SetActive(false);
                     Spot3_estado2.SetActive(false);
-                    //MisionRedDot.SetActive(false);
+                    
                 }
 
                 //Respuesta de que hay una mision que desplegar
@@ -121,7 +123,7 @@ public class Spot3Mision : MonoBehaviour
                         Spot3_estado2.SetActive(false);
 
                         Spot3_estado0.SetActive(true);
-                        //MisionRedDot.SetActive(true);
+                        MisionRedDot.SetActive(true);
                     }
 
                     //Estado 1 -> mision en revision.
@@ -136,25 +138,23 @@ public class Spot3Mision : MonoBehaviour
                         Spot3_estado2.SetActive(false);
 
                         Spot3_estado1.SetActive(true);
-                        //MisionRedDot.SetActive(false);
+                        
                     }
 
                     //Estado 2 -> mision completada.
                     else if (RespuestaJson[nombreSpot]["estado"] == 2)
                     {
                         Text textotitulomision;
-                        Text displayPuntaje;
                         textotitulomision = NombreMision.GetComponent<Text>();
-                        displayPuntaje = Puntaje.GetComponent<Text>();
 
                         textotitulomision.text = RespuestaJson[nombreSpot]["nombre_mision"];
-                        displayPuntaje.text = RespuestaJson[nombreSpot]["puntaje"];
+                        puntos = RespuestaJson[nombreSpot]["puntaje"];
 
                         Spot3_estado0.SetActive(false);
                         Spot3_estado1.SetActive(false);
 
                         Spot3_estado2.SetActive(true);
-                        //MisionRedDot.SetActive(false);
+                        
                     }
 
 
@@ -175,8 +175,6 @@ public class Spot3Mision : MonoBehaviour
 
             //Desactivamos todo lo que no hay que mostrar en el estado 0
             MensajeEnvio.SetActive(false);
-            BotonVolver.SetActive(false);
-            Puntaje.SetActive(false);
             Felicitaciones.SetActive(false);
             MsgEvaluacion.SetActive(false);
             ImgPatas.SetActive(false);
@@ -209,8 +207,6 @@ public class Spot3Mision : MonoBehaviour
             isPanelActive = true;
 
             //Desactivamos todo lo que no hay que mostrar en el estado 1
-            BotonVolver.SetActive(false);
-            Puntaje.SetActive(false);
             InstruccionesMision.SetActive(false);
             InputRespuesta.SetActive(false);
             BotonEnviar.SetActive(false);
@@ -244,7 +240,6 @@ public class Spot3Mision : MonoBehaviour
             isPanelActive = true;
 
             //Desactivamos todo lo que no hay que mostrar en el estado 2
-            BotonVolver.SetActive(false);
             BotonEnviar.SetActive(false);
             InstruccionesMision.SetActive(false);
             InputRespuesta.SetActive(false);
@@ -252,12 +247,12 @@ public class Spot3Mision : MonoBehaviour
             ErrorText.SetActive(false);
 
             //Activamos todo lo que hay que mostrar en el estado 2
-            Puntaje.SetActive(true);
             TituloMision.SetActive(true);
             BotonCerrar.SetActive(true);
             NombreMision.SetActive(true);
             Felicitaciones.SetActive(true);
             MsgEvaluacion.SetActive(true);
+            ImgPatas.GetComponent<Image>().sprite = SpritesPatas[puntos];
             ImgPatas.SetActive(true);
 
             //Desactivamos movimiento de la camara.
@@ -272,9 +267,10 @@ public class Spot3Mision : MonoBehaviour
 
     IEnumerator MovePanel()
     {
+        PanelOverlay.SetActive(true);
         //Posiciones inicial y final del panel.
         Vector3 PanelMisionPosShow = new Vector2(0, 0);
-        Vector3 PanelMisionPosHide = new Vector2(0, -2000);
+        Vector3 PanelMisionPosHide = new Vector2(0, -2160);
 
         //el divisor de rateTiempo indica el tiempo que toma en aparecer el panel completamente.
         float t = 0.0f;
@@ -302,7 +298,7 @@ public class Spot3Mision : MonoBehaviour
     {
         //Posiciones inicial y final del panel.
         Vector3 PanelMisionPosShow = new Vector2(0, 0);
-        Vector3 PanelMisionPosHide = new Vector2(0, -2000);
+        Vector3 PanelMisionPosHide = new Vector2(0, -2160);
 
         //el divisor de rateTiempo indica el tiempo que toma en aparecer el panel completamente.
         float t = 0.0f;
@@ -319,8 +315,6 @@ public class Spot3Mision : MonoBehaviour
         t = 0.0f;
         //Desactivamos todos los elementos del panel.
         MensajeEnvio.SetActive(false);
-        BotonVolver.SetActive(false);
-        Puntaje.SetActive(false);
         TituloMision.SetActive(false);
         InstruccionesMision.SetActive(false);
         InputRespuesta.SetActive(false);
@@ -334,6 +328,7 @@ public class Spot3Mision : MonoBehaviour
 
         DetalleMisionCanvas.SetActive(false);
         isPanelActive = false;
+        PanelOverlay.SetActive(false);
         MainCamera.GetComponent<TouchCamera>().enabled = true;
         yield return null;
     }
@@ -370,8 +365,6 @@ public class Spot3Mision : MonoBehaviour
         {
             Debug.Log("Ok");
             //Desactivamos todo lo que no hay que mostrar en el estado 1
-            BotonVolver.SetActive(false);
-            Puntaje.SetActive(false);
             InstruccionesMision.SetActive(false);
             InputRespuesta.SetActive(false);
             BotonEnviar.SetActive(false);
