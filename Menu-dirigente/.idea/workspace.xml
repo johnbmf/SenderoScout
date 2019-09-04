@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/php/EvaluarAptitudes.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/EvaluarAptitudes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/evaluacion_aptitudes.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/evaluacion_aptitudes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +28,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

@@ -1,33 +1,39 @@
 <?php
 	require_once('db_conn.php');
   //Generar conexion a BD.
-    $mysqli = db_conn();
+  $mysqli = db_conn();
 
-    $json = file_get_contents('php://input');
-    $obj = json_decode($json,true);
-    $response = new stdClass;
+  $json = file_get_contents('php://input');
+  $obj = json_decode($json,true);
+  $response = new stdClass;
 
-    $seisena = $obj['seisena'];
+  $seisena = $obj['seisena'];
 
-    $exito = "";
-    $fracaso = "";
+  $exito = "";
+  $fracaso = "";
 
- 
-  if ($result= $mysqli->query("SELECT * FROM Usuario WHERE seisena1 = '$seisena'")){
-    while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
-      $myArray[] = $row;
+  if($seisena != "default"){
+    if ($result= $mysqli->query("SELECT * FROM Usuario WHERE seisena1 = '$seisena'")){
+      while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
+        $myArray[] = $row;
+      }
+      $response -> data = $myArray;
+      $response -> type = 1;
+      $response -> message = "Usuarios obtenidos con exito";
+
+      echo json_encode($response);
     }
-    $response -> data = $myArray;
-    $response -> type = 1;
-    $response -> message = "Usuarios obtenidos con exito";
-
-    echo json_encode($response);
+    else{
+      $response -> data = null;
+      $response -> type = -1;
+      $response -> message = "Error al obtener usuarios";   
+    }
   }
   else{
-    $response -> data = null;
+    $response -> data = "default";
     $response -> type = -1;
-    $response -> message = "Error al obtener usuarios";
-
+    $response -> message = "Error al obtener usuarios"; 
+    echo json_encode($response);
   }
   mysqli_close($mysqli);
 ?>
