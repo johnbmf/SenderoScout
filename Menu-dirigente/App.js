@@ -33,24 +33,16 @@ const CustomDrawerComponent = (props)=>(
   </SafeAreaView>
 )
 const StackNavigator = createStackNavigator({
-  Home: {screen : HomeScreen,
-    NavigationOptions: {
-      drawerLabel: 'Inicio',
-      drawerIcon: ({tintColor}) => (
-          <Icon name='home' style = {{fontSize:24,color:tintColor}} />
-      )
-    }
-  },
   Pendientes: PendientesScreen,
-  Evaluacion: EvaluacionScreen
+  Evaluacion: EvaluacionScreen,
+  Home : HomeScreen,
   }, {
     defaultNavigationOptions:{
       header: null
-    }
-  }
+    }}
 ); 
 const AppDrawerNavigator = createDrawerNavigator({
-  Home:StackNavigator,
+  Home:HomeScreen,
   MiManada:MiManadaScreen,
   CrearMision:CrearMisionScreen,
   Pendientes: PendientesScreen,
@@ -59,6 +51,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
   Settings:SettingsScreen,
+  Cerrar: StackNavigator
 },{
   contentComponent: CustomDrawerComponent,
   contentOptions:{

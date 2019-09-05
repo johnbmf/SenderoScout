@@ -118,17 +118,25 @@ class crear_mision extends Component {
                                 </Body>
                             </Header >                    
                         </View>
+                        <NavigationEvents onWillFocus={() => this.getPendientes()}/> 
+                        {(this.state.dataSource.length <= 0) && 
+                            <View style = {{flexDirection : 'row', width:'90%', height:'88%', justifyContent:'center', alignItems:'center',alignSelf:'center' }}>
+                                <Text style ={{color:'red',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>No se encuentran misiones disponibles para evaluar.</Text>
+                            </View>
+
+                            }
+                        {(this.state.dataSource.length > 0) &&    
                             <View style = {{width:'100%', height:'80%'}}> 
-                            <NavigationEvents onWillFocus={() => this.getPendientes()}/> 
                             <View>{this.state.dataSource.map(((obj,i) => 
                             <View key = {i}>{                    
                                 <TouchableOpacity
-                                onPress = {()=> this.props.navigation.navigate('Evaluacion', {data : obj})}
+                                onPress = {()=> this.props.navigation.navigate('./screen/evaluacion', {data : obj})}
                                 style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
                                         <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {obj.nombre}</Text>
                                     </TouchableOpacity>}</View>))}
                                 </View>
                             </View>
+                            }
                     </View>
                 </ScrollView>
                 </KeyboardAvoidingView>

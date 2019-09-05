@@ -48,8 +48,11 @@ class crear_mision extends Component {
     clearText(){
         this.setState(
             {
+                TipoMision : 0,
                 nombre_mision : '',
-                desc_mision: ''
+                desc_mision: '',
+                Spot: '',
+                Expiracion: 0,
             }
         )
     }
@@ -60,7 +63,7 @@ class crear_mision extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Es necesario elegir el tipo de misión"
+                SendAlertMessage: "Es necesario elegir el tipo de misión."
             }, ()=> {this.handleOpen()});
             //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
@@ -70,7 +73,7 @@ class crear_mision extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar una ubicación a la misión"
+                SendAlertMessage: "Es necesario asignar una ubicación a la misión."
             }, ()=> {this.handleOpen()});
             //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
@@ -79,7 +82,7 @@ class crear_mision extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar un tiempo de expiración de la misión"
+                SendAlertMessage: "Es necesario asignar un tiempo de expiración de la misión."
             }, ()=> {this.handleOpen()});
             //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
@@ -88,7 +91,7 @@ class crear_mision extends Component {
                 {
                     isLoading : true,
                     SendAlertType : 2,
-                    SendAlertMessage: "Es necesaria una descripción de la misión",
+                    SendAlertMessage: "Es necesaria una descripción de la misión.",
                     SendAlertState: true
                 }, ()=> {this.handleOpen()});
             return;
@@ -96,7 +99,7 @@ class crear_mision extends Component {
             this.setState({
                 isLoading : true,
                 SendAlertType : 2,
-                SendAlertMessage: "Es necesario un nombre para la misión",
+                SendAlertMessage: "Es necesario un nombre para la misión.",
                 SendAlertState: true}, ()=> {this.handleOpen()});
             return;
         } else {
@@ -118,10 +121,17 @@ class crear_mision extends Component {
             })
             .then(response => response.json())
             .then((responseJson) => {
-                this.setState({
-                    isLoading : false,
-                    SendAlertType:1
-                }, ()=> {this.handleOpen()})
+                if(responseJson != -2){
+                    this.setState({
+                        isLoading : false,
+                        SendAlertType:1
+                    }, ()=> {this.handleOpen()})
+                }else{
+                    this.setState({
+                        isLoading : false,
+                        SendAlertType:-2
+                    }, ()=> {this.handleOpen()})
+                }
             })
             .catch((error)=>{
                 console.error(error);
@@ -181,13 +191,13 @@ class crear_mision extends Component {
                     </SCLAlert>
                 );
             }
-            else if(this.state.SendAlertType == -1){
+            else if(this.state.SendAlertType == -2){
                 return(
                     <SCLAlert
                     theme="danger"
                     show={this.state.SendAlertState}
-                    title="Ooops"
-                    subtitle= {this.state.SendAlertMessage}
+                    title="Ups"
+                    subtitle= {"Ya existe una misión activa en esa ubicación."}
                     onRequestClose = {this.handleClose}
                     >
                     <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>

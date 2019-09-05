@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "intento-6-menu",
-    "slug": "responsive-navbar",
+    "name": "Aplicacion-Dirigente-SenderoScout",
+    "slug": "Sendero-Scout-Dirigente",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [

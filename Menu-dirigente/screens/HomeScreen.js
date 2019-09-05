@@ -20,11 +20,13 @@ class HomeScreen extends Component {
         super(props);
         this.state = {
             isLoading: true,
+            button:false,
             dataSource: []
 
         }
     }
-    componentDidMount(){        
+    componentDidMount(){
+
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
             method: 'post',
             header:{
@@ -120,6 +122,7 @@ class HomeScreen extends Component {
                     <MenuItem itemImage = {require('./../assets/chart4.png')} />
                     <MenuItem itemImage = {require('./../assets/chart6.png')} />
                 </View>
+                {(this.state.dataSource.length > 0) &&
                 <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
                     <NavigationEvents onWillFocus={() => this.getPendientes()}/> 
                     <TouchableOpacity
@@ -127,7 +130,7 @@ class HomeScreen extends Component {
                     style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
                         <Text style = {{color: 'white', textAlign:'center', fontSize:18}}>Tienes {this.state.dataSource.length} misiones sin evaluar</Text>
                     </TouchableOpacity>
-                </View>
+                </View>}
             </View>
 
         );
