@@ -6,7 +6,7 @@ import {
     Modal,
     ActivityIndicator,
 } from "react-native";
-import { Icon,Header,Left,Body,Picker} from 'native-base'
+import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 
@@ -50,30 +50,37 @@ class evalaptitudes extends Component {
     }
     //componentDidMount(){
     GetUsers =(SeisenaValue) => {
-        this.setState({seisena: SeisenaValue, isLoading : true})
-        //fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
-        fetch('http://www.mitra.cl/SS/GetNinosSeisena.php',{    
-            method: 'POST',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "seisena" : SeisenaValue,
-            }),
-        }).then((Response) => Response.json())
-        .then((responseJson) =>{
-            console.log(this.state.seisena)
-            console.log(responseJson);
-            this.setState({
-                dataSource: responseJson["data"],
-                GetAlertMessage: responseJson["message"],
-                GetAlertType: responseJson["type"],
-                isLoading: false
-            })
-        }).catch((error) => {
-            console.error(error);
-        });
+        this.setState({seisena: SeisenaValue})
+        
+        if(SeisenaValue == 'default'){
+            this.setState({dataSource: []})
+        }
+        else{
+            this.setState({isLoading : true})
+            //fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
+            fetch('http://www.mitra.cl/SS/GetNinosSeisena.php',{    
+                method: 'POST',
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "seisena" : SeisenaValue,
+                }),
+            }).then((Response) => Response.json())
+            .then((responseJson) =>{
+                console.log(this.state.seisena)
+                console.log(responseJson);
+                this.setState({
+                    dataSource: responseJson["data"],
+                    GetAlertMessage: responseJson["message"],
+                    GetAlertType: responseJson["type"],
+                    isLoading: false
+                })
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
     }
 
 
@@ -227,12 +234,17 @@ class evalaptitudes extends Component {
 
 
     render() {
+
+        /*
         //let nombres = this.state.dataSource.map(({nombre, user}) => ({nombre,user}));
 
         if(this.state.nombres.length < 1){//para que solo serealice una vez y no en cada render
             this.state.nombres = this.state.dataSource.map(({nombre}) => nombre);
             this.state.users = this.state.dataSource.map(({user}) => user);
         };
+        */
+        this.state.nombres = this.state.dataSource.map(({nombre}) => nombre);
+        this.state.users = this.state.dataSource.map(({user}) => user);
 
         //const {SendAlertState} = this.state;
         console.log(this.state.nombres)
@@ -245,9 +257,10 @@ class evalaptitudes extends Component {
                         <Left>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
-                        <Body style = {{justifyContent:'center'}}> 
-                            <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Consejo de la tarde</Text>
+                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Consejo de la tarde</Text>
                         </Body>
+                        <Right></Right>
                     </Header >                    
                 </View>
 
@@ -283,143 +296,132 @@ class evalaptitudes extends Component {
                         </View>
                     </View>
                     
-                    <View style ={ {width: '100%', height: '50%',paddingLeft: 10 }}>
+                    <View style ={ {width: '100%', height: '50%'}}>
+                        
                         <View style = {styles.AreasContainer}>
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                     Corporalidad:
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({corporalidad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start'}}
+                                        onFinishRating={(valor) => this.setState({corporalidad : valor})}
+                                    />
                                 </View>  
                             </View>
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                         Creatividad:
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({creatividad : valor})}
-                                        />
-                                    </View>
-                                </View>  
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({creatividad : valor})}
+                                    />
+                                </View>
                             </View>
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems: 'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems: 'flex-start'}}>
                                     Carácter:
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({caracter : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({caracter : valor})}
+                                    />
                                 </View>  
                             </View>
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                     Afectividad:
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({afectividad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({afectividad : valor})}
+                                    />
                                 </View>  
                             </View>
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25,justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text style = {{ fontSize: 20,justifyContent:'center', alignItems:'flex-start'}}>
                                     Sociabilidad:
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({sociabilidad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({sociabilidad : valor})}
+                                    />
                                 </View>  
                             </View>
 
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
-                                    <Text style = {{ fontSize: 25, justifyContent:'center', alignItems:'flex-start'}}>
+                                    <Text numberOfLines={1} style = {{ fontSize: 20, justifyContent:'center', alignItems:'flex-start'}}>
                                     Espiritualidad:
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({espiritualidad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({espiritualidad : valor})}
+                                    />
                                 </View>  
                             </View>
                         </View>
@@ -464,8 +466,8 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize:28,
         justifyContent:'center', 
-        alignItems:'center',
-        alignContent:'center',
+        alignItems: 'flex-start',
+        alignContent:'flex-start',
         fontFamily:'Roboto',
         paddingTop:20
     },
@@ -503,18 +505,22 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         flexWrap: 'nowrap',
-        alignItems: 'center',
+        //alignItems: 'center',
         justifyContent: 'center'
     },
     TextArea: {
-        width: '40%',
+        width: '45%',
         justifyContent: 'space-between',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        paddingLeft: 5
     },
     Rating:{
-        width: '60%',
+        width: '55%',
         justifyContent:'flex-start',
-        alignItems: 'flex-start'
+        //alignItems: 'flex-start',
+        alignSelf:'flex-start',
+        //paddingRight:10,
+        backgroundColor: '#FFFFFF'
 
     }
 
