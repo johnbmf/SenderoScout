@@ -150,7 +150,7 @@ class crear_mision extends Component {
                                 </Body>
                             </Header >                    
                         </View>
-                        <NavigationEvents onWillFocus={() => this.setState({largo:-1}, () => {this.getPendientes()})}/> 
+                        <NavigationEvents onWillFocus={() => this.setState({largo:-1, isLoading:true}, () => {this.getPendientes()})}/> 
                         {(this.state.largo < 0) && this.LoadingState()}
                         {(this.state.largo == 0) && 
                             <View style = {{flexDirection : 'row', width:'90%', height:'88%', justifyContent:'center', alignItems:'center',alignSelf:'center' }}>
