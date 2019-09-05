@@ -66,7 +66,7 @@ public class VerMisiones : MonoBehaviour
 
     public void CerrarCanvas()
     {
-        StartCoroutine(HidePanel());
+        StartCoroutine(HidePanel());        
     }
 
     IEnumerator Misiones()
@@ -127,6 +127,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                         //tituloMision1.SetActive(true);
                         //descripcionMision1.SetActive(true);
                     }
@@ -140,6 +143,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                         /*
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);*/
@@ -154,6 +160,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM1 = imagenMision1.GetComponent<Image>();
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
                         imagenMision1.SetActive(true);
+                        tituloMision1.SetActive(true);
+                        
                         /*
                         tituloMision1.SetActive(true);
                         imagenMision1.SetActive(true);*/
@@ -173,6 +181,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 1)
                     {
@@ -184,6 +195,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 2)
                     {
@@ -195,6 +209,9 @@ public class VerMisiones : MonoBehaviour
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
 
                         imagenMision1.SetActive(true);
+
+                        tituloMision1.SetActive(true);
+                        
                         //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
@@ -208,6 +225,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = "¡Nueva caceria!";
                         textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 1)
                     {
@@ -219,6 +239,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
                         textoDescripMision2.text = "Caceria enviada para calificar.";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 2)
                     {
@@ -231,6 +254,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
 
                         imagenMision2.SetActive(true);
+                        tituloMision2.SetActive(true);
+                       
                         //falta arreglar lo de la foto (activar)
                     }
                 }
@@ -248,6 +273,8 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 1)
                     {
@@ -259,6 +286,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 2)
                     {
@@ -271,6 +301,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
 
                         imagenMision1.SetActive(true);
+                        tituloMision1.SetActive(true);
+                        
                         //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
@@ -284,6 +316,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = "¡Nueva caceria!";
                         textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 1)
                     {
@@ -295,6 +330,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
                         textoDescripMision2.text = "Caceria enviada para calificar.";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 2)
                     {
@@ -307,6 +345,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
 
                         imagenMision2.SetActive(true);
+                        tituloMision2.SetActive(true);
+                   
                         //falta arreglar lo de la foto (activar)
                     }
                     //tercera fila
@@ -320,6 +360,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = "¡Nueva caceria!";
                         textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 1)
                     {
@@ -331,6 +374,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
                         textoDescripMision3.text = "Caceria enviada para calificar.";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 2)
                     {
@@ -343,6 +389,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
 
                         imagenMision3.SetActive(true);
+                        tituloMision3.SetActive(true);
+                        
                         //falta arreglar lo de la foto (activar)
                     }
                 }
@@ -360,6 +408,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 1)
                     {
@@ -371,6 +422,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 2)
                     {
@@ -382,6 +436,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM1 = imagenMision1.GetComponent<Image>();
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
                         imagenMision1.SetActive(true);
+
+                        tituloMision1.SetActive(true);
 
                         //falta arreglar lo de la foto (activar)
                     }
@@ -396,6 +452,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = "¡Nueva caceria!";
                         textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 1)
                     {
@@ -407,6 +466,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
                         textoDescripMision2.text = "Caceria enviada para calificar.";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 2)
                     {
@@ -419,6 +481,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
 
                         imagenMision2.SetActive(true);
+                        tituloMision2.SetActive(true);
+
                         //falta arreglar lo de la foto (activar)
                     }
                     //tercera fila
@@ -432,6 +496,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = "¡Nueva caceria!";
                         textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 1)
                     {
@@ -443,6 +510,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
                         textoDescripMision3.text = "Caceria enviada para calificar.";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 2)
                     {
@@ -455,6 +525,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
 
                         imagenMision3.SetActive(true);
+                        tituloMision3.SetActive(true);
+
                         //falta arreglar lo de la foto (activar)
                     }
                     //cuarta fila
@@ -468,6 +540,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision4.text = "¡Nueva caceria!";
                         textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision4.SetActive(true);
+                        descripcionMision4.SetActive(true);
                     }
                     else if (RespuestaJson["4"]["estado"] == 1)
                     {
@@ -479,6 +554,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
                         textoDescripMision4.text = "Caceria enviada para calificar.";
+
+                        tituloMision4.SetActive(true);
+                        descripcionMision4.SetActive(true);
                     }
                     else if (RespuestaJson["4"]["estado"] == 2)
                     {
@@ -491,6 +569,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
 
                         imagenMision4.SetActive(true);
+                        tituloMision4.SetActive(true);
+                      
                         //falta arreglar lo de la foto (activar)
                     }
                 }
@@ -508,6 +588,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 1)
                     {
@@ -519,6 +602,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 2)
                     {
@@ -531,6 +617,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
 
                         imagenMision1.SetActive(true);
+                        tituloMision1.SetActive(true);
+   
                         //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
@@ -544,6 +632,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = "¡Nueva caceria!";
                         textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 1)
                     {
@@ -555,6 +646,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
                         textoDescripMision2.text = "Caceria enviada para calificar.";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 2)
                     {
@@ -567,6 +661,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
 
                         imagenMision2.SetActive(true);
+                        tituloMision2.SetActive(true);
+
                         //falta arreglar lo de la foto (activar)
                     }
                     //tercera fila
@@ -580,6 +676,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = "¡Nueva caceria!";
                         textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 1)
                     {
@@ -591,6 +690,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
                         textoDescripMision3.text = "Caceria enviada para calificar.";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 2)
                     {
@@ -603,6 +705,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
 
                         imagenMision3.SetActive(true);
+                        tituloMision3.SetActive(true);
+
                         //falta arreglar lo de la foto (activar)
                     }
                     //cuarta fila
@@ -616,6 +720,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision4.text = "¡Nueva caceria!";
                         textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision4.SetActive(true);
+                        descripcionMision4.SetActive(true);
                     }
                     else if (RespuestaJson["4"]["estado"] == 1)
                     {
@@ -627,6 +734,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
                         textoDescripMision4.text = "Caceria enviada para calificar.";
+
+                        tituloMision4.SetActive(true);
+                        descripcionMision4.SetActive(true);
                     }
                     else if (RespuestaJson["4"]["estado"] == 2)
                     {
@@ -639,6 +749,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
 
                         imagenMision4.SetActive(true);
+                        tituloMision4.SetActive(true);
+                  
                         //falta arreglar lo de la foto (activar)
                     }
                     //quinta fila
@@ -652,6 +764,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision5.text = "¡Nueva caceria!";
                         textoDescripMision5.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision5.SetActive(true);
+                        descripcionMision5.SetActive(true);
                     }
                     else if (RespuestaJson["5"]["estado"] == 1)
                     {
@@ -663,6 +778,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
                         textoDescripMision5.text = "Caceria enviada para calificar.";
+
+                        tituloMision5.SetActive(true);
+                        descripcionMision5.SetActive(true);
                     }
                     else if (RespuestaJson["5"]["estado"] == 2)
                     {
@@ -675,6 +793,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM5.sprite = listaImagen[RespuestaJson["5"]["puntaje"]];
 
                         imagenMision5.SetActive(true);
+                        tituloMision5.SetActive(true);
+                     
                         //falta arreglar lo de la foto (activar)
                     }
                 }
@@ -692,6 +812,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = "¡Nueva caceria!";
                         textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 1)
                     {
@@ -703,6 +826,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
                         textoDescripMision1.text = "Caceria enviada para calificar.";
+
+                        tituloMision1.SetActive(true);
+                        descripcionMision1.SetActive(true);
                     }
                     else if (RespuestaJson["1"]["estado"] == 2)
                     {
@@ -715,6 +841,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM1.sprite = listaImagen[RespuestaJson["1"]["puntaje"]];
 
                         imagenMision1.SetActive(true);
+                        tituloMision1.SetActive(true);
+                       
                         //falta arreglar lo de la foto (activar)
                     }
                     //segunda fila
@@ -728,6 +856,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = "¡Nueva caceria!";
                         textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 1)
                     {
@@ -739,6 +870,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
                         textoDescripMision2.text = "Caceria enviada para calificar.";
+
+                        tituloMision2.SetActive(true);
+                        descripcionMision2.SetActive(true);
                     }
                     else if (RespuestaJson["2"]["estado"] == 2)
                     {
@@ -751,6 +885,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM2.sprite = listaImagen[RespuestaJson["2"]["puntaje"]];
 
                         imagenMision2.SetActive(true);
+                        tituloMision2.SetActive(true);
+                    
                         //falta arreglar lo de la foto (activar)
                     }
                     //tercera fila
@@ -764,6 +900,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = "¡Nueva caceria!";
                         textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 1)
                     {
@@ -775,6 +914,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
                         textoDescripMision3.text = "Caceria enviada para calificar.";
+
+                        tituloMision3.SetActive(true);
+                        descripcionMision3.SetActive(true);
                     }
                     else if (RespuestaJson["3"]["estado"] == 2)
                     {
@@ -787,6 +929,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM3.sprite = listaImagen[RespuestaJson["3"]["puntaje"]];
 
                         imagenMision3.SetActive(true);
+                        tituloMision3.SetActive(true);
+                    
                         //falta arreglar lo de la foto (activar)
                     }
                     //cuarta fila
@@ -800,6 +944,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision4.text = "¡Nueva caceria!";
                         textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision4.SetActive(true);
+                        descripcionMision4.SetActive(true);
                     }
                     else if (RespuestaJson["4"]["estado"] == 1)
                     {
@@ -811,6 +958,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
                         textoDescripMision4.text = "Caceria enviada para calificar.";
+
+                        tituloMision4.SetActive(true);
+                        descripcionMision4.SetActive(true);
                     }
                     else if (RespuestaJson["4"]["estado"] == 2)
                     {
@@ -823,6 +973,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM4.sprite = listaImagen[RespuestaJson["4"]["puntaje"]];
 
                         imagenMision4.SetActive(true);
+                        tituloMision4.SetActive(true);
+                  
                         //falta arreglar lo de la foto (activar)
                     }
                     //quinta fila
@@ -836,6 +988,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision5.text = "¡Nueva caceria!";
                         textoDescripMision5.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision5.SetActive(true);
+                        descripcionMision5.SetActive(true);
                     }
                     else if (RespuestaJson["5"]["estado"] == 1)
                     {
@@ -847,6 +1002,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
                         textoDescripMision5.text = "Caceria enviada para calificar.";
+
+                        tituloMision5.SetActive(true);
+                        descripcionMision5.SetActive(true);
                     }
                     else if (RespuestaJson["5"]["estado"] == 2)
                     {
@@ -859,6 +1017,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM5.sprite = listaImagen[RespuestaJson["5"]["puntaje"]];
 
                         imagenMision5.SetActive(true);
+                        tituloMision5.SetActive(true);
+                       
                         //falta arreglar lo de la foto (activar)
                     }
                     //sexta fila
@@ -872,6 +1032,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision6.text = "¡Nueva caceria!";
                         textoDescripMision6.text = "¡Busca en el mapa esta nueva caceria!";
+
+                        tituloMision6.SetActive(true);
+                        descripcionMision6.SetActive(true);
                     }
                     else if (RespuestaJson["6"]["estado"] == 1)
                     {
@@ -883,6 +1046,9 @@ public class VerMisiones : MonoBehaviour
 
                         textonombreMision6.text = RespuestaJson["6"]["nombre_mision"];
                         textoDescripMision6.text = "Caceria enviada para calificar.";
+
+                        tituloMision6.SetActive(true);
+                        descripcionMision6.SetActive(true);
                     }
                     else if (RespuestaJson["6"]["estado"] == 2)
                     {
@@ -895,6 +1061,8 @@ public class VerMisiones : MonoBehaviour
                         fotoM6.sprite = listaImagen[RespuestaJson["6"]["puntaje"]];
 
                         imagenMision6.SetActive(true);
+                        tituloMision6.SetActive(true);
+           
                         //falta arreglar lo de la foto (activar)
                     }
                 }
@@ -953,6 +1121,27 @@ public class VerMisiones : MonoBehaviour
         //HAY QUE SETACTIVA FALSE TODOS LOS GAMEOBJECTS QUE NO SEAN ESTATICOS.
         canvasMision.SetActive(false);
         PanelOverlay.SetActive(false);
+
+        tituloMision1.SetActive(false);
+        tituloMision2.SetActive(false);
+        tituloMision3.SetActive(false);
+        tituloMision4.SetActive(false);
+        tituloMision5.SetActive(false);
+        tituloMision6.SetActive(false);
+
+        descripcionMision1.SetActive(false);
+        descripcionMision2.SetActive(false);
+        descripcionMision3.SetActive(false);
+        descripcionMision4.SetActive(false);
+        descripcionMision5.SetActive(false);
+        descripcionMision6.SetActive(false);
+
+        imagenMision1.SetActive(false);
+        imagenMision2.SetActive(false);
+        imagenMision3.SetActive(false);
+        imagenMision4.SetActive(false);
+        imagenMision5.SetActive(false);
+        imagenMision6.SetActive(false);
 
         yield break;
     }
