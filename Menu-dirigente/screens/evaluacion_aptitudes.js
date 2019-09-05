@@ -289,7 +289,8 @@ class evalaptitudes extends Component {
                         </View>
                     </View>
                     
-                    <View style ={ {width: '100%', height: '50%',paddingLeft: 5, paddingRight:10 }}>
+                    <View style ={ {width: '100%', height: '50%'}}>
+                        
                         <View style = {styles.AreasContainer}>
                             <View style = {styles.RatingContainer}>
                                 <View style ={styles.TextArea}>
@@ -298,19 +299,17 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({corporalidad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start'}}
+                                        onFinishRating={(valor) => this.setState({corporalidad : valor})}
+                                    />
                                 </View>  
                             </View>
 
@@ -321,20 +320,18 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({creatividad : valor})}
-                                        />
-                                    </View>
-                                </View>  
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({creatividad : valor})}
+                                    />
+                                </View>
                             </View>
 
                             <View style = {styles.RatingContainer}>
@@ -344,19 +341,17 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({caracter : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({caracter : valor})}
+                                    />
                                 </View>  
                             </View>
 
@@ -367,19 +362,17 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({afectividad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({afectividad : valor})}
+                                    />
                                 </View>  
                             </View>
 
@@ -390,19 +383,17 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({sociabilidad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({sociabilidad : valor})}
+                                    />
                                 </View>  
                             </View>
 
@@ -413,19 +404,17 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <View>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={WOLF_HEAD}
-                                            ratingColor='#eff224'
-                                            ratingBackgroundColor='#dedede'
-                                            startingValue = {DEFAULT_RATING}
-                                            ratingCount={5}
-                                            imageSize={40}
-                                            style={{ justifyContent:'center' }}
-                                            onFinishRating={(valor) => this.setState({espiritualidad : valor})}
-                                        />
-                                    </View>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({espiritualidad : valor})}
+                                    />
                                 </View>  
                             </View>
                         </View>
@@ -509,18 +498,21 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         flexWrap: 'nowrap',
-        alignItems: 'center',
+        //alignItems: 'center',
         justifyContent: 'center'
     },
     TextArea: {
-        width: '48%',
+        width: '50%',
         justifyContent: 'space-between',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        paddingLeft: 5
     },
     Rating:{
-        width: '48%',
+        width: '50%',
         justifyContent:'flex-start',
-        alignItems: 'flex-start'
+        //alignItems: 'flex-start',
+        alignSelf:'flex-start',
+        paddingRight:10
 
     }
 

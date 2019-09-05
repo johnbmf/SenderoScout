@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/evaluacion_aptitudes.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/evaluacion_aptitudes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +61,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="217" y="12" width="1400" height="1000" extended-state="0" />
+    <frame x="217" y="12" width="1400" height="1000" extended-state="1" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.32966226" />
