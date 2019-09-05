@@ -81,7 +81,7 @@ public class VerMisiones : MonoBehaviour
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
-            error.text = "Lo sentimos, no se pudo obtener tus cacerías en este momento. Comprueba tu conexión a internet.";
+            error.text = "Lo sentimos, no se pudieron obtener tus cacerías en este momento. Comprueba tu conexión a internet.";
             Loading.SetActive(false);
             canvasMision.SetActive(true);
             StartCoroutine(MovePanel());
@@ -98,7 +98,7 @@ public class VerMisiones : MonoBehaviour
             if (RespuestaJson["response"] == -1)
             {
                 Debug.Log("El script no se pudo conectar a la base de datos");
-                error.text = "Lo sentimos, no se pudo obtener tus caerías en este momento. Inténtelo más tarde.";
+                error.text = "Lo sentimos, no se pudieron obtener tus caerías en este momento. Inténtelo más tarde.";
                 //Loading.SetActive(false);
                 //canvasMision.SetActive(true);
                 //StartCoroutine(MovePanel());
@@ -125,8 +125,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1 = tituloMision1.GetComponent<Text>();
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-                        textonombreMision1.text = "¡Nueva caceria!";
-                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision1.text = "¡Nueva cacería!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -142,7 +142,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
-                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                        textoDescripMision1.text = "Cacería enviada para calificar.";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -179,8 +179,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1 = tituloMision1.GetComponent<Text>();
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-                        textonombreMision1.text = "¡Nueva caceria!";
-                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision1.text = "¡Nueva cacería!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -194,7 +194,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
-                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                        textoDescripMision1.text = "Cacería enviada para calificar.";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -223,8 +223,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision2 = tituloMision2.GetComponent<Text>();
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
-                        textonombreMision2.text = "¡Nueva caceria!";
-                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision2.text = "¡Nueva cacería!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -238,7 +238,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
-                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                        textoDescripMision2.text = "Cacería enviada para calificar.";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -271,8 +271,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1 = tituloMision1.GetComponent<Text>();
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-                        textonombreMision1.text = "¡Nueva caceria!";
-                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision1.text = "¡Nueva cacería!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva cacería!";
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
                     }
@@ -285,7 +285,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
-                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                        textoDescripMision1.text = "Cacería enviada para calificar.";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -314,8 +314,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision2 = tituloMision2.GetComponent<Text>();
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
-                        textonombreMision2.text = "¡Nueva caceria!";
-                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision2.text = "¡Nueva cacería!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -329,7 +329,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
-                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                        textoDescripMision2.text = "Cacería enviada para calificar.";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -358,8 +358,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision3 = tituloMision3.GetComponent<Text>();
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
-                        textonombreMision3.text = "¡Nueva caceria!";
-                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision3.text = "¡Nueva cacería!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -373,7 +373,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
-                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                        textoDescripMision3.text = "Cacería enviada para calificar.";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -406,8 +406,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1 = tituloMision1.GetComponent<Text>();
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-                        textonombreMision1.text = "¡Nueva caceria!";
-                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision1.text = "¡Nueva cacería!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -421,7 +421,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
-                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                        textoDescripMision1.text = "Cacería enviada para calificar.";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -450,8 +450,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision2 = tituloMision2.GetComponent<Text>();
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
-                        textonombreMision2.text = "¡Nueva caceria!";
-                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision2.text = "¡Nueva cacería!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -465,7 +465,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
-                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                        textoDescripMision2.text = "Cacería enviada para calificar.";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -494,8 +494,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision3 = tituloMision3.GetComponent<Text>();
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
-                        textonombreMision3.text = "¡Nueva caceria!";
-                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision3.text = "¡Nueva cacería!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -509,7 +509,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
-                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                        textoDescripMision3.text = "Cacería enviada para calificar.";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -538,8 +538,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision4 = tituloMision4.GetComponent<Text>();
                         textoDescripMision4 = descripcionMision4.GetComponent<Text>();
 
-                        textonombreMision4.text = "¡Nueva caceria!";
-                        textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision4.text = "¡Nueva cacería!";
+                        textoDescripMision4.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision4.SetActive(true);
                         descripcionMision4.SetActive(true);
@@ -553,7 +553,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision4 = descripcionMision4.GetComponent<Text>();
 
                         textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
-                        textoDescripMision4.text = "Caceria enviada para calificar.";
+                        textoDescripMision4.text = "Cacería enviada para calificar.";
 
                         tituloMision4.SetActive(true);
                         descripcionMision4.SetActive(true);
@@ -586,8 +586,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1 = tituloMision1.GetComponent<Text>();
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-                        textonombreMision1.text = "¡Nueva caceria!";
-                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision1.text = "¡Nueva cacería!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -601,7 +601,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
-                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                        textoDescripMision1.text = "Cacería enviada para calificar.";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -630,8 +630,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision2 = tituloMision2.GetComponent<Text>();
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
-                        textonombreMision2.text = "¡Nueva caceria!";
-                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision2.text = "¡Nueva cacería!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -645,7 +645,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
-                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                        textoDescripMision2.text = "Cacería enviada para calificar.";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -674,8 +674,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision3 = tituloMision3.GetComponent<Text>();
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
-                        textonombreMision3.text = "¡Nueva caceria!";
-                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision3.text = "¡Nueva cacería!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -689,7 +689,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
-                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                        textoDescripMision3.text = "Cacería enviada para calificar.";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -718,8 +718,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision4 = tituloMision4.GetComponent<Text>();
                         textoDescripMision4 = descripcionMision4.GetComponent<Text>();
 
-                        textonombreMision4.text = "¡Nueva caceria!";
-                        textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision4.text = "¡Nueva cacería!";
+                        textoDescripMision4.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision4.SetActive(true);
                         descripcionMision4.SetActive(true);
@@ -733,7 +733,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision4 = descripcionMision4.GetComponent<Text>();
 
                         textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
-                        textoDescripMision4.text = "Caceria enviada para calificar.";
+                        textoDescripMision4.text = "Cacería enviada para calificar.";
 
                         tituloMision4.SetActive(true);
                         descripcionMision4.SetActive(true);
@@ -762,8 +762,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision5 = tituloMision5.GetComponent<Text>();
                         textoDescripMision5 = descripcionMision5.GetComponent<Text>();
 
-                        textonombreMision5.text = "¡Nueva caceria!";
-                        textoDescripMision5.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision5.text = "¡Nueva cacería!";
+                        textoDescripMision5.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision5.SetActive(true);
                         descripcionMision5.SetActive(true);
@@ -777,7 +777,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision5 = descripcionMision5.GetComponent<Text>();
 
                         textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
-                        textoDescripMision5.text = "Caceria enviada para calificar.";
+                        textoDescripMision5.text = "Cacería enviada para calificar.";
 
                         tituloMision5.SetActive(true);
                         descripcionMision5.SetActive(true);
@@ -810,8 +810,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision1 = tituloMision1.GetComponent<Text>();
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
-                        textonombreMision1.text = "¡Nueva caceria!";
-                        textoDescripMision1.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision1.text = "¡Nueva cacería!";
+                        textoDescripMision1.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -825,7 +825,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision1 = descripcionMision1.GetComponent<Text>();
 
                         textonombreMision1.text = RespuestaJson["1"]["nombre_mision"];
-                        textoDescripMision1.text = "Caceria enviada para calificar.";
+                        textoDescripMision1.text = "Cacería enviada para calificar.";
 
                         tituloMision1.SetActive(true);
                         descripcionMision1.SetActive(true);
@@ -854,8 +854,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision2 = tituloMision2.GetComponent<Text>();
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
-                        textonombreMision2.text = "¡Nueva caceria!";
-                        textoDescripMision2.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision2.text = "¡Nueva cacería!";
+                        textoDescripMision2.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -869,7 +869,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision2 = descripcionMision2.GetComponent<Text>();
 
                         textonombreMision2.text = RespuestaJson["2"]["nombre_mision"];
-                        textoDescripMision2.text = "Caceria enviada para calificar.";
+                        textoDescripMision2.text = "Cacería enviada para calificar.";
 
                         tituloMision2.SetActive(true);
                         descripcionMision2.SetActive(true);
@@ -898,8 +898,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision3 = tituloMision3.GetComponent<Text>();
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
-                        textonombreMision3.text = "¡Nueva caceria!";
-                        textoDescripMision3.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision3.text = "¡Nueva cacería!";
+                        textoDescripMision3.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -913,7 +913,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision3 = descripcionMision3.GetComponent<Text>();
 
                         textonombreMision3.text = RespuestaJson["3"]["nombre_mision"];
-                        textoDescripMision3.text = "Caceria enviada para calificar.";
+                        textoDescripMision3.text = "Cacería enviada para calificar.";
 
                         tituloMision3.SetActive(true);
                         descripcionMision3.SetActive(true);
@@ -942,8 +942,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision4 = tituloMision4.GetComponent<Text>();
                         textoDescripMision4 = descripcionMision4.GetComponent<Text>();
 
-                        textonombreMision4.text = "¡Nueva caceria!";
-                        textoDescripMision4.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision4.text = "¡Nueva cacería!";
+                        textoDescripMision4.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision4.SetActive(true);
                         descripcionMision4.SetActive(true);
@@ -957,7 +957,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision4 = descripcionMision4.GetComponent<Text>();
 
                         textonombreMision4.text = RespuestaJson["4"]["nombre_mision"];
-                        textoDescripMision4.text = "Caceria enviada para calificar.";
+                        textoDescripMision4.text = "Cacería enviada para calificar.";
 
                         tituloMision4.SetActive(true);
                         descripcionMision4.SetActive(true);
@@ -986,8 +986,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision5 = tituloMision5.GetComponent<Text>();
                         textoDescripMision5 = descripcionMision5.GetComponent<Text>();
 
-                        textonombreMision5.text = "¡Nueva caceria!";
-                        textoDescripMision5.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision5.text = "¡Nueva cacería!";
+                        textoDescripMision5.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision5.SetActive(true);
                         descripcionMision5.SetActive(true);
@@ -1001,7 +1001,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision5 = descripcionMision5.GetComponent<Text>();
 
                         textonombreMision5.text = RespuestaJson["5"]["nombre_mision"];
-                        textoDescripMision5.text = "Caceria enviada para calificar.";
+                        textoDescripMision5.text = "Cacería enviada para calificar.";
 
                         tituloMision5.SetActive(true);
                         descripcionMision5.SetActive(true);
@@ -1030,8 +1030,8 @@ public class VerMisiones : MonoBehaviour
                         textonombreMision6 = tituloMision6.GetComponent<Text>();
                         textoDescripMision6 = descripcionMision6.GetComponent<Text>();
 
-                        textonombreMision6.text = "¡Nueva caceria!";
-                        textoDescripMision6.text = "¡Busca en el mapa esta nueva caceria!";
+                        textonombreMision6.text = "¡Nueva cacería!";
+                        textoDescripMision6.text = "¡Busca en el mapa esta nueva cacería!";
 
                         tituloMision6.SetActive(true);
                         descripcionMision6.SetActive(true);
@@ -1045,7 +1045,7 @@ public class VerMisiones : MonoBehaviour
                         textoDescripMision6 = descripcionMision6.GetComponent<Text>();
 
                         textonombreMision6.text = RespuestaJson["6"]["nombre_mision"];
-                        textoDescripMision6.text = "Caceria enviada para calificar.";
+                        textoDescripMision6.text = "Cacería enviada para calificar.";
 
                         tituloMision6.SetActive(true);
                         descripcionMision6.SetActive(true);
