@@ -9,6 +9,8 @@ public class Spot3Mision : MonoBehaviour
 {
     public GameObject MisionRedDot;
     public GameObject PanelOverlay;
+    public GameObject PanelOverlayMini;
+    public GameObject Loading;
 
     public GameObject Spot3_estado0;
     public GameObject Spot3_estado1;
@@ -342,6 +344,10 @@ public class Spot3Mision : MonoBehaviour
     {
         string respuesta = TextRespuesta.GetComponent<Text>().text;
 
+        //Activar Loading
+        PanelOverlayMini.SetActive(true);
+        Loading.SetActive(true);
+
         WWWForm form = new WWWForm();
         form.AddField("respuesta", respuesta);
         form.AddField("id_mision_mapa", id_mision_mapa);
@@ -351,6 +357,10 @@ public class Spot3Mision : MonoBehaviour
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
+            //Desactivar Loading
+            Loading.SetActive(false);
+            PanelOverlayMini.SetActive(false);
+
             //Mostrar que hubo un error enviando la informacion.
             ErrorText.GetComponent<Text>().text = "Lo sentimos. Hubo un error procesando tu respuesta. Comprueba tu conexión a internet.";
             ErrorText.SetActive(true);
@@ -364,6 +374,10 @@ public class Spot3Mision : MonoBehaviour
         if (respuestaServer["response"] == 1)
         {
             Debug.Log("Ok");
+            //Desactivar Loading
+            Loading.SetActive(false);
+            PanelOverlayMini.SetActive(false);
+
             //Desactivamos todo lo que no hay que mostrar en el estado 1
             InstruccionesMision.SetActive(false);
             InputRespuesta.SetActive(false);
@@ -388,6 +402,10 @@ public class Spot3Mision : MonoBehaviour
         else
         {
             Debug.Log("Not Ok");
+            //Desactivar Loading
+            Loading.SetActive(false);
+            PanelOverlayMini.SetActive(false);
+
             //Mostrar que hubo un error en el envio de info.
             ErrorText.GetComponent<Text>().text = "Lo sentimos. Hubo un error procesando tu respuesta. Inténtalo más tarde.";
             ErrorText.SetActive(true);

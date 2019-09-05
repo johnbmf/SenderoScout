@@ -14,9 +14,15 @@ public class TouchCamera : MonoBehaviour {
     float min_movement_X = -365f;
     float min_movement_Y = -435f;
 
-    void Start()
+    void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
+
+    void Start()
+    {
+        
     }
 
     void Update() {
