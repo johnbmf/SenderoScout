@@ -50,30 +50,37 @@ class evalaptitudes extends Component {
     }
     //componentDidMount(){
     GetUsers =(SeisenaValue) => {
-        this.setState({seisena: SeisenaValue, isLoading : true})
-        //fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
-        fetch('http://www.mitra.cl/SS/GetNinosSeisena.php',{    
-            method: 'POST',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "seisena" : SeisenaValue,
-            }),
-        }).then((Response) => Response.json())
-        .then((responseJson) =>{
-            console.log(this.state.seisena)
-            console.log(responseJson);
-            this.setState({
-                dataSource: responseJson["data"],
-                GetAlertMessage: responseJson["message"],
-                GetAlertType: responseJson["type"],
-                isLoading: false
-            })
-        }).catch((error) => {
-            console.error(error);
-        });
+        this.setState({seisena: SeisenaValue})
+        
+        if(SeisenaValue == 'default'){
+            this.setState({dataSource: []})
+        }
+        else{
+            this.setState({isLoading : true})
+            //fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
+            fetch('http://www.mitra.cl/SS/GetNinosSeisena.php',{    
+                method: 'POST',
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "seisena" : SeisenaValue,
+                }),
+            }).then((Response) => Response.json())
+            .then((responseJson) =>{
+                console.log(this.state.seisena)
+                console.log(responseJson);
+                this.setState({
+                    dataSource: responseJson["data"],
+                    GetAlertMessage: responseJson["message"],
+                    GetAlertType: responseJson["type"],
+                    isLoading: false
+                })
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
     }
 
 
@@ -502,17 +509,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     TextArea: {
-        width: '50%',
+        width: '45%',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         paddingLeft: 5
     },
     Rating:{
-        width: '50%',
+        width: '55%',
         justifyContent:'flex-start',
         //alignItems: 'flex-start',
         alignSelf:'flex-start',
-        paddingRight:10
+        //paddingRight:10,
+        backgroundColor: '#FFFFFF'
 
     }
 
