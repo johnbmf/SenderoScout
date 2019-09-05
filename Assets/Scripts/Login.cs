@@ -17,7 +17,7 @@ public class Login : MonoBehaviour{
     private string user, email, tipo, nombre, pseudonimo, unidad1, unidad2, edad;
 
     //Debug mode: Permite saltarse el login usando datos STUB.
-    private bool debugMode = true;
+    private bool debugMode = false;
 
     void Start(){
         if (debugMode)
