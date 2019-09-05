@@ -22,7 +22,7 @@ public class Ranking : MonoBehaviour
 
     public GameObject PuntajeVisible;
 
-    private WaitForSeconds UpdateCooldown = new WaitForSeconds(30.0f);
+    private WaitForSeconds UpdateCooldown = new WaitForSeconds(15.0f);
 
     // Start is called before the first frame update
     void Start()
