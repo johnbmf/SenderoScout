@@ -36,6 +36,7 @@ public class Spot3Mision : MonoBehaviour
     public GameObject MsgEvaluacion;
     public GameObject ImgPatas;
     public GameObject ErrorText;
+    public GameObject AceptarButton;
     #endregion
 
     private string nombreSpot = "bosque";
@@ -43,7 +44,7 @@ public class Spot3Mision : MonoBehaviour
     private bool isPanelActive = false;
     private int puntos;
 
-    private WaitForSeconds UpdateCooldown = new WaitForSeconds(30.0f);
+    private WaitForSeconds UpdateCooldown = new WaitForSeconds(15.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -181,6 +182,7 @@ public class Spot3Mision : MonoBehaviour
             MsgEvaluacion.SetActive(false);
             ImgPatas.SetActive(false);
             ErrorText.SetActive(false);
+            AceptarButton.SetActive(false);
 
             //Activamos todo lo que hay que mostrar en el estado 0
             TituloMision.SetActive(true);
@@ -222,6 +224,7 @@ public class Spot3Mision : MonoBehaviour
             TituloMision.SetActive(true);
             BotonCerrar.SetActive(true);
             NombreMision.SetActive(true);
+            AceptarButton.SetActive(true);
 
             //Desactivamos movimiento de la camara.
             MainCamera.GetComponent<TouchCamera>().enabled = false;
@@ -256,6 +259,7 @@ public class Spot3Mision : MonoBehaviour
             MsgEvaluacion.SetActive(true);
             ImgPatas.GetComponent<Image>().sprite = SpritesPatas[puntos];
             ImgPatas.SetActive(true);
+            AceptarButton.SetActive(true);
 
             //Desactivamos movimiento de la camara.
             MainCamera.GetComponent<TouchCamera>().enabled = false;
@@ -327,6 +331,7 @@ public class Spot3Mision : MonoBehaviour
         MsgEvaluacion.SetActive(false);
         ImgPatas.SetActive(false);
         ErrorText.SetActive(false);
+        AceptarButton.SetActive(false);
 
         DetalleMisionCanvas.SetActive(false);
         isPanelActive = false;
@@ -388,6 +393,7 @@ public class Spot3Mision : MonoBehaviour
             TituloMision.SetActive(true);
             BotonCerrar.SetActive(true);
             NombreMision.SetActive(true);
+            AceptarButton.SetActive(true);
 
             //Cambiamos el estado del spot al estado 1.
             Spot3_estado0.SetActive(false);

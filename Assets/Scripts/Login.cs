@@ -76,7 +76,7 @@ public class Login : MonoBehaviour{
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
-            errorIngreso.text = "Error de conexion. Comprueba tu conexion a internet.";
+            errorIngreso.text = "Error de conexion. Comprueba tu conexión a internet.";
             yield break;
         }
 
