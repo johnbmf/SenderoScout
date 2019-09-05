@@ -33,7 +33,7 @@ class crear_mision extends Component {
             Spot: '',
             Expiracion: 0,
             SendAlertState: false,
-            SendAlertMessage: "Mision creada con éxito.",
+            SendAlertMessage: "Misión creada con éxito.",
             SendAlertType: 2,
             isLoading:false,
 
@@ -210,7 +210,7 @@ class crear_mision extends Component {
                     <SCLAlert
                     theme="warning"
                     show={this.state.SendAlertState}
-                    title="Estoy Confundido"
+                    title="Campo Faltante"
                     subtitle= {this.state.SendAlertMessage}
                     onRequestClose = {this.handleClose}
                     >
@@ -300,7 +300,7 @@ class crear_mision extends Component {
                                 onValueChange ={ (itemValue,itemIndex) => this.setState({Expiracion: itemValue}) }>
                                 <Picker.Item label = "Elija la duración de la misión" value = {0} />
                                 <Picker.Item label = "3 días" value = {3} />
-                                <Picker.Item label = "7 dias" value = {7} />
+                                <Picker.Item label = "7 días" value = {7} />
                                 <Picker.Item label = "14 días" value = {14} />
                             </Picker>
                         </View>

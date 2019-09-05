@@ -7,7 +7,7 @@ import {
 import { Header,Left,Right,Icon } from 'native-base'
 class recomendaciones extends Component {
     static navigationOptions = {
-        drawerLabel: 'Recomendiaciones',
+        drawerLabel: 'Recomendaciones',
         drawerIcon: ({tintColor}) => (
             <Icon name='home' style = {{fontSize:24,color:tintColor}} />
         )

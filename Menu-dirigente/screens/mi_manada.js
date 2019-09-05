@@ -7,7 +7,7 @@ import {
 import { Header,Left,Right,Icon } from 'native-base'
 class mi_manada extends Component {
     static navigationOptions = {
-        drawerLabel: 'Mi manada',
+        drawerLabel: 'Mi Manada',
         drawerIcon: ({tintColor}) => (
             <Icon name='paw' style = {{fontSize:24,color:tintColor}} />
         )
