@@ -6,6 +6,29 @@ using UnityEngine.Networking;
 
 public class Aptitudes : MonoBehaviour
 {
+    #region PublicVars
+    /*
+     * Personajes: Array con gameobjects de los personajes:
+     *              0 -> Baloo
+     *              1 -> Bagheera
+     *              2 -> Kaa
+     *              3 -> Akela
+     *              4 -> Bandar-log
+     *              5 -> Hathi
+     * 
+     * Elementos: Array con los elementos del panel que se abre al pulsar un personaje.
+     *              0 -> Imagen del animal
+     *              1 -> DialogoText
+     *              2 -> LoadBarra
+     */
+    public GameObject[] Personajes;
+    public GameObject[] Elementos;
+    #endregion
+
+    #region PrivateVars
+    private float[] Evaluaciones = new float[6];
+    #endregion
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +46,7 @@ public class Aptitudes : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("name", PlayerPrefs.GetString("user", ""));
 
-        UnityWebRequest www = UnityWebRequest.Post("http://www.mitra.cl/SS/GetVerMisiones.php", form);
+        UnityWebRequest www = UnityWebRequest.Post("http://www.mitra.cl/SS/GetAptitudes.php", form);
         yield return www.SendWebRequest();
 
         //Si hay error de conexion de red, debugLog y esperar el cooldown de refresh.
@@ -58,7 +81,19 @@ public class Aptitudes : MonoBehaviour
             //SI respuesta 1 -> existen evaluaciones y hay que mostrarlas.
             else if (RespuestaJson["response"] == 1)
             {
-                //Aptitudes
+                //Guardar las evaluaciones localmente
+                Evaluaciones[0] = RespuestaJson["corpo"];
+                Evaluaciones[1] = RespuestaJson["creat"];
+                Evaluaciones[2] = RespuestaJson["carac"];
+                Evaluaciones[3] = RespuestaJson["afect"];
+                Evaluaciones[4] = RespuestaJson["socio"];
+                Evaluaciones[5] = RespuestaJson["espir"];
+
+                //Activar los gameobjects de los personajes
+                for (int i = 0; i < 6; i++)
+                {
+                    Personajes[i].SetActive(true);
+                }
             }
         }
         yield return null;
