@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Aptitudes : MonoBehaviour
 {
@@ -25,14 +26,25 @@ public class Aptitudes : MonoBehaviour
     public GameObject[] Elementos;
     #endregion
 
-    #region PrivateVars
-    private float[] Evaluaciones = new float[6];
+    #region PublicStaticVars
+    public static float[] Evaluaciones = new float[6];
     #endregion
-    
+
+    #region AptitudesCanvasVars
+    public GameObject AptitudesCanvas;
+    public GameObject AptitudesPanel;
+    public GameObject Animal;
+    public GameObject DialogoFrame;
+    public GameObject DialogoText;
+    public GameObject Barra;
+    public GameObject Load;
+    public GameObject Faces;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(GetNivelAptitudes());
     }
 
     // Update is called once per frame
@@ -89,13 +101,22 @@ public class Aptitudes : MonoBehaviour
                 Evaluaciones[4] = RespuestaJson["socio"];
                 Evaluaciones[5] = RespuestaJson["espir"];
 
-                //Activar los gameobjects de los personajes
+                
+                //Activar los gameobjects de los personajes               
                 for (int i = 0; i < 6; i++)
                 {
                     Personajes[i].SetActive(true);
                 }
+                
             }
         }
         yield return null;
+    }
+
+    public void Testing(string mensaje, int animalFace)
+    {
+        DialogoText.GetComponent<Text>().text = mensaje;
+        Load.GetComponent<Image>().fillAmount = Evaluaciones[animalFace] / 5;
+        AptitudesCanvas.SetActive(true);
     }
 }
