@@ -12,14 +12,19 @@
   $seisena = $obj['seisena'];
   $unidad = $obj['unidad'];
 
-  $query = "SELECT SUM(EvaluacionSemanal.corporalidad), SUM(EvaluacionSemanal.creatividad), SUM(EvaluacionSemanal.caracter), SUM(EvaluacionSemanal.afectividad), SUM(EvaluacionSemanal.sociabilidad), SUM(EvaluacionSemanal.espiritualidad) FROM EvaluacionSemanal, Usuario WHERE (EvaluacionSemanal.fecha BETWEEN (NOW() - INTERVAL 2 MONTH) AND NOW()) AND Usuario.seisena1 = '$seisena' AND Usuario.user = EvaluacionSemanal.usuario";
+  $query = "SELECT AVG(EvaluacionSemanal.corporalidad), AVG(EvaluacionSemanal.creatividad), AVG(EvaluacionSemanal.caracter), AVG(EvaluacionSemanal.afectividad), AVG(EvaluacionSemanal.sociabilidad), AVG(EvaluacionSemanal.espiritualidad) FROM EvaluacionSemanal, Usuario WHERE (EvaluacionSemanal.fecha BETWEEN (NOW() - INTERVAL 2 MONTH) AND NOW()) AND Usuario.seisena1 = '$seisena' AND Usuario.user = EvaluacionSemanal.usuario";
 
   
   if($result = $mysqli->query($query)){
-    echo "hla";
     $row = $result->fetch_array(MYSQLI_NUM);
-    $myArray[] = $row;
-    $response -> data = $myArray;
+
+    $response -> data = $row;
+    $response -> corporalidad = $row[0];
+    $response -> creatividad = $row[1];
+    $response -> caracter = $row[2];
+    $response -> afectividad = $row[3];
+    $response -> sociabilidad = $row[4];
+    $response -> espiritualidad = $row[5];
     $response -> message = "Atributos totales obtenidos con exito";
     echo json_encode($response);
     }
