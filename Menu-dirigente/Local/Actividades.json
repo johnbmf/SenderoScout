@@ -1,0 +1,15 @@
+{
+    "Actividades": [
+
+        {
+            "Nombre": "Psicopata",
+            "Resumen": "Juego donde uno de los participantes debe adivinar que señal o gesto permite que los demas jugadores mientan.",
+            "Area": "Social",
+            "Descripcion" : "El juego es encontrar la enfermedad que tienen los jugadores. Todos se sientan en un círculo, un joven que es \"el medico\" sale del cuarto mientras que los otros jugadores eligen un signo distinto que es \"la enfermedad\", la misma para todos. Cuando los jugadores hacen el signo, deben mentir, cuando no lo hacen, deben responder la verdad. Por ejemplo, los jugadores pueden elegir de mentir cuando tocan el suelo con sus manos o cuando rascan su piel. El medico regresa cuando los jugadores han eligido el signo y debe adivinar su enfermedad, o sea cual es el signo entre ellos que les permite mentir. Para encontrarlo, el medico debe preguntar a los participantes su nombre, su edad por ejemplo, como esta vestido y deducir lo que hacen como signo cuando mienten. Cada vez un jugador miente mientras que no hace el signo, los otros jugadores deben decir \"Psycopata\" y cambia el sentido de la identidad robada para que el medico esté mas confundido.",
+            "Materiales" : [{"key": "No requiere"},{"key":"No requiere 2"}],
+            "Duracion" : "30 mins"
+
+        }
+
+    ]
+}

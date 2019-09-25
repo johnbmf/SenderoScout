@@ -12,6 +12,8 @@ import AgregarUsuariosScreen from './screens/agregar_usuarios'
 import MiManadaScreen from './screens/mi_manada'
 import PendientesScreen from './screens/misiones_pendietes'
 import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
+import DetalleActividadScreen from './screens/detalle_actividad'
+
 
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
@@ -42,7 +44,8 @@ const StackNavigator = createStackNavigator({
     }
   },
   Pendientes: PendientesScreen,
-  Evaluacion: EvaluacionScreen
+  Evaluacion: EvaluacionScreen,
+  DetalleActividad: DetalleActividadScreen,
   }, {
     defaultNavigationOptions:{
       header: null
