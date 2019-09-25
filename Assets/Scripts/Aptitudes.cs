@@ -116,7 +116,66 @@ public class Aptitudes : MonoBehaviour
     public void Testing(string mensaje, int animalFace)
     {
         DialogoText.GetComponent<Text>().text = mensaje;
-        Load.GetComponent<Image>().fillAmount = Evaluaciones[animalFace] / 5;
+        //Load.GetComponent<Image>().fillAmount = Evaluaciones[animalFace] / 5;
         AptitudesCanvas.SetActive(true);
+        float ev = Evaluaciones[animalFace];
+
+        StartCoroutine(EfectoScalePanel(animalFace));
+    }
+
+    IEnumerator EfectoScalePanel(int animalFace)
+    {
+        Vector3 ScaleStart = new Vector3(0.9f, 0.9f, 1);
+        Vector3 ScaleEnd = new Vector3(1, 1, 1);
+
+        //el divisor de rateTiempo indica el tiempo que toma en llenarse la barra.
+        float t = 0.0f;
+        float rateTiempo = 1f / 0.2f;
+
+        //Mientras la barra aun no llegue al punto deseado, hay que seguirla moviendo.
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rateTiempo;
+            AptitudesPanel.transform.localScale = Vector3.Lerp(ScaleStart, ScaleEnd, t);
+            //Esperamos al next frame para seguir moviendo.
+            yield return null;
+        }
+
+        t = 0.0f;
+        float ev = Evaluaciones[animalFace];
+        StartCoroutine(LoadBarAnimation(ev));
+        yield return null;
+    }
+
+    IEnumerator LoadBarAnimation(float evaluacion)
+    {
+        Vector3 LoadBarStart = new Vector2(0, 0);
+        Vector3 LoadBarEnd = new Vector2(evaluacion, 0);
+
+        Image LoadBar = Load.GetComponent<Image>();
+        //el divisor de rateTiempo indica el tiempo que toma en llenarse la barra.
+        float t = 0.0f;
+        float rateTiempo = 1f / 3f;
+
+        //Mientras la barra aun no llegue al punto deseado, hay que seguirla moviendo.
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rateTiempo;
+            LoadBar.fillAmount = Vector2.Lerp(LoadBarStart, LoadBarEnd, t).x / 5;
+            //Esperamos al next frame para seguir moviendo.
+            yield return null;
+        }
+
+        t = 0.0f;
+        yield return null;
+    }
+
+    public void Close()
+    {
+        //Desactivar y devolver gameobjects a su nivel por defecto.
+        AptitudesPanel.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        Load.GetComponent<Image>().fillAmount = 0;
+        AptitudesCanvas.SetActive(false);
+
     }
 }
