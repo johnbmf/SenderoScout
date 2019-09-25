@@ -14,7 +14,7 @@
   $seisena = $obj['seisena'];
   $unidad = $obj['unidad'];
 
-  $query = "SELECT AVG(EvaluacionSemanal.corporalidad), AVG(EvaluacionSemanal.creatividad), AVG(EvaluacionSemanal.caracter), AVG(EvaluacionSemanal.afectividad), AVG(EvaluacionSemanal.sociabilidad), AVG(EvaluacionSemanal.espiritualidad) FROM EvaluacionSemanal, Usuario WHERE (EvaluacionSemanal.fecha BETWEEN (NOW() - INTERVAL 2 MONTH) AND NOW()) AND Usuario.seisena1 = '$seisena' AND Usuario.user = EvaluacionSemanal.usuario";
+  $query = "SELECT AVG(EvaluacionSemanal.corporalidad), AVG(EvaluacionSemanal.creatividad), AVG(EvaluacionSemanal.caracter), AVG(EvaluacionSemanal.afectividad), AVG(EvaluacionSemanal.sociabilidad), AVG(EvaluacionSemanal.espiritualidad) FROM EvaluacionSemanal, Usuario WHERE (EvaluacionSemanal.fecha BETWEEN (NOW() - INTERVAL 2 MONTH) AND NOW()) AND Usuario.unidad1 = '$unidad' AND Usuario.user = EvaluacionSemanal.usuario";
 
   
   if($result = $mysqli->query($query)){
