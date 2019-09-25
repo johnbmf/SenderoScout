@@ -14,7 +14,7 @@ public class Aptitudes : MonoBehaviour
      *              1 -> Bagheera
      *              2 -> Kaa
      *              3 -> Akela
-     *              4 -> Bandar-log
+     *              4 -> San Francisco
      *              5 -> Hathi
      * 
      * Elementos: Array con los elementos del panel que se abre al pulsar un personaje.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bagheera : MonoBehaviour
+public class Akela : MonoBehaviour
 {
 
     #region PublicGameobjects
@@ -19,8 +19,8 @@ public class Bagheera : MonoBehaviour
     #endregion
 
     public GameObject PortadorScript;
-    private readonly int numAnimal = 1;
-    private readonly string nombreAnimal = "Bagheera";
+    private readonly int numAnimal = 2;
+    private readonly string nombreAnimal = "Akela";
     // Start is called before the first frame update
     void Start()
     {
