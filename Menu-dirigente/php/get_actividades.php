@@ -6,7 +6,9 @@
   $response = new stdClass;
 
   $date = new DateTime();
+  $firstdate = new DateTime();
   $date = date("Y-m-d");
+  $firstdate = date("Y-m-d", strtotime("-2 months"));
 
   //Var
   $seisena = $obj['seisena'];
@@ -25,6 +27,8 @@
     $response -> afectividad = $row[3];
     $response -> sociabilidad = $row[4];
     $response -> espiritualidad = $row[5];
+    $response -> fecha_inicio = $firstdate;
+    $response -> fecha_fin = $date;
     $response -> message = "Atributos totales obtenidos con exito";
     echo json_encode($response);
     }
