@@ -41,6 +41,10 @@ class recomendaciones extends Component {
             fecha_inicio_recomendacion: "",
             fehca_fin_recomendacion: "",
 
+            //Recomendaciones locales
+
+            RecomendacionesGuardadas: {},
+
             //php response
             data: [],
             ptj_Corporalidad: -1,
@@ -53,10 +57,44 @@ class recomendaciones extends Component {
             php_fecha_fin: "",
             mensaje: "",
         }
+        AsyncStorage.clear()
+        this.GetRecomendaciones()
     }
+
+    GetRecomendaciones = async () =>{
+        try {
+            const value = await AsyncStorage.getItem('Recomendaciones');
+
+            if (value !== null){
+                console.log("Datos obtenidos con exito AsyncStorage")
+                //console.log(value)
+                this.setState({RecomendacionesGuardadas: JSON.parse(value)})
+            }
+        }catch (error) {
+            console.log("Error al obtener datos AsyncStorage")
+        }
+
+           
+    };
+
+    StoreRecomendaciones = async (data) => {
+        try {
+            await AsyncStorage.setItem('Recomendaciones',JSON.stringify(data))
+        } catch (error){
+            console.log("Error al gruardar los datos en AsyncStorage")
+
+        }
+
+        console.log("Recomendaciones guardads con exito en AsyncStorage")
+    }
+
     
     componentDidMount(){
-        this.setState({isLoading:true})
+
+        
+        this.setState({
+            isLoading:true,    
+        })
 
         fetch('http://www.mitra.cl/SS/get_actividades.php',{
                 method: 'POST',
@@ -93,11 +131,26 @@ class recomendaciones extends Component {
             .catch((error)=>{
                 console.error(error);
             });
-        
-        
-
     }
 
+    componentDidUpdate(){
+        //console.log("largo del objeto", Object.keys(this.state.RecomendacionesGuardadas).length)
+        //console.log(this.state.RecomendacionesGuardadas)
+
+        if (Object.keys(this.state.RecomendacionesGuardadas).length !== 0  && this.state.setData === false) {
+            
+            this.setState({
+                peor_recomendadas: this.state.RecomendacionesGuardadas["Peor_area"],
+                mal_recomendadas: this.state.RecomendacionesGuardadas["Mal_area"],
+                mejor_recomendadas: this.state.RecomendacionesGuardadas["Mejor_area"],
+                fecha_inicio_recomendacion: this.state.RecomendacionesGuardadas["fecha_inicio"],
+                fehca_fin_recomendacion: this.state.RecomendacionesGuardadas["fecha_fin"] ,
+                setData: true
+            })
+
+            console.log("Las recomendaciones fueron obtenidas de la Memoria")
+        }
+    }
 
 
     RecomendarActividades(corporalidad, creatividad,caracter,afectividad,sociabilidad, espiritualidad, fecha_inicio, fecha_fin){
@@ -108,13 +161,11 @@ class recomendaciones extends Component {
         this.setState({isLoading:true})
 
         var ptj_ordenados = [];
-        var peor_index = [];
-        var malo_index = [];
-        var mejor_index = [];
-
         var peores_count = 0;
         var malas_count = 0;
         var mejores_count =0;
+
+        var temp = {"Actividades":[]}
 
 
         ptj_ordenados.push(["Corporalidad",corporalidad]);
@@ -141,7 +192,8 @@ class recomendaciones extends Component {
             console.log("El nombre de la actividad es " + actividad_random["Nombre"])
             
 
-            if(Object.keys(RecomendadasJson["Peor_area"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                temp["Actividades"].push(actividad_random)
                 RecomendadasJson["Peor_area"].push(actividad_random)
                 peores_count ++;
             }
@@ -157,7 +209,8 @@ class recomendaciones extends Component {
             console.log("El nombre de la actividad es " + actividad_random["Nombre"])
             
 
-            if(Object.keys(RecomendadasJson["Mal_area"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                temp["Actividades"].push(actividad_random)
                 RecomendadasJson["Mal_area"].push(actividad_random)
                 malas_count ++;
             }
@@ -173,7 +226,8 @@ class recomendaciones extends Component {
             console.log("El nombre de la actividad es " + actividad_random["Nombre"])
             
 
-            if(Object.keys(RecomendadasJson["Mejor_area"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                temp["Actividades"].push(actividad_random)
                 RecomendadasJson["Mejor_area"].push(actividad_random)
                 mejores_count++;
             }
@@ -182,14 +236,7 @@ class recomendaciones extends Component {
         RecomendadasJson["fecha_inicio"] = fecha_inicio
         RecomendadasJson["fecha_fin"] = fecha_fin
 
-
-        AsyncStorage.setItem('Recomendaciones',JSON.stringify(RecomendadasJson) )
-        .then(() => {
-            console.log("Actividades recomendadas guardadas exitosamente!")
-        })
-        .catch(()=> {
-            console.log("Error al guardar actvidades recomendadas")
-        })
+        this.StoreRecomendaciones(RecomendadasJson)
 
         this.setState({
             peor_recomendadas: RecomendadasJson["Peor_area"],
@@ -245,7 +292,12 @@ class recomendaciones extends Component {
         }
     };
 
+
+
+
     render() {
+        //console.log(this.state.RecomendacionesGuardadas)
+
         return (
             <View style={styles.container}>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >     

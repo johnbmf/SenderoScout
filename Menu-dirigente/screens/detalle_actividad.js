@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Modal,
     ActivityIndicator,
+    AsyncStorage
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
@@ -37,17 +38,17 @@ class evalaptitudes extends Component {
         }
     }
 
+
     componentDidMount(){
-        this.setState({
-            Actividad_seleccionada : Actividades["Actividades"][0]
-        })
     }
 
     render() {
 
-        console.log(this.state.Actividad_seleccionada["Nombre"])
-        console.log(this.state.Actividad_seleccionada["Area"])
-        console.log(this.state.Actividad_seleccionada["Duracion"])
+        console.log(this.state.TestRecomendaciones)
+
+        //console.log(this.state.Actividad_seleccionada["Nombre"])
+        //console.log(this.state.Actividad_seleccionada["Area"])
+        //console.log(this.state.Actividad_seleccionada["Duracion"])
 
 
         return (
