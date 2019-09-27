@@ -87,7 +87,7 @@ class crear_unidad extends Component {
  
             }).then((response) => response.json()).then((responseJson) =>
             {
-                alert(responseJson);
+                Alert.alert("",responseJson);
                 this.setState({ loading: false, disabled: false });
             }).catch((error) =>
             {
@@ -105,7 +105,7 @@ class crear_unidad extends Component {
     
             }
             else {
-                Alert.alert(SendAlertMessage)
+                Alert.alert("",SendAlertMessage)
             };
         };
     
@@ -139,9 +139,10 @@ class crear_unidad extends Component {
                             </Body>
                         </Header > 
                     </View>
-                        <View style={{width: '100%', height: '7%'}} >
+                        <View style={{width: '100%', height: '6%',flexDirection: 'row', alignSelf:'center',justifyContent:'center'}} >
+                                 <Text style = {{textAlign:'center', justifyContent:'center',alignSelf:'center'}}>Nombre: </Text>
                                 <TextInput 
-                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                                    style = {{height:'100%', width:'80%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
                                     maxLength = {60}
                                     //{...this.props}
@@ -152,7 +153,8 @@ class crear_unidad extends Component {
                                     value={this.state.nombre_unidad}
                                     />
                     </View>
-                                            <View style={{width: '100%', height: '7%'}} >
+                                            <View style={{width: '100%', height: '6%'}} >
+
                                 <TextInput 
                                     style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
@@ -165,7 +167,7 @@ class crear_unidad extends Component {
                                     value={this.state.grupo}
                                     />
                     </View>
-                                            <View style={{width: '100%', height: '7%'}} >
+                                            <View style={{width: '100%', height: '6%'}} >
                                 <TextInput 
                                     style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
