@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView,ScrollView,Dimensions,Image } from 'react-native';
-import {createDrawerNavigator, createAppContainer, DrawerItems, createStackNavigator} from 'react-navigation'
+import { StyleSheet, Text, View, SafeAreaView,ScrollView,Dimensions,Image, Button } from 'react-native';
+import {createDrawerNavigator, createAppContainer, DrawerItems, createStackNavigator, createSwitchNavigator} from 'react-navigation'
 import { Header,Left,Right,Icon} from 'native-base'
 import HomeScreen from './screens/HomeScreen'
 import SettingsScreen from './screens/SettingsScreen'
@@ -13,8 +13,9 @@ import MiManadaScreen from './screens/mi_manada'
 import PendientesScreen from './screens/misiones_pendietes'
 import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 import DetalleActividadScreen from './screens/detalle_actividad'
-
-
+import AutenticarScreen from './screens/autenticacion'
+import LoginScreen from './screens/login'
+import CrearCuentaScreen from './screens/crear_cuenta'
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
   render() {
@@ -23,6 +24,7 @@ export default class App extends React.Component {
     );
   }
 }
+
 const CustomDrawerComponent = (props)=>(
 
   <SafeAreaView style = {{flex : 1}}>
@@ -33,7 +35,7 @@ const CustomDrawerComponent = (props)=>(
       <DrawerItems {...props}/>
     </ScrollView>
   </SafeAreaView>
-)
+);
 const StackNavigator = createStackNavigator({
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
@@ -65,7 +67,27 @@ const AppDrawerNavigator = createDrawerNavigator({
   //drawerWidth: 200
 }
 )
-const Apps = createAppContainer(AppDrawerNavigator)
+const RegisterStack = createStackNavigator({
+  Login : LoginScreen,
+  CrearCuenta: CrearCuentaScreen
+}, {
+  defaultNavigationOptions:{
+    header: null
+  }}
+);
+const LoginNavigator = createSwitchNavigator({
+  Autenticar: AutenticarScreen,
+  Logear:RegisterStack,
+  Home: AppDrawerNavigator
+  }, {
+    defaultNavigationOptions:{
+      header: null
+    }},
+    {
+      initialRouteName: 'Autenticar'
+    }
+);
+const Apps = createAppContainer(LoginNavigator);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

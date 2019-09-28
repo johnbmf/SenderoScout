@@ -5,8 +5,8 @@ instalar NodeJS (el cual viene con npm). Este puede ser descargado desde el sigu
 https://nodejs.org/en/
 La versión que utilicé yo es la 10.16.0, así que recomendaría que se utilizara la misma.
 Luego de instalar Node y clonar el repo, tienes que abrir una terminal dentro de la carpeta "Menu-dirigente"
-y ahi dentro es cosa de ejecutar el comando npm-install para instalar todos los packages necesarios para el proyecto.
-Una vez que la instalación de los packages finaliza, basta con ejecutar en la terminal el comando npm-start, el cual va a ejecutar el proyecto.
+y ahi dentro es cosa de ejecutar el comando npm install para instalar todos los packages necesarios para el proyecto.
+Una vez que la instalación de los packages finaliza, basta con ejecutar en la terminal el comando npm start, el cual va a ejecutar el proyecto.
 
 El proyecto puedes cargarlo en emuladores de android, pero lo más fácil resulta cargandola a tu telefono, para poder realizar eso
 se debe descargar la app "Expo Client" la cual puedes encontrarla en la play store, ya con la app en tu telefono solo debes escanear el codigo QR que se te entrega y se debería poder ver lo que estas desarrollando dentro de tu telefono.
