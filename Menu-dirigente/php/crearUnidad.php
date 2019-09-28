@@ -17,7 +17,7 @@
 		}
 		else
 		{
-			$add = $mysqli->query("insert into Unidad (nombre,grupo,distrito,rama) values('$nombre','$grupo','$distrito','$rama')");
+			$add = $mysqli->query("insert into Unidad (nombre_unidad,grupo,distrito,rama) values('$nombre','$grupo','$distrito','$rama')");
 			if($add){
 				echo json_encode('¡Unidad agregada con exito!');
 			}

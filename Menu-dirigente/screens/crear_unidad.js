@@ -38,6 +38,15 @@ class crear_unidad extends Component {
             <Icon name='person-add' style = {{fontSize:24,color:tintColor}} />
         )
     }
+    clearText(){
+        this.setState(
+            {
+                grupo : '',
+                nombre_unidad: '',
+                distrito: ''
+            }
+        )
+    }
     crearUnidad = () =>
     {   
         if(this.state.nombre_unidad==''){
@@ -85,14 +94,14 @@ class crear_unidad extends Component {
                     distrito: this.state.distrito
                 })
  
-            }).then((response) => response.json()).then((responseJson) =>
-            {
-                Alert.alert("",responseJson);
-                this.setState({ loading: false, disabled: false });
-            }).catch((error) =>
-            {
+            }).then((response) => response.json()).then((responseJson) => {
+                this.setState({
+                    isLoading : false,
+                    SendAlertType:1
+                }, ()=> {this.handleOpen()})
+            })
+            .catch((error)=>{
                 console.error(error);
-                this.setState({ loading: false, disabled: false });
             });
         });}
     }
@@ -109,8 +118,21 @@ class crear_unidad extends Component {
             };
         };
     
+        SendAlert = () => {
+            if(this.state.SendAlertType == -1){
+                Alert.alert("")
+    
+            }
+            else if (this.SendAlertType == 1){
+    
+            }
+            else {
+    
+            };
+        };
+    
         handleOpen = () => {
-            
+
             this.setState({ 
                 SendAlertState: true,
                 isLoading : false 
@@ -125,8 +147,86 @@ class crear_unidad extends Component {
             this.setState({isLoading : false})
 
         }
+    
+        ShowSendAlert(){
+
+            if (this.state.SendAlertType == 0){
+                return(
+                <ActivityIndicator
+                    animating = {this.state.SendAlertState}
+                    size="large" 
+                    color="#00ff00" 
+                />);
+            }
+            else if(this.state.SendAlertType == 1){
+                return(
+                    <SCLAlert
+                    theme="success"
+                    show={this.state.SendAlertState}
+                    title="Felicidades"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
+                    >
+                    <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
+                    </SCLAlert>
+                );
+            }
+            else if(this.state.SendAlertType == -1){
+                return(
+                    <SCLAlert
+                    theme="danger"
+                    show={this.state.SendAlertState}
+                    title="Ooops"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
+                    >
+                    <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
+                    </SCLAlert>
+                );
+            }
+            else{
+                console.log("ALERTA DE ERROR NO IDENTIFICADO")
+                return(
+                    <SCLAlert
+                    theme="warning"
+                    show={this.state.SendAlertState}
+                    title="Estoy Confundido"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
+                    >
+                    <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
+                    </SCLAlert>
+                );
+            }
+    
+        }
+        LoadingState(){
+            console.log(this.state.isLoading)
+            if(this.state.isLoading){
+                return(
+    
+                    <Modal
+    
+                        transparent = {true}
+                        visible = {this.state.isLoading}
+                        animationType = 'none'
+                        onRequestClose = {()=>{console.log("Closing Modal")}}
+                    > 
+                        <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+                            <ActivityIndicator
+                            animating = {this.state.isLoading}
+                            size="large" 
+                            color="#00ff00" 
+                            />    
+                        </View> 
+                    </Modal>
+                );   
+            }
+        }
     render() {
     return (
+                <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
                 <View style = {styles.container}>
                     <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
                         
@@ -139,8 +239,11 @@ class crear_unidad extends Component {
                             </Body>
                         </Header > 
                     </View>
-                        <View style={{width: '100%', height: '6%',flexDirection: 'row', alignSelf:'center',justifyContent:'center'}} >
-                                 <Text style = {{textAlign:'center', justifyContent:'center',alignSelf:'center'}}>Nombre: </Text>
+                    <View>
+                        {this.LoadingState()}
+                        {this.ShowSendAlert()}
+                    </View>
+                        <View style={{width: '100%', height: '7%'}} >
                                 <TextInput 
                                     style = {{height:'100%', width:'80%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
@@ -152,9 +255,8 @@ class crear_unidad extends Component {
                                     placeholder = "Ingrese nombre de la unidad"
                                     value={this.state.nombre_unidad}
                                     />
-                    </View>
-                                            <View style={{width: '100%', height: '6%'}} >
-
+                        </View>
+                       <View style={{width: '100%', height: '6%'}} >             
                                 <TextInput 
                                     style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
@@ -166,8 +268,8 @@ class crear_unidad extends Component {
                                     placeholder = "Ingrese nombre del grupo"
                                     value={this.state.grupo}
                                     />
-                    </View>
-                                            <View style={{width: '100%', height: '6%'}} >
+                        </View>
+                        <View style={{width: '100%', height: '6%'}} >
                                 <TextInput 
                                     style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
@@ -180,14 +282,17 @@ class crear_unidad extends Component {
                                     value={this.state.distrito}
                                     />
                     </View>
+
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
                         <TouchableOpacity 
                         onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
                         style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
                             <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Crear </Text>
                         </TouchableOpacity>
-                    </View>
                 </View>
+                </View>
+                </ScrollView>
+                </KeyboardAvoidingView>
     );
 
     }
@@ -233,19 +338,5 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width: '100%',
         height: '100%'
-    },
-    misionInput:{
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:'100%',
-        height:'100%'
-
-    },    
-    misionDesc:{
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        //backgroundColor: 'white'   //'#F4F0BB'
     }
 });
