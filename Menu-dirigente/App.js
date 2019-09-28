@@ -12,6 +12,8 @@ import AgregarUsuariosScreen from './screens/agregar_usuarios'
 import MiManadaScreen from './screens/mi_manada'
 import PendientesScreen from './screens/misiones_pendietes'
 import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
+import DetalleActividadScreen from './screens/detalle_actividad'
+
 
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
@@ -22,7 +24,7 @@ export default class App extends React.Component {
   }
 }
 const CustomDrawerComponent = (props)=>(
-  
+
   <SafeAreaView style = {{flex : 1}}>
     <View style = {{height:150,backgroundColor:'#81C14B',font:'Roboto', alignItems:'flex-start',justifyContent:'flex-start'}}>
       <Image source = {require('./assets/perfil.png')} style={{height:120, width:120, borderRadius:60}}/>
@@ -35,12 +37,12 @@ const CustomDrawerComponent = (props)=>(
 const StackNavigator = createStackNavigator({
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
-  Home : HomeScreen,
+  DetalleActividad: DetalleActividadScreen,
   }, {
     defaultNavigationOptions:{
       header: null
     }}
-); 
+);
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
@@ -57,7 +59,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   contentOptions:{
     activeTintColor:'orange',
     inactiveTintColor:'black'
-  }, 
+  },
   lazy : true,
 
   //drawerWidth: 200
