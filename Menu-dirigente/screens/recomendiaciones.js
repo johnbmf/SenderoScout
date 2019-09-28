@@ -32,6 +32,7 @@ class recomendaciones extends Component {
             unidad_dirigente: 1,
             sisena: "Amarilla",
             setData: false,
+            setSmiles: false,
             isLoading: false,
 
             //Datos a mostrar
@@ -56,6 +57,7 @@ class recomendaciones extends Component {
             php_fecha_inicio: "",
             php_fecha_fin: "",
             mensaje: "",
+            ptj_ordenados: []
         }
         AsyncStorage.clear()
         this.GetRecomendaciones()
@@ -90,7 +92,7 @@ class recomendaciones extends Component {
 
     
     componentDidMount(){
-
+        var ordenados = [];
         
         this.setState({
             isLoading:true,    
@@ -112,6 +114,16 @@ class recomendaciones extends Component {
             .then(response => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
+                ordenados.push(["Corporalidad",responseJson["corporalidad"]]);
+                ordenados.push(["Creatividad",responseJson["creatividad"]]);
+                ordenados.push(["Caracter",responseJson["caracter"]]);
+                ordenados.push(["Afectividad",responseJson["afectividad"]]);
+                ordenados.push(["Sociabilidad",responseJson["espiritualidad"]]);
+                ordenados.push(["Espiritualidad",responseJson["fecha_fin"]]);
+        
+                ordenados.sort(function(a,b){
+                    return a[1] - b[1]
+                });
                 this.setState({
 
                     data: responseJson["data"],
@@ -124,6 +136,7 @@ class recomendaciones extends Component {
                     php_fecha_inicio: responseJson["fecha_inicio"],
                     php_fecha_inicio: responseJson["fecha_fin"],
                     mensaje: responseJson["message"],
+                    ptj_ordenados: ordenados,
 
                     isLoading:false
                 })
@@ -160,14 +173,14 @@ class recomendaciones extends Component {
 
         this.setState({isLoading:true})
 
-        var ptj_ordenados = [];
+        var ptj_ordenados = this.state.ptj_ordenados;
         var peores_count = 0;
         var malas_count = 0;
         var mejores_count =0;
 
         var temp = {"Actividades":[]}
 
-
+/*
         ptj_ordenados.push(["Corporalidad",corporalidad]);
         ptj_ordenados.push(["Creatividad",creatividad]);
         ptj_ordenados.push(["Caracter",caracter]);
@@ -178,7 +191,7 @@ class recomendaciones extends Component {
         ptj_ordenados.sort(function(a,b){
             return a[1] - b[1]
         });
-
+*/
         console.log(ptj_ordenados)
         //Peores
 
@@ -249,8 +262,6 @@ class recomendaciones extends Component {
 
     MostrarRecomendadas(){
         console.log("Estado de los datos", this.state.setData)
-
-
         if (this.state.setData) {
             return(
                 <ScrollView>
@@ -292,12 +303,25 @@ class recomendaciones extends Component {
         }
     };
 
+    MostrarSalud(valor){
 
+        if(this.state.setSmiles){
+            return(<View></View>)
 
+        }
+        else{
+            return(
+            <ActivityIndicator
+            style = {{alignContent: 'center'}}
+            animating = {!this.state.setSmiles}
+            size="small" 
+            color="#00ff00" 
+            />
+            )
+        }
+    }
 
     render() {
-        //console.log(this.state.RecomendacionesGuardadas)
-
         return (
             <View style={styles.container}>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
@@ -322,24 +346,55 @@ class recomendaciones extends Component {
                         <View style = {styles.areas_container}>
                             <View style= {{width: '50%', marginTop:5}}>
                                 <View style = {styles.area}>
-                                    <Text>Corporalidad</Text>
+                                    <View style = {{width: '50%'}}>
+                                        <Text>Corporalidad</Text>
+                                    </View>
+                                    <View style = {{width: '50%'}}>
+                                        {this.MostrarSalud()}
+                                    </View>
                                 </View>
                                 <View style = {styles.area}>
-                                    <Text>Creatividad</Text>
+                                    <View style = {{width: '50%'}}>
+                                        <Text>Creatividad</Text>
+                                    </View>
+                                    <View style = {{width: '50%'}}>
+                                        {this.MostrarSalud()}
+                                    </View>
                                 </View>
                                 <View style = {styles.area}>
-                                    <Text>Caracter</Text>
+                                    <View style = {{width: '50%'}}>
+                                        <Text>Caracter</Text>
+                                    </View>
+                                    <View style = {{width: '50%'}}>
+                                        {this.MostrarSalud()}
+                                    </View>
+
                                 </View>
                             </View>
                             <View style= {{width: '50%', marginTop: 5}}>
                                 <View style = {styles.area}>
-                                    <Text>Afectividad</Text>
+                                    <View style = {{width: '50%'}}>
+                                        <Text>Afectividad</Text>
+                                    </View>
+                                    <View style = {{width: '50%'}}>
+                                        {this.MostrarSalud()}
+                                    </View>
                                 </View>
                                 <View style = {styles.area}>
-                                    <Text>Sociabilidad</Text>
+                                    <View style = {{width: '50%'}}>
+                                        <Text>Sociabilidad</Text>
+                                    </View>
+                                    <View style = {{width: '50%'}}>
+                                        {this.MostrarSalud()}
+                                    </View>
                                 </View>
                                 <View style = {styles.area}>
-                                    <Text>Espiritualidad</Text>
+                                    <View style = {{width: '50%'}}>
+                                        <Text>Espiritualidad</Text>
+                                    </View>
+                                    <View style = {{width: '50%'}}>
+                                        {this.MostrarSalud()}
+                                    </View>
                                 </View>
                             </View>
                         </View>
