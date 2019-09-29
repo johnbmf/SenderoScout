@@ -17,6 +17,8 @@ export class autenticacion extends Component {
       }
       _bootstrapAsync = async () => {
         const userToken = await AsyncStorage.getItem('userToken');
+        console.log(userToken);
+        
         this.props.navigation.navigate(userToken ? 'Home' : 'Logear');
       };
     render() {
