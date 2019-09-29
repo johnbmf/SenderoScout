@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class Bagheera : MonoBehaviour
 {
-
-    #region PublicGameobjects
-    /*
-    public GameObject AptitudesCanvas;
-    public GameObject AptitudesPanel;
-    public GameObject Animal;
-    public GameObject DialogoFrame;
-    public GameObject DialogoText;
-    public GameObject Barra;
-    public GameObject Load;
-    public GameObject Faces;
-    */
-    #endregion
-
     public GameObject PortadorScript;
     private readonly int numAnimal = 1;
     private readonly string nombreAnimal = "Bagheera";

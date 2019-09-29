@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class SanFrancisco : MonoBehaviour
 {
-
-    #region PublicGameobjects
-    /*
-    public GameObject AptitudesCanvas;
-    public GameObject AptitudesPanel;
-    public GameObject Animal;
-    public GameObject DialogoFrame;
-    public GameObject DialogoText;
-    public GameObject Barra;
-    public GameObject Load;
-    public GameObject Faces;
-    */
-    #endregion
-
     public GameObject PortadorScript;
     private readonly int numAnimal = 5;
     private readonly string nombreAnimal = "San Francisco de Asis";

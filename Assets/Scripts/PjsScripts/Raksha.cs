@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Akela : MonoBehaviour
+public class Raksha : MonoBehaviour
 {
     public GameObject PortadorScript;
     private readonly int numAnimal = 2;
-    private readonly string nombreAnimal = "Akela";
+    private readonly string nombreAnimal = "Raksha";
     // Start is called before the first frame update
     void Start()
     {

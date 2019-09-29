@@ -10,20 +10,17 @@ public class Aptitudes : MonoBehaviour
     #region PublicVars
     /*
      * Personajes: Array con gameobjects de los personajes:
-     *              0 -> Baloo
+     *              0 -> Akela
      *              1 -> Bagheera
-     *              2 -> Kaa
-     *              3 -> Akela
-     *              4 -> San Francisco
-     *              5 -> Hathi
+     *              2 -> Baloo
+     *              3 -> Kha
+     *              4 -> Raksha
+     *              5 -> SanFrancisco
      * 
-     * Elementos: Array con los elementos del panel que se abre al pulsar un personaje.
-     *              0 -> Imagen del animal
-     *              1 -> DialogoText
-     *              2 -> LoadBarra
+     * PersonajesPanel: Array con gameobjects de la imagen del personaje en el panel de visualizacion.
      */
     public GameObject[] Personajes;
-    public GameObject[] Elementos;
+    public GameObject[] PersonajesPanel;
     #endregion
 
     #region PublicStaticVars
@@ -39,6 +36,8 @@ public class Aptitudes : MonoBehaviour
     public GameObject Barra;
     public GameObject Load;
     public GameObject Faces;
+
+    public GameObject OverlayGrande;
     #endregion
 
     // Start is called before the first frame update
@@ -119,6 +118,7 @@ public class Aptitudes : MonoBehaviour
         //Load.GetComponent<Image>().fillAmount = Evaluaciones[animalFace] / 5;
         AptitudesCanvas.SetActive(true);
         float ev = Evaluaciones[animalFace];
+        OverlayGrande.SetActive(true);
 
         StartCoroutine(EfectoScalePanel(animalFace));
     }
@@ -128,16 +128,16 @@ public class Aptitudes : MonoBehaviour
         Vector3 ScaleStart = new Vector3(0.9f, 0.9f, 1);
         Vector3 ScaleEnd = new Vector3(1, 1, 1);
 
-        //el divisor de rateTiempo indica el tiempo que toma en llenarse la barra.
+        //el divisor de rateTiempo indica el tiempo que toma en abrirse el panel.
         float t = 0.0f;
         float rateTiempo = 1f / 0.2f;
 
-        //Mientras la barra aun no llegue al punto deseado, hay que seguirla moviendo.
+        //Mientras el panel aun no llega a su tamaño real:
         while (t < 1f)
         {
             t += Time.deltaTime * rateTiempo;
             AptitudesPanel.transform.localScale = Vector3.Lerp(ScaleStart, ScaleEnd, t);
-            //Esperamos al next frame para seguir moviendo.
+            //Esperamos al next frame para seguir aumentando.
             yield return null;
         }
 
@@ -176,6 +176,7 @@ public class Aptitudes : MonoBehaviour
         AptitudesPanel.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         Load.GetComponent<Image>().fillAmount = 0;
         AptitudesCanvas.SetActive(false);
+        OverlayGrande.SetActive(false);
 
     }
 }
