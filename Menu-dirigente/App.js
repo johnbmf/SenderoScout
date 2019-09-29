@@ -14,6 +14,7 @@ import PendientesScreen from './screens/misiones_pendietes'
 import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 import DetalleActividadScreen from './screens/detalle_actividad'
 import CrearUnidadScreen from './screens/crear_unidad'
+import CambiarUnidadScreen from './screens/cambiar_unidad'
 
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
@@ -63,6 +64,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   AgregarUsuarios:AgregarUsuariosScreen,
   Settings:SettingsScreen,
   CrearUnidad:CrearUnidadScreen,
+  CambiarUnidad:CambiarUnidadScreen,
 },{
   contentComponent: CustomDrawerComponent,
   contentOptions:{

@@ -13,12 +13,12 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    FlatList
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
-import Autocomplete from  'react-autocomplete';
 class cambiar_unidad extends Component {
     constructor(props){
         super(props);
@@ -155,45 +155,28 @@ class cambiar_unidad extends Component {
         }
     render() {
     return (
-      <div className = "card col-sm-6" style = {{ marginTop: 40, marginLeft: 50 }}>
-      <div class="card-header">
-        Country Name :
-      </div>
-      <div class="card-body">
-      <form>
-        <div className="form-group">
- 
-            <Autocomplete
-              value={ this.state.value }
-              inputProps={{ id: 'states-autocomplete' }}
-              wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-              items={ getCountry() }
-              getItemValue={ item => item.name }
-              shouldItemRender={ matchCountry }
-              onChange={(event, value) => this.setState({ value }) }
-              onSelect={ value => this.setState({ value }) }
-              renderMenu={ children => (
-                <div className = "menu">
-                  { children }
-                </div>
-              )}
-              renderItem={ (item, isHighlighted) => (
-                <div
-                  className={`item ${isHighlighted ? 'item-highlighted' : ''}`}
-                  key={ item.abbr } >
-                  { item.name }
-                </div>
-              )}
-            />
-            </div>
-          </form>
-          </div>
-      </div>
+<List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+  <FlatList          
+    data={this.state.data}          
+    renderItem={({ item }) => ( 
+      <ListItem              
+        roundAvatar              
+        title={`${item.name.first} ${item.name.last}`}  
+        subtitle={item.email}                           
+        avatar={{ uri: item.picture.thumbnail }}   
+        containerStyle={{ borderBottomWidth: 0 }} 
+       />          
+     )}          
+     keyExtractor={item => item.email}  
+     ItemSeparatorComponent={this.renderSeparator} 
+     ListHeaderComponent={this.renderHeader}                             
+  />            
+</List>
     );
 
     }
 }
-export default crear_unidad;
+export default cambiar_unidad;
 
 const styles = StyleSheet.create({
     container: {
