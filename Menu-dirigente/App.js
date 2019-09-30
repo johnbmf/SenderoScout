@@ -45,13 +45,16 @@ const StackNavigator = createStackNavigator({
   },
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
+  Recomendaciones:RecomendacionesScreen,
   DetalleActividad: DetalleActividadScreen,
+
   }, {
     defaultNavigationOptions:{
       header: null
     }
   }
 ); 
+
 const AppDrawerNavigator = createDrawerNavigator({
   Home:StackNavigator,
   MiManada:MiManadaScreen,

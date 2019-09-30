@@ -8,10 +8,13 @@ import {
     TouchableOpacity,
     AsyncStorage,
 } from "react-native";
-import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
+import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
+import { NavigationEvents } from 'react-navigation';
+
+import ActivityCard from '../CustomComponents/ActivityCard'
 
 const Actividades = require('../Local/Actividades.json')
 const RecomendadasJson = require('../Local/ActividadesRecomendadas.json')
@@ -19,12 +22,6 @@ const RecomendadasJson = require('../Local/ActividadesRecomendadas.json')
 
 
 class recomendaciones extends Component {
-    static navigationOptions = {
-        drawerLabel: 'Recomendiaciones',
-        drawerIcon: ({tintColor}) => (
-            <Icon name='home' style = {{fontSize:24,color:tintColor}} />
-        )
-    }
 
     constructor(props){
         super(props)
@@ -62,6 +59,13 @@ class recomendaciones extends Component {
         AsyncStorage.clear()
         this.GetRecomendaciones()
     }
+    static navigationOptions = {
+        drawerLabel: 'Recomendaciones',
+        drawerIcon: ({tintColor}) => (
+            <Icon name='gear' type = 'FontAwesome' style = {{fontSize:24, color:tintColor}} />
+        )
+    }
+
 
     GetRecomendaciones = async () =>{
         try {
@@ -88,6 +92,10 @@ class recomendaciones extends Component {
         }
 
         console.log("Recomendaciones guardads con exito en AsyncStorage")
+    }
+
+    FormatData(fecha){
+        return (fecha.split("-").reverse().join("-"))
     }
 
     
@@ -124,6 +132,7 @@ class recomendaciones extends Component {
                 ordenados.sort(function(a,b){
                     return a[1] - b[1]
                 });
+                console.log(ordenados)
                 this.setState({
 
                     data: responseJson["data"],
@@ -133,11 +142,12 @@ class recomendaciones extends Component {
                     ptj_afectividad: responseJson["afectividad"],
                     ptj_sociabilidad: responseJson["sociabilidad"],
                     ptj_espiritualidad: responseJson["espiritualidad"],
-                    php_fecha_inicio: responseJson["fecha_inicio"],
-                    php_fecha_inicio: responseJson["fecha_fin"],
+                    php_fecha_inicio: this.FormatData(responseJson["fecha_inicio"]),
+                    php_fecha_fin: this.FormatData(responseJson["fecha_fin"]),
                     mensaje: responseJson["message"],
                     ptj_ordenados: ordenados,
 
+                    setSmiles: true,
                     isLoading:false
                 })
             })
@@ -166,7 +176,7 @@ class recomendaciones extends Component {
     }
 
 
-    RecomendarActividades(corporalidad, creatividad,caracter,afectividad,sociabilidad, espiritualidad, fecha_inicio, fecha_fin){
+    RecomendarActividades(){
         //  3 del mas debil
         // 1 en el segundo mas debil
         // 2 del mas fuerte
@@ -180,18 +190,6 @@ class recomendaciones extends Component {
 
         var temp = {"Actividades":[]}
 
-/*
-        ptj_ordenados.push(["Corporalidad",corporalidad]);
-        ptj_ordenados.push(["Creatividad",creatividad]);
-        ptj_ordenados.push(["Caracter",caracter]);
-        ptj_ordenados.push(["Afectividad",afectividad]);
-        ptj_ordenados.push(["Sociabilidad",sociabilidad]);
-        ptj_ordenados.push(["Espiritualidad",espiritualidad]);
-
-        ptj_ordenados.sort(function(a,b){
-            return a[1] - b[1]
-        });
-*/
         console.log(ptj_ordenados)
         //Peores
 
@@ -246,8 +244,8 @@ class recomendaciones extends Component {
             }
         }
 
-        RecomendadasJson["fecha_inicio"] = fecha_inicio
-        RecomendadasJson["fecha_fin"] = fecha_fin
+        RecomendadasJson["fecha_inicio"] = this.state.php_fecha_inicio
+        RecomendadasJson["fecha_fin"] = this.state.php_fecha_fin
 
         this.StoreRecomendaciones(RecomendadasJson)
 
@@ -255,59 +253,144 @@ class recomendaciones extends Component {
             peor_recomendadas: RecomendadasJson["Peor_area"],
             mal_recomendadas: RecomendadasJson["Mal_area"] ,
             mejor_recomendadas: RecomendadasJson["Mejor_area"],
-            fecha_inicio_recomendacion: fecha_inicio,
-            fehca_fin_recomendacion: fecha_fin,
+            fecha_inicio_recomendacion: this.state.php_fecha_inicio,
+            fehca_fin_recomendacion: this.state.php_fecha_fin,
             setData: true})
     }
 
-    MostrarRecomendadas(){
-        console.log("Estado de los datos", this.state.setData)
-        if (this.state.setData) {
+    CustomCard = () => {
+        estado = 0
+        
+        if (estado === 1){
             return(
-                <ScrollView>
-                <View>{this.state.peor_recomendadas.map(((obj,i) => 
-                    <View key = {i}>{                    
-                        <TouchableOpacity
-                        onPress = {()=> this.props.navigation.navigate('DetalleActividad', {data : obj})}
-                        style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                                <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {obj["Nombre"]}</Text>
-                            </TouchableOpacity>}
-                    </View>
-                    ))}
-                </View>
-
-                <View>{this.state.mal_recomendadas.map(((obj,i) => 
-                    <View key = {i}>{                    
-                        <TouchableOpacity
-                        onPress = {()=> this.props.navigation.navigate('DetalleActividad', {data : obj})}
-                        style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                                <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {obj["Nombre"]}</Text>
-                            </TouchableOpacity>}
-                    </View>
-                    ))}
-                </View>
-
-                <View>{this.state.mejor_recomendadas.map(((obj,i) => 
-                    <View key = {i}>{                    
-                        <TouchableOpacity
-                        onPress = {()=> this.props.navigation.navigate('DetalleActividad', {data : obj})}
-                        style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                                <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {obj["Nombre"]}</Text>
-                            </TouchableOpacity>}
-                    </View>
-                    ))}
-                </View>
-
-                </ScrollView>
+            <Card>
+            <CardItem header bordered button onPress={() => alert("This is Card Header")}>
+              <Text>NativeBase</Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text>
+                  NativeBase is a free and open source framework that enable
+                  developers to build
+                  high-quality mobile apps using React Native iOS and Android
+                  apps
+                  with a fusion of ES6.
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem footer bordered>
+              <Text>GeekyAnts</Text>
+            </CardItem>
+          </Card>
             )
         }
-    };
+
+        else{
+            return(
+                <Card>
+            <CardItem header bordered button onPress={() => estado = 1}>
+              <Text>NativeBase</Text>
+            </CardItem>
+            <CardItem footer bordered>
+              <Text>GeekyAnts</Text>
+            </CardItem>
+          </Card>
+            )
+        }
+
+
+
+    }
+
+    MostrarRecomendadas(){
+    console.log("Estado de los datos", this.state.setData)
+    
+    if (this.state.setData) {
+        return(
+            <View>
+                <ScrollView>
+                    <Text>Area Peor Evaluada</Text>
+                    <View>{this.state.peor_recomendadas.map(((obj,i) => 
+                        <View key = {i}>{
+                            <ActivityCard
+                                actividad = {obj}
+                                navegacion = {this.props.navigation}
+                           /> 
+                        }         
+                        </View>
+                        ))}
+                    </View>
+                    <Text>Area Mal Evaluada</Text>
+                    <View>{this.state.mal_recomendadas.map(((obj,i) => 
+                        <View key = {i}>{                    
+                            <ActivityCard
+                            actividad = {obj}
+                            navegacion = {this.props.navigation}
+                            /> 
+                        } 
+                        </View>
+                        ))}
+                    </View>
+                    <Text>Area Mejor Evaluada</Text>
+                    <View>{this.state.mejor_recomendadas.map(((obj,i) => 
+                        <View key = {i}>{                    
+                            <ActivityCard
+                            actividad = {obj}
+                            navegacion = {this.props.navigation}
+                            /> 
+                        } 
+                        </View>
+                        ))}
+                    </View>
+                    
+                    <Text>*Recomendaciones en base a las evaluaciones realizadas entre las fechas:</Text>
+                    <View style = {{ flexDirection: 'row'}}>
+                        <Text>{this.state.php_fecha_inicio} y </Text>
+                        <Text>{this.state.php_fecha_fin} </Text>
+                    </View>
+                </ScrollView>
+            </View>
+        )
+    }
+};
 
     MostrarSalud(valor){
+       
+        if(this.state.setSmiles && this.state.ptj_ordenados.length > 0){
+            const index = this.state.ptj_ordenados.findIndex( obj => obj[0] === valor)
+            
+            if (index > -1 && index < 2) {
+                return(
+                    <Icon
+                        name = 'frown'
+                        type = "AntDesign"
+                        style = {{fontSize: 20, color : '#d64242',alignContent: 'center', alignSelf: 'center' }}
+                    />
+                )
+            }
+            
+            else if (index > 1 && index < 4) {
+                return(
+                    <Icon
+                        name = 'meho'
+                        type = "AntDesign"
+                        style = {{fontSize: 20, color: '#f0e348',alignContent: 'center',alignSelf: 'center'}}
+                    />
+                )
+            }
 
-        if(this.state.setSmiles){
-            return(<View></View>)
-
+            else if (index > 3 && index < 6){
+                    return(
+                        <Icon
+                            name = 'smile-circle'
+                            type = "AntDesign"
+                            style = {{fontSize: 20, color : '#34c240',alignContent: 'center',alignSelf: 'center'}}
+                        />
+                    )
+            }
+            else {
+                console.log("error al desplegar iconos de estado")
+            }
         }
         else{
             return(
@@ -335,13 +418,11 @@ class recomendaciones extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <View style = {{width: '100%', height: '5%'}}>
+                <View style = {{width: '100%', height: '3%'}}></View>
 
-                </View>
-
-                <View style = {{width: '100%', height: '83%',alignItems: 'center'}}> 
+                <View style = {{width: '100%', height: '85%',alignItems: 'center'}}> 
                     
-                    <View style = {{width: '100%', height: '40%',alignItems: 'center'}}>
+                    <View style = {{width: '100%', height: '30%',alignItems: 'center'}}>
                         <Text style = {styles.textlabel}>Estado Areas de Desarrollo</Text>
                         <View style = {styles.areas_container}>
                             <View style= {{width: '50%', marginTop:5}}>
@@ -350,7 +431,7 @@ class recomendaciones extends Component {
                                         <Text>Corporalidad</Text>
                                     </View>
                                     <View style = {{width: '50%'}}>
-                                        {this.MostrarSalud()}
+                                        {this.MostrarSalud("Corporalidad")}
                                     </View>
                                 </View>
                                 <View style = {styles.area}>
@@ -358,7 +439,7 @@ class recomendaciones extends Component {
                                         <Text>Creatividad</Text>
                                     </View>
                                     <View style = {{width: '50%'}}>
-                                        {this.MostrarSalud()}
+                                        {this.MostrarSalud("Creatividad")}
                                     </View>
                                 </View>
                                 <View style = {styles.area}>
@@ -366,7 +447,7 @@ class recomendaciones extends Component {
                                         <Text>Caracter</Text>
                                     </View>
                                     <View style = {{width: '50%'}}>
-                                        {this.MostrarSalud()}
+                                        {this.MostrarSalud("Caracter")}
                                     </View>
 
                                 </View>
@@ -377,7 +458,7 @@ class recomendaciones extends Component {
                                         <Text>Afectividad</Text>
                                     </View>
                                     <View style = {{width: '50%'}}>
-                                        {this.MostrarSalud()}
+                                        {this.MostrarSalud("Afectividad")}
                                     </View>
                                 </View>
                                 <View style = {styles.area}>
@@ -385,7 +466,7 @@ class recomendaciones extends Component {
                                         <Text>Sociabilidad</Text>
                                     </View>
                                     <View style = {{width: '50%'}}>
-                                        {this.MostrarSalud()}
+                                        {this.MostrarSalud("Sociabilidad")}
                                     </View>
                                 </View>
                                 <View style = {styles.area}>
@@ -393,21 +474,28 @@ class recomendaciones extends Component {
                                         <Text>Espiritualidad</Text>
                                     </View>
                                     <View style = {{width: '50%'}}>
-                                        {this.MostrarSalud()}
+                                        {this.MostrarSalud("Espiritualidad")}
                                     </View>
                                 </View>
                             </View>
                         </View>
-                        <TouchableOpacity
-                                //onPress = {()=> this.props.navigation.navigate('DetalleActividad')}
-                                onPress = {()=> this.RecomendarActividades(this.state.ptj_Corporalidad, this.state.ptj_creatividad, this.state.ptj_caracter,this.state.ptj_afectividad, this.state.ptj_sociabilidad, this.state.ptj_espiritualidad, this.state.php_fecha_inicio, this.state.php_fecha_fin)}
-                                style = {{margin:10, height:50, backgroundColor: '#104F55', justifyContent:'center'}}>
-                                <Text style = {{color: 'white', textAlign:'center', fontSize:18}}>  Recomendar Actividades  </Text>
-                        </TouchableOpacity>
-                        <View style = {{width:'90%', alignSelf: 'center', borderBottomColor: 'green', borderBottomWidth: 1}}></View>
-                    </View>
+                        <Button
+                            onPress = {()=> this.RecomendarActividades()}
+                            icon = {
+                                <Icon
+                                name= 'gear'
+                                type= 'FontAwesome'
+                                style={{fontSize: 25, color: 'white', alignContent: 'center' }}
+                                />
+                            }iconRight
 
-                    <View style = {{width: '100%', height: '60%',alignItems: 'center'}}>
+                            title = "Recomendar Actividades "
+                            titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                            buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}                        
+                        />
+                        <View style = {{width:'90%', height: "1%", alignSelf: 'center', borderBottomColor: 'green', borderBottomWidth: 1}}></View>
+                    </View>
+                    <View style = {{width: '90%', height: '70%',alignItems: 'center'}}>
                         {this.MostrarRecomendadas()}
                     </View>
                 </View>
@@ -460,10 +548,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginLeft:20,
         alignContent: 'flex-start',
+    },
 
-
+    observacion:{
+        fontFamily: 'Roboto',
+        fontSize: 9,
 
     }
    
-
 });

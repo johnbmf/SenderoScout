@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="" />
+    <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/screens/recomendiaciones.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/recomendiaciones.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +25,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
     </panes>
   </component>
