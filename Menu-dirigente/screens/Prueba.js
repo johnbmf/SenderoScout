@@ -72,11 +72,12 @@ class prueba extends Component {
   };
   renderHeader = () => {    
   return (      
-    <SearchBar        
+        <SearchBar        
       placeholder="Type Here..."        
       lightTheme        
       round        
-      onChangeText={text => this.searchFilterFunction(text)}
+      onChangeText={text => this.makeRemoteRequest(text)}
+      onClear={text => this.makeRemoteRequest()}
       autoCorrect={false}             
     />    
   );  
@@ -100,31 +101,25 @@ class prueba extends Component {
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <ActivityIndicator />
-                </View>
+        </View>
       );
     }
     return(
-                    <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
-                <View style = {styles.container}>
-        <SearchBar        
-      placeholder="Type Here..."        
-      lightTheme        
-      round        
-      onChangeText={text => this.makeRemoteRequest(text)}
-      onClear={text => this.makeRemoteRequest()}
-      autoCorrect={false}             
-    />  
     <View style={{ flex: 1 }}>
         <FlatList
         data = {this.state.data}
-          renderItem={({item}) => <Text style={styles.item}>{item.nombre}</Text>}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+            />
+          )}
+          keyExtractor={item => item.user}  
+          ItemSeparatorComponent={this.renderSeparator} 
+          ListHeaderComponent={this.renderHeader}       
         />
-         </View>
 
-                      </View>
-                </ScrollView>
-                </KeyboardAvoidingView>
+    </View>
     );
     }
 }
