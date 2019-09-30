@@ -19,6 +19,7 @@ import {
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
+import { List, ListItem, SearchBar } from "react-native-elements";
 class cambiar_unidad extends Component {
     constructor(props){
         super(props);
@@ -29,9 +30,11 @@ class cambiar_unidad extends Component {
             SendAlertMessage: "Niño o niña cambiado de unidad con exito.",
             SendAlertType: 2,
             isLoading:false,
-
+            data : [],
+            arrayholder: [],
         }
     }
+
     static navigationOptions = {
         drawerLabel: 'Cambiar Unidad',
         drawerIcon: ({tintColor}) => (
@@ -47,7 +50,65 @@ class cambiar_unidad extends Component {
         )
     }
 
-        
+    cambiarUnidad = () =>
+    {   
+        this.setState({ loading: true, disabled: true }, () =>
+        {
+            fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                {
+                    nombre_n: this.state.nombre_n,
+ 
+                    id_unidad:1 //Change this
+                })
+ 
+            }).then((response) => response.json()).then((responseJson) => {
+                this.setState({
+                    isLoading : false,
+                    SendAlertType:1
+                }, ()=> {this.handleOpen()});
+                this.arrayholder = responseJson.results;
+            })
+
+            .catch((error)=>{
+                console.error(error);
+            });
+        });
+    }
+searchFilterFunction = nombre_n => {    
+  const newData = this.arrayholder.filter(item => {      
+    const itemData = `${item.name.title.toUpperCase()}   
+    ${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`;
+    
+     const textData = text.toUpperCase();
+      
+     return itemData.indexOf(textData) > -1;    
+  });
+  
+  this.setState({ data: newData });  
+};
+  updateSearch = nombre_n => {
+    this.setState({ nombre_n });
+  };
+    SendAlert = () => {
+            if(this.state.SendAlertType == -1){
+                Alert.alert("")
+    
+            }
+            else if (this.SendAlertType == 1){
+    
+            }
+            else {
+                Alert.alert("",SendAlertMessage)
+            };
+         }    
     
         SendAlert = () => {
             if(this.state.SendAlertType == -1){
@@ -153,25 +214,40 @@ class cambiar_unidad extends Component {
                 );   
             }
         }
+
     render() {
+    const { nombre_n } = this.state;
     return (
-<List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-  <FlatList          
-    data={this.state.data}          
-    renderItem={({ item }) => ( 
-      <ListItem              
-        roundAvatar              
-        title={`${item.name.first} ${item.name.last}`}  
-        subtitle={item.email}                           
-        avatar={{ uri: item.picture.thumbnail }}   
-        containerStyle={{ borderBottomWidth: 0 }} 
-       />          
-     )}          
-     keyExtractor={item => item.email}  
-     ItemSeparatorComponent={this.renderSeparator} 
-     ListHeaderComponent={this.renderHeader}                             
-  />            
-</List>
+                <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
+                <View style = {styles.container}>
+                <View>
+    <SearchBar        
+      placeholder="Type Here..."        
+      lightTheme        
+      round        
+      onChangeText={nombre_n => this.cambiarUnidad(nombre_n)}
+      autoCorrect={false}             
+    />  
+                </View>
+                    <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
+                        
+                        <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                            <Left>
+                                <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                            </Left>
+                            <Body style = {{justifyContent:'center'}}> 
+                                <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Cambiar de unidad</Text>
+                            </Body>
+                        </Header > 
+                    </View>
+                    <View>
+                        {this.LoadingState()}
+                        {this.ShowSendAlert()}
+                    </View>
+                </View>
+                </ScrollView>
+                </KeyboardAvoidingView>
     );
 
     }

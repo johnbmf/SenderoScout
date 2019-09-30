@@ -15,6 +15,7 @@ import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 import DetalleActividadScreen from './screens/detalle_actividad'
 import CrearUnidadScreen from './screens/crear_unidad'
 import CambiarUnidadScreen from './screens/cambiar_unidad'
+import PruebaScreen from './screens/Prueba'
 
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
@@ -65,6 +66,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   Settings:SettingsScreen,
   CrearUnidad:CrearUnidadScreen,
   CambiarUnidad:CambiarUnidadScreen,
+  Prueba:PruebaScreen,
 },{
   contentComponent: CustomDrawerComponent,
   contentOptions:{

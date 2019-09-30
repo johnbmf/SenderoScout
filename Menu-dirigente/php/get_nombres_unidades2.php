@@ -6,12 +6,11 @@
   $response = new stdClass;
   
   //Var
-  $nombre_n = $obj['nombre_n'];
   $id_unidad = $obj['id_unidad'];
 
   $nombre_n .= '%';
 
-  $query = "SELECT * FROM Usuario WHERE (nombre LIKE '$nombre_n') AND unidad1 = $id_unidad AND tipo = 'nino' ";
+  $query = "SELECT * FROM Usuario WHERE unidad1 = $id_unidad AND tipo = 'nino' ";
 
   if($result = $mysqli->query($query)){
     if($result->num_rows==0){
