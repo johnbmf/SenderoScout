@@ -59,9 +59,6 @@ class prueba extends Component {
             })
       .then(res => res.json())
       .then((responseData) => {
-        console.log('holi2');
-        console.log(responseData);
-        console.log(this.state.nombre_n);
         this.setState({
           data: responseData.data,
           message: responseData.message,
@@ -73,11 +70,32 @@ class prueba extends Component {
         this.setState({ error, loading: false });
       });
   };
+  renderHeader = () => {    
+  return (      
+    <SearchBar        
+      placeholder="Type Here..."        
+      lightTheme        
+      round        
+      onChangeText={text => this.searchFilterFunction(text)}
+      autoCorrect={false}             
+    />    
+  );  
+    };
+
+      renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '86%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '14%',
+        }}
+      />
+    );
+  };
 
   render() {
-    console.log('holi1');
-    console.log(this.state.data);
-    console.log(this.state.nombre_n);
     if (this.state.loading) {
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

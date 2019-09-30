@@ -239,13 +239,9 @@ class crear_unidad extends Component {
                             </Body>
                         </Header > 
                     </View>
-                    <View>
-                        {this.LoadingState()}
-                        {this.ShowSendAlert()}
-                    </View>
                         <View style={{width: '100%', height: '7%'}} >
                                 <TextInput 
-                                    style = {{height:'100%', width:'80%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
                                     maxLength = {60}
                                     //{...this.props}
@@ -256,7 +252,7 @@ class crear_unidad extends Component {
                                     value={this.state.nombre_unidad}
                                     />
                         </View>
-                       <View style={{width: '100%', height: '6%'}} >             
+                       <View style={{width: '100%', height: '7%'}} >             
                                 <TextInput 
                                     style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
@@ -269,7 +265,7 @@ class crear_unidad extends Component {
                                     value={this.state.grupo}
                                     />
                         </View>
-                        <View style={{width: '100%', height: '6%'}} >
+                        <View style={{width: '100%', height: '7%'}} >
                                 <TextInput 
                                     style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                                     underlineColorAndroid = "transparent"
@@ -282,14 +278,26 @@ class crear_unidad extends Component {
                                     value={this.state.distrito}
                                     />
                     </View>
-
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-                        <TouchableOpacity 
-                        onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
-                        style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
-                            <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Crear </Text>
-                        </TouchableOpacity>
-                </View>
+                    <Button 
+                    onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
+                    icon = {
+                        <Icon
+                        name= 'send'
+                        type= 'FontAwesome'
+                        style={{fontSize: 22, color: 'white'}}
+                        //color= '#ffffff'
+                        />
+                    }iconRight
+                    title = "Crear   "
+                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    />
+                    </View>
+                                        <View>
+                        {this.LoadingState()}
+                        {this.ShowSendAlert()}
+                    </View>
                 </View>
                 </ScrollView>
                 </KeyboardAvoidingView>
