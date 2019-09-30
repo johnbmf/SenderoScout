@@ -94,7 +94,7 @@ export class crear_cuenta extends Component {
                             maxFontSizeMultiplier = {2}
                             numberOfLines = {4}
                             onChangeText={(valor) => this.setState({nombre: valor})}
-                            placeholder = "Nombre"
+                            placeholder = "Nombre Completo"
                             value={this.state.nombre}
                             />
                         <TextInput 

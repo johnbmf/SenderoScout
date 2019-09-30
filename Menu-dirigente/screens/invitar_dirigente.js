@@ -25,22 +25,59 @@ export default class invitar_dirigente extends Component {
         super(props);
         this.state = {
             userToken : "",
-            usuarioElegido: ""
+            usuarioElegido: "",
+            dataSource : []
+
         }
         this._bootstrapAsync();
       }
-      _bootstrapAsync = async () => {
-        const Token = await AsyncStorage.getItem('userToken');
-        this.setState({userToken : JSON.parse(Token)});
-        //console.log("nombre: " + Token2.nombre);
-      };
     static navigationOptions = {
         drawerLabel: 'Invitar Dirigente',
         drawerIcon: ({tintColor}) => (
             <Icon name='users' type= 'FontAwesome' style = {{fontSize:24,color:tintColor}} />
         )
+    };
+    getInvitados(){
+        fetch('http://www.mitra.cl/SS/get_invitados.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+                
+            },
+            body:JSON.stringify({
+                "grupo":this.state.userToken.grupo
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            if(responseJson != null){
+                this.setState({
+                    dataSource: responseJson,
+                })
+            }else{
+                this.setState({
+                    dataSource: []
+                })
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
     }
-    render() {
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        this.setState({userToken : JSON.parse(Token)});
+        //console.log("nombre: " + Token2.nombre);
+        this.getInvitados();
+      };
+    componentDidMount(){
+        console.log(this.state.userToken.grupo);
+        
+    }
+    render(){
+        this.state.nombres = this.state.dataSource.map(({nombre}) => nombre);
         return (
             <View style={styles.container}>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
@@ -54,9 +91,12 @@ export default class invitar_dirigente extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
+            {(this.state.userToken.unidad1 > 0) && 
                 <View style = {{width: '90%', height:'20%', alignSelf:'center', justifyContent:'center'}}>
                     <Text style = {{color: 'black', fontSize:22, justifyContent:'center', fontFamily:'Roboto',textAlign: 'center'}}>Seleccione un dirigente de su grupo para invitarlo a su unidad.</Text>
                 </View>
+            }
+            {(this.state.userToken.unidad1 > 0) &&
                 <View style= {styles.pickerMenu}>
                     <Picker 
                         style = {{width:'100%', height:'100%', alignItems: 'center',flexDirection: 'row'}}
@@ -64,14 +104,16 @@ export default class invitar_dirigente extends Component {
                         selectedValue = {this.state.usuarioElegido}
                         onValueChange ={ (itemValue,itemIndex) => this.setState({usuarioElegido: itemValue}) }>
                         <Picker.Item label = "Seleccione un Dirigente" value = {0} />
-                        <Picker.Item label = "Campamento" value = {'campamento'} />
-                        <Picker.Item label = "Caverna" value = {'caverna'} />
-                        <Picker.Item label = "Bosque" value = {'bosque'} />
+                        {this.state.dataSource.map((item, index) => {return (<Picker.Item label={item.nombre} value={item.nombre} key={index}/>)})}
                     </Picker>
                 </View>
+            }
+            {(this.state.userToken.unidad1 > 0) &&
                 <View style = {{width: '90%', height:'20%', alignSelf:'center', justifyContent:'center'}}>
                     <Text style = {{color: 'black', fontSize:16, justifyContent:'center', fontFamily:'Roboto',textAlign: 'center'}}>Nota: Solo se muestran dirigentes pertenecientes a su grupo y que no pertenecen a alguna unidad.</Text>
                 </View>
+            }
+            {(this.state.userToken.unidad1 > 0) &&
                 <View style = {{width:'100%', height:'35%', justifyContent:'flex-end', alignItems:'center'}}>
                     <TouchableOpacity 
                         style={{ width:'90%',height: '35%', alignItems:'center', justifyContent: 'center', backgroundColor:'#104F55',marginBottom:20}}
@@ -87,7 +129,8 @@ export default class invitar_dirigente extends Component {
                         }}>
                             Invitar</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> 
+            }
             </View>
             
         )
