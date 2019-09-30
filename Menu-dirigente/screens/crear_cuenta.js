@@ -54,11 +54,11 @@ export class crear_cuenta extends Component {
             body: JSON.stringify({
                 "user" : this.state.usuario,
                 "password" : this.state.password,
-                "unidad1" : 1, //este campo deberia desaparecer en algun momento
                 "tipo" : "dirigente",
                 "nombre" : this.state.nombre,
                 "confirmacion_email" : 1, // esto tambien a futuro debería cambiarse para ser mas "seguro"
-                "grupo" : this.state.grupo
+                "grupo" : this.state.grupo,
+                "email" : this.state.email
             }),
         }).then((Response) => Response.json())
         .then((responseJson) =>{

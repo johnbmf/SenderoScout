@@ -15,6 +15,7 @@ import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 import AutenticarScreen from './screens/autenticacion'
 import LoginScreen from './screens/login'
 import CrearCuentaScreen from './screens/crear_cuenta'
+import InvitarDirigenteScreen from './screens/invitar_dirigente'
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
   render() {
@@ -38,23 +39,34 @@ const CustomDrawerComponent = (props)=>(
 const StackNavigator = createStackNavigator({
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
-  Home : HomeScreen,
   }, {
+    navigationOptions : {
+        drawerLabel: 'Cacerías',
+        drawerIcon: ({tintColor}) => (
+            <Icon name='star' style = {{fontSize:24,color:tintColor}} />
+        ),
+        header: null
+
+    }
+  },{
     defaultNavigationOptions:{
       header: null
-    }}
+    }},
+    {
+      initialRouteName: 'Pendientes'
+    }
 ); 
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
   CrearMision:CrearMisionScreen,
-  Pendientes: PendientesScreen,
+  Pendientes: StackNavigator,
   EvalAptitudes: EvalAptitudesScreen,
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
+  InvitarDirigente : InvitarDirigenteScreen,
   Settings:SettingsScreen,
-  Cerrar: StackNavigator
 },{
   contentComponent: CustomDrawerComponent,
   contentOptions:{

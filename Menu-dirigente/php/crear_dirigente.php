@@ -12,7 +12,6 @@
 	$password = $obj['password'];
 	$email = $obj['email'];
 	$confirmacion_email = (int) $obj['confirmacion_email'];
-	$unidad1 = (int) $obj['unidad1'];
     //$seisena1 =$obj['seisena1'];
     //$edad = (int) $obj['edad'];
     $tipo = $obj['tipo'];
@@ -29,7 +28,7 @@
         echo json_encode($response);
         exit;
     }
-    $sql2 = "INSERT INTO  Usuario (user,password,email,confirmacion_email,unidad1,tipo,nombre) VALUES ('$user','$password','$email','$confirmacion_email','$unidad1','$tipo','$nombre')";
+    $sql2 = "INSERT INTO  Usuario (user,password,email,confirmacion_email,tipo,nombre) VALUES ('$user','$password','$email','$confirmacion_email','$tipo','$nombre')";
     $res2 = $mysqli->query($sql2);
     if($res2 != false){
         $response -> message = "Usuario creado con éxito.";

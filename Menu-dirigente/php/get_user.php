@@ -10,7 +10,7 @@
     $usuario = $obj['usuario'];
     $password = $obj['password'];
 	$query = "
-    SELECT Usuario.user, Usuario.nombre, Usuario.pseudonimo, Usuario.edad, Usuario.email, Usuario.seisena1, Usuario.tipo, Usuario.grupo 
+    SELECT Usuario.user, Usuario.nombre, Usuario.pseudonimo, Usuario.edad, Usuario.email, Usuario.seisena1, Usuario.tipo, Usuario.grupo, Usuario.unidad1 
         FROM `Usuario` WHERE Usuario.user = '$usuario' AND Usuario.password = '$password';
     ";
     if($result = $mysqli->query($query)){
