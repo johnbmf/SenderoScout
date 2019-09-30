@@ -12,7 +12,7 @@ import {
 export class autenticacion extends Component {
     constructor(props) {
         super(props);
-        AsyncStorage.clear(); //<- descomentar esto solo si se quiere testear el login //
+        //AsyncStorage.clear(); //<- descomentar esto solo si se quiere testear el login //
         this._bootstrapAsync();
       }
       _bootstrapAsync = async () => {
