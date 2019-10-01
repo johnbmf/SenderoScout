@@ -82,6 +82,18 @@ class prueba extends Component {
     />    
   );  
     };
+    renderHeader2 = () => {    
+  return (      
+        <SearchBar        
+      placeholder="Type Here..."        
+      lightTheme        
+      round        
+      onChangeText={text => this.makeRemoteRequest(text)}
+      onClear={text => this.makeRemoteRequest()}
+      autoCorrect={false}             
+    />    
+  );  
+    };
 
       renderSeparator = () => {
     return (
@@ -105,6 +117,7 @@ class prueba extends Component {
       );
     }
     return(
+      <View style={{ flex: 1 }}> 
     <View style={{ flex: 1 }}>
         <FlatList
         data = {this.state.data}
@@ -116,10 +129,40 @@ class prueba extends Component {
           )}
           keyExtractor={item => item.user}  
           ItemSeparatorComponent={this.renderSeparator} 
-          ListHeaderComponent={this.renderHeader}       
+          ListHeaderComponent={this.renderHeader}         
         />
-
-    </View>
+        </View>
+        <View style={{ flex: 1 }}>
+        <FlatList
+        data = {this.state.data}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+            />
+          )}
+          keyExtractor={item => item.user}  
+          ItemSeparatorComponent={this.renderSeparator} 
+          ListHeaderComponent2={this.renderHeader2}         
+        />
+        </View>
+    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
+                    <Button 
+                    onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
+                    icon = {
+                        <Icon
+                        name= 'send'
+                        type= 'FontAwesome'
+                        style={{fontSize: 22, color: 'white'}}
+                        //color= '#ffffff'
+                        />
+                    }iconRight
+                    title = "Crear   "
+                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    />
+                    </View>
+                    </View>
     );
     }
 }
