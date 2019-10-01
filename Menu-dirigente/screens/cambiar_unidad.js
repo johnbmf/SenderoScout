@@ -33,7 +33,7 @@ import { LinearGradient } from 'expo';
 
 const { width } = Dimensions.get("window");
 
-class prueba extends Component {
+class cambiar_unidad extends Component {
     static navigationOptions = {
         drawerLabel: 'Prueba',
         drawerIcon: ({tintColor}) => (
@@ -212,7 +212,7 @@ class prueba extends Component {
     );
     }
 }
-export default prueba;
+export default cambiar_unidad;
 
 const styles = StyleSheet.create({
     container: {
