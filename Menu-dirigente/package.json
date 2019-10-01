@@ -13,6 +13,8 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-awesome-alerts": "^1.2.0",
+    "react-native-dynamic-search-bar": "^0.2.1",
+    "react-native-dynamic-vector-icons": "WrathChaos/react-native-dynamic-vector-icons#expo",
     "react-native-elements": "^1.1.0",
     "react-native-scl-alert": "^1.2.1",
     "react-native-vector-icons": "^6.6.0",
@@ -21,5 +23,11 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },
-  "private": true
+  "private": true,
+  "peerDependencies": {
+    "react": ">= 16.x.x",
+    "react-native": ">= 0.55.x",
+    "react-native-vector-icons": ">= 6.x.x",
+    "react-native-dynamic-vector-icons": ">= x.x.x"
+  }
 }

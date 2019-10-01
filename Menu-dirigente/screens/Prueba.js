@@ -40,7 +40,8 @@ class prueba extends Component {
     this.arrayholder = [];
   }
   makeRemoteRequest(text) {
-    this.setState({ loading: true });
+    this.setState({ loading: true,
+    value:this.state.value});
     fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
             {
                 method: 'POST',
@@ -64,33 +65,25 @@ class prueba extends Component {
           message: responseData.message,
           error: null,
           loading: false,
+          value: text,
         });
       })
       .catch(error => {
         this.setState({ error, loading: false });
       });
   };
+  
+
+
   renderHeader = () => {    
   return (      
-        <SearchBar        
-      placeholder="Type Here..."        
+        <SearchBar 
+      placeholder="Ingresa nombre del niño o niña..."        
       lightTheme        
-      round        
+      round
       onChangeText={text => this.makeRemoteRequest(text)}
-      onClear={text => this.makeRemoteRequest()}
-      autoCorrect={false}             
-    />    
-  );  
-    };
-    renderHeader2 = () => {    
-  return (      
-        <SearchBar        
-      placeholder="Type Here..."        
-      lightTheme        
-      round        
-      onChangeText={text => this.makeRemoteRequest(text)}
-      onClear={text => this.makeRemoteRequest()}
-      autoCorrect={false}             
+      autoCorrect={false}  
+      value={this.state.value}           
     />    
   );  
     };
@@ -109,17 +102,12 @@ class prueba extends Component {
   };
 
   render() {
-    if (this.state.loading) {
-      return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator />
-        </View>
-      );
-    }
     return(
       <View style={{ flex: 1 }}> 
     <View style={{ flex: 1 }}>
         <FlatList
+        ItemSeparatorComponent={this.renderSeparator} 
+        ListHeaderComponent={this.renderHeader}  
         data = {this.state.data}
         renderItem={({ item }) => (
             <ListItem
@@ -127,28 +115,12 @@ class prueba extends Component {
               containerStyle={{ borderBottomWidth: 0 }} 
             />
           )}
-          keyExtractor={item => item.user}  
-          ItemSeparatorComponent={this.renderSeparator} 
-          ListHeaderComponent={this.renderHeader}         
-        />
-        </View>
-        <View style={{ flex: 1 }}>
-        <FlatList
-        data = {this.state.data}
-        renderItem={({ item }) => (
-            <ListItem
-              title={`${item.nombre}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-            />
-          )}
-          keyExtractor={item => item.user}  
-          ItemSeparatorComponent={this.renderSeparator} 
-          ListHeaderComponent2={this.renderHeader2}         
+          keyExtractor={item => item.user}         
         />
         </View>
     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
                     <Button 
-                    onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
+                    onPress = {() => { }}
                     icon = {
                         <Icon
                         name= 'send'
