@@ -7,6 +7,7 @@ import {
     ActivityIndicator,
     TouchableOpacity,
     AsyncStorage,
+    Dimensions
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider } from 'react-native-elements'
@@ -17,7 +18,8 @@ import { NavigationEvents } from 'react-navigation';
 import ActivityCard from '../CustomComponents/ActivityCard'
 
 const Actividades = require('../Local/Actividades.json')
-const RecomendadasJson = require('../Local/ActividadesRecomendadas.json')
+const RecomendadasTemplate = require('../Local/ActividadesRecomendadas.json')
+var RecomendadasJson = RecomendadasTemplate
 //const RecomendacionesExistentes =  JSON.parse(AsyncStorage.getItem('Recomendaciones'))
 
 
@@ -28,9 +30,11 @@ class recomendaciones extends Component {
         this.state = {
             unidad_dirigente: 1,
             sisena: "Amarilla",
-            setData: false,
+            setData: false, //si estan o no seteadas las recomendaciones ya sean locales o nuevas
             setSmiles: false,
             isLoading: false,
+            warningState: false,
+            recomendacionAutorizada: false,
 
             //Datos a mostrar
             peor_recomendadas: [],
@@ -56,13 +60,13 @@ class recomendaciones extends Component {
             mensaje: "",
             ptj_ordenados: []
         }
-        AsyncStorage.clear()
+        //AsyncStorage.clear()
         this.GetRecomendaciones()
     }
     static navigationOptions = {
         drawerLabel: 'Recomendaciones',
         drawerIcon: ({tintColor}) => (
-            <Icon name='gear' type = 'FontAwesome' style = {{fontSize:24, color:tintColor}} />
+            <Icon name='list' type = 'Entypo' style = {{fontSize:24, color:tintColor}} />
         )
     }
 
@@ -98,6 +102,13 @@ class recomendaciones extends Component {
         return (fecha.split("-").reverse().join("-"))
     }
 
+    SetWidth(porcentaje){
+        return(Dimensions.get('window').width * (porcentaje/100))
+    }
+
+    SetHeight(porcentaje){
+        return(Dimensions.get('window').height * (porcentaje/100))
+    }
     
     componentDidMount(){
         var ordenados = [];
@@ -159,146 +170,162 @@ class recomendaciones extends Component {
     componentDidUpdate(){
         //console.log("largo del objeto", Object.keys(this.state.RecomendacionesGuardadas).length)
         //console.log(this.state.RecomendacionesGuardadas)
-
-        if (Object.keys(this.state.RecomendacionesGuardadas).length !== 0  && this.state.setData === false) {
-            
+        if (Object.keys(this.state.RecomendacionesGuardadas).length !== 0  && this.state.setData === false) {       
             this.setState({
                 peor_recomendadas: this.state.RecomendacionesGuardadas["Peor_area"],
                 mal_recomendadas: this.state.RecomendacionesGuardadas["Mal_area"],
                 mejor_recomendadas: this.state.RecomendacionesGuardadas["Mejor_area"],
                 fecha_inicio_recomendacion: this.state.RecomendacionesGuardadas["fecha_inicio"],
                 fehca_fin_recomendacion: this.state.RecomendacionesGuardadas["fecha_fin"] ,
-                setData: true
+                setData: true,
             })
 
             console.log("Las recomendaciones fueron obtenidas de la Memoria")
         }
     }
+/*
+    LoadingState(){
+        console.log(this.state.isLoading)
+        if(this.state.isLoading){
+            return(
+                <Modal
+                    transparent = {true}
+                    visible = {this.state.isLoading}
+                    animationType = 'none'
+                    onRequestClose = {()=>{console.log("Closing Modal")}}
+                > 
+                    <View style = {{ position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
+                        <ActivityIndicator
+                            animating = {this.state.isLoading}
+                            size="large" 
+                            color="#00ff00" 
+                        />    
+                    </View> 
+                </Modal>
+            );   
+        }
+    }
+*/
+    WarningOpen = ()=> {
+        this.setState({warningState: true})
+    }
+
+    WarningClose = () => {
+        this.setState({warningState: false})
+    }
+
+    WarningRecomendaciones(){
+        if(this.state.warningState){
+            return(
+                <View style = {styles.alert}>
+                    <SCLAlert
+                    theme="warning"
+                    show={this.state.warningState}
+                    title="Cuidado!"
+                    subtitle= "Nuevas recomendaciones remplazaran, recomendaciones anteriores." 
+                    //subtitleContainerStyle = {{flex: 1, flexWrap: 'wrap'}}
+                    subtitleStyle= {{fontSize: 16, fontWeight: 'bold'}}
+                    onRequestClose = {this.WarningClose}>
+                    <SCLAlertButton theme="warning" onPress={this.RecomendarActividades()}>Recomendar</SCLAlertButton>
+                    <SCLAlertButton theme="success" onPress={() => {this.state.recomendacionAutorizada = true}}>Volver</SCLAlertButton>
+                    </SCLAlert>
+                </View>
+            )
+        }
+        
+    }
 
 
     RecomendarActividades(){
+        
         //  3 del mas debil
         // 1 en el segundo mas debil
         // 2 del mas fuerte
-
-        this.setState({isLoading:true})
-
-        var ptj_ordenados = this.state.ptj_ordenados;
-        var peores_count = 0;
-        var malas_count = 0;
-        var mejores_count =0;
-
-        var temp = {"Actividades":[]}
-
-        console.log(ptj_ordenados)
-        //Peores
-
-
-        while (peores_count < 3) {
-
-            r = Math.round(Math.random()* (Actividades[ptj_ordenados[0][0]].length - 1));
-            
-            console.log("El numer random es:" + r);
-            actividad_random = Actividades[ptj_ordenados[0][0]][r];
-            console.log("El nombre de la actividad es " + actividad_random["Nombre"])
-            
-
-            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
-                temp["Actividades"].push(actividad_random)
-                RecomendadasJson["Peor_area"].push(actividad_random)
-                peores_count ++;
-            }
-        }
-
-        //Malas
-        while (malas_count < 1) {
-
-            r = Math.round(Math.random()* (Actividades[ptj_ordenados[1][0]].length - 1));
-            
-            console.log("El numer random es:" + r);
-            actividad_random = Actividades[ptj_ordenados[1][0]][r];
-            console.log("El nombre de la actividad es " + actividad_random["Nombre"])
-            
-
-            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
-                temp["Actividades"].push(actividad_random)
-                RecomendadasJson["Mal_area"].push(actividad_random)
-                malas_count ++;
-            }
-        }
-
-        //Mejores
-        while (mejores_count < 2) {
-
-            r = Math.round(Math.random()* (Actividades[ptj_ordenados[ptj_ordenados.length - 1][0]].length - 1));
-            
-            console.log("El numer random es:" + r);
-            actividad_random = Actividades[ptj_ordenados[(ptj_ordenados.length - 1)][0]][r];
-            console.log("El nombre de la actividad es " + actividad_random["Nombre"])
-            
-
-            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
-                temp["Actividades"].push(actividad_random)
-                RecomendadasJson["Mejor_area"].push(actividad_random)
-                mejores_count++;
-            }
-        }
-
-        RecomendadasJson["fecha_inicio"] = this.state.php_fecha_inicio
-        RecomendadasJson["fecha_fin"] = this.state.php_fecha_fin
-
-        this.StoreRecomendaciones(RecomendadasJson)
-
-        this.setState({
-            peor_recomendadas: RecomendadasJson["Peor_area"],
-            mal_recomendadas: RecomendadasJson["Mal_area"] ,
-            mejor_recomendadas: RecomendadasJson["Mejor_area"],
-            fecha_inicio_recomendacion: this.state.php_fecha_inicio,
-            fehca_fin_recomendacion: this.state.php_fecha_fin,
-            setData: true})
-    }
-
-    CustomCard = () => {
-        estado = 0
-        
-        if (estado === 1){
-            return(
-            <Card>
-            <CardItem header bordered button onPress={() => alert("This is Card Header")}>
-              <Text>NativeBase</Text>
-            </CardItem>
-            <CardItem bordered>
-              <Body>
-                <Text>
-                  NativeBase is a free and open source framework that enable
-                  developers to build
-                  high-quality mobile apps using React Native iOS and Android
-                  apps
-                  with a fusion of ES6.
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem footer bordered>
-              <Text>GeekyAnts</Text>
-            </CardItem>
-          </Card>
-            )
-        }
+        if (this.state.setData && !this.state.recomendacionAutorizada){
+            this.WarningOpen()        }
 
         else{
-            return(
-                <Card>
-            <CardItem header bordered button onPress={() => estado = 1}>
-              <Text>NativeBase</Text>
-            </CardItem>
-            <CardItem footer bordered>
-              <Text>GeekyAnts</Text>
-            </CardItem>
-          </Card>
-            )
+            if(this.state.recomendacionAutorizada){
+                RecomendadasJson = RecomendadasTemplate
+            }
+
+            this.setState({isLoading:true})
+
+            var ptj_ordenados = this.state.ptj_ordenados;
+            var peores_count = 0;
+            var malas_count = 0;
+            var mejores_count =0;
+
+            var temp = {"Actividades":[]}
+
+            console.log(ptj_ordenados)
+            //Peores
+
+
+            while (peores_count < 3) {
+
+                r = Math.round(Math.random()* (Actividades[ptj_ordenados[0][0]].length - 1));
+                
+                console.log("El numer random es:" + r);
+                actividad_random = Actividades[ptj_ordenados[0][0]][r];
+                console.log("El nombre de la actividad es " + actividad_random["Nombre"])
+                
+
+                if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                    temp["Actividades"].push(actividad_random)
+                    RecomendadasJson["Peor_area"].push(actividad_random)
+                    peores_count ++;
+                }
+            }
+
+            //Malas
+            while (malas_count < 1) {
+
+                r = Math.round(Math.random()* (Actividades[ptj_ordenados[1][0]].length - 1));
+                
+                console.log("El numer random es:" + r);
+                actividad_random = Actividades[ptj_ordenados[1][0]][r];
+                console.log("El nombre de la actividad es " + actividad_random["Nombre"])
+                
+
+                if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                    temp["Actividades"].push(actividad_random)
+                    RecomendadasJson["Mal_area"].push(actividad_random)
+                    malas_count ++;
+                }
+            }
+
+            //Mejores
+            while (mejores_count < 2) {
+
+                r = Math.round(Math.random()* (Actividades[ptj_ordenados[ptj_ordenados.length - 1][0]].length - 1));
+                
+                console.log("El numer random es:" + r);
+                actividad_random = Actividades[ptj_ordenados[(ptj_ordenados.length - 1)][0]][r];
+                console.log("El nombre de la actividad es " + actividad_random["Nombre"])
+                
+
+                if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                    temp["Actividades"].push(actividad_random)
+                    RecomendadasJson["Mejor_area"].push(actividad_random)
+                    mejores_count++;
+                }
+            }
+
+            RecomendadasJson["fecha_inicio"] = this.state.php_fecha_inicio
+            RecomendadasJson["fecha_fin"] = this.state.php_fecha_fin
+
+            this.StoreRecomendaciones(RecomendadasJson)
+
+            this.setState({
+                peor_recomendadas: RecomendadasJson["Peor_area"],
+                mal_recomendadas: RecomendadasJson["Mal_area"] ,
+                mejor_recomendadas: RecomendadasJson["Mejor_area"],
+                fecha_inicio_recomendacion: this.state.php_fecha_inicio,
+                fehca_fin_recomendacion: this.state.php_fecha_fin,
+                setData: true
+            })
         }
-
-
 
     }
 
@@ -307,7 +334,7 @@ class recomendaciones extends Component {
     
     if (this.state.setData) {
         return(
-            <View>
+            <View style = {{width: '100%', height: '100%'}}>
                 <ScrollView>
                     <Text>Area Peor Evaluada</Text>
                     <View>{this.state.peor_recomendadas.map(((obj,i) => 
@@ -343,10 +370,10 @@ class recomendaciones extends Component {
                         ))}
                     </View>
                     
-                    <Text>*Recomendaciones en base a las evaluaciones realizadas entre las fechas:</Text>
+                    <Text style = {styles.observacion}>*Recomendaciones en base a las evaluaciones realizadas entre las fechas:</Text>
                     <View style = {{ flexDirection: 'row'}}>
-                        <Text>{this.state.php_fecha_inicio} y </Text>
-                        <Text>{this.state.php_fecha_fin} </Text>
+                        <Text style = {styles.observacion}>{this.state.php_fecha_inicio} y </Text>
+                        <Text style = {styles.observacion}>{this.state.php_fecha_fin} </Text>
                     </View>
                 </ScrollView>
             </View>
@@ -405,9 +432,11 @@ class recomendaciones extends Component {
     }
 
     render() {
+        console.log(this.SetWidth(100))
+        console.log(this.SetHeight(100))
         return (
             <View style={styles.container}>
-                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
+                <View style={{width: '100%', height: this.SetHeight(12), alignItems:'center'}} >     
                     <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
                         <Left>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
@@ -418,11 +447,13 @@ class recomendaciones extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <View style = {{width: '100%', height: '3%'}}></View>
+                <View style = {{width: '100%', height: this.SetHeight(2)}}></View>
 
-                <View style = {{width: '100%', height: '85%',alignItems: 'center'}}> 
-                    
-                    <View style = {{width: '100%', height: '30%',alignItems: 'center'}}>
+                <View style = {{width: '100%', height: this.SetHeight(85),alignItems: 'center'}}> 
+
+                    <View>{this.WarningRecomendaciones()}</View>
+
+                    <View style = {{width: '100%', height: this.SetHeight(30), alignItems: 'center'}}>
                         <Text style = {styles.textlabel}>Estado Areas de Desarrollo</Text>
                         <View style = {styles.areas_container}>
                             <View style= {{width: '50%', marginTop:5}}>
@@ -449,7 +480,6 @@ class recomendaciones extends Component {
                                     <View style = {{width: '50%'}}>
                                         {this.MostrarSalud("Caracter")}
                                     </View>
-
                                 </View>
                             </View>
                             <View style= {{width: '50%', marginTop: 5}}>
@@ -481,6 +511,7 @@ class recomendaciones extends Component {
                         </View>
                         <Button
                             onPress = {()=> this.RecomendarActividades()}
+                            /*
                             icon = {
                                 <Icon
                                 name= 'gear'
@@ -488,17 +519,20 @@ class recomendaciones extends Component {
                                 style={{fontSize: 25, color: 'white', alignContent: 'center' }}
                                 />
                             }iconRight
-
+                            */
                             title = "Recomendar Actividades "
                             titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
                             buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}                        
                         />
-                        <View style = {{width:'90%', height: "1%", alignSelf: 'center', borderBottomColor: 'green', borderBottomWidth: 1}}></View>
+                        <View style = {{width:'90%', alignSelf: 'center', borderBottomColor: 'green', borderBottomWidth: 1}}>
+                            <Text></Text>
+                        </View>
                     </View>
-                    <View style = {{width: '90%', height: '70%',alignItems: 'center'}}>
+                    <View style = {{width: '90%', height: '65%',alignItems: 'center'}}>
                         {this.MostrarRecomendadas()}
                     </View>
                 </View>
+                <View style = {{height: this.SetHeight(1)}}></View>
             </View>
         );
     }
@@ -507,7 +541,7 @@ export default recomendaciones;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily:'Roboto'
@@ -554,6 +588,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 9,
 
+    },
+
+    alert: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
+
    
 });

@@ -80,7 +80,7 @@ class DetalleActividad extends Component {
      
 
                     </View>
-                    <View style = {{width: '100%', height: '55%', flexDirection: 'column'}}>
+                    <View style = {{width: '100%', height: '60%', flexDirection: 'column'}}>
                         <ScrollView style = {{width:'95%', height: '100%', alignSelf: 'flex-start'   }}>
                             <Text style = {styles.textlabel}>Descripcion</Text>
                             <Text style = {styles.textdata}>{data["Descripcion"]}{'\n'}</Text>
@@ -92,8 +92,13 @@ class DetalleActividad extends Component {
 
                         </ScrollView>
                     </View>
-                    <View style = {{width: '100%', height: '20%', flexDirection: 'column'}}>
-
+                    <View style = {{width: '100%', height: '15%', flexDirection: 'column'}}>
+                        <Button
+                                onPress={() => {this.props.navigation.goBack()}}
+                                title = "Volver"
+                                titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                                buttonStyle = {{backgroundColor: '#83cf4c', justifyContent:'center', margin: 10}}   
+                        />
                     </View>
                 </View>
             </View>
