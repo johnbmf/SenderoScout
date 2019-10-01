@@ -61,7 +61,8 @@ class cambiar_unidad extends Component {
   }
   makeRemoteRequest(text) {
     this.setState({ loading: true,
-    value:this.state.value});
+    value:this.state.value,
+    text:text});
     fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
             {
                 method: 'POST',
@@ -94,7 +95,55 @@ class cambiar_unidad extends Component {
       });
   };
   
+  makeRemoteRequest2(text) {
+    this.setState({ loading: true,
+    value2:this.state.value2,
+    text2:text});
+    fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                {
+                    nombre_n: text,
+ 
+                    id_unidad:1 //Change this
+                })
+ 
+            })
+      .then(res => res.json())
+      .then((responseData) => {
+        console.log(responseData)
+        this.setState({
+          data: responseData.data,
+          message: responseData.message,
+          error: null,
+          loading: false,
+          value2: text,
+        });
+      })
+      .catch(error => {
+        this.setState({ error, loading: false });
+      });
+  };
 
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '86%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '14%',
+        }}
+      />
+    );
+  };
 
   renderHeader = () => {    
   return (      
@@ -113,45 +162,19 @@ class cambiar_unidad extends Component {
  
     renderItem(item) {
         return (
-          <GradientCard
-            title={item.name}
-            shadowStyle={{
-              ...Platform.select({
-                ios: {
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 3,
-                    height: 3
-                  },
-                  shadowRadius: 3,
-                  shadowOpacity: 0.4
-                },
-                android: {
-                  elevation: 3
-                }
-              })
-            }}
-            imageSource={item.edad}
-            subtitle={item.user}
-            width={width * 0.9}
-            style={{
-              width: width,
-              marginTop: 16,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-            centerSubtitleStyle={{
-              fontSize: 12,
-              marginLeft: 8,
-              textAlign: "center",
-              color: item.strokeColor
-            }}
-            rightComponent={
-              <View>
-
-              </View>
-            }
-          />
+        <View style={{ flex: 1 }}>
+        <FlatList
+        ItemSeparatorComponent={this.renderSeparator}
+        data = {this.state.data}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+            />
+          )}
+          keyExtractor={item => item.user}         
+        />
+        </View>
         );
       }
     
@@ -176,7 +199,7 @@ class cambiar_unidad extends Component {
 
   render() {
     return(
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#21283d" }}>
+        <SafeAreaView style={{ flex: 1}}>
         <StatusBar barStyle={"light-content"} />
         <View style={styles.container}>
           <SearchBar 
@@ -184,9 +207,9 @@ class cambiar_unidad extends Component {
             autoFocus={false}
             fontColor="#c6c6c6"
             iconColor="#c6c6c6"
-            shadowColor="#282828"
+            shadowColor="#002642"
             cancelIconColor="#c6c6c6"
-            backgroundColor="#353d5e"
+            backgroundColor="#104F55"
             placeholder="Ingresa nombre del niño o niña..."
             onChangeText={text => {
               this.makeRemoteRequest(text);
@@ -197,16 +220,54 @@ class cambiar_unidad extends Component {
             }}
             onPress={() => alert("onPress")}
           />
-          <View style={{ top: 12 }}>
-            <FlatList
-              data={this.state.data}
-              renderItem={({ item }) => this.renderItem(item)}
-              onEndReached={this.loadMore}
-              onRefresh={this.onRefresh}
-              refreshing={this.state.refreshing}
-              keyExtractor={item => item.user}  
+        <View style={{ flex: 1 }}>
+        <FlatList
+        ItemSeparatorComponent={this.renderSeparator}
+        data = {this.state.data}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+               onPress={() => this.selectItem(this.state.value)}
             />
-          </View>
+          )}
+          keyExtractor={item => item.user}         
+        />
+        </View>
+        </View>
+        <View style={styles.container}>
+          <SearchBar 
+            onPressToFocus
+            autoFocus={false}
+            fontColor="#c6c6c6"
+            iconColor="#c6c6c6"
+            shadowColor="#002642"
+            cancelIconColor="#c6c6c6"
+            backgroundColor="#104F55"
+            placeholder="Ingresa nombre del niño o niña..."
+            onChangeText={text => {
+              this.makeRemoteRequest(text);
+            }}
+            value2={this.state.value2} 
+            onPressCancel={() => {
+              this.makeRemoteRequest("");
+            }}
+            onPress={() => alert("onPress")}
+          />
+        <View style={{ flex: 1 }}>
+        <FlatList
+        ItemSeparatorComponent={this.renderSeparator}
+        data = {this.state.data}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+               onPress={() => this.selectItem(data)}
+            />
+          )}
+          keyExtractor={item => item.user}         
+        />
+        </View>
         </View>
       </SafeAreaView>
     );

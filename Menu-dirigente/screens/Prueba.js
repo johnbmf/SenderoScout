@@ -75,6 +75,50 @@ class prueba extends Component {
   
 
 
+ 
+  renderItem(item) {
+    return (
+      <GradientCard
+        title={item.name}
+        shadowStyle={{
+          ...Platform.select({
+            ios: {
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 3,
+                height: 3
+              },
+              shadowRadius: 3,
+              shadowOpacity: 0.4
+            },
+            android: {
+              elevation: 3
+            }
+          })
+        }}
+        imageSource={item.edad}
+        subtitle={item.user}
+        width={width * 0.9}
+        style={{
+          width: width,
+          marginTop: 16,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+        centerSubtitleStyle={{
+          fontSize: 12,
+          marginLeft: 8,
+          textAlign: "center",
+          color: item.strokeColor
+        }}
+        rightComponent={
+          <View>
+
+          </View>
+        }
+      />
+    );
+  }
   renderHeader = () => {    
   return (      
         <SearchBar 
