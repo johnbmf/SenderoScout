@@ -5,7 +5,7 @@ using UnityEngine;
 public class Baloo : MonoBehaviour
 {
     public GameObject PortadorScript;
-    private readonly int numAnimal = 0;
+    private readonly int numAnimal = 2;
     private readonly string nombreAnimal = "Baloo";
     // Start is called before the first frame update
     void Start()

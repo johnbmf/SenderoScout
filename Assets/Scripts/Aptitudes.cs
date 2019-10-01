@@ -21,10 +21,13 @@ public class Aptitudes : MonoBehaviour
      */
     public GameObject[] Personajes;
     public GameObject[] PersonajesPanel;
+    public GameObject[] StarOff;
+    public GameObject[] StarOn;
     #endregion
 
     #region PublicStaticVars
     public static float[] Evaluaciones = new float[6];
+    public static bool isPanelOpen = false;
     #endregion
 
     #region AptitudesCanvasVars
@@ -119,7 +122,7 @@ public class Aptitudes : MonoBehaviour
         AptitudesCanvas.SetActive(true);
         float ev = Evaluaciones[animalFace];
         OverlayGrande.SetActive(true);
-
+        PersonajesPanel[animalFace].SetActive(true);
         StartCoroutine(EfectoScalePanel(animalFace));
     }
 
@@ -156,16 +159,36 @@ public class Aptitudes : MonoBehaviour
         //el divisor de rateTiempo indica el tiempo que toma en llenarse la barra.
         float t = 0.0f;
         float rateTiempo = 1f / 3f;
-
+        float previousValue = 0f;
+        int estrellasActivas = 0;
         //Mientras la barra aun no llegue al punto deseado, hay que seguirla moviendo.
         while (t < 1f)
         {
             t += Time.deltaTime * rateTiempo;
             LoadBar.fillAmount = Vector2.Lerp(LoadBarStart, LoadBarEnd, t).x / 5;
+
+            //Condiciones para activar las estrellitas.
+            #region ActivarEstrellas
+            for (int i = 1; i <= 5; i++)
+            {
+                if (LoadBar.fillAmount >= i / 5f && previousValue < i / 5f)
+                {
+                    StarOff[i - 1].SetActive(false);
+                    StarOn[i - 1].SetActive(true);
+                    estrellasActivas += 1;
+                }
+            }
+            previousValue = LoadBar.fillAmount;
+            #endregion
             //Esperamos al next frame para seguir moviendo.
             yield return null;
         }
 
+        //Activamos la animacion de las estrellas activas:
+        for (int i = 0; i < estrellasActivas; i++)
+        {
+            StarOn[i].GetComponent<Animator>().enabled = true;
+        }
         t = 0.0f;
         yield return null;
     }
@@ -173,8 +196,15 @@ public class Aptitudes : MonoBehaviour
     public void Close()
     {
         //Desactivar y devolver gameobjects a su nivel por defecto.
-        AptitudesPanel.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        AptitudesPanel.transform.localScale = new Vector3(0.9f, 0.9f, 1);
         Load.GetComponent<Image>().fillAmount = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            StarOff[i].SetActive(true);
+            StarOn[i].GetComponent<Animator>().enabled = false;
+            StarOn[i].SetActive(false);
+            PersonajesPanel[i].SetActive(false);
+        }
         AptitudesCanvas.SetActive(false);
         OverlayGrande.SetActive(false);
 
