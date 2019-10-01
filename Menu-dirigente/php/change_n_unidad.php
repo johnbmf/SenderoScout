@@ -6,10 +6,10 @@
   $response = new stdClass;
   
   //Var
-  $nombre_n = $obj['nombre_n'];
+  $usuario = $obj['usuario'];
   $id_unidad = $obj['id_unidad'];
 
-  $query = "UPDATE Usuario SET Unidad1 = $id_unidad  WHERE nombre = '$nombre_n'";
+  $query = "UPDATE Usuario SET Unidad1 = $id_unidad  WHERE user = '$usuario'";
   $result = $mysqli->query($query);
   if($result){
     $response -> message = "Cambio realizado con exito";

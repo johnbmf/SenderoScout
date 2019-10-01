@@ -7,14 +7,14 @@
   
   //Var
   $id_unidad = $obj['id_unidad'];
+  $nombre_u = $obj['nombre_u'];
+  $nombre_u .= '%';
 
-  $nombre_n .= '%';
-
-  $query = "SELECT * FROM Usuario WHERE unidad1 = $id_unidad AND tipo = 'nino' ";
+  $query = "SELECT * FROM Unidad WHERE id <> $id_unidad AND (nombre_unidad LIKE '$nombre_u')";
 
   if($result = $mysqli->query($query)){
     if($result->num_rows==0){
-      echo json_encode('No se encuentran personas con ese nombre.');  
+      echo json_encode('No se encuentran otras unidades.');  
     }
     else{
     while($row = $result -> fetch_array(MYSQLI_ASSOC)){
@@ -26,7 +26,7 @@
     }
   }else{
   $response -> data = null;
-  $response -> message = "Error al obtener nombres";
+  $response -> message = "Error al obtener unidades";
   echo json_encode($response);  
   }
 

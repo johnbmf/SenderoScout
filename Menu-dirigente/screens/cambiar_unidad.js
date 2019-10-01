@@ -46,8 +46,11 @@ class cambiar_unidad extends Component {
     this.state = {
       loading: false,
       data: [],
+      data2: [] ,
       error: null,
       nombre_n: '',
+      ide: null,
+      usuario:'',
       refreshing: false,
       isLoading: true,
       page: 1 
@@ -109,7 +112,7 @@ class cambiar_unidad extends Component {
                 },
                 body: JSON.stringify(
                 {
-                    nombre_n: text,
+                    nombre_u: text,
  
                     id_unidad:1 //Change this
                 })
@@ -119,8 +122,43 @@ class cambiar_unidad extends Component {
       .then((responseData) => {
         console.log(responseData)
         this.setState({
-          data: responseData.data,
-          message: responseData.message,
+          data2: responseData.data,
+          message2: responseData.message,
+          error: null,
+          loading: false,
+          value2: text,
+        });
+      })
+      .catch(error => {
+        this.setState({ error, loading: false });
+      });
+  };
+
+    
+  makeRemoteRequest3(user,idU) {
+    this.setState({ loading: true});
+    fetch('http://www.mitra.cl/SS/change_n_unidad.php',
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                {
+                    usuario: user,
+ 
+                    id_unidad:idU,
+                })
+ 
+            })
+      .then(res => res.json())
+      .then((responseData) => {
+        console.log(responseData)
+        this.setState({
+          data2: responseData.data,
+          message2: responseData.message,
           error: null,
           loading: false,
           value2: text,
@@ -145,19 +183,7 @@ class cambiar_unidad extends Component {
     );
   };
 
-  renderHeader = () => {    
-  return (      
-        <SearchBar 
-      placeholder="Ingresa nombre del niño o niña..."        
-      onChangeText={text => this.makeRemoteRequest(text)}
-      value={this.state.value}  
-        onPressCancel={() => {
-    this.filterList("");
-  }}
-  onPress={() => alert("onPress")}         
-    />    
-  );  
-    };
+ 
 
  
     renderItem(item) {
@@ -197,8 +223,45 @@ class cambiar_unidad extends Component {
         // this.fetchData();
       };
 
+          
+      selectItem(Ite, usu) {
+        this.setState({
+          value:Ite,
+          text:Ite,
+          usuario:usu
+        });
+        this.makeRemoteRequest2(this.text2)
+        // this.fetchData();
+      };
+
+                
+      selectItem2(Ite,ide) {
+        this.setState({
+          value2:Ite,
+          text2:Ite,
+          ide:ide
+        });
+        this.makeRemoteRequest3(this.usuario,this.ide)
+        // this.fetchData();
+      };
+
   render() {
     return(
+
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
+                <View style = {styles.container}>
+                    <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
+                        
+                        <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                            <Left>
+                                <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                            </Left>
+                            <Body style = {{justifyContent:'center'}}> 
+                                <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Cambiar Unidad</Text>
+                            </Body>
+                        </Header > 
+                    </View>
+
         <SafeAreaView style={{ flex: 1}}>
         <StatusBar barStyle={"light-content"} />
         <View style={styles.container}>
@@ -228,7 +291,7 @@ class cambiar_unidad extends Component {
             <ListItem
               title={`${item.nombre}`}
               containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem(this.state.value)}
+               onPress={() => this.selectItem(item.nombre,item.user)}
             />
           )}
           keyExtractor={item => item.user}         
@@ -236,6 +299,7 @@ class cambiar_unidad extends Component {
         </View>
         </View>
         <View style={styles.container}>
+        <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
           <SearchBar 
             onPressToFocus
             autoFocus={false}
@@ -244,9 +308,9 @@ class cambiar_unidad extends Component {
             shadowColor="#002642"
             cancelIconColor="#c6c6c6"
             backgroundColor="#104F55"
-            placeholder="Ingresa nombre del niño o niña..."
-            onChangeText={text => {
-              this.makeRemoteRequest(text);
+            placeholder="Ingresa nombre de la unidad..."
+            onChangeText={text2 => {
+              this.makeRemoteRequest(text2);
             }}
             value2={this.state.value2} 
             onPressCancel={() => {
@@ -257,19 +321,24 @@ class cambiar_unidad extends Component {
         <View style={{ flex: 1 }}>
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
-        data = {this.state.data}
+        data = {this.state.data2}
         renderItem={({ item }) => (
             <ListItem
-              title={`${item.nombre}`}
+              title={`${item.nombre_unidad}`}
               containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem(data)}
+               onPress={() => this.selectItem2(item.nombre_unidad,item.id)}
             />
           )}
-          keyExtractor={item => item.user}         
+          keyExtractor={item => item.id}         
         />
         </View>
+
+        
         </View>
+        
       </SafeAreaView>
+      </View>
+                </ScrollView>
     );
     }
 }
