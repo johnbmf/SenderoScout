@@ -62,6 +62,59 @@ class cambiar_unidad extends Component {
 
     this.arrayholder = [];
   }
+
+  ShowSendAlert(){
+
+    if (this.state.SendAlertType == 0){
+        return(
+        <ActivityIndicator
+            animating = {this.state.SendAlertState}
+            size="large" 
+            color="#00ff00" 
+        />);
+    }
+    else if(this.state.SendAlertType == 1){
+        return(
+            <SCLAlert
+            theme="success"
+            show={this.state.SendAlertState}
+            title="Felicidades"
+            subtitle= {this.state.SendAlertMessage}
+            onRequestClose = {this.handleClose}
+            >
+            <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
+            </SCLAlert>
+        );
+    }
+    else if(this.state.SendAlertType == -1){
+        return(
+            <SCLAlert
+            theme="danger"
+            show={this.state.SendAlertState}
+            title="Ooops"
+            subtitle= {this.state.SendAlertMessage}
+            onRequestClose = {this.handleClose}
+            >
+            <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
+            </SCLAlert>
+        );
+    }
+    else{
+        console.log("ALERTA DE ERROR NO IDENTIFICADO")
+        return(
+            <SCLAlert
+            theme="warning"
+            show={this.state.SendAlertState}
+            title="Estoy Confundido"
+            subtitle= {this.state.SendAlertMessage}
+            onRequestClose = {this.handleClose}
+            >
+            <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
+            </SCLAlert>
+        );
+    }
+
+}
   makeRemoteRequest(text) {
     this.setState({ loading: true,
     value:this.state.value,
@@ -136,6 +189,9 @@ class cambiar_unidad extends Component {
 
     
   makeRemoteRequest3(user,idU) {
+    console.log('holi')
+    console.log(user)
+    console.log(idU)
     this.setState({ loading: true});
     fetch('http://www.mitra.cl/SS/change_n_unidad.php',
             {
@@ -157,11 +213,10 @@ class cambiar_unidad extends Component {
       .then((responseData) => {
         console.log(responseData)
         this.setState({
-          data2: responseData.data,
-          message2: responseData.message,
+          data3: responseData.data,
+          message3: responseData.message,
           error: null,
           loading: false,
-          value2: text,
         });
       })
       .catch(error => {
@@ -184,7 +239,16 @@ class cambiar_unidad extends Component {
   };
 
  
+    
+  handleOpen = () => {
 
+    this.setState({ 
+        SendAlertState: true,
+        isLoading : false 
+    }, () => {
+        console.log(this.state.SendAlertType);
+    });
+  }
  
     renderItem(item) {
         return (
@@ -216,6 +280,7 @@ class cambiar_unidad extends Component {
       };
     
       loadMore = () => {
+        console.log('holi2')
         this.setState({
           // refreshing: true,
           page: this.state.page + 1
@@ -241,7 +306,6 @@ class cambiar_unidad extends Component {
           text2:Ite,
           ide:ide
         });
-        this.makeRemoteRequest3(this.usuario,this.ide)
         // this.fetchData();
       };
 
@@ -277,7 +341,7 @@ class cambiar_unidad extends Component {
             onChangeText={text => {
               this.makeRemoteRequest(text);
             }}
-            value={this.state.value} 
+            value={this.state.text} 
             onPressCancel={() => {
               this.makeRemoteRequest("");
             }}
@@ -310,11 +374,11 @@ class cambiar_unidad extends Component {
             backgroundColor="#104F55"
             placeholder="Ingresa nombre de la unidad..."
             onChangeText={text2 => {
-              this.makeRemoteRequest(text2);
+              this.makeRemoteRequest2(text2);
             }}
             value2={this.state.value2} 
             onPressCancel={() => {
-              this.makeRemoteRequest("");
+              this.makeRemoteRequest2("");
             }}
             onPress={() => alert("onPress")}
           />
@@ -332,13 +396,28 @@ class cambiar_unidad extends Component {
           keyExtractor={item => item.id}         
         />
         </View>
-
-        
+        <View style={styles.container}>
+                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
+                    <Button 
+                    onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
+                    icon = {
+                        <Icon
+                        name= 'send'
+                        type= 'FontAwesome'
+                        style={{fontSize: 22, color: 'white'}}
+                        //color= '#ffffff'
+                        />
+                    }iconRight
+                    title = "Cambiar"
+                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    />
+                    </View>
         </View>
-        
+        </View>
       </SafeAreaView>
       </View>
-                </ScrollView>
+      </ScrollView>
     );
     }
 }
