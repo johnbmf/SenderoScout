@@ -35,14 +35,13 @@ const { width } = Dimensions.get("window");
 
 class cambiar_unidad extends Component {
     static navigationOptions = {
-        drawerLabel: 'Prueba',
+        drawerLabel: 'Cambiar Unidad',
         drawerIcon: ({tintColor}) => (
             <Icon name='person-add' style = {{fontSize:24,color:tintColor}} />
         )
     }
   constructor(props) {
     super(props);
-
     this.state = {
       loading: false,
       data: [],
@@ -54,6 +53,7 @@ class cambiar_unidad extends Component {
       refreshing: false,
       isLoading: true,
       page: 1 
+      
     };
     if (Platform.OS === "android") {
         UIManager.setLayoutAnimationEnabledExperimental &&
@@ -117,7 +117,6 @@ class cambiar_unidad extends Component {
 }
   makeRemoteRequest(text) {
     this.setState({ loading: true,
-    value:this.state.value,
     text:text});
     fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
             {
@@ -237,9 +236,7 @@ class cambiar_unidad extends Component {
       />
     );
   };
-
  
-    
   handleOpen = () => {
 
     this.setState({ 
@@ -293,8 +290,12 @@ class cambiar_unidad extends Component {
         this.setState({
           value:Ite,
           text:Ite,
-          usuario:usu
+          usuario:usu,
+          data: []
         });
+        console.log(this.state.text)
+        console.log(this.state.value)
+        console.log(this.state.value)
         this.makeRemoteRequest2(this.text2)
         // this.fetchData();
       };
@@ -304,10 +305,21 @@ class cambiar_unidad extends Component {
         this.setState({
           value2:Ite,
           text2:Ite,
-          ide:ide
+          ide:ide,
+          data2: []
         });
         // this.fetchData();
       };
+      reset(){
+        this.setState({
+          data: []
+        });
+      }
+      reset2(){
+        this.setState({
+          data2: []
+        });
+      }
 
   render() {
     return(
@@ -328,6 +340,7 @@ class cambiar_unidad extends Component {
 
         <SafeAreaView style={{ flex: 1}}>
         <StatusBar barStyle={"light-content"} />
+        <Text>Seleccione niño o niña que desea cambiar de unidad: {this.state.value}:</Text>
         <View style={styles.container}>
           <SearchBar 
             onPressToFocus
@@ -343,7 +356,7 @@ class cambiar_unidad extends Component {
             }}
             value={this.state.text} 
             onPressCancel={() => {
-              this.makeRemoteRequest("");
+              this.makeRemoteRequest('');
             }}
             onPress={() => alert("onPress")}
           />
@@ -361,8 +374,8 @@ class cambiar_unidad extends Component {
           keyExtractor={item => item.user}         
         />
         </View>
-        </View>
-        <View style={styles.container}>
+        
+       
         <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
           <SearchBar 
             onPressToFocus
