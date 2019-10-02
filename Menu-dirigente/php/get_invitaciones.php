@@ -8,9 +8,12 @@
 	 $obj = json_decode($json,true);
 	 // name store into $tipo_mision.
     $grupo = $obj['grupo'];
-    $user = obj['usuario'];
+    $user = $obj['usuario'];
 	$query = "
-    SELECT Usuario.user,Usuario.nombre  FROM `Usuario` WHERE Usuario.grupo = '$grupo' and Usuario.user <> '$user'
+    SELECT Unidad.nombre_unidad, invitacion_dirigente.user_reclutador 
+        FROM Unidad 
+            LEFT Join invitacion_dirigente on Unidad.id = invitacion_dirigente.unidad_objetivo
+        WHERE invitacion_dirigente.estado = 0 AND invitacion_dirigente.user_invitado = '$user';
     ";
     if($result = $mysqli->query($query)){
         while($row = $result -> fetch_array(MYSQLI_ASSOC)){
@@ -20,7 +23,3 @@
     }
   mysqli_close($mysqli);
 ?>
-
-
-
-

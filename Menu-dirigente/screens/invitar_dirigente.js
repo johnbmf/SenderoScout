@@ -47,7 +47,8 @@ export default class invitar_dirigente extends Component {
                 
             },
             body:JSON.stringify({
-                "grupo":this.state.userToken.grupo
+                "grupo":this.state.userToken.grupo,
+                "usuario": this.state.userToken.user 
             })
         })
         .then(response => response.json())
@@ -93,13 +94,15 @@ export default class invitar_dirigente extends Component {
         .then(response => response.json())
         .then((responseJson) => {
             console.log(responseJson);
-            if(responseJson.respuesta != -1){
+            if(responseJson.respuesta != 0){
                 this.setState({
-                    error: false,
+                    error: true,
                 })
+                console.log(responseJson);
+                
             }else{
                 this.setState({
-                    error:true
+                    error:false
                 })
             }
         })
@@ -111,6 +114,7 @@ export default class invitar_dirigente extends Component {
         this.state.nombres = this.state.dataSource.map(({nombre}) => nombre);
         return (
             <View style={styles.container}>
+                <NavigationEvents onWillFocus={() => this.getInvitados()}/>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
                     <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
                         <Left>
@@ -124,7 +128,9 @@ export default class invitar_dirigente extends Component {
                 </View>
                 {(this.state.userToken.unidad1 == 0 || this.state.userToken.unidad1 == null ) &&                             
                     <View style = {{flexDirection : 'row', width:'90%', height:'88%', justifyContent:'center', alignItems:'center',alignSelf:'center' }}>
-                        <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Primero debes crear una unidad para poder invitar a otros dirigentes.</Text>
+                        <TouchableOpacity onPress = {() =>{this.props.navigation.navigate('Home')}} >
+                            <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Primero debes crear una unidad para poder invitar a otros dirigentes.</Text>
+                        </TouchableOpacity>
                     </View>
                 }
                 {(this.state.userToken.unidad1 > 0) && 

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Header,Left,Right,Icon} from 'native-base'
 import { NavigationEvents } from 'react-navigation';
+import Modal from "react-native-modal";
 import MenuItem from './../components/menuitems'
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -21,10 +22,54 @@ class HomeScreen extends Component {
         this.state = {
             isLoading: true,
             button:false,
-            dataSource: []
+            dataSource: [],
+            isModalVisible: false,
+            hayInvitaciones: false,
+            userToken: "",
+            invitaciones : []
 
         }
+        this._bootstrapAsync();
+        
     }
+    getInvitaciones = () => {
+        fetch('http://www.mitra.cl/SS/get_invitaciones.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+                
+            },
+            body:JSON.stringify({
+                "usuario":this.state.userToken.user
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            if(responseJson != null){
+                //console.log((typeof(responseJson[0].fecha_expiracion)));
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson,
+                    hayInvitaciones: true
+                })
+            }else{
+                this.setState({
+                    isLoading: false,
+                    dataSource: [],
+                    hayInvitaciones: false
+                })
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+
+    toggleModal = () => {
+        this.setState({isModalVisible : !this.state.isModalVisible});
+    };
+    
     componentDidMount(){
 
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
@@ -57,6 +102,12 @@ class HomeScreen extends Component {
             console.error(error);
         });
     }
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        this.setState({userToken : JSON.parse(Token)});
+        //console.log("nombre: " + Token2.nombre);
+        this.getInvitaciones();
+      };
     getPendientes(){
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
             method: 'post',
@@ -130,6 +181,16 @@ class HomeScreen extends Component {
                     style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
                         <Text style = {{color: 'white', textAlign:'center', fontSize:18}}>Tienes {this.state.dataSource.length} misiones sin evaluar</Text>
                     </TouchableOpacity>
+                </View>}
+                {this.state.hayInvitaciones &&
+                <View style={{ flex: 1 , backgroundColor: 'pink'}}>
+                <Button title="Tienes una nueva invitacion" onPress={this.toggleModal} />
+                <Modal isVisible={this.state.isModalVisible}>
+                    <View style={{ flex: 1 , backgroundColor:'white'}}>
+                        <Text>Hello!</Text>
+                        <Button title="Hide modal" onPress={this.toggleModal} />
+                    </View>
+                </Modal>
                 </View>}
             </View>
 

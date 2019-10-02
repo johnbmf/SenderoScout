@@ -12,6 +12,14 @@
 	$user_invitado = $obj['user_invitado'];
     $unidad_objetivo = $obj['unidad_objetivo'];
     //verificar si el Usuario ya existe
+    $sql1 = "SELECT * FROM invitacion_dirigente WHERE invitacion_dirigente.user_invitado = '$user_invitado' and invitacion_dirigente.estado = 0";
+    $res1 = $mysqli->query($sql1);
+    if($res1->num_rows > 0){
+        $response -> message = "El usuario ya cuenta con una invitación de esta unidad, por favor espere hasta que se acepte.";
+        $response -> respuesta = -2;
+        echo json_encode($response);
+        exit;
+    }
     $sql2 = "INSERT INTO  invitacion_dirigente (user_reclutador,user_invitado,unidad_objetivo) VALUES ('$user_reclutador','$user_invitado','$unidad_objetivo')";
     $res2 = $mysqli->query($sql2);
     if($res2 != false){
