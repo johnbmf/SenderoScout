@@ -38,7 +38,6 @@ public class Aptitudes : MonoBehaviour
     public GameObject DialogoText;
     public GameObject Barra;
     public GameObject Load;
-    public GameObject Faces;
 
     public GameObject OverlayGrande;
     #endregion
@@ -96,11 +95,11 @@ public class Aptitudes : MonoBehaviour
             else if (RespuestaJson["response"] == 1)
             {
                 //Guardar las evaluaciones localmente
-                Evaluaciones[0] = RespuestaJson["corpo"];
-                Evaluaciones[1] = RespuestaJson["creat"];
+                Evaluaciones[0] = RespuestaJson["socio"];
+                Evaluaciones[1] = RespuestaJson["corpo"];
                 Evaluaciones[2] = RespuestaJson["carac"];
-                Evaluaciones[3] = RespuestaJson["afect"];
-                Evaluaciones[4] = RespuestaJson["socio"];
+                Evaluaciones[3] = RespuestaJson["creat"];
+                Evaluaciones[4] = RespuestaJson["afect"];             
                 Evaluaciones[5] = RespuestaJson["espir"];
 
                 
@@ -117,6 +116,7 @@ public class Aptitudes : MonoBehaviour
 
     public void Testing(string mensaje, int animalFace)
     {
+        isPanelOpen = true;
         DialogoText.GetComponent<Text>().text = mensaje;
         //Load.GetComponent<Image>().fillAmount = Evaluaciones[animalFace] / 5;
         AptitudesCanvas.SetActive(true);
@@ -207,6 +207,6 @@ public class Aptitudes : MonoBehaviour
         }
         AptitudesCanvas.SetActive(false);
         OverlayGrande.SetActive(false);
-
+        isPanelOpen = false;
     }
 }

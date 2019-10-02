@@ -21,26 +21,29 @@ public class Raksha : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        float eval = Aptitudes.Evaluaciones[numAnimal];
-        string Mensaje = "Soy " + nombreAnimal + ". ";
-        //Mala evaluacion
-        if (eval >= 0 && eval < 2)
+        if (!Aptitudes.isPanelOpen)
         {
-            Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
-        }
+            float eval = Aptitudes.Evaluaciones[numAnimal];
+            string Mensaje = "Soy " + nombreAnimal + ". ";
+            //Mala evaluacion
+            if (eval >= 0 && eval < 2)
+            {
+                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+            }
 
-        //Media evaluacion
-        else if (eval >= 2 && eval < 3.5)
-        {
-            Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
-        }
+            //Media evaluacion
+            else if (eval >= 2 && eval < 3.5)
+            {
+                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+            }
 
-        else if (eval >= 3.5 && eval <= 5)
-        {
-            Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
-        }
+            else if (eval >= 3.5 && eval <= 5)
+            {
+                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+            }
 
-        PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);
+            PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);
+        }           
     }
 
 }
