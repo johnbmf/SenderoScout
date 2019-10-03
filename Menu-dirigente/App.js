@@ -17,6 +17,12 @@ import AutenticarScreen from './screens/autenticacion'
 import LoginScreen from './screens/login'
 import CrearCuentaScreen from './screens/crear_cuenta'
 import InvitarDirigenteScreen from './screens/invitar_dirigente'
+import CrearUnidadScreen from './screens/crear_unidad'
+import CambiarUnidadScreen from './screens/cambiar_unidad'
+import UnidadScreen from './screens/unidad'
+
+
+
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
   render() {
@@ -40,7 +46,11 @@ const CustomDrawerComponent = (props)=>(
 const StackNavigator = createStackNavigator({
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
+  Recomendaciones:RecomendacionesScreen,
   DetalleActividad: DetalleActividadScreen,
+  Unidad: UnidadScreen,
+  CrearUnidad:CrearUnidadScreen,
+  CambiarUnidad: CambiarUnidadScreen,
   }, {
     navigationOptions : {
         drawerLabel: 'Cacerías',
@@ -53,13 +63,16 @@ const StackNavigator = createStackNavigator({
   },{
     defaultNavigationOptions:{
       header: null
-    }}
+    }
+  }
 );
     }},
     {
       initialRouteName: 'Pendientes'
     }
-); 
+);
+
+
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
@@ -69,7 +82,11 @@ const AppDrawerNavigator = createDrawerNavigator({
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
+
   InvitarDirigente : InvitarDirigenteScreen,
+
+  Unidad:UnidadScreen,
+
   Settings:SettingsScreen,
 },{
   contentComponent: CustomDrawerComponent,
