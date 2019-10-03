@@ -14,16 +14,17 @@ import {Rating, Button, Divider } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
-
 import ActivityCard from '../CustomComponents/ActivityCard'
 
+var _ = require('lodash');
 const Actividades = require('../Local/Actividades.json')
 const RecomendadasTemplate = require('../Local/ActividadesRecomendadas.json')
-var RecomendadasJson = RecomendadasTemplate
+//var RecomendadasJson = RecomendadasTemplate
 //const RecomendacionesExistentes =  JSON.parse(AsyncStorage.getItem('Recomendaciones'))
 
 
 class recomendaciones extends Component {
+
 
     constructor(props){
         super(props)
@@ -46,6 +47,9 @@ class recomendaciones extends Component {
             //Recomendaciones locales
 
             RecomendacionesGuardadas: {},
+
+            //Recomendaciones Nuevas
+            RecomendacionesNuevas: {},
 
             //php response
             data: [],
@@ -159,7 +163,9 @@ class recomendaciones extends Component {
                     ptj_ordenados: ordenados,
 
                     setSmiles: true,
-                    isLoading:false
+                    isLoading:false,
+
+                    RecomendacionesNuevas: RecomendadasTemplate
                 })
             })
             .catch((error)=>{
@@ -207,15 +213,46 @@ class recomendaciones extends Component {
     }
 */
     WarningOpen = ()=> {
-        this.setState({warningState: true})
+
+        
+        if (this.state.setData){
+            console.log("Abriendo warning", this.state.warningState)
+            this.setState({warningState: true})
+        }
+        else{
+            console.log("Recomendando actividades SIN abrir Warning")
+            this.RecomendarActividades()
+        }
+
+        console.log("warning abierto", this.state.warningState)
     }
 
+    WarningCloseRecomendar = () => {
+        console.log("Cerrando warning con recomendacion", this.state.warningState)
+        //this.setState({warningState: false, recomendacionAutorizada: true})
+        this.setState({
+            warningState: false,
+            peor_recomendadas: [],
+            mal_recomendadas: [] ,
+            mejor_recomendadas: [],
+            fecha_inicio_recomendacion: "",
+            fehca_fin_recomendacion: "",
+            RecomendacionesNuevas: {},
+        })
+        console.log("Recomendando actividades con advertencia")
+        this.RecomendarActividades()
+        console.log("warning Cerrado con recomendacion", this.state.warningState)
+    }
+
+
     WarningClose = () => {
+        console.log("Cerrando warning", this.state.warningState)
         this.setState({warningState: false})
+        console.log("warning Cerrado", this.state.warningState)
     }
 
     WarningRecomendaciones(){
-        if(this.state.warningState){
+        if(this.state.warningState)
             return(
                 <View style = {styles.alert}>
                     <SCLAlert
@@ -226,27 +263,37 @@ class recomendaciones extends Component {
                     //subtitleContainerStyle = {{flex: 1, flexWrap: 'wrap'}}
                     subtitleStyle= {{fontSize: 16, fontWeight: 'bold'}}
                     onRequestClose = {this.WarningClose}>
-                    <SCLAlertButton theme="warning" onPress={this.RecomendarActividades()}>Recomendar</SCLAlertButton>
-                    <SCLAlertButton theme="success" onPress={() => {this.state.recomendacionAutorizada = true}}>Volver</SCLAlertButton>
+                    <SCLAlertButton theme="warning" onPress={this.WarningCloseRecomendar}>Recomendar</SCLAlertButton>
+                    <SCLAlertButton theme="success" onPress={this.WarningClose}>Volver</SCLAlertButton>
                     </SCLAlert>
                 </View>
             )
-        }
-        
     }
 
+    /*
 
-    RecomendarActividades(){
+    RecomendarActividades(autorizacion){
         
         //  3 del mas debil
         // 1 en el segundo mas debil
         // 2 del mas fuerte
-        if (this.state.setData && !this.state.recomendacionAutorizada){
-            this.WarningOpen()        }
+        //if (this.state.setData && !this.state.recomendacionAutorizada){
+            //this.WarningOpen()
+        //}
 
-        else{
-            if(this.state.recomendacionAutorizada){
+        //else{
+            //if(this.state.recomendacionAutorizada){
+            if(autorizacion){
+                console.log("Limpiando datos antes de recomendar")
                 RecomendadasJson = RecomendadasTemplate
+                this.setState({
+                    peor_recomendadas: [],
+                    mal_recomendadas: [],
+                    mejor_recomendadas: [],
+                    fecha_inicio_recomendacion: "",
+                    fehca_fin_recomendacion: ""
+
+                })
             }
 
             this.setState({isLoading:true})
@@ -255,9 +302,9 @@ class recomendaciones extends Component {
             var peores_count = 0;
             var malas_count = 0;
             var mejores_count =0;
-
+            
             var temp = {"Actividades":[]}
-
+            console.log(temp)
             console.log(ptj_ordenados)
             //Peores
 
@@ -323,11 +370,104 @@ class recomendaciones extends Component {
                 mejor_recomendadas: RecomendadasJson["Mejor_area"],
                 fecha_inicio_recomendacion: this.state.php_fecha_inicio,
                 fehca_fin_recomendacion: this.state.php_fecha_fin,
-                setData: true
+                setData: true,
+                //recomendacionAutorizada:false
             })
-        }
+        //}
 
     }
+    */
+
+   RecomendarActividades(){
+        
+    //  3 del mas debil
+    // 1 en el segundo mas debil
+    // 2 del mas fuerte
+    //if (this.state.setData && !this.state.recomendacionAutorizada){
+        //this.WarningOpen()
+    //}
+
+        this.setState({isLoading:true})
+
+        var ptj_ordenados = this.state.ptj_ordenados;
+        var peores_count = 0;
+        var malas_count = 0;
+        var mejores_count =0;
+        
+        var temp = {"Actividades":[]}
+        var ParaReecomendar = _.cloneDeep(RecomendadasTemplate)
+        console.log(temp)
+        console.log(ptj_ordenados)
+        //Peores
+
+        
+        while (peores_count < 3) {
+
+            r = Math.round(Math.random()* (Actividades[ptj_ordenados[0][0]].length - 1));
+            
+            console.log("El numer random es:" + r);
+            actividad_random = Actividades[ptj_ordenados[0][0]][r];
+            console.log("El nombre de la actividad es " + actividad_random["Nombre"])
+            
+            
+            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                temp["Actividades"].push(actividad_random)
+                ParaReecomendar["Peor_area"].push(actividad_random)
+                peores_count ++;
+            }
+        }
+
+        //Malas
+        while (malas_count < 1) {
+
+            r = Math.round(Math.random()* (Actividades[ptj_ordenados[1][0]].length - 1));
+            
+            console.log("El numer random es:" + r);
+            actividad_random = Actividades[ptj_ordenados[1][0]][r];
+            console.log("El nombre de la actividad es " + actividad_random["Nombre"])
+            
+
+            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                temp["Actividades"].push(actividad_random)
+                ParaReecomendar["Mal_area"].push(actividad_random)
+                malas_count ++;
+            }
+        }
+
+        //Mejores
+        while (mejores_count < 2) {
+
+            r = Math.round(Math.random()* (Actividades[ptj_ordenados[ptj_ordenados.length - 1][0]].length - 1));
+            
+            console.log("El numer random es:" + r);
+            actividad_random = Actividades[ptj_ordenados[(ptj_ordenados.length - 1)][0]][r];
+            console.log("El nombre de la actividad es " + actividad_random["Nombre"])
+            
+
+            if(Object.keys(temp["Actividades"].filter(obj => {return obj.Nombre === actividad_random["Nombre"]})).length < 1){
+                temp["Actividades"].push(actividad_random)
+                ParaReecomendar["Mejor_area"].push(actividad_random)
+                mejores_count++;
+            }
+        }
+
+        ParaReecomendar["fecha_inicio"] = this.state.php_fecha_inicio
+        ParaReecomendar["fecha_fin"] = this.state.php_fecha_fin
+
+        this.StoreRecomendaciones(ParaReecomendar)
+
+        this.setState({
+            peor_recomendadas: ParaReecomendar["Peor_area"],
+            mal_recomendadas: ParaReecomendar["Mal_area"] ,
+            mejor_recomendadas: ParaReecomendar["Mejor_area"],
+            fecha_inicio_recomendacion: this.state.php_fecha_inicio,
+            fehca_fin_recomendacion: this.state.php_fecha_fin,
+            RecomendacionesNuevas: ParaReecomendar,
+            setData: true,
+        })
+    //}
+
+}
 
     MostrarRecomendadas(){
     console.log("Estado de los datos", this.state.setData)
@@ -372,8 +512,8 @@ class recomendaciones extends Component {
                     
                     <Text style = {styles.observacion}>*Recomendaciones en base a las evaluaciones realizadas entre las fechas:</Text>
                     <View style = {{ flexDirection: 'row'}}>
-                        <Text style = {styles.observacion}>{this.state.php_fecha_inicio} y </Text>
-                        <Text style = {styles.observacion}>{this.state.php_fecha_fin} </Text>
+                        <Text style = {styles.observacion}>{this.state.fecha_inicio_recomendacion} y </Text>
+                        <Text style = {styles.observacion}>{this.state.fehca_fin_recomendacion} </Text>
                     </View>
                 </ScrollView>
             </View>
@@ -389,8 +529,8 @@ class recomendaciones extends Component {
             if (index > -1 && index < 2) {
                 return(
                     <Icon
-                        name = 'frown'
-                        type = "AntDesign"
+                        name = 'circle'
+                        type = 'FontAwesome'
                         style = {{fontSize: 20, color : '#d64242',alignContent: 'center', alignSelf: 'center' }}
                     />
                 )
@@ -399,8 +539,8 @@ class recomendaciones extends Component {
             else if (index > 1 && index < 4) {
                 return(
                     <Icon
-                        name = 'meho'
-                        type = "AntDesign"
+                        name = 'circle'
+                        type = 'FontAwesome'
                         style = {{fontSize: 20, color: '#f0e348',alignContent: 'center',alignSelf: 'center'}}
                     />
                 )
@@ -409,8 +549,8 @@ class recomendaciones extends Component {
             else if (index > 3 && index < 6){
                     return(
                         <Icon
-                            name = 'smile-circle'
-                            type = "AntDesign"
+                            name = 'circle'
+                            type = 'FontAwesome'
                             style = {{fontSize: 20, color : '#34c240',alignContent: 'center',alignSelf: 'center'}}
                         />
                     )
@@ -432,8 +572,9 @@ class recomendaciones extends Component {
     }
 
     render() {
-        console.log(this.SetWidth(100))
-        console.log(this.SetHeight(100))
+        console.log(RecomendadasTemplate)
+        //console.log("Ancho pantalla :",this.SetWidth(100))
+        //console.log("Alto pantalla: "this.SetHeight(100))
         return (
             <View style={styles.container}>
                 <View style={{width: '100%', height: this.SetHeight(12), alignItems:'center'}} >     
@@ -510,7 +651,7 @@ class recomendaciones extends Component {
                             </View>
                         </View>
                         <Button
-                            onPress = {()=> this.RecomendarActividades()}
+                            onPress = {() => {this.WarningOpen();}}
                             /*
                             icon = {
                                 <Icon
