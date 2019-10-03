@@ -20,6 +20,7 @@ import InvitarDirigenteScreen from './screens/invitar_dirigente'
 import CrearUnidadScreen from './screens/crear_unidad'
 import CambiarUnidadScreen from './screens/cambiar_unidad'
 import UnidadScreen from './screens/unidad'
+import CerrarSesionScreen from './screens/cerrar_sesion'
 
 
 
@@ -64,9 +65,7 @@ const StackNavigator = createStackNavigator({
     defaultNavigationOptions:{
       header: null
     }
-  }
-);
-    }},
+  },
     {
       initialRouteName: 'Pendientes'
     }
@@ -88,6 +87,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   Unidad:UnidadScreen,
 
   Settings:SettingsScreen,
+  CerrarSesion:CerrarSesionScreen
 },{
   contentComponent: CustomDrawerComponent,
   contentOptions:{

@@ -21,7 +21,6 @@
     "react-native-dynamic-search-bar": "^0.2.1",
     "react-native-dynamic-vector-icons": "WrathChaos/react-native-dynamic-vector-icons#expo",
     "react-native-easy-cached-image": "0.0.7",
-    "react-native-elements": "^1.1.0",
     "react-native-expo-image-cache": "^4.0.8",
     "react-native-fast-image": "^7.0.2",
     "react-native-gradient-card-view": "github:WrathChaos/react-native-gradient-card-view#expo",
