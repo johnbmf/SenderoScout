@@ -261,7 +261,7 @@ class recomendaciones extends Component {
                     title="Cuidado!"
                     subtitle= "Nuevas recomendaciones remplazaran, recomendaciones anteriores." 
                     //subtitleContainerStyle = {{flex: 1, flexWrap: 'wrap'}}
-                    subtitleStyle= {{fontSize: 16, fontWeight: 'bold'}}
+                    subtitleStyle= {{fontSize: 12, fontWeight: 'bold'}}
                     onRequestClose = {this.WarningClose}>
                     <SCLAlertButton theme="warning" onPress={this.WarningCloseRecomendar}>Recomendar</SCLAlertButton>
                     <SCLAlertButton theme="success" onPress={this.WarningClose}>Volver</SCLAlertButton>

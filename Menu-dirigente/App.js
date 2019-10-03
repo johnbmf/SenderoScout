@@ -13,6 +13,10 @@ import MiManadaScreen from './screens/mi_manada'
 import PendientesScreen from './screens/misiones_pendietes'
 import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 import DetalleActividadScreen from './screens/detalle_actividad'
+import CrearUnidadScreen from './screens/crear_unidad'
+//import CambiarUnidadScreen from './screens/cambiar_unidad'
+import UnidadScreen from './screens/unidad'
+
 
 
 //const {width} = Dimensions.get('window')
@@ -47,7 +51,9 @@ const StackNavigator = createStackNavigator({
   Evaluacion: EvaluacionScreen,
   Recomendaciones:RecomendacionesScreen,
   DetalleActividad: DetalleActividadScreen,
-
+  Unidad: UnidadScreen,
+  CrearUnidad:CrearUnidadScreen,
+  CambiarUnidad: CambiarUnidadScreen,
   }, {
     defaultNavigationOptions:{
       header: null
@@ -64,6 +70,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
+  Unidad:UnidadScreen,
   Settings:SettingsScreen,
 },{
   contentComponent: CustomDrawerComponent,
