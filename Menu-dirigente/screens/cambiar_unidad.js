@@ -52,7 +52,9 @@ class cambiar_unidad extends Component {
       usuario:'',
       refreshing: false,
       isLoading: true,
-      page: 1 
+      page: 1,
+      show1: false,
+      show2: false
       
     };
     if (Platform.OS === "android") {
@@ -179,6 +181,7 @@ class cambiar_unidad extends Component {
           error: null,
           loading: false,
           value2: text,
+          show1:true
         });
       })
       .catch(error => {
@@ -309,11 +312,82 @@ class cambiar_unidad extends Component {
           data2: []
         });
         // this.fetchData();
+        this.setState({
+        show2:true
+        });
       };
 
+show1() {
+    if (this.state.show1) {
+      return (
+        <View style={{ flex: 1 }}>
+        <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
+          <SearchBar 
+            onPressToFocus
+            autoFocus={false}
+            fontColor="#c6c6c6"
+            iconColor="#c6c6c6"
+            shadowColor="#002642"
+            cancelIconColor="#c6c6c6"
+            backgroundColor="#104F55"
+            placeholder="Ingresa nombre de la unidad..."
+            onChangeText={text2 => {
+              this.makeRemoteRequest2(text2);
+            }}
+            value2={this.state.value2} 
+            onPressCancel={() => {
+              this.makeRemoteRequest2("");
+            }}
+            onPress={() => alert("onPress")}
+            textInputValue={this.state.text2}
+          />
 
+        <FlatList
+        ItemSeparatorComponent={this.renderSeparator}
+        data = {this.state.data2}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre_unidad}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+               onPress={() => this.selectItem2(item.nombre_unidad,item.id)}
+            />
+          )}
+          keyExtractor={item => item.id}         
+        />
+        </View>
 
+      );
+  } else {
+      return null;
+  }
+}
 
+show2() {
+  
+  if(this.state.show2){
+    return(
+                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
+                    <Button 
+                    onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
+                    icon = {
+                        <Icon
+                        name= 'send'
+                        type= 'FontAwesome'
+                        style={{fontSize: 22, color: 'white'}}
+                        //color= '#ffffff'
+                        />
+                    }iconRight
+                    title = "Cambiar"
+                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    />
+                    </View>);
+
+  }
+  else{
+return null;
+  }
+}
   render() {
     return(
 
@@ -376,59 +450,9 @@ class cambiar_unidad extends Component {
         />
         </View>
         
-       
-        <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
-          <SearchBar 
-            onPressToFocus
-            autoFocus={false}
-            fontColor="#c6c6c6"
-            iconColor="#c6c6c6"
-            shadowColor="#002642"
-            cancelIconColor="#c6c6c6"
-            backgroundColor="#104F55"
-            placeholder="Ingresa nombre de la unidad..."
-            onChangeText={text2 => {
-              this.makeRemoteRequest2(text2);
-            }}
-            value2={this.state.value2} 
-            onPressCancel={() => {
-              this.makeRemoteRequest2("");
-            }}
-            onPress={() => alert("onPress")}
-            textInputValue={this.state.text2}
-          />
-        <View style={{ flex: 1 }}>
-        <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
-        data = {this.state.data2}
-        renderItem={({ item }) => (
-            <ListItem
-              title={`${item.nombre_unidad}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem2(item.nombre_unidad,item.id)}
-            />
-          )}
-          keyExtractor={item => item.id}         
-        />
-        </View>
-        <View style={{flex:1}}>
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-                    <Button 
-                    onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
-                    icon = {
-                        <Icon
-                        name= 'send'
-                        type= 'FontAwesome'
-                        style={{fontSize: 22, color: 'white'}}
-                        //color= '#ffffff'
-                        />
-                    }iconRight
-                    title = "Cambiar"
-                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
-                    />
-                    </View>
-        </View>
+       {this.show1()}
+       {this.show2()}
+        
         </View>
       </SafeAreaView>
       </View>

@@ -57,7 +57,7 @@ class Unidad extends Component {
                         </View>
                         <View>
                             <Button
-                                onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
+                                onPress = {()=> this.props.navigation.navigate('CambiarUnidad')}
                                 icon = {
                                     <Icon
                                     name= 'sign-direction'
