@@ -21,7 +21,7 @@ class mi_manada extends Component {
         super(props)
         this.state = {
             //datos usuarios
-            userToken :{},
+            userToken :"",
             seisena: 'default',
             unidad_dirigente: -1,
             setData: false, //si estan o no seteadas las recomendaciones ya sean locales o nuevas
@@ -47,12 +47,16 @@ class mi_manada extends Component {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({
             userToken : JSON.parse(Token),
-            unidad_dirigente: JSON.parse(Token).unidad1,
-            seisena: JSON.parse(Token).seisena1,
+            unidad_dirigente: JSON.parse(Token)["unidad1"],
+            seisena:JSON.parse(Token)["Seisena1"],
         });
+        this.getMiembros()
+        
       };
 
-    componentDidMount(){
+    getMiembros(){
+        console.log("Mi manda tokn", this.state.userToken);
+        
         console.log("unidad dir" , this.state.userToken.unidad1)
         this.setState({
             isLoading:true,    

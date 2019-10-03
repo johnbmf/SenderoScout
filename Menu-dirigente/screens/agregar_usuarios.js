@@ -161,14 +161,6 @@ class agregar_usuarios extends Component {
                 SendAlertMessage: "Debes agregar un nombre de usuario."
             },  ()=> {this.handleOpen()});
             return;
-        }else if( this.state.NombreNino==''){
-            this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Debes ingresar el nombre del niño."
-                }, ()=> {this.handleOpen()});
-            return;
         }else if(this.state.Email == ''){
             this.setState({
                 isLoading : true,
@@ -336,10 +328,10 @@ class agregar_usuarios extends Component {
                         //{...this.props}
                         multiline = {false}
                         //numberOfLines = {4}
-                        onChangeText={(valor) => this.setState({NombreNino : valor})}
-                        placeholder = "Nombre del niño"
+                        onChangeText={(valor) => this.setState({Usuario : valor})}
+                        placeholder = "Nombre de usuario"
                         keyboardType = 'default'
-                        value={this.state.NombreNino}                       
+                        value={this.state.Usuario}                       
                     />
                 </View>               
                 <View style={{width: '100%', height: '7%'}} >

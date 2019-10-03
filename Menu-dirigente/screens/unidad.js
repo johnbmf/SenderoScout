@@ -32,7 +32,7 @@ class Unidad extends Component {
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
                         <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
-                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Recomendaciones</Text>
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Gestión de Unidad</Text>
                         </Body>
                         <Right></Right>
                     </Header >                    
@@ -42,7 +42,7 @@ class Unidad extends Component {
                     <View style = {{width: '70%', height: '50%', alignItems: 'center', alignSelf: 'center'}} >
                         <View>
                             <Button
-                                onPress = {()=> this.props.navigation.navigate('CrearUnidad  ')}
+                                onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
                                 icon = {
                                     <Icon
                                         name = 'create'

@@ -19,7 +19,8 @@ import {
     FlatList,
     Platform,
     UIManager,
-    Image
+    Image,
+    AsyncStorage
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
@@ -44,7 +45,6 @@ class cambiar_unidad extends Component {
     super(props);
     this.state = {
       loading: false,
-      loading2: false,
       data: [],
       data2: [] ,
       error: null,
@@ -64,8 +64,15 @@ class cambiar_unidad extends Component {
       }
 
     this.arrayholder = [];
+    this._bootstrapAsync()
   }
-
+  _bootstrapAsync = async () => {
+    const Token = await AsyncStorage.getItem('userToken');
+    this.setState({
+        userToken : JSON.parse(Token),
+    });
+    
+  };
   ShowSendAlert(){
 
     if (this.state.SendAlertType == 0){
@@ -133,7 +140,7 @@ class cambiar_unidad extends Component {
                 {
                     nombre_n: text,
  
-                    id_unidad:1 //Change this
+                    id_unidad:this.state.userToken.unidad1 //Change this
                 })
  
             })
@@ -154,7 +161,7 @@ class cambiar_unidad extends Component {
   };
   
   makeRemoteRequest2(text) {
-    this.setState({ loading2: true,
+    this.setState({ loading: true,
     value2:this.state.value2,
     text2:text});
     fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
@@ -169,7 +176,7 @@ class cambiar_unidad extends Component {
                 {
                     nombre_u: text,
  
-                    id_unidad:1 //Change this
+                    id_unidad:this.state.userToken.unidad1 //Change this
                 })
  
             })
@@ -180,13 +187,13 @@ class cambiar_unidad extends Component {
           data2: responseData.data,
           message2: responseData.message,
           error: null,
-          loading2: false,
+          loading: false,
           value2: text,
           show1:true
         });
       })
       .catch(error => {
-        this.setState({ error, loading2: false });
+        this.setState({ error, loading: false });
       });
   };
 
@@ -295,14 +302,12 @@ class cambiar_unidad extends Component {
           value:Ite,
           text:Ite,
           usuario:usu,
-          data: [],
-          loading:true
+          data: []
         });
+        console.log(this.state.text)
+        console.log(this.state.value)
+        console.log(this.state.value)
         this.makeRemoteRequest2(this.text2)
-        this.setState({
-
-          loading:false
-        });
         // this.fetchData();
       };
 
@@ -331,7 +336,6 @@ show1() {
             fontColor="#c6c6c6"
             iconColor="#c6c6c6"
             shadowColor="#002642"
-            cancelIconComponent={this.charge2()}
             cancelIconColor="#c6c6c6"
             backgroundColor="#104F55"
             placeholder="Ingresa nombre de la unidad..."
@@ -396,16 +400,6 @@ return null;
 
 charge(){
   if(this.state.loading){
-    return(
-    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
-  }
-  else{
-    return(null)
-  }
-}
-
-charge2(){
-  if(this.state.loading2){
     return(
     <View><ActivityIndicator size="small" color="#81C14B" /></View>);
   }

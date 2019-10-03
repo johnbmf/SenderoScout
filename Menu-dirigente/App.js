@@ -49,9 +49,6 @@ const StackNavigator = createStackNavigator({
   Evaluacion: EvaluacionScreen,
   Recomendaciones:RecomendacionesScreen,
   DetalleActividad: DetalleActividadScreen,
-  Unidad: UnidadScreen,
-  CrearUnidad:CrearUnidadScreen,
-  CambiarUnidad: CambiarUnidadScreen,
   }, {
     navigationOptions : {
         drawerLabel: 'Cacerías',
@@ -70,8 +67,26 @@ const StackNavigator = createStackNavigator({
       initialRouteName: 'Pendientes'
     }
 );
+const CrearUnidadStack = createStackNavigator({
+  UnidadSwitch: UnidadScreen,
+  CrearUnidad : CrearUnidadScreen,
+  CambiarUnidad : CambiarUnidadScreen
+  },{
+    navigationOptions : {
+        drawerLabel: 'Gestion unidad',
+        drawerIcon: ({tintColor}) => (
+            <Icon name='star' style = {{fontSize:24,color:tintColor}} />
+        ),
+        header: null
 
-
+    },
+    defaultNavigationOptions:{
+      header: null
+    }},
+    {
+      initialRouteName: 'Unidad'
+    }
+  );
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
@@ -84,7 +99,7 @@ const AppDrawerNavigator = createDrawerNavigator({
 
   InvitarDirigente : InvitarDirigenteScreen,
 
-  Unidad:UnidadScreen,
+  Unidad:CrearUnidadStack,
 
   Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
@@ -99,6 +114,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   //drawerWidth: 200
 }
 )
+
 const RegisterStack = createStackNavigator({
   Login : LoginScreen,
   CrearCuenta: CrearCuentaScreen
@@ -107,6 +123,7 @@ const RegisterStack = createStackNavigator({
     header: null
   }}
 );
+
 const LoginNavigator = createSwitchNavigator({
   Autenticar: AutenticarScreen,
   Logear:RegisterStack,
@@ -119,6 +136,7 @@ const LoginNavigator = createSwitchNavigator({
       initialRouteName: 'Autenticar'
     }
 );
+
 const Apps = createAppContainer(LoginNavigator);
 const styles = StyleSheet.create({
   container: {

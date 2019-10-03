@@ -6,7 +6,8 @@ import {
     AsyncStorage,
     TouchableOpacity,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    RefreshControl
 
 } from "react-native";
 import { Header,Left,Right,Icon} from 'native-base'
@@ -52,12 +53,15 @@ class HomeScreen extends Component {
             SendAlertMessage: "Ha Ocurrido un error inesperado, Intentelo nuevamente.",
             SendAlertType: 0,
             update: false,
-            error: false
+            error: false,
+            refreshing:false
 
         }
         this._bootstrapAsync();
         
     }
+
+
     getInvitaciones = () => {
         fetch('http://www.mitra.cl/SS/get_invitaciones.php',{
             method: 'post',
@@ -104,10 +108,10 @@ class HomeScreen extends Component {
             id_unidad : id
         });
     };
-    componentDidUpdate(prevProps) {
+    componentDidUpdate() {
         if (this.state.update) {
-            this.getUser()
             this.getInvitaciones()
+            this.getUser()
             this.setState({update:false})
           // Use the `this.props.isFocused` boolean
           // Call any action
@@ -150,6 +154,7 @@ class HomeScreen extends Component {
         this.setState({userToken : JSON.parse(Token)});
         //console.log("nombre: " + Token2.nombre);
         this.getInvitaciones();
+        this.getUser();
       };
     responderInvitacion(estado,nombre_unidad1){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
@@ -223,6 +228,10 @@ class HomeScreen extends Component {
                 console.log(this.state.tkn);
                 storeItem('userToken',this.state.tkn[0])
                 if(this.state.tkn[0].user === this.state.usuario){
+                    this.setState({
+                        update: true,
+                        refreshing:false
+                    });
                 }
                 else{
                     this.setState({
@@ -400,8 +409,14 @@ class HomeScreen extends Component {
             </View>
         </Modal>
     );
+    onRefresh() {
+        //Clear old data of the list
+        //Call the Service to get the latest data
+        this.getUser();
+        this._bootstrapAsync();
+
+      }
     render() {
-        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Header style={{height:80,backgroundColor:'#81C14B',font:'Roboto'}}>
@@ -417,7 +432,12 @@ class HomeScreen extends Component {
                         <Text style={{fontSize:28, fontFamily:'Roboto', color: 'black', alignSelf:'center'}}>{this.state.userToken.nombre_unidad}</Text>
                     </View>
                 </View>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+                    refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
+                    }
+    >   
 
                 {this.state.userToken.unidad1 == 0 &&
                     <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>

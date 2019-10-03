@@ -483,7 +483,8 @@ class recomendaciones extends Component {
 
     MostrarRecomendadas(){
     console.log("Estado de los datos", this.state.setData)
-
+    console.log("Token Recomendadas", this.state.userToken);
+    
     if (this.state.setData) {
         return(
             <View style = {{width: '100%', height: '100%'}}>

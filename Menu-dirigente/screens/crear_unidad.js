@@ -12,12 +12,13 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    AsyncStorage
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
-import {Rating, Button } from 'react-native-elements'
+import {Rating, Button, ThemeConsumer } from 'react-native-elements'
 class crear_unidad extends Component {
     constructor(props){
         super(props);
@@ -29,8 +30,10 @@ class crear_unidad extends Component {
             SendAlertMessage: "Unidad creada con éxito.",
             SendAlertType: 2,
             isLoading:false,
+            userToken: "",
 
         }
+        this._bootstrapAsync()
     }
     static navigationOptions = {
         drawerLabel: 'Crear Unidad',
@@ -47,6 +50,13 @@ class crear_unidad extends Component {
             }
         )
     }
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        this.setState({
+            userToken : JSON.parse(Token),
+        });
+        
+      };
     crearUnidad = () =>
     {   
         if(this.state.nombre_unidad==''){
@@ -93,17 +103,17 @@ class crear_unidad extends Component {
 
                     distrito: this.state.distrito,
 
-                    usuario: 'Heimidall' //TOKEN
+                    usuario: this.state.userToken.user //TOKEN
                 })
  
             }).then((response) => response.json()).then((responseJson) => {
                 this.setState({
                     message: responseJson.message,
-                    id_unidad: responseJson.id_unidad,
+                    userToken : {unidad1 : responseJson.id_unidad},
                     usuario: responseJson.nombre_usuario,
                     isLoading : false,
                     SendAlertType:1
-                }, ()=> {this.handleOpen()})
+                }, ()=> {storeItem('userToken',this.state.userToken);this.handleOpen()})
             })
             .catch((error)=>{
                 console.error(error);
@@ -228,12 +238,88 @@ class crear_unidad extends Component {
                 );   
             }
         }
+
+puede(){
+    console.log("Puede", this.state.userToken)
+if(this.state.userToken.unidad1 == 0){
+    return(
+        <View style = {styles.container}>
+            <View style={{width: '100%', height: '7%'}} >
+                    <TextInput 
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        underlineColorAndroid = "transparent"
+                        maxLength = {60}
+                        //{...this.props}
+                        multiline = {true}
+                        numberOfLines = {4}
+                        onChangeText={(valor) => this.setState({nombre_unidad : valor})}
+                        placeholder = "Ingrese nombre de la unidad"
+                        value={this.state.nombre_unidad}
+                        />
+            </View>
+            <View style={{width: '100%', height: '7%'}} >             
+                    <TextInput 
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        underlineColorAndroid = "transparent"
+                        maxLength = {60}
+                        //{...this.props}
+                        multiline = {true}
+                        numberOfLines = {4}
+                        onChangeText={(valor) => this.setState({grupo : valor})}
+                        placeholder = "Ingrese nombre del grupo"
+                        value={this.state.grupo}
+                        />
+            </View>
+            <View style={{width: '100%', height: '7%'}} >
+                    <TextInput 
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        underlineColorAndroid = "transparent"
+                        maxLength = {60}
+                        //{...this.props}
+                        multiline = {true}
+                        numberOfLines = {4}
+                        onChangeText={(valor) => this.setState({distrito : valor})}
+                        placeholder = "Ingrese distrito"
+                        value={this.state.distrito}
+                        />
+        </View>
+        <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
+        <Button 
+        onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
+        icon = {
+            <Icon
+            name= 'send'
+            type= 'FontAwesome'
+            style={{fontSize: 22, color: 'white'}}
+            //color= '#ffffff'
+            />
+        }iconRight
+        title = "Crear   "
+        titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+        buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+        />
+        </View>
+
+        <View>
+            {this.LoadingState()}
+            {this.ShowSendAlert()}
+        </View>
+        </View>
+);
+}
+else{
+    <View style ={{width:'90%', height:'20%'}}>
+        <Text style={{fontSize: 22, color : 'black'}}>Ya tienes tu unidad correspondiente.</Text>
+    </View>
+}
+}
     render() {
     return (
 
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
+                
                 <View style = {styles.container}>
-                    <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
+                <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
                         
                         <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
                             <Left>
@@ -244,65 +330,7 @@ class crear_unidad extends Component {
                             </Body>
                         </Header > 
                     </View>
-                        <View style={{width: '100%', height: '7%'}} >
-                                <TextInput 
-                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
-                                    underlineColorAndroid = "transparent"
-                                    maxLength = {60}
-                                    //{...this.props}
-                                    multiline = {true}
-                                    numberOfLines = {4}
-                                    onChangeText={(valor) => this.setState({nombre_unidad : valor})}
-                                    placeholder = "Ingrese nombre de la unidad"
-                                    value={this.state.nombre_unidad}
-                                    />
-                        </View>
-                       <View style={{width: '100%', height: '7%'}} >             
-                                <TextInput 
-                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
-                                    underlineColorAndroid = "transparent"
-                                    maxLength = {60}
-                                    //{...this.props}
-                                    multiline = {true}
-                                    numberOfLines = {4}
-                                    onChangeText={(valor) => this.setState({grupo : valor})}
-                                    placeholder = "Ingrese nombre del grupo"
-                                    value={this.state.grupo}
-                                    />
-                        </View>
-                        <View style={{width: '100%', height: '7%'}} >
-                                <TextInput 
-                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
-                                    underlineColorAndroid = "transparent"
-                                    maxLength = {60}
-                                    //{...this.props}
-                                    multiline = {true}
-                                    numberOfLines = {4}
-                                    onChangeText={(valor) => this.setState({distrito : valor})}
-                                    placeholder = "Ingrese distrito"
-                                    value={this.state.distrito}
-                                    />
-                    </View>
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-                    <Button 
-                    onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
-                    icon = {
-                        <Icon
-                        name= 'send'
-                        type= 'FontAwesome'
-                        style={{fontSize: 22, color: 'white'}}
-                        //color= '#ffffff'
-                        />
-                    }iconRight
-                    title = "Crear   "
-                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
-                    />
-                    </View>
-                                        <View>
-                        {this.LoadingState()}
-                        {this.ShowSendAlert()}
-                    </View>
+                {this.puede()}
                 </View>
                 </ScrollView>
 
