@@ -23,11 +23,12 @@ public class Login : MonoBehaviour{
     public GameObject Instrucciones;
     public GameObject BotonAceptar;
     public GameObject BotonConfirmar;
-    public GameObject Terminos;
     public GameObject[] Inputs;
     public GameObject[] TextsInputs;
     public InputField[] PassInputs;
     public GameObject ErrorText;
+    public GameObject ScrollViewTerminos;
+    public GameObject ScrollViewCampos;
 
     #endregion
     public GameObject OverlayCanvas;
@@ -175,12 +176,9 @@ public class Login : MonoBehaviour{
 
     public void AceptarTerminos()
     {
-        Terminos.SetActive(false);
-        for (int i = 0; i < 5; i++)
-        {
-            Inputs[i].SetActive(true);
-        }
-        //Cambiar Instrucciones...
+        ScrollViewTerminos.SetActive(false);
+        ScrollViewCampos.SetActive(true);
+        Instrucciones.GetComponent<Text>().text = "Esta es la primera vez que inicias sesión en Sendero Scout!. Edita los campos a continuación para comenzar la aventura!";
         BotonAceptar.SetActive(false);
         BotonConfirmar.SetActive(true);
         numPage = 1;
@@ -314,12 +312,9 @@ public class Login : MonoBehaviour{
 
         else if (numPage == 1)
         {
-            Terminos.SetActive(true);
-            for (int i = 0; i < 5; i++)
-            {
-                Inputs[i].SetActive(false);
-            }
-            //Cambiar Instrucciones...
+            ScrollViewCampos.SetActive(false);
+            ScrollViewTerminos.SetActive(true);
+            Instrucciones.GetComponent<Text>().text = "Esta es la primera vez que inicias sesión en Sendero Scout!. Para comenzar, primero debes aceptar los términos y condiciones de uso que se presentan a continuación:";
             BotonAceptar.SetActive(true);
             BotonConfirmar.SetActive(false);
             ErrorText.SetActive(false);

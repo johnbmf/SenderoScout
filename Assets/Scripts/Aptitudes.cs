@@ -58,7 +58,6 @@ public class Aptitudes : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("name", PlayerPrefs.GetString("user", ""));
-
         UnityWebRequest www = UnityWebRequest.Post("http://www.mitra.cl/SS/GetAptitudes.php", form);
         yield return www.SendWebRequest();
 
