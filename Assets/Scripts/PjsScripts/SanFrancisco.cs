@@ -24,7 +24,7 @@ public class SanFrancisco : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + ". ";
+            string Mensaje = "Soy " + nombreAnimal + " el patrono de los Loabatos y represento al mundo Espiritual.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {

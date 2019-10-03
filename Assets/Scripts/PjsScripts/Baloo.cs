@@ -24,22 +24,22 @@ public class Baloo : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + ". ";
+            string Mensaje = "Soy " + nombreAnimal + " un oso sabio y amistoso. Represento al mundo del Caracter.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+                Mensaje += "¡Hey amigo! Creo que debemos trabajar un poco más en tu carácter, solo tenemos "+eval+" estrellas, recuerda que los lobatos somos ¡siempre mejor!";
             }
 
             //Media evaluacion
             else if (eval >= 2 && eval < 3.5)
             {
-                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+                Mensaje += "Lo estás haciendo bien, tienes eval estrellas. ¡Has estado mejorando, sigue así! Lo que es necesidad, no más ♫.";
             }
 
             else if (eval >= 3.5 && eval <= 5)
             {
-                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+                Mensaje += "¡Muy bien! Has alcanzado "+eval+ "estrellas, continua así y recuerda ¡Ser siempre mejor!.";
             }
 
             PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);

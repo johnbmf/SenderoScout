@@ -24,22 +24,22 @@ public class Akela : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + ". ";
+            string Mensaje = "Soy " + nombreAnimal + " un lobo sabio, generoso y jefe de la manada, represento al undo de la Sociabilidad.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+                Mensaje += "Para ser parte de la manada, recuerda ser siempre respetuoso y generoso con quienes te rodean, con "+eval+" estrellas tenemos que mejorar.\nPodrías comenzar con ser más amistoso con los demás lobatos.";
             }
 
             //Media evaluacion
             else if (eval >= 2 && eval < 3.5)
             {
-                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+                Mensaje += "Vas en buen camino para convertirte en un gran líder como yo. Sigue trabajando en equipo. Recuerda: que la fuerza de la manada es el lobo, y la fuerza de lobo es la manada.";
             }
 
             else if (eval >= 3.5 && eval <= 5)
             {
-                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+                Mensaje += "Eres un lobo muy generoso, con "+eval+" estrellas demuestras que eres ¡siempre mejor! Se fiel a tus amigos, expresa tu opinión, juega mientras puedas.";
             }
 
             PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);

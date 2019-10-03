@@ -24,22 +24,22 @@ public class Bagheera : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + ". ";
+            string Mensaje = "Soy " + nombreAnimal + " una pantera valiente, fuete y sigilosa, represento al mundo Corporal.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+                Mensaje += "Te he visto y debes comenzar a tener habitos más sanos, con "+eval+" estrellas, tenemos que mejorar algunas cosas.";
             }
 
             //Media evaluacion
             else if (eval >= 2 && eval < 3.5)
             {
-                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+                Mensaje += "Con "+eval+" estrellas has demostrado ser un lobato fuerte y sano, sigue así y podrás ser igual de fuerte y valiente como Bagheera.";
             }
 
             else if (eval >= 3.5 && eval <= 5)
             {
-                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+                Mensaje += "Te has convertido en un lobato muy fuerte y sano como Bagheera. ¡Continua así!";
             }
 
             PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);

@@ -24,22 +24,22 @@ public class Kaa : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + ". ";
+            string Mensaje = "Soy " + nombreAnimal + " una serpiente muy astuta y represento al mundo de la Creatividad.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+                Mensaje += "Para vivir en la manada necesitamos de toda tu creatividad, yo sé que tienes de sobra para poder ayudar a todos los lobatos. No dudes en siempre expresar tus ideas.";
             }
 
             //Media evaluacion
             else if (eval >= 2 && eval < 3.5)
             {
-                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+                Mensaje += "¡Vamos! Continua con esa creatividad que te hace tan especial, con "+eval+" estrellas sé que tienes grandes habilidades.";
             }
 
             else if (eval >= 3.5 && eval <= 5)
             {
-                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+                Mensaje += "Eres un lobato creativo, sigue así ¡Para vivir en la selva necesitas de toda tu creatividad!";
             }
 
             PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);

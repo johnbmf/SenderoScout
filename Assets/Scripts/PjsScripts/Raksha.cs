@@ -24,22 +24,22 @@ public class Raksha : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + ". ";
+            string Mensaje = "Soy " + nombreAnimal + " y represento al mundo de la Afectividad.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+                Mensaje += "Hijo mío, yo sé que eres un lobato afectuoso, solo debes tratar de demostrarlo.";
             }
 
             //Media evaluacion
             else if (eval >= 2 && eval < 3.5)
             {
-                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+                Mensaje += "Has hecho un gran avance en demostrarme lo amable, cariñoso y amistoso que eres, ¡continua así!";
             }
 
             else if (eval >= 3.5 && eval <= 5)
             {
-                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+                Mensaje += "Eres un lobato muy amistoso y afectuoso ¡Mi hijo es el más amable!";
             }
 
             PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);
