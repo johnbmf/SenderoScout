@@ -70,7 +70,7 @@ class DetalleActividad extends Component {
 
                         <View style={styles.campo}>
                             <Text style = {styles.textlabel}>Area desarrollo</Text>
-                            <Text style = {styles.textdata}>{data["Area"]}</Text>
+                            <Text style = {styles.textdata}>{data["Area"].join(', ')}</Text>
                         </View>
 
                         <View style={styles.campo}>
@@ -146,6 +146,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginLeft:20,
         alignContent: 'flex-start',
+        textAlign: 'left'
+
+
 
 
 
