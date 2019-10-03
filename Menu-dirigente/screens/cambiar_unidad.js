@@ -341,7 +341,7 @@ show1() {
             onPress={() => alert("onPress")}
             textInputValue={this.state.text2}
           />
-
+<ScrollView>
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data2}
@@ -354,6 +354,7 @@ show1() {
           )}
           keyExtractor={item => item.id}         
         />
+        </ScrollView>
         </View>
 
       );
@@ -388,10 +389,20 @@ show2() {
 return null;
   }
 }
+
+charge(){
+  if(this.state.loading){
+    return(
+    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
+  }
+  else{
+    return(null)
+  }
+}
   render() {
     return(
 
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
+        
                 <View style = {styles.container}>
                     <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
                         
@@ -412,12 +423,12 @@ return null;
         <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
           <SearchBar 
-          showLoading 
             onPressToFocus
             autoFocus={false}
             fontColor="#c6c6c6"
             iconColor="#c6c6c6"
             shadowColor="#002642"
+            cancelIconComponent={this.charge()}
             cancelIconColor="#c6c6c6"
             backgroundColor="#104F55"
             placeholder="Ingresa nombre del niño o niña..."
@@ -431,9 +442,9 @@ return null;
             onPress={() => alert("onPress")}
             textInputValue={this.state.text}
 
-
           />
         <View style={{ flex: 1 }}>
+        <ScrollView > 
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data}
@@ -448,15 +459,18 @@ return null;
           )}
           keyExtractor={item => item.user}         
         />
+        </ScrollView >
         </View>
         
-       {this.show1()}
-       {this.show2()}
+        <View style={styles.container}>{this.show1()}</View>
+      
+       <View style={styles.container}>{this.show2()}</View>
+       
         
         </View>
       </SafeAreaView>
       </View>
-      </ScrollView>
+      
     );
     }
 }
