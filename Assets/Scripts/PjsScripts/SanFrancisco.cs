@@ -28,18 +28,18 @@ public class SanFrancisco : MonoBehaviour
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Ponte las pilas porque estai mal wachito. Con un puntaje de " + eval + " no logramos nada.";
+                Mensaje += "Solo Tenemos "+eval+" estrellas, recuerda ser bueno con tus amigos y acércate más a tu familia.";
             }
 
             //Media evaluacion
             else if (eval >= 2 && eval < 3.5)
             {
-                Mensaje += "Estamos maoma. Con un puntaje de " + eval + " tal vez logramos algo wachito.";
+                Mensaje += "Con "+eval+" estrellas estamos en un buen nivel de espiritualidad. ¡Sigue siendo respetuoso con los demás!";
             }
 
             else if (eval >= 3.5 && eval <= 5)
             {
-                Mensaje += "Estamos perfect loco. Con un puntaje de " + eval + " hacemos la wea que queramos.";
+                Mensaje += "Hemos alcanzado un gran nivel en el mundo Espiritual. ¡Continua así!";
             }
 
             PortadorScript.GetComponent<Aptitudes>().Testing(Mensaje, numAnimal);
