@@ -198,11 +198,14 @@ public class Aptitudes : MonoBehaviour
         //Desactivar y devolver gameobjects a su nivel por defecto.
         AptitudesPanel.transform.localScale = new Vector3(0.9f, 0.9f, 1);
         Load.GetComponent<Image>().fillAmount = 0;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
-            StarOff[i].SetActive(true);
-            StarOn[i].GetComponent<Animator>().enabled = false;
-            StarOn[i].SetActive(false);
+            if (i < 5)
+            {
+                StarOff[i].SetActive(true);
+                StarOn[i].GetComponent<Animator>().enabled = false;
+                StarOn[i].SetActive(false);
+            }
             PersonajesPanel[i].SetActive(false);
         }
         CloseBoton.SetActive(false);

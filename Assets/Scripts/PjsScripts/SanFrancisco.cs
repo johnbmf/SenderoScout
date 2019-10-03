@@ -24,11 +24,11 @@ public class SanFrancisco : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + " el patrono de los Loabatos y represento al mundo Espiritual.\n\n";
+            string Mensaje = "Soy " + nombreAnimal + " el patrono de los Lobatos y represento al mundo Espiritual.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Solo Tenemos "+eval+" estrellas, recuerda ser bueno con tus amigos y acércate más a tu familia.";
+                Mensaje += "Solo tenemos "+eval+" estrellas, recuerda ser bueno con tus amigos y acércate más a tu familia.";
             }
 
             //Media evaluacion
