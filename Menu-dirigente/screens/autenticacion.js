@@ -12,11 +12,13 @@ import {
 export class autenticacion extends Component {
     constructor(props) {
         super(props);
-        AsyncStorage.clear();
+        //AsyncStorage.clear(); //<- descomentar esto solo si se quiere testear el login //
         this._bootstrapAsync();
       }
       _bootstrapAsync = async () => {
         const userToken = await AsyncStorage.getItem('userToken');
+        console.log(userToken);
+        
         this.props.navigation.navigate(userToken ? 'Home' : 'Logear');
       };
     render() {

@@ -34,6 +34,9 @@ class evaluacion extends Component {
             SendAlertType: 0,
         }
     }
+    static navigationOptions = {
+        header: null
+    }
     ratingCompleted = (rating2) => {
         this.setState({rating : rating2})
      }

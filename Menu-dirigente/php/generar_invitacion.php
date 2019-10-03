@@ -8,36 +8,28 @@
 	 // decoding the received JSON and store into $obj variable.
 	 $obj = json_decode($json,true);
 	 // name store into variables.
-	$user = $obj['user'];
-	$password = $obj['password'];
-	$email = $obj['email'];
-	$confirmacion_email = (int) $obj['confirmacion_email'];
-    //$seisena1 =$obj['seisena1'];
-    //$edad = (int) $obj['edad'];
-    $tipo = $obj['tipo'];
-    $nombre = $obj['nombre'];
-    //$pseudonimo = $obj['pseudonimo'];
-    $puntos = (int) $obj['puntos'];
-
+	$user_reclutador = $obj['user_reclutador'];
+	$user_invitado = $obj['user_invitado'];
+    $unidad_objetivo = $obj['unidad_objetivo'];
     //verificar si el Usuario ya existe
-    $sql1 = "SELECT * FROM Usuario WHERE user = '$user' ";
+    $sql1 = "SELECT * FROM invitacion_dirigente WHERE invitacion_dirigente.user_invitado = '$user_invitado' and invitacion_dirigente.estado = 0";
     $res1 = $mysqli->query($sql1);
     if($res1->num_rows > 0){
-        $response -> message = "Usuario ya existe, intente con otro nombre de usuario";
-        $response -> respuesta = 1;
+        $response -> message = "El usuario ya cuenta con una invitación de esta unidad, por favor espere hasta que se acepte.";
+        $response -> respuesta = -2;
         echo json_encode($response);
         exit;
     }
-    $sql2 = "INSERT INTO  Usuario (user,password,email,confirmacion_email,tipo,nombre) VALUES ('$user','$password','$email','$confirmacion_email','$tipo','$nombre')";
+    $sql2 = "INSERT INTO  invitacion_dirigente (user_reclutador,user_invitado,unidad_objetivo) VALUES ('$user_reclutador','$user_invitado','$unidad_objetivo')";
     $res2 = $mysqli->query($sql2);
     if($res2 != false){
-        $response -> message = "Usuario creado con éxito.";
+        $response -> message = "Invitacion enviada con éxito.";
         $response -> respuesta = 0;
         echo json_encode($response);
         exit;
     }else{
-        $response -> message = "Usuario ya existe, intente con otro nombre de usuario";
-        $response -> respuesta = 1;
+        $response -> message = "Hubo un error en el envío de la invitación, intente nuevamente.";
+        $response -> respuesta = -1;
         echo json_encode($response);
         exit;
     }

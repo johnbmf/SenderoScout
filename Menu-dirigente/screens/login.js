@@ -19,6 +19,20 @@ const DismissKeyboard = ({children}) => (
         {children}
     </TouchableWithoutFeedback>
 );
+storeItem = async (key,item) =>{
+    try {
+        var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+
+        if (jsonOfItem !== null){
+            console.log("Datos obtenidos con exito AsyncStorage")
+            //console.log(value)
+        }
+    }catch (error) {
+        console.log("Error al obtener datos AsyncStorage")
+    }
+
+       
+};
 const IsOK = () => (
     <View style = {{ width:'90%', height:'15%', alignItems:'center', justifyContent: 'center', backgroundColor:'#d7576b'}}>
     <Text style= {{
@@ -65,7 +79,7 @@ export class login extends Component {
                     
                 })
                 console.log(this.state.dataSource);
-                AsyncStorage.setItem('userToken',this.state.dataSource);
+                storeItem('userToken',this.state.dataSource[0])
                 if(this.state.dataSource[0].user === this.state.usuario){
                     this.props.navigation.navigate('Home')
                 }

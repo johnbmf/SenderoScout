@@ -7,13 +7,10 @@
 	 // decoding the received JSON and store into $obj variable.
 	 $obj = json_decode($json,true);
 	 // name store into $tipo_mision.
-    $usuario = $obj['usuario'];
-    $password = $obj['password'];
+    $grupo = $obj['grupo'];
+    $user = obj['usuario'];
 	$query = "
-    SELECT Usuario.user, Usuario.nombre, Usuario.pseudonimo, Usuario.edad, Usuario.email, Usuario.seisena1, Usuario.tipo, Usuario.grupo, Usuario.unidad1, Unidad.nombre_unidad
-    FROM 
-    Usuario LEFT JOIN Unidad on Usuario.unidad1 = Unidad.id
-    WHERE Usuario.user = '$usuario' AND Usuario.password = '$password';
+    SELECT Usuario.user,Usuario.nombre  FROM `Usuario` WHERE Usuario.grupo = '$grupo' and Usuario.user <> '$user'
     ";
     if($result = $mysqli->query($query)){
         while($row = $result -> fetch_array(MYSQLI_ASSOC)){
@@ -23,3 +20,7 @@
     }
   mysqli_close($mysqli);
 ?>
+
+
+
+

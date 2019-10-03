@@ -38,10 +38,7 @@ class crear_mision extends Component {
         }
     }
         static navigationOptions = {
-            drawerLabel: 'Cacerías',
-            drawerIcon: ({tintColor}) => (
-                <Icon name='star' style = {{fontSize:24,color:tintColor}} />
-            )
+            header: null
         }
         componentDidMount(){        
             fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
