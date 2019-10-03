@@ -64,7 +64,7 @@ class recomendaciones extends Component {
             mensaje: "",
             ptj_ordenados: []
         }
-        //AsyncStorage.clear()
+        AsyncStorage.clear()
         this.GetRecomendaciones()
     }
     static navigationOptions = {
