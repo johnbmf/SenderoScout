@@ -28,7 +28,7 @@ public class Akela : MonoBehaviour
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {
-                Mensaje += "Para ser parte de la manada, recuerda ser siempre respetuoso y generoso con quienes te rodean, con "+eval+" estrellas tenemos que mejorar.\nPodrías comenzar con ser más amistoso con los demás lobatos.";
+                Mensaje += "Para ser parte de la manada, recuerda ser siempre respetuoso y generoso con quienes te rodean, con "+eval+" estrellas tenemos que mejorar. Podrías comenzar con ser más amistoso con los demás lobatos.";
             }
 
             //Media evaluacion
