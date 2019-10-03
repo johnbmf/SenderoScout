@@ -33,11 +33,11 @@ public class Aptitudes : MonoBehaviour
     #region AptitudesCanvasVars
     public GameObject AptitudesCanvas;
     public GameObject AptitudesPanel;
-    public GameObject Animal;
     public GameObject DialogoFrame;
     public GameObject DialogoText;
     public GameObject Barra;
     public GameObject Load;
+    public GameObject CloseBoton;
 
     public GameObject OverlayGrande;
     #endregion
@@ -190,6 +190,7 @@ public class Aptitudes : MonoBehaviour
             StarOn[i].GetComponent<Animator>().enabled = true;
         }
         t = 0.0f;
+        CloseBoton.SetActive(true);
         yield return null;
     }
 
@@ -205,6 +206,7 @@ public class Aptitudes : MonoBehaviour
             StarOn[i].SetActive(false);
             PersonajesPanel[i].SetActive(false);
         }
+        CloseBoton.SetActive(false);
         AptitudesCanvas.SetActive(false);
         OverlayGrande.SetActive(false);
         isPanelOpen = false;

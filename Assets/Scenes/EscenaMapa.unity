@@ -2200,11 +2200,11 @@ MonoBehaviour:
   - {fileID: 568295348}
   AptitudesCanvas: {fileID: 8697244}
   AptitudesPanel: {fileID: 1675040804}
-  Animal: {fileID: 1485681290}
   DialogoFrame: {fileID: 468211899}
   DialogoText: {fileID: 1217602224}
   Barra: {fileID: 111871271}
   Load: {fileID: 812245025}
+  CloseBoton: {fileID: 1484483464}
   OverlayGrande: {fileID: 1690499181}
 --- !u!1 &201012246
 GameObject:
@@ -12395,7 +12395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1484483465
 RectTransform:
   m_ObjectHideFlags: 0
