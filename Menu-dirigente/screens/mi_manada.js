@@ -20,8 +20,10 @@ class mi_manada extends Component {
     constructor(props){
         super(props)
         this.state = {
-            unidad_dirigente: 1,
-            sisena: "Amarilla",
+            //datos usuarios
+            userToken :{},
+            seisena: 'default',
+            unidad_dirigente: -1,
             setData: false, //si estan o no seteadas las recomendaciones ya sean locales o nuevas
             setSmiles: false,
             isLoading: false,
@@ -30,8 +32,8 @@ class mi_manada extends Component {
             respuesta : -1,
             cantidad: -1,
             miembros: []
-  
-        }
+        };
+        this._bootstrapAsync();
     }
     
     static navigationOptions = {
@@ -41,7 +43,17 @@ class mi_manada extends Component {
         )
     }
 
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        this.setState({
+            userToken : JSON.parse(Token),
+            unidad_dirigente: JSON.parse(Token).unidad1,
+            seisena: JSON.parse(Token).seisena1,
+        });
+      };
+
     componentDidMount(){
+        console.log("unidad dir" , this.state.userToken.unidad1)
         this.setState({
             isLoading:true,    
         })
@@ -53,7 +65,7 @@ class mi_manada extends Component {
                     'Content-Type': 'application/json',
                 },
                 body:JSON.stringify({
-                    "unidad":this.state.unidad_dirigente,
+                    "unidad": this.state.unidad_dirigente
                 })
             })
             .then(response => response.json())

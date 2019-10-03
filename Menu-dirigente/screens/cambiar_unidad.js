@@ -44,6 +44,7 @@ class cambiar_unidad extends Component {
     super(props);
     this.state = {
       loading: false,
+      loading2: false,
       data: [],
       data2: [] ,
       error: null,
@@ -153,7 +154,7 @@ class cambiar_unidad extends Component {
   };
   
   makeRemoteRequest2(text) {
-    this.setState({ loading: true,
+    this.setState({ loading2: true,
     value2:this.state.value2,
     text2:text});
     fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
@@ -179,13 +180,13 @@ class cambiar_unidad extends Component {
           data2: responseData.data,
           message2: responseData.message,
           error: null,
-          loading: false,
+          loading2: false,
           value2: text,
           show1:true
         });
       })
       .catch(error => {
-        this.setState({ error, loading: false });
+        this.setState({ error, loading2: false });
       });
   };
 
@@ -294,12 +295,14 @@ class cambiar_unidad extends Component {
           value:Ite,
           text:Ite,
           usuario:usu,
-          data: []
+          data: [],
+          loading:true
         });
-        console.log(this.state.text)
-        console.log(this.state.value)
-        console.log(this.state.value)
         this.makeRemoteRequest2(this.text2)
+        this.setState({
+
+          loading:false
+        });
         // this.fetchData();
       };
 
@@ -328,6 +331,7 @@ show1() {
             fontColor="#c6c6c6"
             iconColor="#c6c6c6"
             shadowColor="#002642"
+            cancelIconComponent={this.charge2()}
             cancelIconColor="#c6c6c6"
             backgroundColor="#104F55"
             placeholder="Ingresa nombre de la unidad..."
@@ -341,7 +345,7 @@ show1() {
             onPress={() => alert("onPress")}
             textInputValue={this.state.text2}
           />
-
+<ScrollView>
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data2}
@@ -354,6 +358,7 @@ show1() {
           )}
           keyExtractor={item => item.id}         
         />
+        </ScrollView>
         </View>
 
       );
@@ -388,10 +393,30 @@ show2() {
 return null;
   }
 }
+
+charge(){
+  if(this.state.loading){
+    return(
+    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
+  }
+  else{
+    return(null)
+  }
+}
+
+charge2(){
+  if(this.state.loading2){
+    return(
+    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
+  }
+  else{
+    return(null)
+  }
+}
   render() {
     return(
 
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
+        
                 <View style = {styles.container}>
                     <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
                         
@@ -412,12 +437,12 @@ return null;
         <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
           <SearchBar 
-          showLoading 
             onPressToFocus
             autoFocus={false}
             fontColor="#c6c6c6"
             iconColor="#c6c6c6"
             shadowColor="#002642"
+            cancelIconComponent={this.charge()}
             cancelIconColor="#c6c6c6"
             backgroundColor="#104F55"
             placeholder="Ingresa nombre del niño o niña..."
@@ -431,9 +456,9 @@ return null;
             onPress={() => alert("onPress")}
             textInputValue={this.state.text}
 
-
           />
         <View style={{ flex: 1 }}>
+        <ScrollView > 
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data}
@@ -448,15 +473,18 @@ return null;
           )}
           keyExtractor={item => item.user}         
         />
+        </ScrollView >
         </View>
         
-       {this.show1()}
-       {this.show2()}
+        <View style={styles.container}>{this.show1()}</View>
+      
+       <View style={styles.container}>{this.show2()}</View>
+       
         
         </View>
       </SafeAreaView>
       </View>
-      </ScrollView>
+      
     );
     }
 }

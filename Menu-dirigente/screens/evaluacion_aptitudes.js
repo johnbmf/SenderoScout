@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Modal,
     ActivityIndicator,
+    AsyncStorage,
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
@@ -26,9 +27,13 @@ class evalaptitudes extends Component {
     constructor(props){
         super(props)
         this.state = {
+            //datos usuarios
+            unidad_dirigente: -1,
+            userToken:{},
+            seisena: 'default',
+
             isLoading: false,
             PickerValue: 'default',
-            seisena: 'default',
             dataSource: [],
             users:[],
             nombres: [],
@@ -47,8 +52,18 @@ class evalaptitudes extends Component {
             SendAlertMessage: "Ha Ocurrido un error inesperado, Intentelo nuevamente.",
             SendAlertType: 0,
         };
+        this._bootstrapAsync
     }
-    //componentDidMount(){
+
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        console.log("Token ",JSON.parse(Token))
+        this.state.userToken = JSON.parse(Token)
+        this.state.unidad_dirigente = JSON.parse(Token)["unidad1"]
+        this.state.seisena = JSON.parse(Token)["Seisena1"]
+        console.log("TEst", JSON.parse(Token)["unidad1"])
+      };
+    
     GetUsers =(SeisenaValue) => {
         this.setState({seisena: SeisenaValue})
         
@@ -82,7 +97,10 @@ class evalaptitudes extends Component {
             });
         }
     }
-
+    componentDidMount(){
+        console.log("recomendacion",this.state.userToken)
+        this.GetUsers(this.state.seisena)
+    }
 
     EnviarEvaluacion = () =>{
 
@@ -276,15 +294,9 @@ class evalaptitudes extends Component {
                     <View style ={{width: '100%', height: '20%'}}>
                         
                         <View syle ={styles.Picker}>
-                            <Picker 
-                                selectedValue = {this.state.seisena}
-                                style = {{width: '60%', height: '50%', borderColor:'gray', borderWidth: 5, alignItems:'center', justifyContent:'center'/*, alignSelf:'center'*/}}
-                                itemStyle={{height: '50%', width:'100%',fontSize: 20}}
-                                onValueChange = {(itemValue, itemIndex) => this.GetUsers(itemValue)}>
-                                <Picker.Item label = 'Seleccione una Seisena' value = {'default'}/>
-                                <Picker.Item label = "Seisena Amarilla" value = {"Amarilla"}/>
-                                <Picker.Item label = "Seisena Gris" value = {"Gris"}/>
-                            </Picker>
+                            
+
+                            
                             <Picker 
                                 selectedValue = {this.state.PickerValue}
                                 style = {{width: '60%', height: '50%', borderColor:'gray', borderWidth: 5, alignItems:'center', justifyContent:'center' /*, alignSelf:'center'*/}}
