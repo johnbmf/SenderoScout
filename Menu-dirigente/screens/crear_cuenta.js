@@ -79,7 +79,7 @@ export class crear_cuenta extends Component {
             <DismissKeyboard>
             <View style={styles.container}>
                 <View style = {{ width:'100%', height:'15%', alignItems:'center', justifyContent: 'center'}}> 
-                <Text style= {styles.banner}>Bienvenido</Text>
+                    <Text style= {styles.banner}>Bienvenido</Text>
                 </View>
 
                 <View style = {{ width:'100%', height:'85%', alignItems:'center', justifyContent:'space-between',borderBottomColor: 'black',borderBottomWidth: StyleSheet.hairlineWidth}}>

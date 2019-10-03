@@ -13,7 +13,7 @@
     SELECT Usuario.user, Usuario.nombre, Usuario.pseudonimo, Usuario.edad, Usuario.email, Usuario.seisena1, Usuario.tipo, Usuario.grupo, Usuario.unidad1, Unidad.nombre_unidad
     FROM 
     Usuario LEFT JOIN Unidad on Usuario.unidad1 = Unidad.id
-    WHERE Usuario.user = '$usuario' AND Usuario.password = '$password';
+    WHERE Usuario.user = '$usuario';
     ";
     if($result = $mysqli->query($query)){
         while($row = $result -> fetch_array(MYSQLI_ASSOC)){
