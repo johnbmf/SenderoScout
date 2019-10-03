@@ -5,7 +5,6 @@ import {
     StyleSheet,
     Picker,
     TextInput,
-    Button,
     Modal,
     TouchableWithoutFeedback,
     Keyboard,
@@ -19,12 +18,13 @@ import {
     ActivityIndicator,
     FlatList,
     Platform,
-    UIManager
+    UIManager,
+    Image
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
-import { List, ListItem} from "react-native-elements";
+import { List, ListItem, Button} from "react-native-elements";
 import GradientCard from "react-native-gradient-card-view";
 import SearchBar from "react-native-dynamic-search-bar";
 import { CustomLayoutSpring } from "react-native-animation-layout";
@@ -52,7 +52,9 @@ class cambiar_unidad extends Component {
       usuario:'',
       refreshing: false,
       isLoading: true,
-      page: 1 
+      page: 1,
+      show1: false,
+      show2: false
       
     };
     if (Platform.OS === "android") {
@@ -179,6 +181,7 @@ class cambiar_unidad extends Component {
           error: null,
           loading: false,
           value2: text,
+          show1:true
         });
       })
       .catch(error => {
@@ -309,73 +312,15 @@ class cambiar_unidad extends Component {
           data2: []
         });
         // this.fetchData();
+        this.setState({
+        show2:true
+        });
       };
-      reset(){
-        this.setState({
-          data: []
-        });
-      }
-      reset2(){
-        this.setState({
-          data2: []
-        });
-      }
 
-  render() {
-    return(
-
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
-                <View style = {styles.container}>
-                    <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
-                        
-                        <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
-                            <Left>
-                                <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
-                            </Left>
-                            <Body style = {{justifyContent:'center'}}> 
-                                <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Cambiar Unidad</Text>
-                            </Body>
-                        </Header > 
-                    </View>
-
-        <SafeAreaView style={{ flex: 1}}>
-        <StatusBar barStyle={"light-content"} />
-        <Text>Seleccione niño o niña que desea cambiar de unidad: {this.state.value}:</Text>
-        <View style={styles.container}>
-          <SearchBar 
-            onPressToFocus
-            autoFocus={false}
-            fontColor="#c6c6c6"
-            iconColor="#c6c6c6"
-            shadowColor="#002642"
-            cancelIconColor="#c6c6c6"
-            backgroundColor="#104F55"
-            placeholder="Ingresa nombre del niño o niña..."
-            onChangeText={text => {
-              this.makeRemoteRequest(text);
-            }}
-            value={this.state.text} 
-            onPressCancel={() => {
-              this.makeRemoteRequest('');
-            }}
-            onPress={() => alert("onPress")}
-          />
+show1() {
+    if (this.state.show1) {
+      return (
         <View style={{ flex: 1 }}>
-        <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
-        data = {this.state.data}
-        renderItem={({ item }) => (
-            <ListItem
-              title={`${item.nombre}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem(item.nombre,item.user)}
-            />
-          )}
-          keyExtractor={item => item.user}         
-        />
-        </View>
-        
-       
         <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
           <SearchBar 
             onPressToFocus
@@ -394,8 +339,9 @@ class cambiar_unidad extends Component {
               this.makeRemoteRequest2("");
             }}
             onPress={() => alert("onPress")}
+            textInputValue={this.state.text2}
           />
-        <View style={{ flex: 1 }}>
+
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data2}
@@ -409,7 +355,17 @@ class cambiar_unidad extends Component {
           keyExtractor={item => item.id}         
         />
         </View>
-        <View style={styles.container}>
+
+      );
+  } else {
+      return null;
+  }
+}
+
+show2() {
+  
+  if(this.state.show2){
+    return(
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
                     <Button 
                     onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
@@ -425,8 +381,78 @@ class cambiar_unidad extends Component {
                     titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
                     buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
                     />
+                    </View>);
+
+  }
+  else{
+return null;
+  }
+}
+  render() {
+    return(
+
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
+                <View style = {styles.container}>
+                    <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
+                        
+                        <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                            <Left>
+                                <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                            </Left>
+                            <Body style = {{justifyContent:'center'}}> 
+                                <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Cambiar Unidad</Text>
+                            </Body>
+                        </Header > 
                     </View>
+                    <View style={{width: '100%', height: '5%', alignItems:'center'}} > 
+                      
+                    </View>
+        <SafeAreaView style={{ flex: 1}}>
+        <StatusBar barStyle={"light-content"} />
+        <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
+        <View style={styles.container}>
+          <SearchBar 
+          showLoading 
+            onPressToFocus
+            autoFocus={false}
+            fontColor="#c6c6c6"
+            iconColor="#c6c6c6"
+            shadowColor="#002642"
+            cancelIconColor="#c6c6c6"
+            backgroundColor="#104F55"
+            placeholder="Ingresa nombre del niño o niña..."
+            onChangeText={text => {
+              this.makeRemoteRequest(text);
+            }}
+            value={this.state.text} 
+            onPressCancel={() => {
+              this.makeRemoteRequest('');
+            }}
+            onPress={() => alert("onPress")}
+            textInputValue={this.state.text}
+
+
+          />
+        <View style={{ flex: 1 }}>
+        <FlatList
+        ItemSeparatorComponent={this.renderSeparator}
+        data = {this.state.data}
+        renderItem={({ item }) => (
+            <ListItem
+            roundAvatar
+              title={`${item.nombre}`}
+              containerStyle={{ borderBottomWidth: 0 }} 
+               onPress={() => this.selectItem(item.nombre,item.user)}
+               avatar = {<Image source={require('../assets/perfil.png')}/>}
+            />
+          )}
+          keyExtractor={item => item.user}         
+        />
         </View>
+        
+       {this.show1()}
+       {this.show2()}
+        
         </View>
       </SafeAreaView>
       </View>

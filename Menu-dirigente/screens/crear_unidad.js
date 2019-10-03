@@ -5,7 +5,6 @@ import {
     StyleSheet,
     Picker,
     TextInput,
-    Button,
     Modal,
     TouchableWithoutFeedback,
     Keyboard,
@@ -18,6 +17,7 @@ import {
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
+import {Rating, Button } from 'react-native-elements'
 class crear_unidad extends Component {
     constructor(props){
         super(props);
@@ -75,7 +75,7 @@ class crear_unidad extends Component {
             }, ()=> {this.handleOpen()});
             return;
         }else {
-        this.setState({ loading: true, disabled: true }, () =>
+        this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Unidad creada con éxito" }, () =>
         {
             fetch('http://www.mitra.cl/SS/crearUnidad.php',
             {
@@ -91,11 +91,16 @@ class crear_unidad extends Component {
  
                     grupo: this.state.grupo,
 
-                    distrito: this.state.distrito
+                    distrito: this.state.distrito,
+
+                    usuario: 'Heimidall' //TOKEN
                 })
  
             }).then((response) => response.json()).then((responseJson) => {
                 this.setState({
+                    message: responseJson.message,
+                    id_unidad: responseJson.id_unidad,
+                    usuario: responseJson.nombre_usuario,
                     isLoading : false,
                     SendAlertType:1
                 }, ()=> {this.handleOpen()})
@@ -225,7 +230,7 @@ class crear_unidad extends Component {
         }
     render() {
     return (
-                <KeyboardAvoidingView style = {{flex:1}} behavior = "padding">
+
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}> 
                 <View style = {styles.container}>
                     <View style={{width: '100%', height: '12%', alignItems:'center'}} > 
@@ -300,7 +305,7 @@ class crear_unidad extends Component {
                     </View>
                 </View>
                 </ScrollView>
-                </KeyboardAvoidingView>
+
     );
 
     }
