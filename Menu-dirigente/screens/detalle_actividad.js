@@ -16,14 +16,8 @@ import { ScrollView, FlatList } from "react-native-gesture-handler";
 const Actividades = require('../Local/Actividades.json')
 
 
-class evalaptitudes extends Component {
+class DetalleActividad extends Component {
     
-    static navigationOptions = {
-        drawerLabel: 'Consejo de la Tarde',
-        drawerIcon: ({tintColor}) => (
-            <Icon name='angellist' type = 'FontAwesome' style = {{fontSize:24,color:tintColor}} />
-        )
-    }
 
     constructor(props){
         super(props)
@@ -43,7 +37,7 @@ class evalaptitudes extends Component {
     }
 
     render() {
-
+        const data = this.props.navigation.getParam('data', {});
         console.log(this.state.TestRecomendaciones)
 
         //console.log(this.state.Actividad_seleccionada["Nombre"])
@@ -64,53 +58,54 @@ class evalaptitudes extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <View style = {{width: '100%', height: '88%',alignItems: 'center'}}>
+                <View elevation = {5} style = {{width: '100%', height: '88%',alignItems: 'center'}}>
                     
                     <View style = {{width: '100%', height: '5%'}}></View>
                     
                     <View style = {{width: '100%', height: '20%', flexDirection: 'column'}}>
                         <View style={styles.campo}>
                             <Text style = {styles.textlabel}>Nombre</Text>
-                            <Text style = {styles.textdata}>{this.state.Actividad_seleccionada["Nombre"]}</Text>
+                            <Text style = {styles.textdata}>{data["Nombre"]}</Text>
                         </View>
 
                         <View style={styles.campo}>
                             <Text style = {styles.textlabel}>Area desarrollo</Text>
-                            <Text style = {styles.textdata}>{this.state.Actividad_seleccionada["Area"]}</Text>
+                            <Text style = {styles.textdata}>{data["Area"]}</Text>
                         </View>
 
                         <View style={styles.campo}>
                             <Text style = {styles.textlabel}>Duración</Text>
-                            <Text style = {styles.textdata}>{this.state.Actividad_seleccionada["Duracion"]}</Text>
+                            <Text style = {styles.textdata}>{data["Duracion"]}</Text>
                         </View>
      
 
                     </View>
-                    <View style = {{width: '100%', height: '55%', flexDirection: 'column'}}>
+                    <View style = {{width: '100%', height: '60%', flexDirection: 'column'}}>
                         <ScrollView style = {{width:'95%', height: '100%', alignSelf: 'flex-start'   }}>
                             <Text style = {styles.textlabel}>Descripcion</Text>
-                            <Text style = {styles.textdata}>{this.state.Actividad_seleccionada["Descripcion"]}{'\n'}</Text>
+                            <Text style = {styles.textdata}>{data["Descripcion"]}{'\n'}</Text>
                             <Text style = {styles.textlabel}>Materiales</Text>
                             <FlatList
-                                data = {this.state.Actividad_seleccionada["Materiales"]}
+                                data = {data["Materiales"]}
                                 renderItem = {({item}) => <Text style = {styles.textdata}>{'\u2022'} {item.key}</Text>}
-                                
                             />
 
                         </ScrollView>
                     </View>
-                    <View style = {{width: '100%', height: '20%', flexDirection: 'column'}}>
-
+                    <View style = {{width: '100%', height: '15%', flexDirection: 'column'}}>
+                        <Button
+                                onPress={() => {this.props.navigation.goBack()}}
+                                title = "Volver"
+                                titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
+                                buttonStyle = {{backgroundColor: '#83cf4c', justifyContent:'center', margin: 10}}   
+                        />
                     </View>
-
-
-
                 </View>
             </View>
         );
     }
 }
-export default evalaptitudes;
+export default DetalleActividad;
 
 const styles = StyleSheet.create({
     container: {

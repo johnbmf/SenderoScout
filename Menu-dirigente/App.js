@@ -13,9 +13,12 @@ import MiManadaScreen from './screens/mi_manada'
 import PendientesScreen from './screens/misiones_pendietes'
 import EvalAptitudesScreen from './screens/evaluacion_aptitudes'
 import DetalleActividadScreen from './screens/detalle_actividad'
-import AutenticarScreen from './screens/autenticacion'
-import LoginScreen from './screens/login'
-import CrearCuentaScreen from './screens/crear_cuenta'
+import CrearUnidadScreen from './screens/crear_unidad'
+import CambiarUnidadScreen from './screens/cambiar_unidad'
+import UnidadScreen from './screens/unidad'
+
+
+
 //const {width} = Dimensions.get('window')
 export default class App extends React.Component {
   render() {
@@ -39,12 +42,18 @@ const CustomDrawerComponent = (props)=>(
 const StackNavigator = createStackNavigator({
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
+  Recomendaciones:RecomendacionesScreen,
   DetalleActividad: DetalleActividadScreen,
+  Unidad: UnidadScreen,
+  CrearUnidad:CrearUnidadScreen,
+  CambiarUnidad: CambiarUnidadScreen,
   }, {
     defaultNavigationOptions:{
       header: null
-    }}
+    }
+  }
 );
+
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
@@ -54,6 +63,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
+  Unidad:UnidadScreen,
   Settings:SettingsScreen,
   Cerrar: StackNavigator
 },{
