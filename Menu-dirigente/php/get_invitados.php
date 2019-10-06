@@ -10,7 +10,7 @@
     $grupo = $obj['grupo'];
     $user = obj['usuario'];
 	$query = "
-    SELECT Usuario.user,Usuario.nombre  FROM `Usuario` WHERE Usuario.grupo = '$grupo' and Usuario.user <> '$user'
+    SELECT Usuario.user,Usuario.nombre  FROM `Usuario` WHERE Usuario.grupo = '$grupo' and Usuario.tipo ='dirigente' and Usuario.user <> '$user'
     ";
     if($result = $mysqli->query($query)){
         while($row = $result -> fetch_array(MYSQLI_ASSOC)){

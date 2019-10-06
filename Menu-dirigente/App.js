@@ -96,11 +96,8 @@ const AppDrawerNavigator = createDrawerNavigator({
   Recomendaciones:RecomendacionesScreen,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
-
   InvitarDirigente : InvitarDirigenteScreen,
-
   Unidad:CrearUnidadStack,
-
   Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
 },{
