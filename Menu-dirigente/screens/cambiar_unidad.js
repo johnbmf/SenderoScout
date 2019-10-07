@@ -55,7 +55,8 @@ class cambiar_unidad extends Component {
       isLoading: true,
       page: 1,
       show1: false,
-      show2: false
+      show2: false,
+      userToken: ""
       
     };
     if (Platform.OS === "android") {

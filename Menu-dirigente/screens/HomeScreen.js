@@ -118,7 +118,7 @@ class HomeScreen extends Component {
         }
       }
     componentWillUnmount(){
-        
+
     }
     componentDidMount(){
 
@@ -158,7 +158,7 @@ class HomeScreen extends Component {
         //console.log("nombre: " + Token2.nombre);
         this.getInvitaciones();
       };
-    responderInvitacion(estado,nombre_unidad1){
+    responderInvitacion(estado,nombre_unidad1, id){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
             this.setState({SendAlertType: -1,
             SendAlertState:true});
@@ -194,8 +194,19 @@ class HomeScreen extends Component {
                 if(estado != -1){
                     this.setState({
                         SendAlertType: 1,
-                        userToken : {nombre_unidad:nombre_unidad1}
-                    })
+                        userToken : {
+                            user : this.state.userToken.user,
+                            nombre: this.state.userToken.nombre,
+                            pseudonimo : this.state.userToken.pseudonimo,
+                            edad : this.state.userToken.edad,
+                            email : this.state.userToken.email,
+                            seisena1 : this.state.userToken.seisena1,
+                            tipo: this.state.userToken.tipo,
+                            grupo : this.state.userToken.grupo,
+                            unidad1 : id,
+                            nombre_unidad:nombre_unidad1
+                        }
+                    },()=> {storeItem('userToken',this.state.userToken)})
                 }
 
             }else{
@@ -250,14 +261,6 @@ class HomeScreen extends Component {
         }else{
             return false;
         }
-    }
-    fechas = () =>{
-        console.log("hola");
-        
-        date2 = new Date('2019-09-04');
-        //date2.setDate(date2 + 2);
-        console.log(date2);
-        
     }
     handleOpen = () => {
         this.setState({ SendAlertState: true });
@@ -361,8 +364,8 @@ class HomeScreen extends Component {
                     <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:25, fontFamily:'Roboto',textAlign: 'center'}}>{this.state.user_reclutador} que pertenece a tu grupo acaba de invitarte a su unidad, aceptando podrás empezar a crear misiones y evaluar a los niños que pertenescan a ella.</Text>
                 </View>
                 <View style={{height:'20%', paddingBottom:80}}>
-                    <Button titleStyle={{color:'#00AB66'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#00AB66'}} type = "outline" title="Aceptar" onPress={() => {this.responderInvitacion(1, this.state.nombre_unidad);this.toggleModal();this.setState({update:true})}} />
-                    <Button titleStyle={{color:'#d9534f'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#d9534f'}} type = "outline" title="Rechazar" onPress={() => {this.responderInvitacion(-1,this.state.nombre_unidad);this.toggleModal();this.setState({update:true})}} />
+                    <Button titleStyle={{color:'#00AB66'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#00AB66'}} type = "outline" title="Aceptar" onPress={() => {this.responderInvitacion(1, this.state.nombre_unidad,this.state.id_unidad);this.toggleModal();this.setState({update:true})}} />
+                    <Button titleStyle={{color:'#d9534f'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#d9534f'}} type = "outline" title="Rechazar" onPress={() => {this.responderInvitacion(-1,this.state.nombre_unidad,this.state.id_unidad);this.toggleModal();this.setState({update:true})}} />
                     <Button titleStyle={{color:'#428bca'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#428bca'}} type = "outline" title="Cancelar" onPress={() => {this.toggleModal()}} />
                 </View>
             </View>

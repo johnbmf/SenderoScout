@@ -109,7 +109,17 @@ class crear_unidad extends Component {
             }).then((response) => response.json()).then((responseJson) => {
                 this.setState({
                     message: responseJson.message,
-                    userToken : {unidad1 : responseJson.id_unidad},
+                    userToken : {
+                        user : this.state.userToken.user,
+                        nombre: this.state.userToken.nombre,
+                        pseudonimo : this.state.userToken.pseudonimo,
+                        edad : this.state.userToken.edad,
+                        email : this.state.userToken.email,
+                        seisena1 : this.state.userToken.seisena1,
+                        tipo: this.state.userToken.tipo,
+                        grupo : this.state.userToken.grupo,
+                        nombre_unidad:nombre_unidad1,
+                        unidad1 : responseJson.id_unidad},
                     usuario: responseJson.nombre_usuario,
                     isLoading : false,
                     SendAlertType:1

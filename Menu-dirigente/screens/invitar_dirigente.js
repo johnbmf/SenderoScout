@@ -128,7 +128,7 @@ export default class invitar_dirigente extends Component {
                 </View>
                 {(this.state.userToken.unidad1 == 0 || this.state.userToken.unidad1 == null ) &&                             
                     <View style = {{flexDirection : 'row', width:'90%', height:'88%', justifyContent:'center', alignItems:'center',alignSelf:'center' }}>
-                        <TouchableOpacity onPress = {() =>{this.props.navigation.navigate('Home')}} >
+                        <TouchableOpacity onPress = {() =>{this.props.navigation.navigate('Unidad')}} >
                             <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Primero debes crear una unidad para poder invitar a otros dirigentes.</Text>
                         </TouchableOpacity>
                     </View>
