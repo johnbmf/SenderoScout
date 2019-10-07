@@ -307,15 +307,16 @@ class agregar_usuarios extends Component {
             <ScrollView contentContainerStyle={{flexGrow: 1 }}>
             
             <View style = {styles.container}>
-                <View style={{width: '100%', height: '12%', alignItems:'center'}} >
+                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
                     <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
                         <Left>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
-                        <Body style = {{justifyContent:'center'}}>
-                            <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Agregar Usuarios</Text>
+                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Agregar usuarios</Text>
                         </Body>
-                    </Header >
+                        <Right></Right>
+                    </Header >                    
                 </View>
                 <View style={{width: '100%', height: '7%'}} >
                 <NavigationEvents onWillFocus={() => this.clearText()}/> 
