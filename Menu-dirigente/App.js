@@ -44,11 +44,30 @@ const CustomDrawerComponent = (props)=>(
     </ScrollView>
   </SafeAreaView>
 );
+const RecomendacionesStack = createStackNavigator({
+  Recomendaciones:RecomendacionesScreen,
+  DetalleActividad: DetalleActividadScreen,
+  }, {
+    navigationOptions : {
+        drawerLabel: 'Recomendaciones',
+        drawerIcon: ({tintColor}) => (
+          <Icon name='list' type = 'Entypo' style = {{fontSize:24, color:tintColor}} />
+        ),
+        header: null
+
+    }
+  },{
+    defaultNavigationOptions:{
+      header: null
+    }
+  },
+    {
+      initialRouteName: 'Recomendaciones'
+    }
+);
 const StackNavigator = createStackNavigator({
   Pendientes: PendientesScreen,
   Evaluacion: EvaluacionScreen,
-  Recomendaciones:RecomendacionesScreen,
-  DetalleActividad: DetalleActividadScreen,
   }, {
     navigationOptions : {
         drawerLabel: 'Cacerías',
@@ -93,7 +112,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   CrearMision:CrearMisionScreen,
   Pendientes: StackNavigator,
   EvalAptitudes: EvalAptitudesScreen,
-  Recomendaciones:RecomendacionesScreen,
+  Recomendaciones:RecomendacionesStack,
   Estadisticas:EstadisticasScreen,
   AgregarUsuarios:AgregarUsuariosScreen,
   InvitarDirigente : InvitarDirigenteScreen,

@@ -31,7 +31,9 @@ class DetalleActividad extends Component {
             Actividad_seleccionada: {} ,
         }
     }
-
+    static navigationOptions = {
+        header: null
+    }
 
     componentDidMount(){
     }

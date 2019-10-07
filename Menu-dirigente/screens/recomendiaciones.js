@@ -75,7 +75,8 @@ class recomendaciones extends Component {
         drawerLabel: 'Recomendaciones',
         drawerIcon: ({tintColor}) => (
             <Icon name='list' type = 'Entypo' style = {{fontSize:24, color:tintColor}} />
-        )
+        ),
+        header: null
     }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
