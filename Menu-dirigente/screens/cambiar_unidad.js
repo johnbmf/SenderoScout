@@ -409,8 +409,6 @@ charge(){
 }
   render() {
     return(
-
-        
                 <View style = {styles.container}>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
                     <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>

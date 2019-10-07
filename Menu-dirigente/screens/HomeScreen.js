@@ -108,15 +108,18 @@ class HomeScreen extends Component {
             id_unidad : id
         });
     };
+
     componentDidUpdate() {
         if (this.state.update) {
             this.getInvitaciones()
-            this.getUser()
             this.setState({update:false})
           // Use the `this.props.isFocused` boolean
           // Call any action
         }
       }
+    componentWillUnmount(){
+        
+    }
     componentDidMount(){
 
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
@@ -154,7 +157,6 @@ class HomeScreen extends Component {
         this.setState({userToken : JSON.parse(Token)});
         //console.log("nombre: " + Token2.nombre);
         this.getInvitaciones();
-        this.getUser();
       };
     responderInvitacion(estado,nombre_unidad1){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
@@ -191,7 +193,8 @@ class HomeScreen extends Component {
                 })
                 if(estado != -1){
                     this.setState({
-                        SendAlertType: 1
+                        SendAlertType: 1,
+                        userToken : {nombre_unidad:nombre_unidad1}
                     })
                 }
 
@@ -205,51 +208,7 @@ class HomeScreen extends Component {
             console.error(error);
         });
     }
-    getUser(){
-        fetch('http://www.mitra.cl/SS/get_users2.php',{
-            method: 'post',
-            header:{
-                'Accept': 'application/json',
-                'Content/Type': 'application/json',
-                
-            },
-            body:JSON.stringify({
-                "usuario":this.state.userToken.user,
-            })
-        })
-        .then(response => response.json())
-        .then((responseJson) => {
-            if(responseJson != null){
-                this.setState({
-                    tkn: responseJson,
-                    error: false
-                    
-                })
-                console.log(this.state.tkn);
-                storeItem('userToken',this.state.tkn[0])
-                if(this.state.tkn[0].user === this.state.usuario){
-                    this.setState({
-                        update: true,
-                        refreshing:false
-                    });
-                }
-                else{
-                    this.setState({
-                        error: true
-                    });
-                }
-            }else{
-                this.setState({
-                    isLoading: false,
-                    tkn: [],
-                    error: true
-                })
-            }
-        })
-        .catch((error)=>{
-            console.error(error);
-        });
-    }
+   
     getPendientes(){
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
             method: 'post',
@@ -412,7 +371,6 @@ class HomeScreen extends Component {
     onRefresh() {
         //Clear old data of the list
         //Call the Service to get the latest data
-        this.getUser();
         this._bootstrapAsync();
 
       }
