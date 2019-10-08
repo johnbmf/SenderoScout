@@ -7,7 +7,7 @@ import {
 import { Header,Left,Right,Icon } from 'native-base'
 class estadisticas extends Component {
     static navigationOptions = {
-        drawerLabel: 'Estadisticas',
+        drawerLabel: 'Estadísticas',
         drawerIcon: ({tintColor}) => (
             <Icon name='pie' style = {{fontSize:24,color:tintColor}} />
         )

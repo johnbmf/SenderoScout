@@ -1,15 +1,499 @@
 {
-    "Actividades": [
+    "Corporalidad": [
 
         {
-            "Nombre": "Psicopata",
-            "Resumen": "Juego donde uno de los participantes debe adivinar que señal o gesto permite que los demas jugadores mientan.",
-            "Area": "Social",
-            "Descripcion" : "El juego es encontrar la enfermedad que tienen los jugadores. Todos se sientan en un círculo, un joven que es \"el medico\" sale del cuarto mientras que los otros jugadores eligen un signo distinto que es \"la enfermedad\", la misma para todos. Cuando los jugadores hacen el signo, deben mentir, cuando no lo hacen, deben responder la verdad. Por ejemplo, los jugadores pueden elegir de mentir cuando tocan el suelo con sus manos o cuando rascan su piel. El medico regresa cuando los jugadores han eligido el signo y debe adivinar su enfermedad, o sea cual es el signo entre ellos que les permite mentir. Para encontrarlo, el medico debe preguntar a los participantes su nombre, su edad por ejemplo, como esta vestido y deducir lo que hacen como signo cuando mienten. Cada vez un jugador miente mientras que no hace el signo, los otros jugadores deben decir \"Psycopata\" y cambia el sentido de la identidad robada para que el medico esté mas confundido.",
-            "Materiales" : [{"key": "No requiere"},{"key":"No requiere 2"}],
-            "Duracion" : "30 mins"
+            "Nombre": "Gato Scout",
+            "Resumen": "Juego donde dos equipos se enfrentan en el conocido juego El Gato (#).",
+            "Area": ["Corporal","Social","Carácter"],
+            "Descripcion" : "Para realizar este juego se debe conocer el juego del gato y dividir en 2 equipos. Construir el gato con pañolines y entregar 5 fichas a cada equipo. Este juego se trata de alinear tres objetos de tu equipo para ganar el juego. Así mismo evita que tu adversario te venza bloqueándole las líneas que intente realizar. En un extremo del espacio estará el equipo formado en linea hacia atras, en el otro extremo estará ubicado el gato, para llegar al gato se deberá jugar al cuerpo tierra y correr hacia el gato, donde cada uno deberá poner un objeto en su turno para intentar formar la linea del gato.",
+            "Materiales" : [{"key": "5 fichas azules"},{"key":"5 fichas rojas"},{"key":"4 pañolines"}],
+            "Duracion" : "15 mins"
+        },
+        {
+            "Nombre": "Animales",
+            "Resumen": "Juego donde uno de los participantes dice un animal y los demás lo representan con su cuerpo",
+            "Area": ["Corporal","Social","Carácter"],
+            "Descripcion" : "Todos se ubican en un círculo. Uno de los niños dice un animal que le guste, y los demás, por turno deberán imitar a ese animal y sus gestos pero sin hacer lo que ya hizo el anterior. Quien haga la mejor imitación elige el siguiente animal, y así hasta que todos hayan pasado al menos una vez.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+        {
+            "Nombre": "El Correlíneas",
+            "Resumen": "Juego donde los participantes juegan a la pinta solo pisando líneas de la cancha",
+            "Area": ["Corporal"],
+            "Descripcion" : "Un miembro de la unidad debe de intentar tocar a sus compañeros y decir \"línea\"(estos lo deben evitar). La única regla es que todos los participantes tienen que correr por las líneas que existan en la cancha (o polideportivo). Si el niño que tiene que tocar a sus compañeros consigue tocar a alguno, será éste quien deberá ahora intentar tocar al resto de sus compañeros.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
 
+        {
+            "Nombre": "Los Pies",
+            "Resumen": "Actividad paragenerar conciencia sobre el cuidado de los pies (lavarse, cambiar calcetines, etc).",
+            "Area": ["Corporal"],
+            "Descripcion" : "En la inspección de la Manada nos preocupamos del uniforme, los dientes, el pelo,  las  orejas,  y  las  uñas  pero  nunca  de  los  pies,  y  es    un  hecho  que  si  los  pies  están  mal  sufrimos  mucho.  Entonces  por  que  no  una  inspección  de  los  pies.  Debe  empezar  con  la  inspección  de  costumbre  para  terminar  con  los  pies.  Tomará  los  Lobatos  de  sorpresa  la  primera  vez  y  seguramente  encontrará  algunas  cosas  raras,  pero  por  la  experiencia  los  niños  llegarán  a  futuras  reuniones  más  preocupados.  Después  de  un  juego  una  persona  experimentada  puede  conversar  sobre  los  cuidados de los pies.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+
+        {
+            "Nombre": "¿Cuido mi cuerpo?",
+            "Resumen": "Juego donde los lobatos podrán avanzar si cumplen con las preguntas que Akela o el animador adulto les hace sobre el cuidado personal.",
+            "Area": ["Corporal"],
+            "Descripcion" : "Para  variar  la  inspección  se  puede  hacer  lo  siguiente:  La  Manada  se  forma  en  círculo con Akela al centro. Akela dice: Los Lobatos que lustraron sus zapatos esta mañana  un  paso  adelante.  Los  Lobatos  que  llevan  pañuelo  un  paso    adelante.  Los  Lobatos que ayudaron a su madre a lavar los platos un paso adelante. Los Lobatos que  limpiaron sus uñas hoy día un paso adelante. Los Lobatos que no lustraron sus zapatos  dan  un  paso  atrás,  etc.  El  primer  Lobato  que  llega  junto  a  Akela  recibe  el  saludo de mano como felicitación. ",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+        {
+            "Nombre": "Caballos Descabellados",
+            "Resumen": "Juego donde los niños se convierten en un carruaje de caballos y deben correr juntos.",
+            "Area": ["Corporal","Social"],
+            "Descripcion" : "De instrucciones de nudos en los rincones de Seisenas, las Seisenas forman círculos separados y a la palabra “Ya” unen sus cordeles haciendo un círculo. Una vez que cada Lobato de la Seisena ha hecho su nudo correctamente pasa adentro del cordel  y  cuando  todos  estén  adentro  dan  una  vuelta  al  local  o  patio  como  caballos  descabellados, el Seisenero manejando. La Seisena que termina primero gana.",
+            "Materiales" : [{"key": "Cuerda"}],
+            "Duracion" : "30 mins"
+        },
+        {
+            "Nombre": "Teatro Scout",
+            "Resumen": "Juego donde los equipos deben organizarse para representar distintas situaciones.",
+            "Area": ["Creativa","Social","Corporal"],
+            "Descripcion" : "Los niños se dividen en equipos. A cada equipo se le entregará un artículo (o dos, según la cantidad de participantes) de la ley de la manada, y deberán organizarse para representar alguna situación que se trate de ello. El otro equipo deberá intentar adivinar de qué artículo se trata.",
+            "Materiales" : [{"key": "Tarjetas con los artículos de la ley"}],
+            "Duracion" : "40 mins"
+        },
+        {
+            "Nombre": "La Manada Muda",
+            "Resumen": "Desafío para la manada, en que deberán continuar normalmente con sus actividades pero sin hablar",
+            "Area": ["Carácter","Social","Corporal"],
+            "Descripcion" : "15 ó 20 minutos de la reunión de Manada haga (Ud., se las arreglará) que los Lobatos no hablen, así como tampoco los Viejos Lobos. La reunión debe continuar normalmente,  sólo  que  todo  se  hará  con  mímica,  incluyendo  preguntas,  juegos  sencillos, etc. Vea hasta donde son capaces de llegar los Lobatos. No lo prolongue en exceso.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+        {
+            "Nombre": "Abrazos Musicales",
+            "Resumen": "Juego donde los participantes abrazan a su compañero al detener la música.",
+            "Area": ["Afectiva","Social","Corporal"],
+            "Descripcion" : "Los participantes se dispersan, suena una música y todos danzan o se mueven libremente por la habitación. Cuando la música se detiene, cada persona abraza al compañero que tengan más cerca y se sientan en el piso. La música continúa y los participantes bailan por parejas, cuando la música se detiene se abrazan con otra pareja, al continuar bailan de a 4, y así sucesivamente hasta llegar a un abrazo de todos. Luego la actividad se repite con distintas canciones.",
+            "Materiales" : [{"key": "Reproductor de música con parlante"}],
+            "Duracion" : "15 mins"
+        }
+    ],
+
+    "Creatividad": [
+        {
+            "Nombre": "Abracadabra",
+            "Resumen": "Juego donde los participantes observan objetos y luego deben determinar el o los que faltan.",
+            "Area": ["Creativa","Carácter"],
+            "Descripcion" : "Se colocan los objetos encima de la mesa o donde todos puedan verlos. Los participantes los observan durante dos minutos y luego se dan la vuelta. El animador suprime uno o más de los objetos al azar y los jugadores vuelven a mirar a la mesa. Gana quien primero se de cuenta de qué es lo que ha desaparecido.",
+            "Materiales" : [{"key": "10 objetos pequeños (que caigan dentro de la mano)"}],
+            "Duracion" : "10 mins"
+        },
+        {
+            "Nombre": "Teatro Scout",
+            "Resumen": "Juego donde los equipos deben organizarse para representar distintas situaciones.",
+            "Area": ["Creativa","Social","Corporal"],
+            "Descripcion" : "Los niños se dividen en equipos. A cada equipo se le entregará un artículo (o dos, según la cantidad de participantes) de la ley de la manada, y deberán organizarse para representar alguna situación que se trate de ello. El otro equipo deberá intentar adivinar de qué artículo se trata.",
+            "Materiales" : [{"key": "Tarjetas con los artículos de la ley"}],
+            "Duracion" : "40 mins"
+        },
+        {
+            "Nombre": "¿Dónde está lo que tomé?",
+            "Resumen": "Juego donde los participantes deben reconocer el objeto que tomaron sin ver.",
+            "Area": ["Creativa","Social"],
+            "Descripcion" : "Los niños se dividen en equipos. Un equipo se venda los ojos mientras el otro observa. El animador escogeráalgún objeto y se lo entregará a uno de los vendados para que reconozca el objeto con el tacto, la idea es que no todos en el equipo tomen el mismo objeto. Cuando todos hayan tomado algún objeto y este haya sido devuelto a su lugar en el piso, se desvendan y deben correr al objeto que creen que tocaron.",
+            "Materiales" : [{"key": "Set de objetos: 5 pañolines con turcos o nudos distintos"},{"key":"Set de objetos: pelotas de distintos tipos"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "Show de Sombras",
+            "Resumen": "Actividad nocturna en que los lobatos hacen un teatro con sombras por seisena.",
+            "Area": ["Creativa"],
+            "Descripcion" : "Durante  el  invierno  cuando  oscurece  más  temprano  se  puede  variar  las  actuaciones con un Show de sombras. Para esto se necesita una sábana vieja colgada a  un  extremo  del  local  y  una  luz  eléctrica  brillando  atrás.  Los  actores  pueden  confeccionar  su  propio  equipo:  como  coronas  de  cartón,  espadas,  etc.  Y  se  darán  cuenta que  para estos la forma del objeto tiene mayor importancia que los detalles. Se  puede  aprovechar  cualquier  tipo  de  historietas  para  el  “Show  de  Sombras”  y  es  algo  que  con  un  poco  de  práctica  se  puede  hacer  en  una  fiesta  del  grupo  o  una    noche con los padres.",
+            "Materiales" : [{"key": "Cartón"},{"key":"Sábana blanca"},{"key":"Linterna potente"},{"key":"Cuerda"},{"key":"Tijeras"},{"key":"Scotch"}],
+            "Duracion" : "60 mins"
+        },
+
+        {
+            "Nombre": "Monitos",
+            "Resumen": "Actividad tipo trivia para probar los conocimientos generales de los lobatos.",
+            "Area": ["Creativa"],
+            "Descripcion" : "Antes de llegar los Lobatos a la reunión, se pegarán en las murallas, monitos, recortes  de  diario  y  otras  muestras  y  junto  a  cada  uno,  una  o  dos  preguntas,  por  ejemplo:  Un  monito  de  un  pájaro  con  las  preguntas,  ¿Cómo  se  llama  este  pajarito?,  ¿Cómo anda con las piernas largas?, Un dibujo de una hoja de árbol: ¿Cómo se llama la  hoja?,  ¿sabe  donde  crece  un  árbol  de  esta  clase  en  su  barrio?,  un  dibujo  de  la  bandera nacional junto con la bandera vieja y de transición. ¿Qué nombre tiene cada bandera?,  un  dibujo  de  un  cruce  de  calles  donde  un  peatón  no  respete  las  reglas  del  tránsito. ¿Qué hace mal el peatón al cruzar?, ¿En qué forma cruzaría Ud.?, Como los Lobatos  vienen  llegando  se  les  entrega  a  cada  uno  un  papel  y  lápiz,  el  papel  lleva  el  número  correspondiente  a  las  preguntas  y  ellos  siguen  observando  y  anotando.  Una  vez  terminada  la  actividad  la  Manada  da  una  vuelta  a  los  monitos,  etc.  Con  Akela  y  cada  uno  revisa  su  papel  y  puede  corregir  donde  sea  necesario.  Es  una  actividad  interesante que a la vez va educando al Lobato y probando su conocimiento. ",
+            "Materiales" : [{"key": "Scotch"},{"key":"10 recortes con imágenes"},{"key":"1 lápiz y 1 hoja por cada lobato"}],
+            "Duracion" : "15 mins"
+        },
+        {
+            "Nombre": "La Isla Desierta",
+            "Resumen": "Juego donde los lobatos confeccionan utensilios para sobrevivir en una isla desierta",
+            "Area": ["Creativa","Carácter"],
+            "Descripcion" : "Con  anticipación  Akela  deberá  preparar  una  cantidad  de  arcilla  para  cada  Seisena. Akela dice a los Lobatos que han naufragado en una isla desierta, que hay agua  de  manantial  para  beber,  vida  silvestre,  carne,  leña  para  fogatas  y  para  construir, pero no hay ollas, cuchillos, sartenes, etc. Entonces cada Seisena debe hacer con la arcilla una colección de utensilios.",
+            "Materiales" : [{"key": "1 paquete de arcilla por seisena"},{"key":"Diario"},{"key":"Recipiente con agua"}],
+            "Duracion" : "60 mins"
+        },
+
+        {
+            "Nombre": "Flota de Barcos",
+            "Resumen": "Juego donde los niños confeccionan barcos en miniatura para una competencia en el agua.",
+            "Area": ["Creativa"],
+            "Descripcion" : "Entregue  a  cada  Seisena  un  número  igual de pedazos de madera, carrete de hilo, cola fría o pegamentos, fósforos, cartón, etc. Y con estos deben construir un bote en un tiempo  dado  que  flotará.  Hay  que  probar  los  botes  en  un  lavatorio  de  agua.  Si  se  puede  hacer  la    prueba  afuera,  organice  una  batalla  a  ver  cual  de  los  botes  queda  flotando al terminar la pelea. ",
+            "Materiales" : [{"key": "Cartón"},{"key":"Fuente grande con agua"},{"key":"trozos de madera"},{"key":"pegamento"},{"key":"fósforos sueltos"},{"key":"cordón o hilo"}],
+            "Duracion" : "60 mins"
+        },
+
+        {
+            "Nombre": "¿Y qué pasa si hay un accidente?",
+            "Resumen": "Actividad de reflexión en que se conversa sobre qué harían en ciertas situaciones de riesgo, peligros o accidentes.",
+            "Area": ["Carácter","Social","Creativa"],
+            "Descripcion" : "Conversar  con  la  Manada  sobre  accidentes  de  tránsito  informados  en  la  prensa y relacionado con jóvenes. Deje a los Lobatos que sugieran como se podría evitar tales accidentes y que habrían hecho si hubiesen estado en ese lugar; siempre inculcando en ellos la necesidad de buscar auxilio en los adultos.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "Nudos en los cubiles fríos",
+            "Resumen": "Juego donde los lobatos deberán recuperar nudos hechos por los \"Bandarlog\", reconocer qué nudo eso y su está bien o mal hecho.",
+            "Area": ["Carácter","Creativa"],
+            "Descripcion" : "Primero narre a  sus Lobatos la historieta en la cual los Bandarlog raptaron a Mowgli y lo llevaron a los Cubiles fríos, y recalque como ellos se admiraron de las cosas que podía hacer Mowgli con sus hermanos, después siga con este juego: Los Bandarlog, también quisieron aprender nudos durante la corta estadía de Mowgli  en  su  desastrosa  ciudad;  pero  como  siempre,  empezaron  y  no  terminaron,  dejaron  los  nudos  y  cuerdas  tirados  sobre  el  suelo,  atados  a  los  árboles.  Envíe  a  la  Manada  a  un  bosque  cercano  (que  serán  los  cubiles  fríos)  y  que  en  él  busquen  los  nudos  y  sogas  dejados,  al  encontrarlos,  los  deben  traer  a  los  Viejos  Lobos  por  Seisena, diciendo su nombre y si están bien o mal. Nota: Antes de esto, el instructor de Manada y el resto de los Viejos Lobos deben haber dejado sogas con nudos hechos (algunos bien otros mal) sobre el piso, en las ramas de los árboles y arbustos, etc.",
+            "Materiales" : [{"key": "Trozos de cuerda de 1 metro"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "Flores de Pan",
+            "Resumen": "Juego donde uno de los participantes debe adivinar que señal o gesto permite que los demas jugadores mientan.",
+            "Area": ["Afectiva","Creativa"],
+            "Descripcion" : "Se   moja   pan   fresco   con   agua   para   después   sacar   pedazos   chicos   y   aprensarlos  en  partes  planas,  entonces  se  doblan  para  formar  pétalos.  Después  de    dejarlos   secar   se      pueden   pintar   con   colores   aguamarinas   y   una   vez   secos   nuevamente  una  mano  de  barniz  que  se  usa  para  las  uñas.  Se  puede  usar  cola  para  afirmar los pétalos y finalmente fijar la flor a un broche. Cuando se terminan puede servir como lindos regalos para que los Lobatos entreguen a sus madres en el día de la madre.",
+            "Materiales" : [{"key": "1 pan por niño"},{"key":"agua"},{"key":"pintura"},{"key":"cola fría"}],
+            "Duracion" : "60 mins"
+        },
+
+        {
+            "Nombre": "El mapa",
+            "Resumen": "Juego donde los niños encontrarán un mapa del tesoro, iniciando un juego de pistas y claves que deberán completar con su seisena.",
+            "Area": ["Social","Creativa"],
+            "Descripcion" : "Salga con su Manada a un Campo cercano; en uno de los árboles usted encuentra un mapa que indica donde hay un tesoro escondido. Inmediatamente prepare la cacería en  el  mismo  lugar  donde  encontró  el    mapa,  seleccionando  caminos  ya  preparados  de  antemano  con  rastros  para  cada  Seisena.  (mensajes,  dulces,  preguntas  sobre  la  selva, etc. Deben ser dejados en los rastros). Haga que cada Seisena tome un camino distinto  y  que  todos  coincidan  al  final  de  la  cacería  (lugar  donde  está  el  tesoro  escondido).",
+            "Materiales" : [{"key": "Claves para indicar acciones o caminos a seguir"},{"key":"Tesoro"},{"key":"Mapas"}],
+            "Duracion" : "45 mins"
         }
 
+    ],
+
+    "Carácter": [
+        {
+            "Nombre": "Los nativos preguntan",
+            "Resumen": "Juego donde los niños atraviesan obstáculos mientras responden preguntas sobre su unidad.",
+            "Area": ["Carácter"],
+            "Descripcion" : "Es  buena  idea  que  dos  veces  al  año  se  organice  una  noche  de  revisión  de conocimientos. Una manera es avisar a la Manada que  la próxima semana visitará un país extraño  y  salvaje  y  su  única  esperanza  de    regresar  salvo  será  aprobarse  en  las  pruebas  de  los  nativos.  Para  la  noche,  los  Viejos  Lobos  y  otros  ayudantes  como  Rovers,  Scout  mayores,  guías  de  patrullas  disfrazados  previamente  se  esconderán  como  y  donde  puedan  alrededor  del  local  (se  puede  aprovechar  bancos,  pisos,  cortinas,  ramas,  cartón,  etc.).  Se  traza  una  pista  con  tiza  o  pedazos  de  papel  atravesando el local, los Lobatos siguen la pista, de cubil a cubil, saltando en un pie ríos,  pisando  estribones,  etc.  Y  contestando  preguntas  o  ejecutando  diferentes  pruebas en cada cubil hasta que han pasado con éxito por todos los nativos y al final son bienvenidos por el Jefe quién los lleva a una gran fiesta. Una bolsa de calugas para cada uno. ",
+            "Materiales" : [{"key": "disfraces de nativos"},{"key":"Bolsa de calugas o premios paralos niños"}],
+            "Duracion" : "30 mins"
+        },
+        {
+            "Nombre": "¿Y qué pasa si hay un accidente?",
+            "Resumen": "Actividad de reflexión en que se conversa sobre qué harían en ciertas situaciones de riesgo, peligros o accidentes.",
+            "Area": ["Carácter","Social","Creativa"],
+            "Descripcion" : "Conversar  con  la  Manada  sobre  accidentes  de  tránsito  informados  en  la  prensa y relacionado con jóvenes. Deje a los Lobatos que sugieran como se podría evitar tales accidentes y que habrían hecho si hubiesen estado en ese lugar; siempre inculcando en ellos la necesidad de buscar auxilio en los adultos.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "30 mins"
+        },
+        {
+            "Nombre": "Cómo es mi entorno",
+            "Resumen": "Juego donde los niños se darán cuenta de que tan buenos o malos observadores son de su entorno.",
+            "Area": ["Carácter"],
+            "Descripcion" : "En  la  oscuridad  con  los  ojos  cerrados  Akela  hace  preguntas  a  la  Manada  tales como: Qué color tiene la muralla. Cuántas ventanas hay. De qué color son los ojos del Baloo. Cuántas ampolletas hay en la sala. Qué insignias lleva Akela, etc. Si se  hace  durante  la  luz  del  día  sólo  con  los  ojos  vendados  es  sólo  una  prueba  de  observación sino también de honestidad. ",
+            "Materiales" : [{"key": "1 pañolín por niño"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "La seguridad en mi casa",
+            "Resumen": "Actividad en que los lobatos deben pensar en todas las cosas peligrosas que hay en sus casas.",
+            "Area": ["Carácter","Social"],
+            "Descripcion" : "Se  puede  organizar  la  siguiente  como  competencia  entre  Seisenas.  Cada  Seisena  debe  hacer  una  lista  de  peligros  potenciales  en  el  hogar,  por  ejemplo:  Agua  hirviendo  Ollas  sin  manillas  Hojas  para  afeitar  jugos  químicos  estufas  cáscaras  de  plátano en el suelo la misma oscuridad vidrios quebrados clavos, etc. Seguramente los  Lobatos  pensarán  en  muchas  otras  cosas  peligrosas.  Tal  actividad  tiene  tanto  valor como miles de accidentes anuales por descuido en el hogar. ",
+            "Materiales" : [{"key": "1 papelógrafo por seisena"},{"key":"1 plumón por seisena"}],
+            "Duracion" : "45 mins"
+        },
+
+        {
+            "Nombre": "La Manada Muda",
+            "Resumen": "Desafío para la manada, en que deberán continuar normalmente con sus actividades pero sin hablar",
+            "Area": ["Carácter","Social","Corporal"],
+            "Descripcion" : "15 ó 20 minutos de la reunión de Manada haga (Ud., se las arreglará) que los Lobatos no hablen, así como tampoco los Viejos Lobos. La reunión debe continuar normalmente,  sólo  que  todo  se  hará  con  mímica,  incluyendo  preguntas,  juegos  sencillos, etc. Vea hasta donde son capaces de llegar los Lobatos. No lo prolongue en exceso.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+        {
+            "Nombre": "Me perdí",
+            "Resumen": "Desafío para la manada durante una salida, en que el animador reconoce estar perdido y los lobatos deberán encontrar el camino.",
+            "Area": ["Carácter","Social"],
+            "Descripcion" : "Si usted lleva a la Manada a un lugar visitado por la misma, por primera vez, simule  estar  perdido  y  es  una  buena  oportunidad  para  ver  cual  de  los  Lobatos  se  atreve  a  guiar  a  toda  la  Manada  para  el  Local. No deje que todos hablen al mismo tiempo: Rafael, elige un asistente y tu nos guiarás.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+
+        {
+            "Nombre": "Nudos en los cubiles fríos",
+            "Resumen": "Juego donde los lobatos deberán recuperar nudos hechos por los \"Bandarlog\", reconocer qué nudo eso y su está bien o mal hecho.",
+            "Area": ["Carácter","Creativa"],
+            "Descripcion" : "Primero narre a  sus Lobatos la historieta en la cual los Bandarlog raptaron a Mowgli y lo llevaron a los Cubiles fríos, y recalque como ellos se admiraron de las cosas que podía hacer Mowgli con sus hermanos, después siga con este juego: Los Bandarlog, también quisieron aprender nudos durante la corta estadía de Mowgli  en  su  desastrosa  ciudad;  pero  como  siempre,  empezaron  y  no  terminaron,  dejaron  los  nudos  y  cuerdas  tirados  sobre  el  suelo,  atados  a  los  árboles.  Envíe  a  la  Manada  a  un  bosque  cercano  (que  serán  los  cubiles  fríos)  y  que  en  él  busquen  los  nudos  y  sogas  dejados,  al  encontrarlos,  los  deben  traer  a  los  Viejos  Lobos  por  Seisena, diciendo su nombre y si están bien o mal. Nota: Antes de esto, el instructor de Manada y el resto de los Viejos Lobos deben haber dejado sogas con nudos hechos (algunos bien otros mal) sobre el piso, en las ramas de los árboles y arbustos, etc.",
+            "Materiales" : [{"key": "Trozos de cuerda de 1 metro"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "Gato Scout",
+            "Resumen": "Juego donde dos equipos se enfrentan en el conocido juego El Gato (#).",
+            "Area": ["Corporal","Social","Carácter"],
+            "Descripcion" : "Para realizar este juego se debe conocer el juego del gato y dividir en 2 equipos. Construir el gato con pañolines y entregar 5 fichas a cada equipo. Este juego se trata de alinear tres objetos de tu equipo para ganar el juego. Así mismo evita que tu adversario te venza bloqueándole las líneas que intente realizar. En un extremo del espacio estará el equipo formado en linea hacia atras, en el otro extremo estará ubicado el gato, para llegar al gato se deberá jugar al cuerpo tierra y correr hacia el gato, donde cada uno deberá poner un objeto en su turno para intentar formar la linea del gato.",
+            "Materiales" : [{"key": "5 fichas azules"},{"key":"5 fichas rojas"},{"key":"4 pañolines"}],
+            "Duracion" : "15 mins"
+        },
+
+        {
+            "Nombre": "Animales",
+            "Resumen": "Juego donde uno de los participantes dice un animal y los demás lo representan con su cuerpo",
+            "Area": ["Corporal","Social","Carácter"],
+            "Descripcion" : "Todos se ubican en un círculo. Uno de los niños dice un animal que le guste, y los demás, por turno deberán imitar a ese animal y sus gestos pero sin hacer lo que ya hizo el anterior. Quien haga la mejor imitación elige el siguiente animal, y así hasta que todos hayan pasado al menos una vez.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+
+        {
+            "Nombre": "Abracadabra",
+            "Resumen": "Juego donde los participantes observan objetos y luego deben determinar el o los que faltan.",
+            "Area": ["Creativa","Carácter"],
+            "Descripcion" : "Se colocan los objetos encima de la mesa o donde todos puedan verlos. Los participantes los observan durante dos minutos y luego se dan la vuelta. El animador suprime uno o más de los objetos al azar y los jugadores vuelven a mirar a la mesa. Gana quien primero se de cuenta de qué es lo que ha desaparecido.",
+            "Materiales" : [{"key": "10 objetos pequeños (que caigan dentro de la mano)"}],
+            "Duracion" : "10 mins"
+        },
+
+        {
+            "Nombre": "La Isla Desierta",
+            "Resumen": "Juego donde los lobatos confeccionan utensilios para sobrevivir en una isla desierta",
+            "Area": ["Creativa","Carácter"],
+            "Descripcion" : "Con  anticipación  Akela  deberá  preparar  una  cantidad  de  arcilla  para  cada  Seisena. Akela dice a los Lobatos que han naufragado en una isla desierta, que hay agua  de  manantial  para  beber,  vida  silvestre,  carne,  leña  para  fogatas  y  para  construir, pero no hay ollas, cuchillos, sartenes, etc. Entonces cada Seisena debe hacer con la arcilla una colección de utensilios.",
+            "Materiales" : [{"key": "1 paquete de arcilla por seisena"},{"key":"Diario"},{"key":"Recipiente con agua"}],
+            "Duracion" : "60 mins"
+        },
+
+        {
+            "Nombre": "¿Qué harías si...?",
+            "Resumen": "Juego donde los lobatos trabajan el ponerse en el lugar del otro, y cómo se sentirían ante determinadas situaciones.",
+            "Area": ["Afectiva","Carácter"],
+            "Descripcion" : "Debemos  usar  las  actuaciones  para  enseñar  buena  conducta.  Por  ejemplo:  Entregue  a  cada  Seisena  una  pregunta  tal  como;  ¿Qué  haría  Ud.,  si  encontró  una  cartera  con  $  500?,  ¿Qué  haría  Ud.,  si  su  pelota  rompió  la  ventana  de  una  casa?,  ¿Qué haría Ud., si en un Rally de Lobatos usted encuentra algo del uniforme de otro muchacho?, los Lobatos deben actuar cada pregunta junto con la solución que usarían y recuerde que debe seleccionar preguntas convenientes a la edad del Lobato. ",
+            "Materiales" : [{"key": "tarjetas con preguntas"}],
+            "Duracion" : "45 mins"
+        },
+
+        {
+            "Nombre": "Reunión Accidentada",
+            "Resumen": "Juego donde se pone a prueba la disposición a ayudar a los demás.",
+            "Area": ["Afectiva","Social","Carácter"],
+            "Descripcion" : "Si se obtiene la ayuda de varios adultos (o la Tropa) Ud., podría hacer una reunión  accidentada,  con  constantes  interrupciones  del  programa  para  atender  a  pequeñas  emergencias  que  ocurrirían,  en  las  cuales  los  Lobatos  tuvieran  que decidir ayudar, indicándoles lo mucho que los necesitan. Es una buena oportunidad para practicar gran parte de la Segunda Estrella y la especialidad de Primeros Auxilios.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "45 mins"
+        }
+
+    ],
+
+    "Afectividad": [
+
+        {
+            "Nombre": "Abrazos Musicales",
+            "Resumen": "Juego donde los participantes abrazan a su compañero al detener la música.",
+            "Area": ["Afectiva","Social","Corporal"],
+            "Descripcion" : "Los participantes se dispersan, suena una música y todos danzan o se mueven libremente por la habitación. Cuando la música se detiene, cada persona abraza al compañero que tengan más cerca y se sientan en el piso. La música continúa y los participantes bailan por parejas, cuando la música se detiene se abrazan con otra pareja, al continuar bailan de a 4, y así sucesivamente hasta llegar a un abrazo de todos. Luego la actividad se repite con distintas canciones.",
+            "Materiales" : [{"key": "Reproductor de música con parlante"}],
+            "Duracion" : "15 mins"
+        },
+        {
+            "Nombre": "Flores de Pan",
+            "Resumen": "Juego donde uno de los participantes debe adivinar que señal o gesto permite que los demas jugadores mientan.",
+            "Area": ["Afectiva","Creativa"],
+            "Descripcion" : "Se   moja   pan   fresco   con   agua   para   después   sacar   pedazos   chicos   y   aprensarlos  en  partes  planas,  entonces  se  doblan  para  formar  pétalos.  Después  de    dejarlos   secar   se      pueden   pintar   con   colores   aguamarinas   y   una   vez   secos   nuevamente  una  mano  de  barniz  que  se  usa  para  las  uñas.  Se  puede  usar  cola  para  afirmar los pétalos y finalmente fijar la flor a un broche. Cuando se terminan puede servir como lindos regalos para que los Lobatos entreguen a sus madres en el día de la madre.",
+            "Materiales" : [{"key": "1 pan por niño"},{"key":"agua"},{"key":"pintura"},{"key":"cola fría"}],
+            "Duracion" : "60 mins"
+        },
+        {
+            "Nombre": "¿Qué harías si...?",
+            "Resumen": "Juego donde los lobatos trabajan el ponerse en el lugar del otro, y cómo se sentirían ante determinadas situaciones.",
+            "Area": ["Afectiva","Carácter"],
+            "Descripcion" : "Debemos  usar  las  actuaciones  para  enseñar  buena  conducta.  Por  ejemplo:  Entregue  a  cada  Seisena  una  pregunta  tal  como;  ¿Qué  haría  Ud.,  si  encontró  una  cartera  con  $  500?,  ¿Qué  haría  Ud.,  si  su  pelota  rompió  la  ventana  de  una  casa?,  ¿Qué haría Ud., si en un Rally de Lobatos usted encuentra algo del uniforme de otro muchacho?, los Lobatos deben actuar cada pregunta junto con la solución que usarían y recuerde que debe seleccionar preguntas convenientes a la edad del Lobato. ",
+            "Materiales" : [{"key": "tarjetas con preguntas"}],
+            "Duracion" : "45 mins"
+        },
+
+        {
+            "Nombre": "Reunión Accidentada",
+            "Resumen": "Juego donde se pone a prueba la disposición a ayudar a los demás.",
+            "Area": ["Afectiva","Social","Carácter"],
+            "Descripcion" : "Si se obtiene la ayuda de varios adultos (o la Tropa) Ud., podría hacer una reunión  accidentada,  con  constantes  interrupciones  del  programa  para  atender  a  pequeñas  emergencias  que  ocurrirían,  en  las  cuales  los  Lobatos  tuvieran  que decidir ayudar, indicándoles lo mucho que los necesitan. Es una buena oportunidad para practicar gran parte de la Segunda Estrella y la especialidad de Primeros Auxilios.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "45 mins"
+        }
+
+    ],
+
+    "Sociabilidad": [
+
+        {
+            "Nombre": "Abejas Trabajadoras",
+            "Resumen": "Juego donde uno de los participantes debe encontrar un pañolín basado en las pistas que dan los demás.",
+            "Area": ["Social"],
+            "Descripcion" : "Uno de los participantes sale de la habitación, mientras los otros eligen un objeto: un pañolín (variante: un cuadro, un reloj, etc) y lo ocultan. Al incorporarse el niño que salió, el resto imita el zumbar de las abejas, aumentando la intensidad si se aproxima al objeto seleccionado y disminuyendo si se aleja de él. Tendrá que adivinarlo en dos minutos si quiere ganar, sino, es turno del siguiente.",
+            "Materiales" : [{"key": "un pañolín"}],
+            "Duracion" : "15 mins"
+        },
+        {
+            "Nombre": "Enfermos",
+            "Resumen": "Juego donde uno de los participantes debe adivinar que señal o gesto permite que los demas jugadores mientan.",
+            "Area": ["Social"],
+            "Descripcion" : "El juego es encontrar la enfermedad que tienen los jugadores. Todos se sientan en un círculo, un joven que es \"el medico\" sale del cuarto mientras que los otros jugadores eligen un signo distinto que es \"la enfermedad\", la misma para todos. Cuando los jugadores hacen el signo, deben mentir, cuando no lo hacen, deben responder la verdad. Por ejemplo, los jugadores pueden elegir de mentir cuando tocan el suelo con sus manos o cuando rascan su piel. El medico regresa cuando los jugadores han eligido el signo y debe adivinar su enfermedad, o sea cual es el signo entre ellos que les permite mentir. Para encontrarlo, el medico debe preguntar a los participantes su nombre, su edad por ejemplo, como esta vestido y deducir lo que hacen como signo cuando mienten. Cada vez un jugador responde mientras que no hace el signo, los otros jugadores deben decir \"Psicópata\" lo cual da alguna pista al médico.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "30 mins"
+        },
+        {
+            "Nombre": "Noche de Cortesía",
+            "Resumen": "Actividad con convivencia, en la que los lobatos mostrarán cortesía en todo lo que hagan.",
+            "Area": ["Social"],
+            "Descripcion" : "Es  buena costumbre variar los programas a veces para organizar actividades como las  siguientes:  “Una  noche  de  “cortesía”,  cuando  se  acentúa  cortesías  tales  como  abrir  la  puerta  para  salir  otra  persona,  diciendo  muchas  gracias  y  por  favor.  Se  puede  desarrollar  actuaciones  por  los  Lobatos  demostrando  como  ser  cortés  en  la  casa, en la calle y en la movilización colectiva. ",
+            "Materiales" : [{"key": "Comida para compartir"},{"key":"Mantel"}],
+            "Duracion" : "40 mins"
+        },
+
+        {
+            "Nombre": "El mapa",
+            "Resumen": "Juego donde los niños encontrarán un mapa del tesoro, iniciando un juego de pistas y claves que deberán completar con su seisena.",
+            "Area": ["Social","Creativa"],
+            "Descripcion" : "Salga con su Manada a un Campo cercano; en uno de los árboles usted encuentra un mapa que indica donde hay un tesoro escondido. Inmediatamente prepare la cacería en  el  mismo  lugar  donde  encontró  el    mapa,  seleccionando  caminos  ya  preparados  de  antemano  con  rastros  para  cada  Seisena.  (mensajes,  dulces,  preguntas  sobre  la  selva, etc. Deben ser dejados en los rastros). Haga que cada Seisena tome un camino distinto  y  que  todos  coincidan  al  final  de  la  cacería  (lugar  donde  está  el  tesoro  escondido).",
+            "Materiales" : [{"key": "Claves para indicar acciones o caminos a seguir"},{"key":"Tesoro"},{"key":"Mapas"}],
+            "Duracion" : "45 mins"
+        },
+
+        {
+            "Nombre": "Gato Scout",
+            "Resumen": "Juego donde dos equipos se enfrentan en el conocido juego El Gato (#).",
+            "Area": ["Corporal","Social","Carácter"],
+            "Descripcion" : "Para realizar este juego se debe conocer el juego del gato y dividir en 2 equipos. Construir el gato con pañolines y entregar 5 fichas a cada equipo. Este juego se trata de alinear tres objetos de tu equipo para ganar el juego. Así mismo evita que tu adversario te venza bloqueándole las líneas que intente realizar. En un extremo del espacio estará el equipo formado en linea hacia atras, en el otro extremo estará ubicado el gato, para llegar al gato se deberá jugar al cuerpo tierra y correr hacia el gato, donde cada uno deberá poner un objeto en su turno para intentar formar la linea del gato.",
+            "Materiales" : [{"key": "5 fichas azules"},{"key":"5 fichas rojas"},{"key":"4 pañolines"}],
+            "Duracion" : "15 mins"
+        },
+
+        {
+            "Nombre": "Animales",
+            "Resumen": "Juego donde uno de los participantes dice un animal y los demás lo representan con su cuerpo",
+            "Area": ["Corporal","Social","Carácter"],
+            "Descripcion" : "Todos se ubican en un círculo. Uno de los niños dice un animal que le guste, y los demás, por turno deberán imitar a ese animal y sus gestos pero sin hacer lo que ya hizo el anterior. Quien haga la mejor imitación elige el siguiente animal, y así hasta que todos hayan pasado al menos una vez.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+
+        {
+            "Nombre": "Caballos Descabellados",
+            "Resumen": "Juego donde los niños se convierten en un carruaje de caballos y deben correr juntos.",
+            "Area": ["Corporal","Social"],
+            "Descripcion" : "De instrucciones de nudos en los rincones de Seisenas, las Seisenas forman círculos separados y a la palabra “Ya” unen sus cordeles haciendo un círculo. Una vez que cada Lobato de la Seisena ha hecho su nudo correctamente pasa adentro del cordel  y  cuando  todos  estén  adentro  dan  una  vuelta  al  local  o  patio  como  caballos  descabellados, el Seisenero manejando. La Seisena que termina primero gana.",
+            "Materiales" : [{"key": "Cuerda"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "Teatro Scout",
+            "Resumen": "Juego donde los equipos deben organizarse para representar distintas situaciones.",
+            "Area": ["Creativa","Social","Corporal"],
+            "Descripcion" : "Los niños se dividen en equipos. A cada equipo se le entregará un artículo (o dos, según la cantidad de participantes) de la ley de la manada, y deberán organizarse para representar alguna situación que se trate de ello. El otro equipo deberá intentar adivinar de qué artículo se trata.",
+            "Materiales" : [{"key": "Tarjetas con los artículos de la ley"}],
+            "Duracion" : "40 mins"
+        },
+
+        {
+            "Nombre": "¿Dónde está lo que tomé?",
+            "Resumen": "Juego donde los participantes deben reconocer el objeto que tomaron sin ver.",
+            "Area": ["Creativa","Social"],
+            "Descripcion" : "Los niños se dividen en equipos. Un equipo se venda los ojos mientras el otro observa. El animador escogeráalgún objeto y se lo entregará a uno de los vendados para que reconozca el objeto con el tacto, la idea es que no todos en el equipo tomen el mismo objeto. Cuando todos hayan tomado algún objeto y este haya sido devuelto a su lugar en el piso, se desvendan y deben correr al objeto que creen que tocaron.",
+            "Materiales" : [{"key": "Set de objetos: 5 pañolines con turcos o nudos distintos"},{"key":"Set de objetos: pelotas de distintos tipos"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "¿Y qué pasa si hay un accidente?",
+            "Resumen": "Actividad de reflexión en que se conversa sobre qué harían en ciertas situaciones de riesgo, peligros o accidentes.",
+            "Area": ["Carácter","Social","Creativa"],
+            "Descripcion" : "Conversar  con  la  Manada  sobre  accidentes  de  tránsito  informados  en  la  prensa y relacionado con jóvenes. Deje a los Lobatos que sugieran como se podría evitar tales accidentes y que habrían hecho si hubiesen estado en ese lugar; siempre inculcando en ellos la necesidad de buscar auxilio en los adultos.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "La seguridad en mi casa",
+            "Resumen": "Actividad en que los lobatos deben pensar en todas las cosas peligrosas que hay en sus casas.",
+            "Area": ["Carácter","Social"],
+            "Descripcion" : "Se  puede  organizar  la  siguiente  como  competencia  entre  Seisenas.  Cada  Seisena  debe  hacer  una  lista  de  peligros  potenciales  en  el  hogar,  por  ejemplo:  Agua  hirviendo  Ollas  sin  manillas  Hojas  para  afeitar  jugos  químicos  estufas  cáscaras  de  plátano en el suelo la misma oscuridad vidrios quebrados clavos, etc. Seguramente los  Lobatos  pensarán  en  muchas  otras  cosas  peligrosas.  Tal  actividad  tiene  tanto  valor como miles de accidentes anuales por descuido en el hogar. ",
+            "Materiales" : [{"key": "1 papelógrafo por seisena"},{"key":"1 plumón por seisena"}],
+            "Duracion" : "45 mins"
+        },
+
+        {
+            "Nombre": "La Manada Muda",
+            "Resumen": "Desafío para la manada, en que deberán continuar normalmente con sus actividades pero sin hablar",
+            "Area": ["Carácter","Social","Corporal"],
+            "Descripcion" : "15 ó 20 minutos de la reunión de Manada haga (Ud., se las arreglará) que los Lobatos no hablen, así como tampoco los Viejos Lobos. La reunión debe continuar normalmente,  sólo  que  todo  se  hará  con  mímica,  incluyendo  preguntas,  juegos  sencillos, etc. Vea hasta donde son capaces de llegar los Lobatos. No lo prolongue en exceso.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+
+        {
+            "Nombre": "Me perdí",
+            "Resumen": "Desafío para la manada durante una salida, en que el animador reconoce estar perdido y los lobatos deberán encontrar el camino.",
+            "Area": ["Carácter","Social"],
+            "Descripcion" : "Si usted lleva a la Manada a un lugar visitado por la misma, por primera vez, simule  estar  perdido  y  es  una  buena  oportunidad  para  ver  cual  de  los  Lobatos  se  atreve  a  guiar  a  toda  la  Manada  para  el  Local. No deje que todos hablen al mismo tiempo: Rafael, elige un asistente y tu nos guiarás.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "20 mins"
+        },
+
+        {
+            "Nombre": "Abrazos Musicales",
+            "Resumen": "Juego donde los participantes abrazan a su compañero al detener la música.",
+            "Area": ["Afectiva","Social","Corporal"],
+            "Descripcion" : "Los participantes se dispersan, suena una música y todos danzan o se mueven libremente por la habitación. Cuando la música se detiene, cada persona abraza al compañero que tengan más cerca y se sientan en el piso. La música continúa y los participantes bailan por parejas, cuando la música se detiene se abrazan con otra pareja, al continuar bailan de a 4, y así sucesivamente hasta llegar a un abrazo de todos. Luego la actividad se repite con distintas canciones.",
+            "Materiales" : [{"key": "Reproductor de música con parlante"}],
+            "Duracion" : "15 mins"
+        },
+
+        {
+            "Nombre": "Reunión Accidentada",
+            "Resumen": "Juego donde se pone a prueba la disposición a ayudar a los demás.",
+            "Area": ["Afectiva","Social","Carácter"],
+            "Descripcion" : "Si se obtiene la ayuda de varios adultos (o la Tropa) Ud., podría hacer una reunión  accidentada,  con  constantes  interrupciones  del  programa  para  atender  a  pequeñas  emergencias  que  ocurrirían,  en  las  cuales  los  Lobatos  tuvieran  que decidir ayudar, indicándoles lo mucho que los necesitan. Es una buena oportunidad para practicar gran parte de la Segunda Estrella y la especialidad de Primeros Auxilios.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "45 mins"
+        }
+
+    ],
+
+    "Espiritualidad": [
+
+        {
+            "Nombre": "Ayudando a la naturaleza",
+            "Resumen": "Actividad en que los lobatos plantan flores en conjunto, para traerlas 2 meses después y mostrar su crecimiento.",
+            "Area": ["Espiritual"],
+            "Descripcion" : "En el otoño diga a los Lobatos que cada uno debe traer un tiesto con tierra. Akela  suministrará  los  bulbos  y  demostrará  como  plantarlos,  para  que  después  los  Lobatos  planten  los  suyos.  También  se  puede  plantar:  Castañas,  bellotas,  etc.  Akela explicando el cuidado general que necesitan. Los niños llevan bulbos a la casa  y  al  llegar  la  primavera  se  puede  organizar  una  exposición  de  flores  con  diferentes  clases  para  los  diferentes  tipos  de  bulbos.  Como  premios  para  los  ganadores se puede entregar escarapelas de colores.",
+            "Materiales" : [{"key": "tierra de hoja"},{"key":"1 macetero por niño"},{"key":"bulbos de flores"}],
+            "Duracion" : "45 mins"
+        },
+        {
+            "Nombre": "Conociendo la naturaleza",
+            "Resumen": "Juego para hacer en un parque o similar, donde los niños aprenderán areconocer distintas especies de flora.",
+            "Area": ["Espiritual"],
+            "Descripcion" : "La Manada de pié y las Seisenas en fila india. Cada Seisena, será numerada (1 al 6). El  Viejo  Lobo  dirá  en  voz  alta  “Álamo”  Nº  4:  Los  Lobatos  que  tengan  el  Nº  4  en   cada  Seisena  saldrán  a  buscar  una  hoja,  flor  o  la  corteza  de  “Álamo”.  Se  anotará  puntos la Seisena que más rápido llegue con lo pedido. Los objetos deben ser muy sencillos, pero es una gran oportunidad para enseñar algún nuevo árbol, flor, hierba, etc.",
+            "Materiales" : [{"key": "No requiere"}],
+            "Duracion" : "30 mins"
+        },
+
+        {
+            "Nombre": "Abecedario de espiritualidad",
+            "Resumen": "Juego para aprender los conceptos que están relacionados al mundo espiritual.",
+            "Area": ["Espiritual"],
+            "Descripcion" : "Se reparten a cada seisena tarjetas que contienen letras del abecedario, de manera que cada niño cuente con un total de 3 a 4 tarjetas. Posteriormente, el dirigente debe decir una palabra relacionada al ámbito espiritual y cada seisena debe intentar escribir la palabra de la forma más legible posible con las tarjetas proporcionadas, sin intercambiarlas entre sus miembros. El equipo que no logra armar la palabra de forma legible (ya que podría darse el caso de que no se pueda formar la palabra completa), debe representar una escena mediante mímica de la palabra formada.",
+            "Materiales" : [{"key": "Tarjetas con letras del abecedario"}],
+            "Duracion" : "60 mins"
+        }
     ]
 }

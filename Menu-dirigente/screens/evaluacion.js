@@ -34,6 +34,9 @@ class evaluacion extends Component {
             SendAlertType: 0,
         }
     }
+    static navigationOptions = {
+        header: null
+    }
     ratingCompleted = (rating2) => {
         this.setState({rating : rating2})
      }
@@ -114,11 +117,11 @@ class evaluacion extends Component {
         else if(this.state.SendAlertType == 1){
             return(
                 <SCLAlert
-                theme="success"
-                show={this.state.SendAlertState}
-                title="Felicidades"
-                subtitle= {this.state.SendAlertMessage}
-                onRequestClose = {this.handleClose}
+                    theme="success"
+                    show={this.state.SendAlertState}
+                    title="Felicidades"
+                    subtitle= {this.state.SendAlertMessage}
+                    onRequestClose = {this.handleClose}
                 >
                 <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
                 </SCLAlert>

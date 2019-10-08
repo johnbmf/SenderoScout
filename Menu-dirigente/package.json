@@ -1,0 +1,36 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^9.0.0",
+    "abort-controller": "^3.0.0",
+    "expo": "^33.0.0",
+    "lodash": "^4.17.15",
+    "native-base": "^2.12.1",
+    "react": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react-native-animation-layout": "0.0.13",
+    "react-native-awesome-alerts": "^1.2.0",
+    "react-native-base64": "0.0.2",
+    "react-native-dynamic-search-bar": "^0.2.1",
+    "react-native-dynamic-vector-icons": "WrathChaos/react-native-dynamic-vector-icons#expo",
+    "react-native-easy-cached-image": "0.0.7",
+    "react-native-elements": "^1.1.0",
+    "react-native-expo-image-cache": "^4.0.8",
+    "react-native-fast-image": "^7.0.2",
+    "react-native-gradient-card-view": "github:WrathChaos/react-native-gradient-card-view#expo",
+    "react-native-modal": "^11.4.0",
+    "react-native-scl-alert": "^1.2.1",
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^3.11.0"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^5.0.0"
+  },
+  "private": true
+}

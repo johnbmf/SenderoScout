@@ -33,7 +33,7 @@ class crear_mision extends Component {
             Spot: '',
             Expiracion: 0,
             SendAlertState: false,
-            SendAlertMessage: "Mision creada con éxito.",
+            SendAlertMessage: "Misión creada con éxito.",
             SendAlertType: 2,
             isLoading:false,
 
@@ -48,8 +48,11 @@ class crear_mision extends Component {
     clearText(){
         this.setState(
             {
+                TipoMision : 0,
                 nombre_mision : '',
-                desc_mision: ''
+                desc_mision: '',
+                Spot: '',
+                Expiracion: 0,
             }
         )
     }
@@ -60,7 +63,7 @@ class crear_mision extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Es necesario elegir el tipo de misión"
+                SendAlertMessage: "Es necesario elegir el tipo de misión."
             }, ()=> {this.handleOpen()});
             //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
@@ -70,7 +73,7 @@ class crear_mision extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar una ubicación a la misión"
+                SendAlertMessage: "Es necesario asignar una ubicación a la misión."
             }, ()=> {this.handleOpen()});
             //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
@@ -79,7 +82,7 @@ class crear_mision extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar un tiempo de expiración de la misión"
+                SendAlertMessage: "Es necesario asignar un tiempo de expiración de la misión."
             }, ()=> {this.handleOpen()});
             //Alert.alert("Error","Es necesario elegir el tipo de misión");
             return;
@@ -88,7 +91,7 @@ class crear_mision extends Component {
                 {
                     isLoading : true,
                     SendAlertType : 2,
-                    SendAlertMessage: "Es necesaria una descripción de la misión",
+                    SendAlertMessage: "Es necesaria una descripción de la misión.",
                     SendAlertState: true
                 }, ()=> {this.handleOpen()});
             return;
@@ -96,7 +99,7 @@ class crear_mision extends Component {
             this.setState({
                 isLoading : true,
                 SendAlertType : 2,
-                SendAlertMessage: "Es necesario un nombre para la misión",
+                SendAlertMessage: "Es necesario un nombre para la misión.",
                 SendAlertState: true}, ()=> {this.handleOpen()});
             return;
         } else {
@@ -118,10 +121,17 @@ class crear_mision extends Component {
             })
             .then(response => response.json())
             .then((responseJson) => {
-                this.setState({
-                    isLoading : false,
-                    SendAlertType:1
-                }, ()=> {this.handleOpen()})
+                if(responseJson != -2){
+                    this.setState({
+                        isLoading : false,
+                        SendAlertType:1
+                    }, ()=> {this.handleOpen()})
+                }else{
+                    this.setState({
+                        isLoading : false,
+                        SendAlertType:-2
+                    }, ()=> {this.handleOpen()})
+                }
             })
             .catch((error)=>{
                 console.error(error);
@@ -181,13 +191,13 @@ class crear_mision extends Component {
                     </SCLAlert>
                 );
             }
-            else if(this.state.SendAlertType == -1){
+            else if(this.state.SendAlertType == -2){
                 return(
                     <SCLAlert
                     theme="danger"
                     show={this.state.SendAlertState}
-                    title="Ooops"
-                    subtitle= {this.state.SendAlertMessage}
+                    title="Ups"
+                    subtitle= {"Ya existe una misión activa en esa ubicación."}
                     onRequestClose = {this.handleClose}
                     >
                     <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
@@ -200,7 +210,7 @@ class crear_mision extends Component {
                     <SCLAlert
                     theme="warning"
                     show={this.state.SendAlertState}
-                    title="Estoy Confundido"
+                    title="Campo Faltante"
                     subtitle= {this.state.SendAlertMessage}
                     onRequestClose = {this.handleClose}
                     >
@@ -290,7 +300,7 @@ class crear_mision extends Component {
                                 onValueChange ={ (itemValue,itemIndex) => this.setState({Expiracion: itemValue}) }>
                                 <Picker.Item label = "Elija la duración de la misión" value = {0} />
                                 <Picker.Item label = "3 días" value = {3} />
-                                <Picker.Item label = "7 dias" value = {7} />
+                                <Picker.Item label = "7 días" value = {7} />
                                 <Picker.Item label = "14 días" value = {14} />
                             </Picker>
                         </View>
