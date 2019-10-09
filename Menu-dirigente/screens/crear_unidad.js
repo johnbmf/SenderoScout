@@ -118,7 +118,7 @@ class crear_unidad extends Component {
                         seisena1 : this.state.userToken.seisena1,
                         tipo: this.state.userToken.tipo,
                         grupo : this.state.userToken.grupo,
-                        nombre_unidad:nombre_unidad1,
+                        nombre_unidad:this.state.nombre_unidad,
                         unidad1 : responseJson.id_unidad},
                     usuario: responseJson.nombre_usuario,
                     isLoading : false,
