@@ -253,12 +253,17 @@ puede(){
     console.log("Puede", this.state.userToken)
 if(this.state.userToken.unidad1 == 0){
     return(
+        
         <View style = {styles.container}>
+                        <View style={{width: '100%', height: '7%'}} >
+
+            </View>
             <View style={{width: '100%', height: '7%'}} >
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
+                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
@@ -272,6 +277,7 @@ if(this.state.userToken.unidad1 == 0){
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
+                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
@@ -285,6 +291,7 @@ if(this.state.userToken.unidad1 == 0){
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
+                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
