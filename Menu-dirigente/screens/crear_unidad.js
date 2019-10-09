@@ -248,7 +248,7 @@ class crear_unidad extends Component {
                 );   
             }
         }
-
+//puede(): Funcion que muestra paneles para crear unidad en caso de que la persona no tenga Unidad, en caso que no, muestra que la persona ya tiene unidad. 
 puede(){
     console.log("Puede", this.state.userToken)
 if(this.state.userToken.unidad1 == 0){
@@ -318,9 +318,14 @@ if(this.state.userToken.unidad1 == 0){
 );
 }
 else{
-    <View style ={{width:'90%', height:'20%'}}>
-        <Text style={{fontSize: 22, color : 'black'}}>Ya tienes tu unidad correspondiente.</Text>
+    return(
+        <View style = {styles.container}>
+        <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+        <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Ya tienes tu unidad correspondiente.</Text>
     </View>
+    </View>
+
+    )
 }
 }
     render() {
