@@ -42,6 +42,7 @@ public class Aptitudes : MonoBehaviour
     public GameObject OverlayGrande;
     #endregion
 
+    public GameObject MainCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +123,7 @@ public class Aptitudes : MonoBehaviour
         float ev = Evaluaciones[animalFace];
         OverlayGrande.SetActive(true);
         PersonajesPanel[animalFace].SetActive(true);
+        MainCamera.GetComponent<TouchCamera>().enabled = false;
         StartCoroutine(EfectoScalePanel(animalFace));
     }
 
@@ -212,5 +214,6 @@ public class Aptitudes : MonoBehaviour
         AptitudesCanvas.SetActive(false);
         OverlayGrande.SetActive(false);
         isPanelOpen = false;
+        MainCamera.GetComponent<TouchCamera>().enabled = true;
     }
 }
