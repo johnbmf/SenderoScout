@@ -30,6 +30,7 @@ import GradientCard from "react-native-gradient-card-view";
 import SearchBar from "react-native-dynamic-search-bar";
 import { CustomLayoutSpring } from "react-native-animation-layout";
 import { LinearGradient } from 'expo';
+import TouchableScale from 'react-native-touchable-scale';
 
 
 const { width } = Dimensions.get("window");
@@ -472,7 +473,7 @@ charge2(){
                       
                 </View>
                 <SafeAreaView style={{ flex: 1}}>
-        <StatusBar barStyle={"light-content"} />
+        
         <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
         
@@ -502,19 +503,32 @@ charge2(){
         <ScrollView > 
                 
         <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data}
 
         renderItem={({ item }) => (
-          <TouchableOpacity >
+
             <ListItem
-            roundAvatar
+
+              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2,shadowColor: '#000',shadowRadius:4}}
               title={`${item.nombre}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
                onPress={() => this.selectItem(item.nombre,item.user)}
-               avatar = {<Image source={require('../assets/perfil.png')}/>}
+              Component={TouchableScale}
+              friction={90} //
+              tension={100} // These props are passed to the parent component (here TouchableScale)
+              activeScale={0.95} //
+               leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+               linearGradientProps={{
+                colors: ['#ADCFD3', '#BAD3D6'],
+                start: [1.5, 0],
+                end: [0.1, 0],
+              }}
+              subtitleStyle={{ color: '#104F55' }}
+              subtitle={`${item.pseudonimo}`}
+               ViewComponent={LinearGradient}
+
             />
-          </TouchableOpacity>)}
+        )}
           keyExtractor={item => item.user} 
                   
         />
@@ -578,5 +592,5 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width: '100%',
         height: '100%'
-    }
+    },
 });
