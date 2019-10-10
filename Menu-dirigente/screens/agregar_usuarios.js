@@ -322,6 +322,11 @@ class agregar_usuarios extends Component {
                 <NavigationEvents onWillFocus={() => this.clearText()}/> 
                 </View>
                 <View style={{width: '100%', height: '7%'}} >
+                    <Text style={{width: '90%'}}>
+                        <Text style={{width: '90%'}}>
+                            {"      Nombre de Usuario:"}
+                        </Text>
+                    </Text>
                     <TextInput
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                         underlineColorAndroid = "transparent"
@@ -330,12 +335,18 @@ class agregar_usuarios extends Component {
                         multiline = {false}
                         //numberOfLines = {4}
                         onChangeText={(valor) => this.setState({Usuario : valor})}
-                        placeholder = "Nombre de usuario"
+                        placeholder = "Ejemplo: Mowgli"
                         keyboardType = 'default'
                         value={this.state.Usuario}                       
                     />
-                </View>               
+                </View>    
+                           
                 <View style={{width: '100%', height: '7%'}} >
+                    <Text style={{width: '90%'}}>
+                        <Text style={{width: '90%'}}>
+                            {"      Email Apoderado:"}
+                        </Text>
+                    </Text>
                     <TextInput
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
                         underlineColorAndroid = "transparent"
@@ -344,7 +355,8 @@ class agregar_usuarios extends Component {
                         multiline = {false}
                         //numberOfLines = {4}
                         onChangeText={(valor) => this.setState({Email : valor})}
-                        placeholder = "Email Apoderado"
+                        placeholder = "Ejemplo: hammersoft.fesw@gmail.com"
+                        //textAlign={'left'}
                         keyboardType ='email-address'
                         value={this.state.Email}                       
                     />
@@ -431,5 +443,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         //backgroundColor: 'white'   //'#F4F0BB'
-    }
+    },
+    //baseText: {
+    //    fontFamily: 'Cochin',
+    //  },
+      titleText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+      }
 });
