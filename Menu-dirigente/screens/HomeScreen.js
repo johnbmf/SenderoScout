@@ -18,6 +18,7 @@ import MenuItem from './../components/menuitems'
 import { ThemeConsumer } from "react-native-elements";
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 
+
 const CModal = ({ nombre, value }) => (                    
     <Modal isVisible={value}>
         <View style={{ flex: 1 , backgroundColor:'white'}}>
@@ -446,7 +447,6 @@ class HomeScreen extends Component {
                         }</View>))
                     }
                     <this.CModal/>
-                  
                     <View>
                         {this.ShowSendAlert()}
                     </View>
