@@ -16,7 +16,8 @@ import { NavigationEvents } from 'react-navigation';
 import Modal from "react-native-modal";
 import MenuItem from './../components/menuitems'
 import { ThemeConsumer } from "react-native-elements";
-import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
+import {Alerta} from './../CustomComponents/customalert'
+
 
 
 const CModal = ({ nombre, value }) => (                    
@@ -50,12 +51,13 @@ class HomeScreen extends Component {
             tkn : [],
             mensaje_respuesta: "",
             estado_respuesta : -1,
-            SendAlertState: false,
-            SendAlertMessage: "Ha Ocurrido un error inesperado, Intentelo nuevamente.",
-            SendAlertType: 0,
             update: false,
             error: false,
-            refreshing:false
+            refreshing:false,
+            estadoAlerta: false,
+            tituloAlerta: "Este es el titulo de la alerta",
+            mensajeAlerta: "Misión creada con éxito",
+            typeAlerta: 'Warning',
 
         }
         this._bootstrapAsync();
@@ -118,9 +120,7 @@ class HomeScreen extends Component {
           // Call any action
         }
       }
-    componentWillUnmount(){
 
-    }
     componentDidMount(){
 
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
@@ -153,6 +153,11 @@ class HomeScreen extends Component {
             console.error(error);
         });
     }
+    toggleAlert(){
+        this.setState({
+            estadoAlerta : !this.state.estadoAlerta
+        })
+    }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({userToken : JSON.parse(Token)});
@@ -161,8 +166,12 @@ class HomeScreen extends Component {
       };
     responderInvitacion(estado,nombre_unidad1, id){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
-            this.setState({SendAlertType: -1,
-            SendAlertState:true});
+            this.setState({
+                estadoAlerta : true,
+                typeAlerta: "Warning",
+                tituloAlerta: "Ya perteneces a una unidad",
+                mensajeAlerta : "Para poder unirte a una nueva unidad es necesario que abandones primero la que perteneces"
+            });
             return
         }
         if(estado == 1){
@@ -194,7 +203,6 @@ class HomeScreen extends Component {
                 })
                 if(estado != -1){
                     this.setState({
-                        SendAlertType: 1,
                         userToken : {
                             user : this.state.userToken.user,
                             nombre: this.state.userToken.nombre,
@@ -206,7 +214,11 @@ class HomeScreen extends Component {
                             grupo : this.state.userToken.grupo,
                             unidad1 : id,
                             nombre_unidad:nombre_unidad1
-                        }
+                        },
+                        estadoAlerta : true,
+                        typeAlerta: "Succsess",
+                        tituloAlerta: "Éxito",
+                        mensajeAlerta: "Felicitaciones, ahora perteneces a la unidad" + this.state.nombre_unidad
                     },()=> {storeItem('userToken',this.state.userToken)})
                 }
 
@@ -263,98 +275,6 @@ class HomeScreen extends Component {
             return false;
         }
     }
-    handleOpen = () => {
-        this.setState({ SendAlertState: true });
-    }
-    
-    handleClose = () => {
-        this.setState({ SendAlertState: false });
-    }
-
-    ShowSendAlert(){
-            if (this.state.SendAlertType == 0){
-                return(
-                    <Modal
-                        transparent = {true}
-                        visible = {this.state.isLoading}
-                        animationType = 'none'
-                        onRequestClose = {()=>{console.log("Closion Modal")}}
-                    > 
-                        <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
-                            <ActivityIndicator
-                            animating = {this.state.isLoading}
-                            size="large" 
-                            color="#00ff00" 
-                            />    
-                        </View> 
-                    </Modal>
-                ); 
-            }
-            else if(this.state.SendAlertType == 1){
-                return(
-                    <SCLAlert
-                    theme="success"
-                    show={this.state.SendAlertState}
-                    title="Felicidades"
-                    subtitle= "El cambio de unidad se ha realizado con éxito."
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="success" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-            else if(this.state.SendAlertType == -1){
-                return(
-                    <SCLAlert
-                    theme="danger"
-                    show={this.state.SendAlertState}
-                    title="Ya tiene unidad."
-                    subtitle= "Por favor, abandone su unidad antes de poder unirse a una nueva"
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-            else{
-                console.log("ALERTA DE ERROR NO IDENTIFICADO")
-                return(
-                    <SCLAlert
-                    theme="warning"
-                    show={this.state.SendAlertState}
-                    title="Estoy Confundido"
-                    subtitle= {this.state.SendAlertMessage}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-    }
-
-    LoadingState(){
-        console.log(this.state.isLoading)
-        if(this.state.isLoading){
-            return(
-                <Modal
-                    transparent = {true}
-                    visible = {this.state.isLoading}
-                    animationType = 'none'
-                    onRequestClose = {()=>{console.log("Closing Modal")}}
-                > 
-                    <View style = {{ position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
-                        <ActivityIndicator
-                            animating = {this.state.isLoading}
-                            size="large" 
-                            color="#00ff00" 
-                        />    
-                    </View> 
-                </Modal>
-            );   
-        }
-    }
-
-
     CModal = () => (              
         <Modal isVisible={this.state.isModalVisible}>
             <View style={{ flex: 1 , backgroundColor:'white', flexDirection:'column', justifyContent:'space-around', borderWidth:5, borderColor:'#81C14B'}}>
@@ -422,7 +342,7 @@ class HomeScreen extends Component {
                     <MenuItem itemImage = {require('./../assets/chart4.png')} />
                     <MenuItem itemImage = {require('./../assets/chart6.png')} />
                 </View>}               
-                {this.state.hayInvitaciones &&
+                {this.state.invitaciones.length > 0 &&
                 <View style={{ width:'90%', height:'30%' , justifyContent : 'center', alignItems:'center', alignSelf:'center'}}>
                     {this.state.invitaciones.map(((obj,i) => 
                         <View style={{flexDirection:'row', marginBottom:10}} key = {i}>
@@ -446,14 +366,10 @@ class HomeScreen extends Component {
                         </View>
                         }</View>))
                     }
-                    <this.CModal/>
-                    <View>
-                        {this.ShowSendAlert()}
-                    </View>
-                    <View>
-                        {this.LoadingState()}
-                    </View>
                 </View>}
+                <this.CModal/>
+                    <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
+                    />
 
             </ScrollView>
             </View>

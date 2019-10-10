@@ -70,7 +70,7 @@ class crear_mision extends Component {
                 typeAlerta : 'Warning',
                 estadoAlerta: true,
                 tituloAlerta: "Campo faltante",
-                mensajeAlerta: "Por favor seleccione una misión he intente nuevamente"
+                mensajeAlerta: "Por favor seleccione una misión e intente nuevamente"
             })
         }
         else if (!this.state.Spot || !this.state.Spot.trim()) {
@@ -78,14 +78,14 @@ class crear_mision extends Component {
                 typeAlerta : 'Warning',
                 estadoAlerta: true,
                 tituloAlerta: "Campo faltante",
-                mensajeAlerta: "Por favor seleccione una ubicación he intente nuevamente"
+                mensajeAlerta: "Por favor seleccione una ubicación e intente nuevamente"
             })
         }else if (this.state.Expiracion==0) {
             this.setState({
                 typeAlerta : 'Warning',
                 estadoAlerta: true,
                 tituloAlerta: "Campo faltante",
-                mensajeAlerta: "Por favor asigne una fecha de expiración a su misión he intente nuevamente"
+                mensajeAlerta: "Por favor asigne una fecha de expiración a su misión e intente nuevamente"
 
             })
         }else if (!this.state.desc_mision || !this.state.desc_mision.trim()) {
@@ -93,14 +93,14 @@ class crear_mision extends Component {
                     typeAlerta : 'Warning',
                     estadoAlerta: true,
                     tituloAlerta: "Campo faltante",
-                    mensajeAlerta : "Por favor escriba una descripción para su misión he intente nuevamente"
+                    mensajeAlerta : "Por favor escriba una descripción para su misión e intente nuevamente"
                 })
         }else if (!this.state.nombre_mision || !this.state.nombre_mision.trim()) {
             this.setState({
                 typeAlerta : 'Warning',
                 estadoAlerta: true,
                 tituloAlerta: "Campo faltante",
-                mensajeAlerta : "Por favor escriba un nombre para su misión he intente nuevamente"
+                mensajeAlerta : "Por favor escriba un nombre para su misión e intente nuevamente"
         })} 
         else {
             this.setState({isLoading:true});
