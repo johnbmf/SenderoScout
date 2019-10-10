@@ -317,10 +317,6 @@ if(this.state.userToken.unidad1 == 0){
         />
         </View>
 
-        <View>
-            {this.LoadingState()}
-            {this.ShowSendAlert()}
-        </View>
         </View>
 );
 }
@@ -353,6 +349,10 @@ else{
                     </Header >                    
                 </View>
                 {this.puede()}
+                <View>
+            {this.LoadingState()}
+            {this.ShowSendAlert()}
+        </View>
                 </View>
                 </ScrollView>
 
