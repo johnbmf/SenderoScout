@@ -12,6 +12,9 @@
 	$usuario = $obj['usuario'];
 	$ide = 0;
 
+	//Crear arreglo para crear 5 seisenas.
+	$arr = array(1, 2, 3, 4,5);
+	$seisena = 'Seisena ';
 
 	if($obj['nombre_unidad']!="" and $obj['grupo']!="" and $obj['distrito']!="")
 	{
@@ -30,6 +33,21 @@
 					$response -> message = "Unidad creada con exito.";
 					$response -> id_unidad = $ide;
 					$response -> nombre_usuario = $usuario;
+					//Crear 5 Seisenas para la unidad.
+					
+					foreach ($arr as &$value) {
+						$seisena .= $value;
+						$check = $mysqli->query("INSERT into Seisena (nombre_seisena,id_unidad_seisena) values('$seisena','$ide')");
+						if($check){
+							$response -> message = "Unidad creada con exito.";
+						}
+						else{
+							$response -> message = "Error.";
+						}
+						$seisena = 'Seisena ';
+					}
+					
+
 					echo json_encode($response);
 				}
 				else{
