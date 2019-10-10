@@ -45,6 +45,7 @@ class cambiar_unidad extends Component {
     super(props);
     this.state = {
       loading: false,
+      loading2:false,
       data: [],
       data2: [] ,
       error: null,
@@ -56,7 +57,9 @@ class cambiar_unidad extends Component {
       page: 1,
       show1: false,
       show2: false,
-      userToken: ""
+      userToken: "",
+      SendAlertType: 1,
+      SendAlertMessage: "",
       
     };
     if (Platform.OS === "android") {
@@ -74,8 +77,17 @@ class cambiar_unidad extends Component {
     });
     
   };
-  ShowSendAlert(){
 
+          
+  handleClose = () => {
+
+    this.setState({ SendAlertState: false });
+    this.setState({isLoading : false})
+
+}
+  ShowSendAlert(){
+    console.log('lalalalalalalalsadsadas')
+console.log(this.state.SendAlertType)
     if (this.state.SendAlertType == 0){
         return(
         <ActivityIndicator
@@ -111,7 +123,6 @@ class cambiar_unidad extends Component {
         );
     }
     else{
-        console.log("ALERTA DE ERROR NO IDENTIFICADO")
         return(
             <SCLAlert
             theme="warning"
@@ -126,6 +137,32 @@ class cambiar_unidad extends Component {
     }
 
 }
+
+LoadingState(){
+  console.log(this.state.isLoading)
+  if(this.state.isLoading){
+      return(
+
+          <Modal
+
+              transparent = {true}
+              visible = {this.state.isLoading}
+              animationType = 'none'
+              onRequestClose = {()=>{console.log("Closing Modal")}}
+          > 
+              <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+                  <ActivityIndicator
+                  animating = {this.state.isLoading}
+                  size="large" 
+                  color="#00ff00" 
+                  />    
+              </View> 
+          </Modal>
+      );   
+  }
+}
+
+
   makeRemoteRequest(text) {
     this.setState({ loading: true,
     text:text});
@@ -141,7 +178,7 @@ class cambiar_unidad extends Component {
                 {
                     nombre_n: text,
  
-                    id_unidad:this.state.userToken.unidad1 //Change this
+                    id_unidad:this.state.userToken.unidad1 
                 })
  
             })
@@ -162,7 +199,7 @@ class cambiar_unidad extends Component {
   };
   
   makeRemoteRequest2(text) {
-    this.setState({ loading: true,
+    this.setState({ loading2: true,
     value2:this.state.value2,
     text2:text});
     fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
@@ -188,22 +225,19 @@ class cambiar_unidad extends Component {
           data2: responseData.data,
           message2: responseData.message,
           error: null,
-          loading: false,
+          loading2: false,
           value2: text,
           show1:true
         });
       })
       .catch(error => {
-        this.setState({ error, loading: false });
+        this.setState({ error, loading2: false });
       });
   };
 
     
   makeRemoteRequest3(user,idU) {
-    console.log('holi')
-    console.log(user)
-    console.log(idU)
-    this.setState({ loading: true});
+    this.setState({ isLoading: true});
     fetch('http://www.mitra.cl/SS/change_n_unidad.php',
             {
                 method: 'POST',
@@ -225,14 +259,15 @@ class cambiar_unidad extends Component {
         console.log(responseData)
         this.setState({
           data3: responseData.data,
-          message3: responseData.message,
+          SendAlertMessage: responseData.message,
           error: null,
-          loading: false,
+          isLoading:false
         });
       })
       .catch(error => {
-        this.setState({ error, loading: false });
+        this.setState({ error, isLoading: false });
       });
+      this.handleOpen();
   };
 
 
@@ -250,7 +285,7 @@ class cambiar_unidad extends Component {
   };
  
   handleOpen = () => {
-
+console.log('HOLAAAAAAAAAAAAAAAAASDAFSDFDFDS')
     this.setState({ 
         SendAlertState: true,
         isLoading : false 
@@ -305,9 +340,6 @@ class cambiar_unidad extends Component {
           usuario:usu,
           data: []
         });
-        console.log(this.state.text)
-        console.log(this.state.value)
-        console.log(this.state.value)
         this.makeRemoteRequest2(this.text2)
         // this.fetchData();
       };
@@ -335,6 +367,7 @@ show1() {
             onPressToFocus
             autoFocus={false}
             fontColor="#c6c6c6"
+            cancelIconComponent={this.charge2()}
             iconColor="#c6c6c6"
             shadowColor="#002642"
             cancelIconColor="#c6c6c6"
@@ -372,6 +405,7 @@ show1() {
   }
 }
 
+
 show2() {
   
   if(this.state.show2){
@@ -398,7 +432,7 @@ show2() {
 return null;
   }
 }
-
+//Mostrar simbolo de carga en la lista de nines
 charge(){
   if(this.state.loading){
     return(
@@ -408,6 +442,18 @@ charge(){
     return(null)
   }
 }
+//Mostrar simbolo de carga en la lista de unidades
+charge2(){
+  if(this.state.loading2){
+    return(
+    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
+  }
+  else{
+    return(null)
+  }
+}
+
+
   render() {
     return(
                 <View style = {styles.container}>
@@ -424,11 +470,12 @@ charge(){
                 </View>
                     <View style={{width: '100%', height: '5%', alignItems:'center'}} > 
                       
-                    </View>
-        <SafeAreaView style={{ flex: 1}}>
+                </View>
+                <SafeAreaView style={{ flex: 1}}>
         <StatusBar barStyle={"light-content"} />
         <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
+        
           <SearchBar 
             onPressToFocus
             autoFocus={false}
@@ -450,12 +497,16 @@ charge(){
             textInputValue={this.state.text}
 
           />
+          
         <View style={{ flex: 1 }}>
         <ScrollView > 
+                
         <FlatList
         ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data}
+
         renderItem={({ item }) => (
+          <TouchableOpacity >
             <ListItem
             roundAvatar
               title={`${item.nombre}`}
@@ -463,20 +514,25 @@ charge(){
                onPress={() => this.selectItem(item.nombre,item.user)}
                avatar = {<Image source={require('../assets/perfil.png')}/>}
             />
-          )}
-          keyExtractor={item => item.user}         
+          </TouchableOpacity>)}
+          keyExtractor={item => item.user} 
+                  
         />
+        
+            
+        
         </ScrollView >
         </View>
         
         <View style={styles.container}>{this.show1()}</View>
       
        <View style={styles.container}>{this.show2()}</View>
-       
-        
+       <View>
+            {this.ShowSendAlert()}
+        </View>
         </View>
       </SafeAreaView>
-      </View>
+                </View>
       
     );
     }

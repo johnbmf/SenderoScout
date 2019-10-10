@@ -210,7 +210,6 @@ class crear_unidad extends Component {
                 );
             }
             else{
-                console.log("ALERTA DE ERROR NO IDENTIFICADO")
                 return(
                     <SCLAlert
                     theme="warning"
