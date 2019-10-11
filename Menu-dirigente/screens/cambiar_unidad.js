@@ -165,8 +165,10 @@ LoadingState(){
 
 
   makeRemoteRequest(text) {
-    this.setState({ loading: true,
-    text:text});
+    this.setState({ loading: true,text:text});
+    if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar informacion en los otros item.
+      this.setState({ show1: false,show2:false});
+    }
     fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
             {
                 method: 'POST',
@@ -185,7 +187,6 @@ LoadingState(){
             })
       .then(res => res.json())
       .then((responseData) => {
-        console.log(responseData)
         this.setState({
           data: responseData.data,
           message: responseData.message,
@@ -203,6 +204,9 @@ LoadingState(){
     this.setState({ loading2: true,
     value2:this.state.value2,
     text2:text});
+    if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar el boton cambiar.
+      this.setState({show2:false});
+    }
     fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
             {
                 method: 'POST',
@@ -362,7 +366,7 @@ console.log('HOLAAAAAAAAAAAAAAAAASDAFSDFDFDS')
 show1() {
     if (this.state.show1) {
       return (
-        <View style={{ flex: 1 }}>
+        <View> 
         <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
           <SearchBar 
             onPressToFocus
@@ -472,6 +476,7 @@ charge2(){
                     <View style={{width: '100%', height: '5%', alignItems:'center'}} > 
                       
                 </View>
+                <ScrollView >
                 <SafeAreaView style={{ flex: 1}}>
         
         <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
@@ -492,7 +497,7 @@ charge2(){
             }}
             value={this.state.text} 
             onPressCancel={() => {
-              this.makeRemoteRequest('');
+              this.makeRemoteRequest("");
             }}
             onPress={() => alert("onPress")}
             textInputValue={this.state.text}
@@ -509,7 +514,7 @@ charge2(){
 
             <ListItem
 
-              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2,shadowColor: '#000',shadowRadius:4}}
+              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
                onPress={() => this.selectItem(item.nombre,item.user)}
@@ -541,11 +546,13 @@ charge2(){
         <View style={styles.container}>{this.show1()}</View>
       
        <View style={styles.container}>{this.show2()}</View>
+
        <View>
             {this.ShowSendAlert()}
         </View>
         </View>
       </SafeAreaView>
+      </ScrollView>
                 </View>
       
     );
