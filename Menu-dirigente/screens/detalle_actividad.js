@@ -95,11 +95,11 @@ class DetalleActividad extends Component {
 
                         </ScrollView>
                     </View>
-                    <View style = {{width: '100%', height: '15%', flexDirection: 'column'}}>
+                    <View style = {{width: '100%', height: '15%', alignItems: 'center'}}>
                         <CustomButton
-                                onPress={() => {this.props.navigation.goBack()}}
-                                title = "Volver"
-                                name = 'long-primary-button' 
+                            onPress={() => {this.props.navigation.goBack()}}
+                            title = "Volver"
+                            name = 'long-primary-button' 
                         />
                     </View>
                 </View>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 15,
         marginLeft:20,
-        alignContent: 'flex-start',
+        alignContent: 'space-around',
         textAlign: 'left'
 
 
