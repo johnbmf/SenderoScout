@@ -16,9 +16,10 @@ import {
     ActivityIndicator
 } from "react-native";
 import {Header,Left,Right,Icon, Body} from 'native-base'
-import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta} from './../CustomComponents/customalert'
+
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -33,9 +34,10 @@ class crear_mision extends Component {
             desc_mision: '',
             Spot: '',
             Expiracion: 0,
-            SendAlertState: false,
-            SendAlertMessage: "Misión creada con éxito.",
-            SendAlertType: 2,
+            estadoAlerta: false,
+            tituloAlerta: "Este es el titulo de la alerta",
+            mensajeAlerta: "Misión creada con éxito",
+            typeAlerta: 'Warning',
             isLoading:false,
 
         }
@@ -57,53 +59,51 @@ class crear_mision extends Component {
             }
         )
     }
+    toggleAlert(){
+        this.setState({
+            estadoAlerta : !this.state.estadoAlerta
+        })
+    }
     crearMision = () =>{
         console.log(this.state);
         if(this.state.TipoMision==0){
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario elegir el tipo de misión."
-            }, ()=> {this.handleOpen()});
-            //Alert.alert("Error","Es necesario elegir el tipo de misión");
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor seleccione una misión e intente nuevamente"
+            })
         }
         else if (!this.state.Spot || !this.state.Spot.trim()) {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar una ubicación a la misión."
-            }, ()=> {this.handleOpen()});
-            //Alert.alert("Error","Es necesario elegir el tipo de misión");
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor seleccione una ubicación e intente nuevamente"
+            })
         }else if (this.state.Expiracion==0) {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar un tiempo de expiración de la misión."
-            }, ()=> {this.handleOpen()});
-            //Alert.alert("Error","Es necesario elegir el tipo de misión");
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor asigne una fecha de expiración a su misión e intente nuevamente"
+
+            })
         }else if (!this.state.desc_mision || !this.state.desc_mision.trim()) {
-            this.setState(
-                {
-                    isLoading : true,
-                    SendAlertType : 2,
-                    SendAlertMessage: "Es necesaria una descripción de la misión.",
-                    SendAlertState: true
-                }, ()=> {this.handleOpen()});
-            return;
+            this.setState({
+                    typeAlerta : 'Warning',
+                    estadoAlerta: true,
+                    tituloAlerta: "Campo faltante",
+                    mensajeAlerta : "Por favor escriba una descripción para su misión e intente nuevamente"
+                })
         }else if (!this.state.nombre_mision || !this.state.nombre_mision.trim()) {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertMessage: "Es necesario un nombre para la misión.",
-                SendAlertState: true}, ()=> {this.handleOpen()});
-            return;
-        } else {
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta : "Por favor escriba un nombre para su misión e intente nuevamente"
+        })} 
+        else {
             this.setState({isLoading:true});
             fetch('http://www.mitra.cl/SS/crearMision.php',{
                 method: 'post',
@@ -124,14 +124,18 @@ class crear_mision extends Component {
             .then((responseJson) => {
                 if(responseJson != -2){
                     this.setState({
-                        isLoading : false,
-                        SendAlertType:1
-                    }, ()=> {this.handleOpen()})
+                        typeAlerta: 'Succsess',
+                        estadoAlerta: true,
+                        tituloAlerta : "Éxito",
+                        mensajeAlerta : "La misión fue creada correctamente"
+                    })
                 }else{
                     this.setState({
-                        isLoading : false,
-                        SendAlertType:-2
-                    }, ()=> {this.handleOpen()})
+                        typeAlerta: 'Error',
+                        estadoAlerta: true,
+                        tituloAlerta: "Error",
+                        mensajeAlerta: "Algo a ocurrido, por favor intente nuevamente"
+                    })
                 }
             })
             .catch((error)=>{
@@ -139,110 +143,6 @@ class crear_mision extends Component {
             });
         }
             
-        }
-        SendAlert = () => {
-            if(this.state.SendAlertType == -1){
-                Alert.alert("")
-    
-            }
-            else if (this.SendAlertType == 1){
-    
-            }
-            else {
-    
-            };
-        };
-    
-        handleOpen = () => {
-            
-            this.setState({ 
-                SendAlertState: true,
-                isLoading : false 
-            }, () => {
-                console.log(this.state.SendAlertType);
-            });
-          }
-        
-        handleClose = () => {
-
-            this.setState({ SendAlertState: false });
-            this.setState({isLoading : false})
-
-        }
-    
-        ShowSendAlert(){
-            if (this.state.SendAlertType == 0){
-                return(
-                <ActivityIndicator
-                    animating = {this.state.SendAlertState}
-                    size="large" 
-                    color="#00ff00" 
-                />);
-            }
-            else if(this.state.SendAlertType == 1){
-                return(
-                    <SCLAlert
-                    theme="success"
-                    show={this.state.SendAlertState}
-                    title="Felicidades"
-                    subtitle= {this.state.SendAlertMessage}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-            else if(this.state.SendAlertType == -2){
-                return(
-                    <SCLAlert
-                    theme="danger"
-                    show={this.state.SendAlertState}
-                    title="Ups"
-                    subtitle= {"Ya existe una misión activa en esa ubicación."}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-            else{
-                console.log("ALERTA DE ERROR NO IDENTIFICADO")
-                return(
-                    <SCLAlert
-                    theme="warning"
-                    show={this.state.SendAlertState}
-                    title="Campo Faltante"
-                    subtitle= {this.state.SendAlertMessage}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-    
-        }
-        LoadingState(){
-            console.log(this.state.isLoading)
-            if(this.state.isLoading){
-                return(
-    
-                    <Modal
-    
-                        transparent = {true}
-                        visible = {this.state.isLoading}
-                        animationType = 'none'
-                        onRequestClose = {()=>{console.log("Closing Modal")}}
-                    > 
-                        <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
-                            <ActivityIndicator
-                            animating = {this.state.isLoading}
-                            size="large" 
-                            color="#00ff00" 
-                            />    
-                        </View> 
-                    </Modal>
-                );   
-            }
         }
         render() {
             
@@ -274,10 +174,8 @@ class crear_mision extends Component {
                             </Picker>
                         </View>
                     </View>
-                    <View>
-                        {this.LoadingState()}
-                        {this.ShowSendAlert()}
-                    </View>
+                    <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
+                    />
                     <View style={{width: '100%', height: '7%'}} > 
                         <View style= {styles.pickerMenu}>
                             <Picker 

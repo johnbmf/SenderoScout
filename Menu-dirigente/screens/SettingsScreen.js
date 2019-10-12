@@ -9,21 +9,23 @@ import {
     AsyncStorage,
     Dimensions
 } from "react-native";
+
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider, ListItem } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
 import CustomButton from '../CustomComponents/CustomButtons'
+import {Alerta} from './../CustomComponents/customalert'
 
-class Settings extends Component {
-
-    constructor(props){
-        super(props)
+class SettingsScreen extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
-        };
+            alerta : true
+
+        }
     }
-    
     static navigationOptions = {
         drawerLabel: 'Setting',
         drawerIcon: ({tintColor}) => (
@@ -32,41 +34,29 @@ class Settings extends Component {
     }
 
 
+    toggleAlert(){
+        this.setState({
+            alerta : !this.state.alerta
+        })
+    }
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
 
-    render(){
-        
-        return(
-            <View style= {styles.BackGround}>
-                <View style={{width: '100%', height:'12%', alignItems:'center'}} >
                     <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
                         <Left>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
-                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}>
+
+                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Preferencias</Text>
                         </Body>
                         <Right></Right>
-                    </Header >
+                    </Header >                    
                 </View>
-                <View style = {{width: '100%', height: '88%'}}>
-                    <View style = {{width: '100%', height: '20%'}}></View>
-                    <CustomButton 
-                        title = "La ewa un poco mas larga"
-                        name = 'long-primary-button'
-                    />
-
-                    <CustomButton 
-                        title = "La Wea "
-                        name = 'long-secondary-btton'
-                    />
-                    <CustomButton
-                        title = 'volver'
-                        name = 'primary-button'
-                    />
-                    <CustomButton
-                        title = 'volver'
-                        name = 'secondary-button'
-                    />
-                </View>
+                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya  existe"}
+                />
             </View>
         )
     }
@@ -74,8 +64,38 @@ class Settings extends Component {
 
 const styles = StyleSheet.create({
 
-    BackGround: {
-        backgroundColor: 'rgba(255, 255, 0, 0.03)'
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width:'100%',
+        height:'100%',
+        alignItems:'center'
+    },
+    banner:{
+        color:'white',
+        fontSize:28,
+        justifyContent:'center', 
+        alignItems: 'flex-start',
+        alignContent:'flex-start',
+        fontFamily:'Roboto',
+        paddingTop:20
+    },
+    header:{
+        flex: 1,
+        color: 'black',
+        fontSize: 28,
+        borderColor: 'black',
+        justifyContent:'center', 
+        alignItems:'center'
+    },
+    top:{
+        flex:1,
+        flexDirection: 'column',
+        height:'100%',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
    
 });

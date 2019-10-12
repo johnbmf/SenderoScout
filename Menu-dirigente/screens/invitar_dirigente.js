@@ -20,6 +20,8 @@ import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta} from './../CustomComponents/customalert'
+
 
 export default class invitar_dirigente extends Component {
     constructor(props) {
@@ -28,7 +30,13 @@ export default class invitar_dirigente extends Component {
             userToken : "",
             usuarioElegido: "",
             dataSource : [],
-            error: false
+            error: false,
+            estadoAlerta: false,
+            tituloAlerta: "",
+            mensajeAlerta: "",
+            typeAlerta: 'Warning',
+            isLoading:false,
+
 
         }
         this._bootstrapAsync();
@@ -69,6 +77,11 @@ export default class invitar_dirigente extends Component {
             console.error(error);
         });
     }
+    toggleAlert(){
+        this.setState({
+            estadoAlerta : !this.state.estadoAlerta
+        })
+    }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({userToken : JSON.parse(Token)});
@@ -97,14 +110,22 @@ export default class invitar_dirigente extends Component {
             console.log(responseJson);
             if(responseJson.respuesta != 0){
                 this.setState({
-                    error: true,
-                })
+                    typeAlerta: "Error",
+                    tituloAlerta: "Error",
+                    mensajeAlerta: responseJson.message
+                }, () => {this.setState({
+                    estadoAlerta: true
+                })})
                 console.log(responseJson);
                 
             }else{
                 this.setState({
-                    error:false
-                })
+                    typeAlerta: "Succsess",
+                    tituloAlerta: "Éxito",
+                    mensajeAlerta: responseJson.message
+                }, () => {this.setState({
+                    estadoAlerta: true
+                })})
             }
         })
         .catch((error)=>{
@@ -167,6 +188,11 @@ export default class invitar_dirigente extends Component {
 
                         </View> 
                 }
+                <Alerta type = {this.state.typeAlerta} 
+                        visible = {this.state.estadoAlerta} 
+                        titulo = {this.state.tituloAlerta} 
+                        contenido = {this.state.mensajeAlerta} 
+                        rechazar = {() => {this.toggleAlert()}}/>
             </View>
             
         )
