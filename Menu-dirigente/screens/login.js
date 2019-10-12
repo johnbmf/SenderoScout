@@ -14,6 +14,7 @@ import {
     TouchableWithoutFeedback
 } from 'react-native'
 import { Button } from 'native-base'
+import CustomButton from '../CustomComponents/CustomButtons';
 const DismissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress = {()=> Keyboard.dismiss()}>
         {children}
@@ -108,7 +109,7 @@ export class login extends Component {
                     <Text style= {styles.banner}>Bienvenido</Text>
                     </View>
 
-                    <View style = {{ width:'100%', height:'50%', alignItems:'center', justifyContent:'space-between',borderBottomColor: 'black',borderBottomWidth: StyleSheet.hairlineWidth}}>
+                    <View style = {{width:'100%', height:'50%', alignItems:'center', justifyContent:'space-between'}}>
                             {this.state.error ? <IsOK/> : null}
                             <TextInput 
                                 style = {{height:'20%', width:'90%',backgroundColor:'#edf1f5', paddingLeft:20}}
@@ -140,35 +141,21 @@ export class login extends Component {
                                 placeholder = "Contraseña"
                                 value={this.state.password}
                                 />
-                        <TouchableOpacity 
-                            style={{ width:'90%',height: '20%', alignItems:'center', justifyContent: 'center', backgroundColor:'#31B6A8',marginBottom:20}}
-                            onPress = {() => {this.getUser()}}
-                        >
-                            <Text style= {{
-                                    color:'white',
-                                    fontSize:38,
-                                    justifyContent:'center', 
-                                    alignItems:'center',
-                                    alignContent:'center',
-                                    fontFamily:'Roboto'
-                                }}>
-                                Iniciar Sesión</Text>
-                        </TouchableOpacity>
+                            <View style = {{width : '100%', alignItems: 'center'}}>
+                                <CustomButton 
+                                    onPress = {() => {this.getUser()}}
+                                    title = 'Iniciar Sesión'
+                                    name = 'long-primary-button'
+                                />
+                                <CustomButton 
+                                    onPress = {()=> this.props.navigation.navigate('CrearCuenta')}
+                                    title = "Registrarse"
+                                    name = 'long-secondary-button'
+                                />
+                            </View>
                     </View>
-                    <View style = {{ width:'100%', height:'20%', alignItems:'center', justifyContent:'center'}}>
-                        <TouchableOpacity 
-                            style={{width: '50%', height: '50%', alignItems:'center', justifyContent: 'center'}}
-                            onPress = {()=> this.props.navigation.navigate('CrearCuenta')}
-                        >
-                            <Text style = {{       
-                                color:'black',
-                                fontSize:30,
-                                justifyContent:'center', 
-                                alignItems:'center',
-                                alignContent:'center',
-                                fontFamily:'Roboto'}}>
-                                Registrarse</Text>
-                    </TouchableOpacity>
+                    <View style = {{ width:'100%', height:'35%'}}>
+
                     </View>
                 </View>
                 </DismissKeyboard>

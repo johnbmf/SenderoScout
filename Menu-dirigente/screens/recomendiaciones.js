@@ -15,6 +15,7 @@ import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
 import ActivityCard from '../CustomComponents/ActivityCard'
+import CustomButton from "../CustomComponents/CustomButtons";
 
 var _ = require('lodash');
 const Actividades = require('../Local/Actividades.json')
@@ -664,23 +665,13 @@ class recomendaciones extends Component {
                                 </View>
                             </View>
                         </View>
-                        <Button
+                        <CustomButton 
                             onPress = {() => {this.WarningOpen();}}
-                            /*
-                            icon = {
-                                <Icon
-                                name= 'gear'
-                                type= 'FontAwesome'
-                                style={{fontSize: 25, color: 'white', alignContent: 'center' }}
-                                />
-                            }iconRight
-                            */
-                            title = "Recomendar Actividades "
-                            titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                            buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}
+                            title = 'Recomendar actividades'
+                            name = 'long-primary-button'
                         />
-                        <View style = {{width:'90%', alignSelf: 'center', borderBottomColor: 'green', borderBottomWidth: 1}}>
-                            <Text></Text>
+                        <View style = {{width:'90%', alignSelf: 'center', borderBottomColor: '#4BC150', borderBottomWidth: 1}}>
+                            
                         </View>
                     </View>
                     <View style = {{width: '90%', height: '65%',alignItems: 'center'}}>

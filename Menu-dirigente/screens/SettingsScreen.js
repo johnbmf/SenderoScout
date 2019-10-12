@@ -2,68 +2,80 @@ import React, { Component } from "react";
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Modal,
+    ActivityIndicator,
+    TouchableOpacity,
+    AsyncStorage,
+    Dimensions
 } from "react-native";
-import { Header,Left,Right,Icon } from 'native-base'
+import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
+import {Rating, Button, Divider, ListItem } from 'react-native-elements'
+import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
+import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
+import { NavigationEvents } from 'react-navigation';
+import CustomButton from '../CustomComponents/CustomButtons'
 
-class SettingsScreen extends Component {
+class Settings extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+        };
+    }
+    
     static navigationOptions = {
-        drawerLabel: 'Preferencias',
+        drawerLabel: 'Setting',
         drawerIcon: ({tintColor}) => (
-            <Icon name='settings' style = {{fontSize:24,color:tintColor}} />
+            <Icon name='paw' style = {{fontSize:24,color:tintColor}} />
         )
     }
-    render() {
-        return (
-            <View style={styles.container}>
-                <Header style={{height:80,backgroundColor:'orange'}}>
-                    <Left style = {{flex:1, flexDirection:'row'}}>
-                        <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
-                        <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
-                    </Left>
-                </Header >
-                <View style = {styles.top}>
-                    <Text style = {styles.header} >P R E F E R E N C I A S</Text>
+
+
+
+    render(){
+        
+        return(
+            <View style= {styles.BackGround}>
+                <View style={{width: '100%', height:'12%', alignItems:'center'}} >
+                    <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                        <Left>
+                            <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                        </Left>
+                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}>
+                        </Body>
+                        <Right></Right>
+                    </Header >
+                </View>
+                <View style = {{width: '100%', height: '88%'}}>
+                    <View style = {{width: '100%', height: '20%'}}></View>
+                    <CustomButton 
+                        title = "La ewa un poco mas larga"
+                        name = 'long-primary-button'
+                    />
+
+                    <CustomButton 
+                        title = "La Wea "
+                        name = 'long-secondary-btton'
+                    />
+                    <CustomButton
+                        title = 'volver'
+                        name = 'primary-button'
+                    />
+                    <CustomButton
+                        title = 'volver'
+                        name = 'secondary-button'
+                    />
                 </View>
             </View>
-        );
+        )
     }
-}
-export default SettingsScreen;
+}export default Settings;
 
 const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        height: '100%'
-    },
-    top:{
-        flex:1,
-        flexDirection: 'column',
-        height:'100%',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    header:{
-        color: 'black',
-        fontSize: 28,
-        borderColor: 'black',
-        padding:20,
-        paddingLeft:40,
-        paddingRight:40,
-    },
-    menuContainer : {
-        height : '80%',
-        width: '100%',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start'
-    },
-    banner:{
-        justifyContent:'center', 
-        alignItems:'center', 
-        color:'white',
-        paddingLeft:70, 
-        fontSize:28,
-        paddingTop:20
+
+    BackGround: {
+        backgroundColor: 'rgba(255, 255, 0, 0.03)'
     }
+   
 });

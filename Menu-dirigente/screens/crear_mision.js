@@ -18,6 +18,7 @@ import {
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
+import CustomButton from "../CustomComponents/CustomButtons";
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -331,11 +332,11 @@ class crear_mision extends Component {
                                     />
                     </View>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-                        <TouchableOpacity 
-                        onPress = {() => {this.crearMision(() => {this.handleOpen()})}}
-                        style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
-                            <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Crear </Text>
-                        </TouchableOpacity>
+                        <CustomButton 
+                            onPress = {() => {this.crearMision(() => {this.handleOpen()})}}
+                            name = 'long-primary-button'
+                            title = 'Crear mision'
+                        />
                     </View>
                 </View>
                 </ScrollView>

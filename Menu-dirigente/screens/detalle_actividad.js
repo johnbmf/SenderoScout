@@ -11,6 +11,7 @@ import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList } from "react-native-gesture-handler";
+import CustomButton from "../CustomComponents/CustomButtons.js";
 
 
 const Actividades = require('../Local/Actividades.json')
@@ -95,11 +96,10 @@ class DetalleActividad extends Component {
                         </ScrollView>
                     </View>
                     <View style = {{width: '100%', height: '15%', flexDirection: 'column'}}>
-                        <Button
+                        <CustomButton
                                 onPress={() => {this.props.navigation.goBack()}}
                                 title = "Volver"
-                                titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                                buttonStyle = {{backgroundColor: '#83cf4c', justifyContent:'center', margin: 10}}   
+                                name = 'long-primary-button' 
                         />
                     </View>
                 </View>

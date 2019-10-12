@@ -19,6 +19,7 @@ import {
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
+import CustomButton from "../CustomComponents/CustomButtons";
 
 export default class invitar_dirigente extends Component {
     constructor(props) {
@@ -157,20 +158,13 @@ export default class invitar_dirigente extends Component {
                 }
                 {(this.state.userToken.unidad1 > 0) &&
                     <View style = {{width:'100%', height:'35%', justifyContent:'flex-end', alignItems:'center'}}>
-                        <TouchableOpacity 
-                            style={{ width:'90%',height: '35%', alignItems:'center', justifyContent: 'center', backgroundColor:'#104F55',marginBottom:20}}
+                        <CustomButton 
                             onPress = {() => {this.crearInvitacion()}}
-                            >
-                            <Text style= {{
-                                color:'white',
-                                fontSize:38,
-                                justifyContent:'center', 
-                                alignItems:'center',
-                                alignContent:'center',
-                                fontFamily:'Roboto'
-                            }}>
-                                Invitar</Text>
-                            </TouchableOpacity>
+                            title = 'Invitar'
+                            name = 'long-primary-button'
+                        />
+
+
                         </View> 
                 }
             </View>
