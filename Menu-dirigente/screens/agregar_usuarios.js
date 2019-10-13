@@ -22,6 +22,7 @@ import {Rating, Button } from 'react-native-elements';
 import { Header,Left,Right,Icon, Body} from 'native-base';
 import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta} from './../CustomComponents/customalert'
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -40,6 +41,8 @@ class agregar_usuarios extends Component {
             SendAlertState: false,
             SendAlertType: 0,// 0: ok / 1: usuario ya esta / 2:campo faltante /3: Email no valido   
             isLoading:false,
+            TypeAlert: 'Warning', //agregado para alerta nueva
+            AlertTitle: 'Campo Faltate',//agregado para alerta nueva
             MailText:'',
             userToken: '',
         }
@@ -69,6 +72,12 @@ class agregar_usuarios extends Component {
             Edad: 0,
         })
     };
+
+    toggleAlert(){
+        this.setState({
+            SendAlertState : !this.state.SendAlertState
+        })
+    }
 
    //funcion enviar mail
     enviarMail = () =>{
@@ -131,16 +140,20 @@ class agregar_usuarios extends Component {
                     isLoading : false,
                     SendAlertType:0,
                     SendAlertState:true,
-                    SendAlertMessage: "Hemos enviado un email al apoderado los datos de la cuenta.",//responseJson['message ']
-                    MailText: "<h3>Bienvenido a Sendero Scout!</h3><br />El dirigente scout de tu pupilo te creó una cuenta. <br />Para poder utilizar la aplicación debes iniciar sesión y cambiar tu contraseña <br /><br />Usuario: "+this.state.Usuario+"<br />Contraseña: "+this.state.Password+" <br /><br />De parte de Hammersoft esperamos que disfrutes la aplicación!" 
-                }, ()=> {this.enviarMail();this.handleOpen()})//{this.handleOpen();this.enviarMail()})
+                    SendAlertMessage: "Hemos enviado un email al apoderado con los datos de la cuenta.",//responseJson['message ']
+                    MailText: "<h3>Bienvenido a Sendero Scout!</h3><br />El dirigente scout de tu pupilo te creó una cuenta. <br />Para poder utilizar la aplicación debes iniciar sesión y cambiar tu contraseña <br /><br />Usuario: "+this.state.Usuario+"<br />Contraseña: "+this.state.Password+" <br /><br />De parte de Hammersoft esperamos que disfrutes la aplicación!" ,
+                    AlertTitle: 'Usuario creado con éxito',//agregado para alerta nueva
+                    TypeAlert : 'Succsess',//agregado para alerta nueva
+                }, ()=> {this.enviarMail();this.handleOpen();this.clearText()})//{this.handleOpen();this.enviarMail()})
                 //deberia llamar a mandar el mail                   
             }else if(responseJson['respuesta'] == 1){//no se pudo agregar
                 this.setState({
                     SendAlertMessage: "Nombre de usuario ya existe, intente con uno nuevo.",//responseJson['message '],// "Nombre de usuario ya existe, intente con uno nuevo.",
                     isLoading : false,
                     SendAlertState:true,
-                    SendAlertType:1
+                    SendAlertType:1,
+                    AlertTitle: 'Usuario ya existe',//agregado para alerta nueva
+                    TypeAlert : 'Error',//agregado para alerta nueva
                 }, ()=> {this.handleOpen()})
             }
         })
@@ -159,7 +172,9 @@ class agregar_usuarios extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Debes agregar un nombre de usuario."
+                SendAlertMessage: "Debes agregar un nombre de usuario.",
+                AlertTitle: 'Campo Faltante',//agregado para alerta nueva
+                TypeAlert : 'Warning',//agregado para alerta nueva
             },  ()=> {this.handleOpen()});
             return;
         }else if(this.state.Email == ''){
@@ -167,7 +182,9 @@ class agregar_usuarios extends Component {
                 isLoading : true,
                 SendAlertType : 2,
                 SendAlertState: true,
-                SendAlertMessage: "Debes ingresar un email."
+                SendAlertMessage: "Debes ingresar un email.",
+                AlertTitle: 'Campo Faltante',//agregado para alerta nueva
+                TypeAlert : 'Warning',//agregado para alerta nueva
                 }, ()=> {this.handleOpen()});
             return;
         }else{      
@@ -175,7 +192,9 @@ class agregar_usuarios extends Component {
                 console.log("Email is Not Correct");
                 this.setState({
                     SendAlertType:-3,
-                    SendAlertMessage:"Ingresa una direccion de mail válida"
+                    SendAlertMessage:"Ingresa una direccion de email válida",
+                    AlertTitle: 'Email no válido',//agregado para alerta nueva
+                    TypeAlert : 'Warning',//agregado para alerta nueva
                 }, () =>{this.handleOpen()})
                 return;
             }else {
@@ -362,9 +381,11 @@ class agregar_usuarios extends Component {
                         value={this.state.Email}                       
                     />
                 </View>
+                <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}}
+                    />
                 <View>
                     {this.LoadingState()}
-                    {this.ShowSendAlert()}
+                    
                 </View>
                 <View
                     style = {{height:'10%', width:'90%', backgroundColor:'#white5', paddingLeft:20}} 
