@@ -14,6 +14,7 @@ import {Rating, Button, Divider } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
+import CustomButton from "../CustomComponents/CustomButtons";
 
 class Unidad extends Component {
     static navigationOptions = {
@@ -39,55 +40,32 @@ class Unidad extends Component {
                 </View>
                 <View elevation = {5} style = {{width: '100%', height: '88%',alignItems: 'center'}}>
                     <View style = {{width: '70%', height: '30%', alignItems: 'center', alignSelf: 'center'}}></View>
-                    <View style = {{width: '70%', height: '50%', alignItems: 'center', alignSelf: 'center'}} >
-                        <View>
-                            <Button
+                    <View style = {{width: '100%', height: '50%', alignItems: 'center', alignSelf: 'center'}} >
+                        <View style = {{width: '100%'}}>
+                            <CustomButton
                                 onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
-                                icon = {
-                                    <Icon
-                                        name = 'create'
-                                        type = 'MaterialIcons'
-                                        style = {{fontSize: 25, color: 'white', alignContent: 'center'}} 
-                                    />
-                                }iconRight
                                 title = "Crear nueva unidad"
-                                titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                                buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}                        
+                                name = 'long-secondary-button'
+                    
                             />
                         </View>
-                        <View>
-                            <Button
+                        <View style = {{width: '100%'}}>
+                            <CustomButton
                                 onPress = {()=> this.props.navigation.navigate('CambiarUnidad')}
-                                icon = {
-                                    <Icon
-                                    name= 'sign-direction'
-                                    type= 'MaterialCommunityIcons'
-                                    style={{fontSize: 25, color: 'white', alignContent: 'center' }}
-                                    />
-                                }iconRight
-                                title = "Cambiar niño de unidad  "
-                                titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                                buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}
+                                title = "Cambiar niño de unidad"
+                                name = 'long-secondary-button'
+
                             />
                         </View>
                     </View>
-                    <View style = {{width: '70%', height: '20%', justifyContent: 'center', alignItems: 'center',}}>
-                            <Button
+                    <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center',}}>
+                            <CustomButton
                                 onPress = {()=> this.props.navigation.goBack(null)}
-                                /*
-                                icon = {
-                                    <Icon
-                                    name= 'sign-direction'
-                                    type= 'MaterialCommunityIcons'
-                                    style={{fontSize: 25, color: 'white', alignContent: 'center' }}
-                                    />
-                                }iconRight
-                                */
-                                title = "Volver "
-                                titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                                buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}      
+                                title = "Volver"
+                                name = 'long-primary-button'
+   
                             />
-                        </View>
+                    </View>
                 </View>
             </View>
         );

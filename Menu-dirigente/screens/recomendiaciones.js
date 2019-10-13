@@ -15,6 +15,7 @@ import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
 import ActivityCard from '../CustomComponents/ActivityCard'
+import CustomButton from "../CustomComponents/CustomButtons";
 
 var _ = require('lodash');
 const Actividades = require('../Local/Actividades.json')
@@ -478,9 +479,7 @@ class recomendaciones extends Component {
             RecomendacionesNuevas: ParaReecomendar,
             setData: true,
         })
-    //}
-
-}
+    }
 
     MostrarRecomendadas(){
     console.log("Estado de los datos", this.state.setData)
@@ -488,7 +487,7 @@ class recomendaciones extends Component {
     
     if (this.state.setData) {
         return(
-            <View style = {{width: '100%', height: '100%'}}>
+            <View style = {{width: '100%', height: '100%', marginTop: 5}}>
                 <ScrollView>
                     <Text>Area Peor Evaluada</Text>
                     <View>{this.state.peor_recomendadas.map(((obj,i) =>
@@ -604,11 +603,11 @@ class recomendaciones extends Component {
                 </View>
                 <View style = {{width: '100%', height: this.SetHeight(2)}}></View>
 
-                <View style = {{width: '100%', height: this.SetHeight(85),alignItems: 'center'}}>
+                <View style = {{width: '100%', height: '85%',alignItems: 'center'}}>
 
                     <View>{this.WarningRecomendaciones()}</View>
 
-                    <View style = {{width: '100%', height: this.SetHeight(30), alignItems: 'center'}}>
+                    <View style = {{width: '100%', height: '30%', alignItems: 'center', justifyContent:'space-between'}}>
                         <Text style = {styles.textlabel}>Estado Areas de Desarrollo</Text>
                         <View style = {styles.areas_container}>
                             <View style= {{width: '50%', marginTop:5}}>
@@ -664,26 +663,14 @@ class recomendaciones extends Component {
                                 </View>
                             </View>
                         </View>
-                        <Button
+                        <CustomButton 
                             onPress = {() => {this.WarningOpen();}}
-                            /*
-                            icon = {
-                                <Icon
-                                name= 'gear'
-                                type= 'FontAwesome'
-                                style={{fontSize: 25, color: 'white', alignContent: 'center' }}
-                                />
-                            }iconRight
-                            */
-                            title = "Recomendar Actividades "
-                            titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                            buttonStyle = {{backgroundColor: '#83cf4c',justifyContent:'center', margin: 10}}
+                            title = 'Recomendar actividades'
+                            name = 'long-primary-button'
                         />
-                        <View style = {{width:'90%', alignSelf: 'center', borderBottomColor: 'green', borderBottomWidth: 1}}>
-                            <Text></Text>
-                        </View>
+                        <View style = {{width:'90%', height: '1%', alignSelf: 'center', borderBottomColor: '#4BC150', borderBottomWidth: 1}}></View>
                     </View>
-                    <View style = {{width: '90%', height: '65%',alignItems: 'center'}}>
+                    <View style = {{width: '90%', height: '70%',alignItems: 'center'}}>
                         {this.MostrarRecomendadas()}
                     </View>
                 </View>
