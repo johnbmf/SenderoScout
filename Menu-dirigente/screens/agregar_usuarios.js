@@ -21,6 +21,7 @@ import base64 from 'react-native-base64';
 import {Rating, Button } from 'react-native-elements';
 import { Header,Left,Right,Icon, Body} from 'native-base';
 import { NavigationEvents } from 'react-navigation';
+import CustomButton from "../CustomComponents/CustomButtons";
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -357,19 +358,10 @@ class agregar_usuarios extends Component {
                     style = {{height:'10%', width:'90%', backgroundColor:'#white5', paddingLeft:20}} 
                 ></View>
                 <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >
-                    <Button 
+                    <CustomButton 
                     onPress = {() => this.ValidarMail()}
-                    icon = {
-                        <Icon
-                        name= 'send'
-                        type= 'FontAwesome'
-                        style={{fontSize: 22, color: 'white'}}
-                        //color= '#ffffff'
-                        />
-                    }iconRight
-                    title = "Agregar   "
-                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    title = "Agregar"
+                    name = 'long-primary-button'
                     />
                 </View>
                 <View></View>

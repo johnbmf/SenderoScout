@@ -2,68 +2,100 @@ import React, { Component } from "react";
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Modal,
+    ActivityIndicator,
+    TouchableOpacity,
+    AsyncStorage,
+    Dimensions
 } from "react-native";
-import { Header,Left,Right,Icon } from 'native-base'
+
+import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
+import {Rating, Button, Divider, ListItem } from 'react-native-elements'
+import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
+import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
+import { NavigationEvents } from 'react-navigation';
+import CustomButton from '../CustomComponents/CustomButtons'
+import {Alerta} from './../CustomComponents/customalert'
 
 class SettingsScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            alerta : true
+
+        }
+    }
     static navigationOptions = {
-        drawerLabel: 'Preferencias',
+        drawerLabel: 'Setting',
         drawerIcon: ({tintColor}) => (
-            <Icon name='settings' style = {{fontSize:24,color:tintColor}} />
+            <Icon name='paw' style = {{fontSize:24,color:tintColor}} />
         )
+    }
+
+
+    toggleAlert(){
+        this.setState({
+            alerta : !this.state.alerta
+        })
     }
     render() {
         return (
             <View style={styles.container}>
-                <Header style={{height:80,backgroundColor:'orange'}}>
-                    <Left style = {{flex:1, flexDirection:'row'}}>
-                        <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
-                        <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
-                    </Left>
-                </Header >
-                <View style = {styles.top}>
-                    <Text style = {styles.header} >P R E F E R E N C I A S</Text>
+                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
+
+                    <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                        <Left>
+                            <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                        </Left>
+
+                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Preferencias</Text>
+                        </Body>
+                        <Right></Right>
+                    </Header >                    
                 </View>
+                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya  existe"}
+                />
             </View>
-        );
+        )
     }
-}
-export default SettingsScreen;
+}export default Settings;
 
 const styles = StyleSheet.create({
+
     container: {
-        width: '100%',
-        height: '100%'
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width:'100%',
+        height:'100%',
+        alignItems:'center'
+    },
+    banner:{
+        color:'white',
+        fontSize:28,
+        justifyContent:'center', 
+        alignItems: 'flex-start',
+        alignContent:'flex-start',
+        fontFamily:'Roboto',
+        paddingTop:20
+    },
+    header:{
+        flex: 1,
+        color: 'black',
+        fontSize: 28,
+        borderColor: 'black',
+        justifyContent:'center', 
+        alignItems:'center'
     },
     top:{
         flex:1,
         flexDirection: 'column',
         height:'100%',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    header:{
-        color: 'black',
-        fontSize: 28,
-        borderColor: 'black',
-        padding:20,
-        paddingLeft:40,
-        paddingRight:40,
-    },
-    menuContainer : {
-        height : '80%',
         width: '100%',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start'
-    },
-    banner:{
-        justifyContent:'center', 
-        alignItems:'center', 
-        color:'white',
-        paddingLeft:70, 
-        fontSize:28,
-        paddingTop:20
+        alignItems: 'center',
+        justifyContent: 'center',
     }
+   
 });

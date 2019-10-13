@@ -10,6 +10,7 @@ import {
 import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
+import CustomButton from "../CustomComponents/CustomButtons";
 
 
 const WOLF_HEAD = require('../assets/Wolf_Head4.png')
@@ -444,19 +445,10 @@ class evalaptitudes extends Component {
 
                         </View>
                         <View style={{height: '70%', alignItems:'center', justifyContent:'flex-start'}} >
-                            <Button
+                            <CustomButton
                             onPress = {() => {this.EnviarEvaluacion(); this.handleOpen();}}
-                            icon = {
-                                <Icon
-                                name= 'send'
-                                type= 'FontAwesome'
-                                style={{fontSize: 22, color: 'white'}}
-                                //color= '#ffffff'
-                                />
-                            }iconRight
-                            title = "Evaluar   "
-                            titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                            buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                            title = "Evaluar"
+                            name = 'long-primary-button'
                             />                     
                         </View>
                     </View>
