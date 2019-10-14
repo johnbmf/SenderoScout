@@ -27,9 +27,9 @@ class SettingsScreen extends Component {
         }
     }
     static navigationOptions = {
-        drawerLabel: 'Setting',
+        drawerLabel: 'Preferencias',
         drawerIcon: ({tintColor}) => (
-            <Icon name='paw' style = {{fontSize:24,color:tintColor}} />
+            <Icon name='settings' style = {{fontSize:24,color:tintColor}} />
         )
     }
 
@@ -60,7 +60,7 @@ class SettingsScreen extends Component {
             </View>
         )
     }
-}export default Settings;
+}export default SettingsScreen;
 
 const styles = StyleSheet.create({
 
