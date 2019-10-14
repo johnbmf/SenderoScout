@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Modal, View, Text} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
-
+import CustomButton from './CustomButtons'
 const Alerta = (props) => {
     //if type=succsess, warning or error, cambiar el icono
     // Se necesita tener una variable de estado para hacerlo aparecer, de momento se le asigna la properti aceptar/rechazar para asignar funciones a los botones asignados.
@@ -23,9 +23,12 @@ const Alerta = (props) => {
                         <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:30, fontFamily:'Roboto',textAlign: 'center', marginBottom:10}}>{props.titulo}</Text>
                         <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                     </View>
-                    <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center'}}>
-                        <Button titleStyle={{color:'#d9534f'}} buttonStyle = {{width:'80%' , marginBottom:5, alignSelf:'center', borderColor:'#d9534f'}} type = "outline" title="Rechazar" onPress = {props.rechazar} />
-                        <Button titleStyle={{color:'#00AB66'}} buttonStyle = {{width:'80%' , marginBottom:5, alignSelf:'center', borderColor:'#00AB66'}} type = "outline" title="Aceptar" onPress = {props.aceptar}  />
+                    <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
+                    <CustomButton 
+                            onPress = {props.rechazar}
+                            name = 'long-primary-button'
+                            title = 'Volver'
+                        />
                     </View>
                 </View>
             </View>

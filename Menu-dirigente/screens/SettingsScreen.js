@@ -23,13 +23,12 @@ class SettingsScreen extends Component {
         super(props);
         this.state = {
             alerta : true
-
         }
     }
     static navigationOptions = {
-        drawerLabel: 'Setting',
+        drawerLabel: 'Preferencias',
         drawerIcon: ({tintColor}) => (
-            <Icon name='paw' style = {{fontSize:24,color:tintColor}} />
+            <Icon name='settings' style = {{fontSize:24,color:tintColor}} />
         )
     }
 
@@ -55,12 +54,12 @@ class SettingsScreen extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya  existe"}
+                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya existe"}
                 />
             </View>
         )
     }
-}export default Settings;
+}export default SettingsScreen;
 
 const styles = StyleSheet.create({
 
