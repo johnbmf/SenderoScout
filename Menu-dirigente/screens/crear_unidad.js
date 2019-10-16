@@ -19,6 +19,7 @@ import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
 import {Rating, Button, ThemeConsumer } from 'react-native-elements'
+import CustomButton from "../CustomComponents/CustomButtons";
 class crear_unidad extends Component {
     constructor(props){
         super(props);
@@ -324,7 +325,15 @@ else{
         <View style = {styles.container}>
         <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
         <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Ya tienes tu unidad correspondiente.</Text>
-    </View>
+        </View>
+        <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+        <CustomButton
+                                onPress = {()=> this.props.navigation.navigate('Unidad')}
+                                title = "Volver"
+                                name = 'long-primary-button'
+
+                            />
+        </View>
     </View>
 
     )

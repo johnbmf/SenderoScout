@@ -41,7 +41,7 @@ class Unidad extends Component {
                 <View elevation = {5} style = {{width: '100%', height: '88%',alignItems: 'center'}}>
                     <View style = {{width: '70%', height: '30%', alignItems: 'center', alignSelf: 'center'}}></View>
                     <View style = {{width: '100%', height: '50%', alignItems: 'center', alignSelf: 'center'}} >
-                        <View style = {{width: '100%'}}>
+                        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                             <CustomButton
                                 onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
                                 title = "Crear nueva unidad"
@@ -49,7 +49,7 @@ class Unidad extends Component {
                     
                             />
                         </View>
-                        <View style = {{width: '100%'}}>
+                        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                             <CustomButton
                                 onPress = {()=> this.props.navigation.navigate('CambiarUnidad')}
                                 title = "Cambiar niño de unidad"

@@ -89,7 +89,8 @@ const StackNavigator = createStackNavigator({
 const CrearUnidadStack = createStackNavigator({
   UnidadSwitch: UnidadScreen,
   CrearUnidad : CrearUnidadScreen,
-  CambiarUnidad : CambiarUnidadScreen
+  CambiarUnidad : CambiarUnidadScreen,
+  Unidad: UnidadScreen
   },{
     navigationOptions : {
         drawerLabel: 'Gestion unidad',
