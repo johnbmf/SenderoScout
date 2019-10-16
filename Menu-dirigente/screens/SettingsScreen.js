@@ -54,7 +54,7 @@ class SettingsScreen extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya existe"}
+                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro e intente nuevamente." } titulo = {"Usuario ya existe"}
                 />
             </View>
         )
