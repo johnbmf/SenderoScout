@@ -308,6 +308,9 @@ if(this.state.userToken.unidad1 == 0){
         name = 'long-primary-button'
         />
         </View>
+        <View >
+
+</View>
 
         </View>
 );
