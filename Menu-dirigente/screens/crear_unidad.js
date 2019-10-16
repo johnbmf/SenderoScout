@@ -260,7 +260,7 @@ if(this.state.userToken.unidad1 == 0){
             </View>
             <View style={{width: '100%', height: '7%'}} >
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         fontSize = {20}
@@ -274,7 +274,7 @@ if(this.state.userToken.unidad1 == 0){
             </View>
             <View style={{width: '100%', height: '7%'}} >             
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:20}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         fontSize = {20}
@@ -288,7 +288,7 @@ if(this.state.userToken.unidad1 == 0){
             </View>
             <View style={{width: '100%', height: '7%'}} >
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:30}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         fontSize = {20}
