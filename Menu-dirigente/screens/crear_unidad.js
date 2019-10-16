@@ -255,7 +255,7 @@ if(this.state.userToken.unidad1 == 0){
     return(
         
         <View style = {styles.container}>
-                        <View style={{width: '100%', height: '7%'}} >
+            <View >
 
             </View>
             <View style={{width: '100%', height: '7%'}} >
@@ -301,19 +301,11 @@ if(this.state.userToken.unidad1 == 0){
                         />
         </View>
         <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-        <Button 
+        <CustomButton 
         onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
-        icon = {
-            <Icon
-            name= 'send'
-            type= 'FontAwesome'
-            style={{fontSize: 22, color: 'white'}}
-            //color= '#ffffff'
-            />
-        }iconRight
-        title = "Crear   "
-        titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-        buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+        
+        title = "Crear"
+        name = 'long-primary-button'
         />
         </View>
 
@@ -356,6 +348,7 @@ else{
                         <Right></Right>
                     </Header >                    
                 </View>
+                
                 {this.puede()}
                 <View>
             {this.LoadingState()}
@@ -376,7 +369,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         width:'100%',
-        height:'100%'
+        height:'100%',
+
     },
     banner:{
         color:'white',

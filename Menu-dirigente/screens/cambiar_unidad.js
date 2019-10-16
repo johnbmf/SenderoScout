@@ -31,6 +31,7 @@ import SearchBar from "react-native-dynamic-search-bar";
 import { CustomLayoutSpring } from "react-native-animation-layout";
 import { LinearGradient } from 'expo';
 import TouchableScale from 'react-native-touchable-scale';
+import CustomButton from "../CustomComponents/CustomButtons";
 
 
 const { width } = Dimensions.get("window");
@@ -87,7 +88,7 @@ class cambiar_unidad extends Component {
 
 }
   ShowSendAlert(){
-    console.log('lalalalalalalalsadsadas')
+
 console.log(this.state.SendAlertType)
     if (this.state.SendAlertType == 0){
         return(
@@ -290,7 +291,7 @@ LoadingState(){
   };
  
   handleOpen = () => {
-console.log('HOLAAAAAAAAAAAAAAAAASDAFSDFDFDS')
+
     this.setState({ 
         SendAlertState: true,
         isLoading : false 
@@ -329,7 +330,7 @@ console.log('HOLAAAAAAAAAAAAAAAAASDAFSDFDFDS')
       };
     
       loadMore = () => {
-        console.log('holi2')
+
         this.setState({
           // refreshing: true,
           page: this.state.page + 1
@@ -387,16 +388,29 @@ show1() {
             }}
             onPress={() => alert("onPress")}
             textInputValue={this.state.text2}
+
+            
           />
-<ScrollView>
+        <ScrollView>
         <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data2}
         renderItem={({ item }) => (
             <ListItem
               title={`${item.nombre_unidad}`}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
               containerStyle={{ borderBottomWidth: 0 }} 
                onPress={() => this.selectItem2(item.nombre_unidad,item.id)}
+               Component={TouchableScale}
+              friction={90} //
+              tension={100} // 
+              activeScale={0.95} //
+              linearGradientProps={{
+                colors: ['#ADCFD3', '#BAD3D6'],
+                start: [1.5, 0],
+                end: [0.1, 0],
+              }}
+              ViewComponent={LinearGradient}
+              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
             />
           )}
           keyExtractor={item => item.id}         
@@ -415,22 +429,17 @@ show2() {
   
   if(this.state.show2){
     return(
+            <View>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-                    <Button 
+                    <CustomButton
                     onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
-                    icon = {
-                        <Icon
-                        name= 'send'
-                        type= 'FontAwesome'
-                        style={{fontSize: 22, color: 'white'}}
-                        //color= '#ffffff'
-                        />
-                    }iconRight
+                
                     title = "Cambiar"
-                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    name = 'long-primary-button'
                     />
+                    </View>
                     </View>);
+                    
 
   }
   else{
@@ -520,7 +529,7 @@ charge2(){
                onPress={() => this.selectItem(item.nombre,item.user)}
               Component={TouchableScale}
               friction={90} //
-              tension={100} // These props are passed to the parent component (here TouchableScale)
+              tension={100} // 
               activeScale={0.95} //
                leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
                linearGradientProps={{
