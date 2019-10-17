@@ -9,16 +9,16 @@ import {
     AsyncStorage,
     Dimensions
 } from "react-native";
-
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider, ListItem } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
 import CustomButton from '../CustomComponents/CustomButtons'
-import {Alerta} from './../CustomComponents/customalert'
+import {Alerta} from '../CustomComponents/customalert';
+import CustomRating from "../CustomComponents/CustomRating";
 
-class SettingsScreen extends Component {
+class Settings extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -55,8 +55,9 @@ class SettingsScreen extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya  existe"}
-                />
+                <Alerta visible = {this.state.alerta} type = {'Warning'} rechazar = {() => {this.toggleAlert()}} contenido = {"El usuario que seleccionó se encuentra ocupado, por favor seleccione otro he intente nuevamente." } titulo = {"Usuario ya  existe"}/>
+                <CustomRating />
+                
             </View>
         )
     }

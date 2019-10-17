@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Modal, View, Text} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
+import CustomButton from "./CustomButtons";
 
 const Alerta = (props) => {
     //if type=succsess, warning or error, cambiar el icono
@@ -9,7 +10,7 @@ const Alerta = (props) => {
     return (
         <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
             <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
-                <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#81C14B', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
+                <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#4BC150', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
                     {(props.type == 'Warning') && <View style = {{height:'25%', justifyContent:'center', paddingTop:15}}>
                         <Icon style = {{alignSelf:'center'}} type = "antdesign" name="exclamationcircle" color = '#FFA000' size = {65}/>
                     </View>}
@@ -24,8 +25,16 @@ const Alerta = (props) => {
                         <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                     </View>
                     <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center'}}>
-                        <Button titleStyle={{color:'#d9534f'}} buttonStyle = {{width:'80%' , marginBottom:5, alignSelf:'center', borderColor:'#d9534f'}} type = "outline" title="Rechazar" onPress = {props.rechazar} />
-                        <Button titleStyle={{color:'#00AB66'}} buttonStyle = {{width:'80%' , marginBottom:5, alignSelf:'center', borderColor:'#00AB66'}} type = "outline" title="Aceptar" onPress = {props.aceptar}  />
+                        <CustomButton 
+                            onPress = {props.rechazar}
+                            title = 'Rechazar'
+                            name = 'secondary-button'
+                        />
+                        <CustomButton
+                            onPress = {props.aceptar}
+                            title= 'Aceptar'
+                            name = 'primary-button'
+                        />
                     </View>
                 </View>
             </View>
