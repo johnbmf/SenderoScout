@@ -47,7 +47,7 @@ class cambiar_unidad extends Component {
     super(props);
     this.state = {
       loading: false,
-      loading2:false,
+      cancel:null,
       data: [],
       data2: [] ,
       error: null,
@@ -62,6 +62,7 @@ class cambiar_unidad extends Component {
       userToken: "",
       SendAlertType: 1,
       SendAlertMessage: "",
+      press: true
       
     };
     if (Platform.OS === "android") {
@@ -202,7 +203,7 @@ LoadingState(){
   };
   
   makeRemoteRequest2(text) {
-    this.setState({ loading2: true,
+    this.setState({ loading: true,
     value2:this.state.value2,
     text2:text});
     if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar el boton cambiar.
@@ -231,7 +232,7 @@ LoadingState(){
           data2: responseData.data,
           message2: responseData.message,
           error: null,
-          loading2: false,
+          loading: false,
           value2: text,
           show1:true
         });
@@ -351,25 +352,42 @@ LoadingState(){
       };
 
                 
-      selectItem2(Ite,ide) {
+      selectItem2(item) { 
+        if (this.state.press){
         this.setState({
-          value2:Ite,
-          text2:Ite,
-          ide:ide,
-          data2: []
+          value2:item.nombre_unidad,
+          text2:item.nombre_unidad,
+          ide:item.id,
+          data2: [item],
+          cancel: 'clear',
+          show2:true,
+          press:false
         });
-        // this.fetchData();
-        this.setState({
-        show2:true
-        });
+        }
+        else{
+          this.makeRemoteRequest2("")
+          this.setState({
+            value2:"",
+            text2:"",
+            ide:null,
+            data2: this.state.data2,
+            cancel: null,
+            show2:false,
+            press:true
+          });
+
+        }
+     
       };
 
 show1() {
     if (this.state.show1) {
+      console.log(this.state.data) 
       return (
+        
         <View> 
         <Text style={{marginLeft:15,fontSize: 15, marginTop:15}}>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
-
+        <View style={{marginVertical:15}}> 
         <ScrollView>
         <FlatList
         data = {this.state.data2}
@@ -377,8 +395,9 @@ show1() {
             <ListItem
               title={`${item.nombre_unidad}`}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem2(item.nombre_unidad,item.id)}
+              containerStyle={{ borderBottomWidth: 0}} 
+               onPress={() => this.selectItem2(item)}
+               rightIcon={{name : this.state.cancel}}
                Component={TouchableScale}
               friction={90} //
               tension={100} // 
@@ -395,6 +414,7 @@ show1() {
           keyExtractor={item => item.id}         
         />
         </ScrollView>
+        </View>
         </View>
 
       );
@@ -487,7 +507,7 @@ charge2(){
             onPressCancel={() => {
               this.makeRemoteRequest("");
             }}
-            onPress={() => alert("onPress")}
+
             textInputValue={this.state.text}
 
           />
