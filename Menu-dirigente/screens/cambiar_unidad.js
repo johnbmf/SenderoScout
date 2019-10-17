@@ -360,7 +360,7 @@ LoadingState(){
           text2:item.nombre_unidad,
           ide:item.id,
           data2: [item],
-          cancel: 'clear',
+          cancel: 'clear', //backspace
           show2:true,
           press:false
         });
