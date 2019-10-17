@@ -19,6 +19,7 @@ import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
 import {Rating, Button, ThemeConsumer } from 'react-native-elements'
+import CustomButton from "../CustomComponents/CustomButtons";
 class crear_unidad extends Component {
     constructor(props){
         super(props);
@@ -118,7 +119,7 @@ class crear_unidad extends Component {
                         seisena1 : this.state.userToken.seisena1,
                         tipo: this.state.userToken.tipo,
                         grupo : this.state.userToken.grupo,
-                        nombre_unidad:nombre_unidad1,
+                        nombre_unidad:this.state.nombre_unidad,
                         unidad1 : responseJson.id_unidad},
                     usuario: responseJson.nombre_usuario,
                     isLoading : false,
@@ -210,7 +211,6 @@ class crear_unidad extends Component {
                 );
             }
             else{
-                console.log("ALERTA DE ERROR NO IDENTIFICADO")
                 return(
                     <SCLAlert
                     theme="warning"
@@ -248,17 +248,22 @@ class crear_unidad extends Component {
                 );   
             }
         }
-
+//puede(): Funcion que muestra paneles para crear unidad en caso de que la persona no tenga Unidad, en caso que no, muestra que la persona ya tiene unidad. 
 puede(){
     console.log("Puede", this.state.userToken)
 if(this.state.userToken.unidad1 == 0){
     return(
+        
         <View style = {styles.container}>
+            <View >
+
+            </View>
             <View style={{width: '100%', height: '7%'}} >
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
+                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
@@ -269,9 +274,10 @@ if(this.state.userToken.unidad1 == 0){
             </View>
             <View style={{width: '100%', height: '7%'}} >             
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:20}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
+                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
@@ -282,9 +288,10 @@ if(this.state.userToken.unidad1 == 0){
             </View>
             <View style={{width: '100%', height: '7%'}} >
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:30}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
+                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
@@ -294,33 +301,37 @@ if(this.state.userToken.unidad1 == 0){
                         />
         </View>
         <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-        <Button 
+        <CustomButton 
         onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
-        icon = {
-            <Icon
-            name= 'send'
-            type= 'FontAwesome'
-            style={{fontSize: 22, color: 'white'}}
-            //color= '#ffffff'
-            />
-        }iconRight
-        title = "Crear   "
-        titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-        buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+        
+        title = "Crear"
+        name = 'long-primary-button'
         />
         </View>
+        <View >
 
-        <View>
-            {this.LoadingState()}
-            {this.ShowSendAlert()}
-        </View>
+</View>
+
         </View>
 );
 }
 else{
-    <View style ={{width:'90%', height:'20%'}}>
-        <Text style={{fontSize: 22, color : 'black'}}>Ya tienes tu unidad correspondiente.</Text>
+    return(
+        <View style = {styles.container}>
+        <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+        <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Ya tienes tu unidad correspondiente.</Text>
+        </View>
+        <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+        <CustomButton
+                                onPress = {()=> this.props.navigation.navigate('Unidad')}
+                                title = "Volver"
+                                name = 'long-primary-button'
+
+                            />
+        </View>
     </View>
+
+    )
 }
 }
     render() {
@@ -340,7 +351,12 @@ else{
                         <Right></Right>
                     </Header >                    
                 </View>
+                
                 {this.puede()}
+                <View>
+            {this.LoadingState()}
+            {this.ShowSendAlert()}
+        </View>
                 </View>
                 </ScrollView>
 
@@ -356,7 +372,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         width:'100%',
-        height:'100%'
+        height:'100%',
+
     },
     banner:{
         color:'white',
