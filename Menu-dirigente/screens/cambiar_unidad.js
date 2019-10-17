@@ -360,7 +360,7 @@ LoadingState(){
           text2:item.nombre_unidad,
           ide:item.id,
           data2: [item],
-          cancel: 'clear', //backspace
+          cancel: 'keyboard-backspace', //backspace
           show2:true,
           press:false
         });
@@ -387,7 +387,7 @@ show1() {
       return (
         
         <View> 
-        <Text style={{marginLeft:15,fontSize: 15, marginTop:15}}>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
+        <Text style={{marginLeft:15,fontSize: 16, marginTop:15}}>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
         <View style={{marginVertical:15}}> 
         <ScrollView>
         <FlatList
@@ -404,7 +404,7 @@ show1() {
               tension={100} // 
               activeScale={0.95} //
               linearGradientProps={{
-                colors: ['#ADCFD3', '#BAD3D6'],
+                colors: ['#f2e6ff', '#F9F4FF'],
                 start: [1.5, 0],
                 end: [0.1, 0],
               }}
@@ -429,7 +429,7 @@ show2() {
   
   if(this.state.show2){
     return(
-            <View style={{ marginTop:15}}>
+            <View style={styles.bottom}>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
                     <CustomButton
                     onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
@@ -488,17 +488,18 @@ charge2(){
                 <ScrollView >
                 <SafeAreaView style={{ flex: 1}}>
         
-        <Text style={{marginLeft:15,fontSize: 15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
+        <Text style={{marginLeft:15,fontSize: 16}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
         
           <SearchBar 
             onPressToFocus
             autoFocus={false}
-            fontColor="#c6c6c6"
-            iconColor="#c6c6c6"
-            shadowColor="#002642"
+            fontColor="#ffffff"
+            fontSize={16}
+            iconColor="#ffffff"
+            shadowColor={null}
             cancelIconComponent={this.charge()}
-            cancelIconColor="#c6c6c6"
+            cancelIconColor="#ffffff"
             backgroundColor="#8B4BC1"
             placeholder="Ingresa nombre del niño o niña..."
             onChangeText={text => {
@@ -533,7 +534,7 @@ charge2(){
               activeScale={0.95} //
                leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
                linearGradientProps={{
-                colors: ['#ADCFD3', '#BAD3D6'],
+                colors: ['#f2e6ff', '#F9F4FF'],
                 start: [1.5, 0],
                 end: [0.1, 0],
               }}
@@ -554,14 +555,15 @@ charge2(){
         
         <View style={styles.container}>{this.show1()}</View>
       
-       <View style={styles.container}>{this.show2()}</View>
 
        <View>
             {this.ShowSendAlert()}
         </View>
         </View>
       </SafeAreaView>
+      
       </ScrollView>
+      <View style={styles.container}>{this.show2()}</View>
                 </View>
       
     );
@@ -609,4 +611,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
+    bottom: {
+      flex:1,
+      justifyContent: 'flex-end',
+      marginBottom:50
+
+    }
+
 });
