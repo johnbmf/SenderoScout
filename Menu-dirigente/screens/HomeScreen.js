@@ -10,7 +10,7 @@ import {
     RefreshControl
 
 } from "react-native";
-import { Header,Left,Right,Icon} from 'native-base'
+import { Header,Left,Right,Icon, Body} from 'native-base'
 import { Button } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
 import Modal from "react-native-modal";
@@ -301,20 +301,18 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header style={{height:80,backgroundColor:'#81C14B',font:'Roboto'}}>
-                    <Left style = {{flex:1, flexDirection:'row'}}>
+                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
+                <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                    <Left>
                         <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
-                        <Text style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}> Sendero Scout</Text>
                     </Left>
-                </Header >
-                <NavigationEvents onWillFocus={() => {this.getPendientes(); this.setState({isModalVisible:false})}}/> 
-                <View style = {{width: '100%', height: '20%', alignItems:'center'}}> 
-                    <View style = {{ width: '90%', height: '100%', flexDirection:'column', justifyContent: 'flex-start'}}>
-                        <Text style={{fontSize:20, fontFamily:'Roboto', color: 'black', alignSelf:'center',borderBottomWidth:1}}>Unidad</Text>
-                        <Text style={{fontSize:28, fontFamily:'Roboto', color: 'black', alignSelf:'center'}}>{this.state.userToken.nombre_unidad}</Text>
-                    </View>
-                </View>
 
+                    <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                        <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Sendero Scout</Text>
+                    </Body>
+                    <Right></Right>
+                </Header >                    
+                </View>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}
                     refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
@@ -416,7 +414,6 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center', 
         color:'white',
-        paddingLeft:50, 
         fontSize:28,
         paddingTop:20,
         fontFamily:'Roboto'
