@@ -7,10 +7,9 @@
   
   //Var
   $id_unidad = $obj['id_unidad'];
-  $nombre_u = $obj['nombre_u'];
-  $nombre_u .= '%';
+  $grupo_u = $obj['grupo_u'];
 
-  $query = "SELECT * FROM Unidad WHERE id <> $id_unidad AND (nombre_unidad LIKE '$nombre_u')";
+  $query = "SELECT * FROM Unidad WHERE id <> '$id_unidad' AND grupo = '$grupo_u'";
 
   if($result = $mysqli->query($query)){
     if($result->num_rows==0){

@@ -220,7 +220,7 @@ LoadingState(){
                 {
                     nombre_u: text,
  
-                    id_unidad:this.state.userToken.unidad1 //Change this
+                    grupo_u:this.state.userToken.grupo 
                 })
  
             })
@@ -368,29 +368,8 @@ show1() {
     if (this.state.show1) {
       return (
         <View> 
-        <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
-          <SearchBar 
-            onPressToFocus
-            autoFocus={false}
-            fontColor="#c6c6c6"
-            cancelIconComponent={this.charge2()}
-            iconColor="#c6c6c6"
-            shadowColor="#002642"
-            cancelIconColor="#c6c6c6"
-            backgroundColor="#104F55"
-            placeholder="Ingresa nombre de la unidad..."
-            onChangeText={text2 => {
-              this.makeRemoteRequest2(text2);
-            }}
-            value2={this.state.value2} 
-            onPressCancel={() => {
-              this.makeRemoteRequest2("");
-            }}
-            onPress={() => alert("onPress")}
-            textInputValue={this.state.text2}
+        <Text style={{marginLeft:15,fontSize: 15, marginTop:15}}>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
 
-            
-          />
         <ScrollView>
         <FlatList
         data = {this.state.data2}
@@ -488,7 +467,7 @@ charge2(){
                 <ScrollView >
                 <SafeAreaView style={{ flex: 1}}>
         
-        <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
+        <Text style={{marginLeft:15,fontSize: 15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
         
           <SearchBar 
@@ -499,7 +478,7 @@ charge2(){
             shadowColor="#002642"
             cancelIconComponent={this.charge()}
             cancelIconColor="#c6c6c6"
-            backgroundColor="#104F55"
+            backgroundColor="#8B4BC1"
             placeholder="Ingresa nombre del niño o niña..."
             onChangeText={text => {
               this.makeRemoteRequest(text);
