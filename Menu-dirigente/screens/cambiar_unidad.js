@@ -62,7 +62,7 @@ class cambiar_unidad extends Component {
       userToken: "",
       SendAlertType: 1,
       SendAlertMessage: "",
-      press: true
+      press: true,
       
     };
     if (Platform.OS === "android") {
@@ -78,6 +78,7 @@ class cambiar_unidad extends Component {
     this.setState({
         userToken : JSON.parse(Token),
     });
+    {{this.makeRemoteRequest("")}}
     
   };
 
@@ -428,7 +429,7 @@ show2() {
   
   if(this.state.show2){
     return(
-            <View>
+            <View style={{ marginTop:15}}>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
                     <CustomButton
                     onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
