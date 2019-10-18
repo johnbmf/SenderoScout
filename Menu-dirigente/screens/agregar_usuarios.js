@@ -338,24 +338,22 @@ class agregar_usuarios extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <View style={{width: '100%', height: '7%'}} >
-                <NavigationEvents onWillFocus={() => this.clearText()}/> 
-                </View>
+                
                 <View style={{width: '100%', height: '7%'}} >
                     <Text style={{width: '90%'}}>
-                        <Text style={{width: '90%'}}>
+                        <Text style={{width: '90%', paddingLeft:20}}>
                             {"      Nombre de Usuario:"}
                         </Text>
                     </Text>
                     <TextInput
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1,  justifyContent:'center',alignSelf:'center', paddingLeft:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
                         multiline = {false}
                         //numberOfLines = {4}
                         onChangeText={(valor) => this.setState({Usuario : valor})}
-                        placeholder = "Ejemplo: Mowgli"
+                        //placeholder = "Ejemplo: Mowgli"
                         keyboardType = 'default'
                         value={this.state.Usuario}                       
                     />
@@ -368,14 +366,14 @@ class agregar_usuarios extends Component {
                         </Text>
                     </Text>
                     <TextInput
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, justifyContent:'center',alignSelf:'center', paddingLeft:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
                         multiline = {false}
                         //numberOfLines = {4}
                         onChangeText={(valor) => this.setState({Email : valor})}
-                        placeholder = "Ejemplo: hammersoft.fesw@gmail.com"
+                        //placeholder = "Ejemplo: hammersoft.fesw@gmail.com"
                         //textAlign={'left'}
                         keyboardType ='email-address'
                         value={this.state.Email}                       
@@ -383,13 +381,7 @@ class agregar_usuarios extends Component {
                 </View>
                 <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}}
                     />
-                <View>
-                    {this.LoadingState()}
-                    
-                </View>
-                <View
-                    style = {{height:'10%', width:'90%', backgroundColor:'#white5', paddingLeft:20}} 
-                ></View>
+
                 <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >
                     <CustomButton 
                     onPress = {() => this.ValidarMail()}
@@ -398,6 +390,9 @@ class agregar_usuarios extends Component {
                     />
                 </View>
                 <View></View>
+                <View style={{width: '100%', height: '7%'}} >
+                <NavigationEvents onWillFocus={() => this.clearText()}/> 
+                </View>
             </View>
             </ScrollView>           
             );
