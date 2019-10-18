@@ -58,6 +58,8 @@ class HomeScreen extends Component {
             tituloAlerta: "Este es el titulo de la alerta",
             mensajeAlerta: "Misión creada con éxito",
             typeAlerta: 'Warning',
+            Pseudonimos: [],
+            HayPseudonimos : false,
 
         }
         this._bootstrapAsync();
@@ -103,6 +105,37 @@ class HomeScreen extends Component {
         });
     }
 
+    getPseudonimos = () =>{
+        fetch('http://www.mitra.cl/SS/getPseudonimo.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+            },
+            body:JSON.stringify({        
+                "unidad": this.state.userToken.unidad1,
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) =>{
+            console.log("pseudonimos")
+            console.log(responseJson)
+            if(responseJson["solicitudes"]>0){
+                this.setState({
+                    HayPseudonimos:true,
+                    Pseudonimos: responseJson,
+                })
+            }else{
+                this.setState({
+                    HayPseudonimos:false,
+                })
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+
     toggleModal = (unidad, user, id) => {
         console.log("Toggle modal" + this.state.userToken);
         this.setState({isModalVisible : !this.state.isModalVisible,
@@ -116,6 +149,7 @@ class HomeScreen extends Component {
         if (this.state.update) {
             this.getInvitaciones()
             this.setState({update:false})
+            this.getPseudonimos()
           // Use the `this.props.isFocused` boolean
           // Call any action
         }
@@ -163,6 +197,7 @@ class HomeScreen extends Component {
         this.setState({userToken : JSON.parse(Token)});
         //console.log("nombre: " + Token2.nombre);
         this.getInvitaciones();
+        this.getPseudonimos();
       };
     responderInvitacion(estado,nombre_unidad1, id){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
