@@ -20,6 +20,9 @@ import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents } from 'react-navigation';
 import {Rating, Button, ThemeConsumer } from 'react-native-elements'
 import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta} from './../CustomComponents/customalert'
+
+
 class crear_unidad extends Component {
     constructor(props){
         super(props);
@@ -27,12 +30,14 @@ class crear_unidad extends Component {
             grupo : '',
             nombre_unidad : '',
             distrito: '',
-            SendAlertState: false,
-            SendAlertMessage: "Unidad creada con éxito.",
-            SendAlertType: 2,
+            estadoAlerta: false,
+            tituloAlerta: "Este es el titulo de la alerta",
+            mensajeAlerta: "Unidad creada con éxito",
+            typeAlerta: 'Warning',
+            isLoading:false,
             isLoading:false,
             userToken: "",
-
+        
         }
         this._bootstrapAsync()
     }
@@ -51,6 +56,11 @@ class crear_unidad extends Component {
             }
         )
     }
+    toggleAlert(){
+        this.setState({
+            estadoAlerta : !this.state.estadoAlerta
+        })
+    }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({
@@ -62,29 +72,26 @@ class crear_unidad extends Component {
     {   
         if(this.state.nombre_unidad==''){
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario dar un nombre a la unidad"
-            }, ()=> {this.handleOpen()});
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor escriba un nombre de la nueva unidad"
+            })
         }
         else if (this.state.grupo=='') {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario agregar el grupo"
-            }, ()=> {this.handleOpen()});
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor escriba el nombre de grupo"
+            })
         }else if (this.state.distrito=='') {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar el distrito de la unidad."
-            }, ()=> {this.handleOpen()});
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor escriba el nombre del distrito"
+            })
         }else {
         this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Unidad creada con éxito" }, () =>
         {
@@ -123,11 +130,20 @@ class crear_unidad extends Component {
                         unidad1 : responseJson.id_unidad},
                     usuario: responseJson.nombre_usuario,
                     isLoading : false,
-                    SendAlertType:1
+                    typeAlerta: 'Succsess',
+                    estadoAlerta: true,
+                    tituloAlerta : "Éxito",
+                    mensajeAlerta : "La unidad fue creada correctamente"
                 }, ()=> {storeItem('userToken',this.state.userToken);this.handleOpen()})
             })
             .catch((error)=>{
                 console.error(error);
+                this.setState({
+                    typeAlerta: 'Error',
+                    estadoAlerta: true,
+                    tituloAlerta: "Error",
+                    mensajeAlerta: "Algo a ocurrido, por favor intente nuevamente"
+                })
             });
         });}
     }
@@ -355,7 +371,8 @@ else{
                 {this.puede()}
                 <View>
             {this.LoadingState()}
-            {this.ShowSendAlert()}
+            <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
+                    />
         </View>
                 </View>
                 </ScrollView>
