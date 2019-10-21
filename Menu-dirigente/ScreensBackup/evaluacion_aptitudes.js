@@ -6,20 +6,16 @@ import {
     Modal,
     ActivityIndicator,
     AsyncStorage,
-    Dimensions,
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
-import { ScrollView} from "react-native-gesture-handler";
-
 import CustomButton from "../CustomComponents/CustomButtons";
-import CustomRating from "../CustomComponents/CustomRating";
 
 
 const WOLF_HEAD = require('../assets/Wolf_Head4.png')
 const DEFAULT_RATING = 2
-const RATING_WIDTH_PERCENT = 70
+
 class evalaptitudes extends Component {
     
     static navigationOptions = {
@@ -67,15 +63,7 @@ class evalaptitudes extends Component {
         this.state.unidad_dirigente = JSON.parse(Token)["unidad1"]
         this.state.seisena = JSON.parse(Token)["Seisena1"]
         console.log("TEst", JSON.parse(Token)["unidad1"])
-    };
-
-    SetWidth(porcentaje){
-        return(Dimensions.get('window').width * (porcentaje/100))
-    }
-
-    SetHeight(porcentaje){
-        return(Dimensions.get('window').height * (porcentaje/100))
-    }
+      };
     
     GetUsers =(SeisenaValue) => {
         this.setState({seisena: SeisenaValue})
@@ -304,9 +292,12 @@ class evalaptitudes extends Component {
                         {this.LoadingState()}
                     </View>
 
-                    <View style ={{width: '100%', height: '10%'}}>
+                    <View style ={{width: '100%', height: '20%'}}>
                         
                         <View syle ={styles.Picker}>
+                            
+
+                            
                             <Picker 
                                 selectedValue = {this.state.PickerValue}
                                 style = {{width: '60%', height: '50%', borderColor:'gray', borderWidth: 5, alignItems:'center', justifyContent:'center' /*, alignSelf:'center'*/}}
@@ -318,8 +309,7 @@ class evalaptitudes extends Component {
                         </View>
                     </View>
                     
-                    <View style ={ {width: '100%', height: '80%'}}>
-                        <ScrollView>
+                    <View style ={ {width: '100%', height: '50%'}}>
                         
                         <View style = {styles.AreasContainer}>
                             <View style = {styles.RatingContainer}>
@@ -329,9 +319,16 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                <CustomRating
-                                        onChange = {(valor) => {this.setState({corporalidad: valor})}}
-                                        width = {this.SetWidth(RATING_WIDTH_PERCENT)}
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start'}}
+                                        onFinishRating={(valor) => this.setState({corporalidad : valor})}
                                     />
                                 </View>  
                             </View>
@@ -343,9 +340,16 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                <CustomRating
-                                        onChange = {(valor) => {this.setState({creatividad: valor})}}
-                                        width = {this.SetWidth(RATING_WIDTH_PERCENT)}
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({creatividad : valor})}
                                     />
                                 </View>
                             </View>
@@ -357,9 +361,16 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                <CustomRating
-                                        onChange = {(valor) => {this.setState({caracter: valor})}}
-                                        width = {this.SetWidth(RATING_WIDTH_PERCENT)}
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({caracter : valor})}
                                     />
                                 </View>  
                             </View>
@@ -371,9 +382,16 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                <CustomRating
-                                        onChange = {(valor) => {this.setState({afectividad: valor})}}
-                                        width = {this.SetWidth(RATING_WIDTH_PERCENT)}
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({afectividad : valor})}
                                     />
                                 </View>  
                             </View>
@@ -385,9 +403,16 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                    <CustomRating
-                                        onChange = {(valor) => {this.setState({sociabilidad: valor})}}
-                                        width = {this.SetWidth(RATING_WIDTH_PERCENT)}
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({sociabilidad : valor})}
                                     />
                                 </View>  
                             </View>
@@ -399,23 +424,33 @@ class evalaptitudes extends Component {
                                     </Text>
                                 </View>
                                 <View style = {styles.Rating}>
-                                <CustomRating
-                                        onChange = {(valor) => {this.setState({espiritualidad: valor})}}
-                                        width = {this.SetWidth(RATING_WIDTH_PERCENT)}
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={WOLF_HEAD}
+                                        ratingColor='#eff224'
+                                        ratingBackgroundColor='#dedede'
+                                        startingValue = {DEFAULT_RATING}
+                                        ratingCount={5}
+                                        imageSize={40}
+                                        style={{ justifyContent:'center', alignItems:'flex-start' }}
+                                        onFinishRating={(valor) => this.setState({espiritualidad : valor})}
                                     />
                                 </View>  
                             </View>
                         </View>
-                        </ScrollView>
                     </View>
-                    
 
-                    <View style ={ {width: '100%', height: '10%', alignItems:'center',  }}>
-                        <CustomButton
-                        onPress = {() => {this.EnviarEvaluacion(); this.handleOpen();}}
-                        title = "Evaluar"
-                        name = 'long-primary-button'
-                        />                     
+                    <View style ={ {width: '100%', height: '30%' }}>
+                        <View style = {{height: '30%'}}>
+
+                        </View>
+                        <View style={{height: '70%', alignItems:'center', justifyContent:'flex-start'}} >
+                            <CustomButton
+                            onPress = {() => {this.EnviarEvaluacion(); this.handleOpen();}}
+                            title = "Evaluar"
+                            name = 'long-primary-button'
+                            />                     
+                        </View>
                     </View>
                 </View>
             </View>
