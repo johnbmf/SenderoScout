@@ -63,6 +63,8 @@ class cambiar_unidad extends Component {
       SendAlertType: 1,
       SendAlertMessage: "",
       press: true,
+      mostrarSearchBar: true,
+      cancel1: null
       
     };
     if (Platform.OS === "android") {
@@ -340,13 +342,15 @@ LoadingState(){
         // this.fetchData();
       };
 
-          
-      selectItem(Ite, usu) {
+      
+      selectItem(item) {
         this.setState({
-          value:Ite,
-          text:Ite,
-          usuario:usu,
-          data: []
+          value:item.nombre,
+          text:item.nombre,
+          usuario:item.user,
+          data: [item],
+          mostrarSearchBar: false,
+          cancel1: 'cancel'
         });
         this.makeRemoteRequest2(this.text2)
         // this.fetchData();
@@ -446,6 +450,40 @@ show2() {
 return null;
   }
 }
+parte_inicial() {
+  
+  if(this.state.mostrarSearchBar){
+    return(
+<SearchBar 
+            onPressToFocus
+            autoFocus={false}
+            fontColor="#ffffff"
+            fontSize={16}
+            iconColor="#ffffff"
+            shadowColor={null}
+            cancelIconComponent={this.charge()}
+            cancelIconColor="#ffffff"
+            backgroundColor="#8B4BC1"
+            placeholder="Ingresa nombre del niño o niña..."
+            onChangeText={text => {
+              this.makeRemoteRequest(text);
+            }}
+            value={this.state.text} 
+            onPressCancel={() => {
+              this.makeRemoteRequest("");
+            }}
+
+            textInputValue={this.state.text}
+
+          />)
+  }
+  else{
+return null;
+  }
+}
+
+
+
 //Mostrar simbolo de carga en la lista de nines
 charge(){
   if(this.state.loading){
@@ -487,33 +525,12 @@ charge2(){
                 </View>
                 <ScrollView >
                 <SafeAreaView style={{ flex: 1}}>
-        
-        <Text style={{marginLeft:15,fontSize: 16}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
+                
+        <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
         <View style={styles.container}>
         
-          <SearchBar 
-            onPressToFocus
-            autoFocus={false}
-            fontColor="#ffffff"
-            fontSize={16}
-            iconColor="#ffffff"
-            shadowColor={null}
-            cancelIconComponent={this.charge()}
-            cancelIconColor="#ffffff"
-            backgroundColor="#8B4BC1"
-            placeholder="Ingresa nombre del niño o niña..."
-            onChangeText={text => {
-              this.makeRemoteRequest(text);
-            }}
-            value={this.state.text} 
-            onPressCancel={() => {
-              this.makeRemoteRequest("");
-            }}
 
-            textInputValue={this.state.text}
-
-          />
-          
+        <View >{this.parte_inicial()}</View>
         <View style={{ flex: 1 }}>
         <ScrollView > 
                 
@@ -523,11 +540,11 @@ charge2(){
         renderItem={({ item }) => (
 
             <ListItem
-
+              rightIcon={{name : this.state.cancel1}}
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-               onPress={() => this.selectItem(item.nombre,item.user)}
+               onPress={() => this.selectItem(item)}
               Component={TouchableScale}
               friction={90} //
               tension={100} // 
