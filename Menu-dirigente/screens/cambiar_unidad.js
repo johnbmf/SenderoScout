@@ -306,7 +306,8 @@ LoadingState(){
           usuario:item.user,
           data: [item],
           mostrarSearchBar: false,
-          cancel1: 'cancel'
+          cancel1: 'clear',
+          cancel: null
         });
         this.makeRemoteRequest2(this.text2)}
         else{
@@ -332,7 +333,7 @@ LoadingState(){
           text2:item.nombre_unidad,
           ide:item.id,
           data2: [item],
-          cancel: 'keyboard-backspace', //backspace
+          cancel: 'clear', //backspace keyboard-backspace
           show2:true,
           press:false
         });

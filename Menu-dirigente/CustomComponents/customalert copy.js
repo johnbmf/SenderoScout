@@ -19,24 +19,30 @@ const Alerta2Botones = (props) => {
                     {(props.type == 'Error') && <View style = {{height:'25%', justifyContent:'center',paddingTop:15}}>
                         <Icon style = {{alignSelf:'center'}} type = "antdesign" name="closecircle" color = 'red' size = {65}/>
                     </View>}
-                    <View style = {{width:'90%', alignSelf:'center', height:'55%',justifyContent:'center', alignContent:"center", alignItems:'center'}}>
+                    <View style = {{width:'90%', alignSelf:'center', height:'45%',justifyContent:'center', alignContent:"center", alignItems:'center'}}>
                         <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:30, fontFamily:'Roboto',textAlign: 'center', marginBottom:10}}>{props.titulo}</Text>
                         <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                     </View>
-                    <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
-                    <CustomButton 
-                            onPress = {props.aceptar}
-                            name = 'long-primary-button'
-                            title = 'Continuar'
-                        />    
+
+
+                    <View style = {{width:'90%', alignSelf:'center', height:'55%',justifyContent:'flex-start', alignContent:"center", alignItems:'center'}}>
+                        <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', alignItems:'center', alignSelf:'center' }}>
+                        <CustomButton 
+                                onPress = {props.aceptar}
+                                name = 'long-primary-button'
+                                title = 'Continuar'
+                            />    
+                        </View>
+                        <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', alignItems:'center', alignSelf:'center' }}>   
+                        <CustomButton 
+                                onPress = {props.rechazar}
+                                name = 'long-primary-button'
+                                title = 'Volver'
+                            />
+                        </View>
                     </View>
-                    <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', alignItems:'center', alignSelf:'center' }}>   
-                    <CustomButton 
-                            onPress = {props.rechazar}
-                            name = 'long-primary-button'
-                            title = 'Volver'
-                        />
-                    </View>
+
+
                 </View>
             </View>
         </Modal>
