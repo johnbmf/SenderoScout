@@ -401,8 +401,8 @@ show2() {
   
   if(this.state.show2){
     return(
-            <View style={styles.bottom}>
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
+
+                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:15}} >
                     <CustomButton
                     //onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
                     onPress = {() => {this.toggleAlert2Botones()}}
@@ -411,7 +411,7 @@ show2() {
                     name = 'long-primary-button'
                     />
                     </View>
-                    </View>);
+                 );
                     
 
   }
@@ -598,9 +598,9 @@ se_encuentra_en_busqueda(){
 
         </View>
       </SafeAreaView>
-      
-      </ScrollView>
       <View style={styles.container}>{this.show2()}</View>
+      </ScrollView>
+      
 
             <Alerta2Botones visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
                     />
@@ -654,11 +654,5 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    bottom: {
-      flex:1,
-      justifyContent: 'flex-end',
-      marginBottom:50
-
-    }
 
 });
