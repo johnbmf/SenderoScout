@@ -275,44 +275,46 @@ if(this.state.userToken.unidad1 == 0){
 
             </View>
             <View style={{width: '100%', height: '7%'}} >
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese nombre de la unidad:</Text>
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
-                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
                         onChangeText={(valor) => this.setState({nombre_unidad : valor})}
-                        placeholder = "Ingrese nombre de la unidad"
+
                         value={this.state.nombre_unidad}
                         />
             </View>
-            <View style={{width: '100%', height: '7%'}} >             
+            <View style={{width: '100%', height: '7%'}} >
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese nombre del grupo:</Text>             
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
-                        fontSize = {20}
+
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
                         onChangeText={(valor) => this.setState({grupo : valor})}
-                        placeholder = "Ingrese nombre del grupo"
+
                         value={this.state.grupo}
                         />
             </View>
             <View style={{width: '100%', height: '7%'}} >
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese distrito:</Text>
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
-                        fontSize = {20}
+
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
                         onChangeText={(valor) => this.setState({distrito : valor})}
-                        placeholder = "Ingrese distrito"
+
                         value={this.state.distrito}
                         />
         </View>
