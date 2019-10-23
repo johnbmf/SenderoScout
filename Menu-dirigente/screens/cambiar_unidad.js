@@ -516,45 +516,47 @@ charge2(){
 
 se_encuentra_en_busqueda(){
   console.log(this.state.data)
-  if(this.state.data!=undefined){
-    return(
-      <FlatList
-      data = {this.state.data}
+    if(this.state.userToken.unidad1!=0){
+      if(this.state.data!=undefined){
+        return(
+          <FlatList
+          data = {this.state.data}
 
-      renderItem={({ item }) => (
+          renderItem={({ item }) => (
 
-          <ListItem
-            rightIcon={{name : this.state.cancel1}}
-            containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
-            title={`${item.nombre}`}
-            titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-            onPress={() => this.selectItem(item)}
-            Component={TouchableScale}
-            friction={90} //
-            tension={100} // 
-            activeScale={0.95} //
-            leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
-            linearGradientProps={{
-              colors: ['#f2e6ff', '#F9F4FF'],
-              start: [1.5, 0],
-              end: [0.1, 0],
-            }}
-            subtitleStyle={{ color: '#104F55' }}
-            subtitle={`${item.pseudonimo}`}
-            ViewComponent={LinearGradient}
+              <ListItem
+                rightIcon={{name : this.state.cancel1}}
+                containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                title={`${item.nombre}`}
+                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+                onPress={() => this.selectItem(item)}
+                Component={TouchableScale}
+                friction={90} //
+                tension={100} // 
+                activeScale={0.95} //
+                leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+                linearGradientProps={{
+                  colors: ['#f2e6ff', '#F9F4FF'],
+                  start: [1.5, 0],
+                  end: [0.1, 0],
+                }}
+                subtitleStyle={{ color: '#104F55' }}
+                subtitle={`${item.pseudonimo}`}
+                ViewComponent={LinearGradient}
 
+              />
+          )}
+            keyExtractor={item => item.user} 
+                    
           />
-      )}
-        keyExtractor={item => item.user} 
-                
-      />
-    )
-  }
-  else{
-    return(
-      <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
-    )
-  }
+        )
+      }
+      else{
+        return(
+          <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
+        )
+      }
+    }
 }
 
 
