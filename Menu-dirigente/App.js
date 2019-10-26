@@ -21,6 +21,7 @@ import CrearUnidadScreen from './screens/crear_unidad'
 import CambiarUnidadScreen from './screens/cambiar_unidad'
 import UnidadScreen from './screens/unidad'
 import CerrarSesionScreen from './screens/cerrar_sesion'
+import CambiarPseudonimo from './screens/cambiar_pseudonimo'
 
 
 
@@ -117,8 +118,10 @@ const AppDrawerNavigator = createDrawerNavigator({
   AgregarUsuarios:AgregarUsuariosScreen,
   InvitarDirigente : InvitarDirigenteScreen,
   Unidad:CrearUnidadStack,
+  CambioPseudos: CambiarPseudonimo,
   Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
+  
 },{
   contentComponent: CustomDrawerComponent,
   contentOptions:{

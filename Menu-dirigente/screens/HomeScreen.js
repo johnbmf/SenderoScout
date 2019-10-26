@@ -58,8 +58,9 @@ class HomeScreen extends Component {
             tituloAlerta: "Este es el titulo de la alerta",
             mensajeAlerta: "Misión creada con éxito",
             typeAlerta: 'Warning',
-            Pseudonimos: [],
-            HayPseudonimos : false,
+            Pseudonimos: [],//agregado para el camnio de pseudonimos
+            HayPseudonimos : false,//agregado para el camnio de pseudonimos
+            isPseudonimoVisible: false,//agregado para el camnio de pseudonimos
 
         }
         this._bootstrapAsync();
@@ -105,6 +106,7 @@ class HomeScreen extends Component {
         });
     }
 
+    //cambiar pseudonimos
     getPseudonimos = () =>{
         fetch('http://www.mitra.cl/SS/getPseudonimo.php',{
             method: 'post',
@@ -119,17 +121,22 @@ class HomeScreen extends Component {
         .then(response => response.json())
         .then((responseJson) =>{
             console.log("pseudonimos")
+            //console.log(response)
             console.log(responseJson)
-            if(responseJson["solicitudes"]>0){
+            if(responseJson["response"]>0){
                 this.setState({
                     HayPseudonimos:true,
-                    Pseudonimos: responseJson,
+                    Pseudonimos: responseJson["solicitudes"],
+                    isLoading: false,
                 })
             }else{
                 this.setState({
                     HayPseudonimos:false,
+                    isLoading: false,
                 })
             }
+            console.log("despues de guardar")
+            console.log(this.state.Pseudonimos["1"])//así se puede
         })
         .catch((error)=>{
             console.error(error);
@@ -142,6 +149,14 @@ class HomeScreen extends Component {
             user_reclutador : user,
             nombre_unidad: unidad,
             id_unidad : id
+        });
+    };
+
+    //agregado para el camnio de pseudonimos REVISAR
+    toggleModal2 = (user, Pseudonimo, pos) => {
+        console.log("Toggle modal2 " + this.state.userToken);
+        this.setState({
+            isPseudonimoVisible : !this.state.isPseudonimoVisible,
         });
     };
 
@@ -333,6 +348,8 @@ class HomeScreen extends Component {
         this._bootstrapAsync();
 
       }
+
+    //desde 397-406 agregado para el camnio de pseudonimos
     render() {
         return (
             <View style={styles.container}>
@@ -376,7 +393,17 @@ class HomeScreen extends Component {
                     <MenuItem itemImage = {require('./../assets/chart2.png')} />
                     <MenuItem itemImage = {require('./../assets/chart4.png')} />
                     <MenuItem itemImage = {require('./../assets/chart6.png')} />
-                </View>}               
+                </View>}
+
+                {(this.state.Pseudonimos.length > 0) &&
+                <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
+                    <TouchableOpacity
+                    onPress = {()=> this.props.navigation.navigate('CambioPseudos')}
+                    style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
+                        <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {this.state.Pseudonimos.length} lobatos quieren cambiar su pseudonimo.</Text>
+                    </TouchableOpacity>
+                </View>}
+
                 {this.state.invitaciones.length > 0 &&
                 <View style={{ width:'90%', height:'30%' , justifyContent : 'center', alignItems:'center', alignSelf:'center'}}>
                     {this.state.invitaciones.map(((obj,i) => 
@@ -402,6 +429,9 @@ class HomeScreen extends Component {
                         }</View>))
                     }
                 </View>}
+                
+                
+
                 <this.CModal/>
                     <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />
