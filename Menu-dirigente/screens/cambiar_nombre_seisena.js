@@ -5,13 +5,9 @@ import {
     StyleSheet,
     Modal,
     ScrollView,
-    Dimensions,
-    SafeAreaView,
     ActivityIndicator,
     FlatList,
-    Platform,
-    UIManager,
-    Image,
+    TextInput,
     AsyncStorage
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
@@ -35,8 +31,10 @@ class cambiar_nombre_seisena extends Component {
             isLoading:false,
             userToken: "",
             id_seisena: null,
-            data:[]
-        
+            data:[],
+            seisena_seleccionada:false,
+            boton_cancelar_seisena:null,
+
         }
         this._bootstrapAsync()
     }
@@ -71,7 +69,7 @@ class cambiar_nombre_seisena extends Component {
     }
 
     mostrarSeisenas(){
-        this.setState({ loading: true});
+        this.setState({ isLoading: true});
         fetch('http://www.mitra.cl/SS/get_nombres_seisenas.php',
                 {
                     method: 'POST',
@@ -94,12 +92,11 @@ class cambiar_nombre_seisena extends Component {
               data: responseData.data,
               message: responseData.message,
               error: null,
-              loading: false,
+              isLoading: false,
             });
           })
-          console.log(this.state.data)
           .catch(error => {
-            this.setState({ error, loading: false });
+            this.setState({ error, isLoading: false });
           });
       };
 
@@ -158,7 +155,6 @@ class cambiar_nombre_seisena extends Component {
     
     
         LoadingState(){
-            console.log(this.state.isLoading)
             if(this.state.isLoading){
                 return(
     
@@ -182,13 +178,13 @@ class cambiar_nombre_seisena extends Component {
         }
 
 Ingresar_nuevo_nombre(){
-    if (this.state.seleccion_de_seisena){
+    if (this.state.seisena_seleccionada){
         return(
-            <View style = {styles.container}>
-            <View style={{width: '100%', height: '7%'}} >
-            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese el nuevo nombre de la seisena:</Text>
+            <View style={{alignItems: 'flex-start'}}>
+
+            <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Ingrese el nuevo nombre de la seisena:</Text>
                     <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
+                        style = {{height:'15%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:15}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
@@ -198,7 +194,7 @@ Ingresar_nuevo_nombre(){
 
                         value={this.state.nuevo_nombre}
                         />
-            </View>
+
         <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
         <CustomButton 
         onPress = {() => {this.cambiarNombreSeisena()}}
@@ -212,13 +208,31 @@ Ingresar_nuevo_nombre(){
     }
 }
 
+seleccionar_seisena(item){
+    if(!this.state.seisena_seleccionada){
+        this.setState({
+            seisena_seleccionada:true,
+            boton_cancelar_seisena:'clear',
+            data: [item],
+        })
+    }
+    else{
+        {this.mostrarSeisenas()}
+        this.setState({
+            seisena_seleccionada:false,
+            boton_cancelar_seisena:null,
+        })
+    }
+}
+
+
 
 //puede(): Funcion que muestra paneles para cambiar el nombre de seisena en caso de que tenga Unidad, en caso que no, muestra que la persona no tiene unidad. 
 puede(){
 if(this.state.userToken.unidad1 != 0){
     return(
     <View>
-    <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione seisena que desea cambiar nombre:</Text>
+    <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena que desea cambiar nombre:</Text>
     <ScrollView>
         <FlatList
         data = {this.state.data}
@@ -226,9 +240,8 @@ if(this.state.userToken.unidad1 != 0){
             <ListItem
               title={`${item.nombre_seisena}`}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              containerStyle={{ borderBottomWidth: 0}} 
-               //onPress={() => this.selectItem2(item)}
-               rightIcon={{name : this.state.cancel}}
+               onPress={() => this.seleccionar_seisena(item)}
+               rightIcon={{name : this.state.boton_cancelar_seisena}}
                Component={TouchableScale}
               friction={90} //
               tension={100} // 
@@ -239,7 +252,7 @@ if(this.state.userToken.unidad1 != 0){
                 end: [0.1, 0],
               }}
               ViewComponent={LinearGradient}
-              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
             />
           )}
           keyExtractor={item => item.id_seisena}         
@@ -250,7 +263,7 @@ if(this.state.userToken.unidad1 != 0){
 }
 else{
     return(
-        <View style = {styles.container}>
+        <View>
     <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
     <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center',marginTop:15,marginBottom:15}}>No formas parte de una unidad, crea una o unete a la de otro dirigente.</Text>
     </View>
@@ -290,9 +303,11 @@ else{
                         </Body>
                         <Right></Right>
                     </Header >                    
-                </View>
-                
+                </View >
+                <View style = {styles.container}>
                 {this.puede()}
+                {this.Ingresar_nuevo_nombre()}
+                </View>
                 <View>
             {this.LoadingState()}
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
@@ -314,6 +329,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width:'100%',
         height:'100%',
+        
 
     },
     banner:{
