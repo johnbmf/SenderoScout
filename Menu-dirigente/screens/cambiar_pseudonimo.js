@@ -22,7 +22,8 @@ import {Rating, Button, ListItem} from 'react-native-elements';
 import { Header,Left,Right,Icon, Body} from 'native-base';
 import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
-import {Alerta} from './../CustomComponents/customalert'
+import {Alerta} from './../CustomComponents/customalert';
+import {Alerta2B} from './../CustomComponents/customalert2B'
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -34,6 +35,7 @@ class cambio_pseudonimos extends Component {
         this.state={
             SendAlertMessage: "",
             SendAlertState: false,
+            AlertTitle: "Solicitud de cambio",
             SendAlertType: 0,// 0: ok / 1: usuario ya esta / 2:campo faltante /3: Email no valido   
             isLoading:false,
             TypeAlert: 'Warning', //agregado para alerta nueva
@@ -47,6 +49,8 @@ class cambio_pseudonimos extends Component {
             TypeAlert2: 'Succsess',
             SendAlertMessage2: "Pseudonimo cambiado con éxito.",
             SendAlertType2: 0,//se cambio el pseudonimo
+            SendAlertState2: false,
+            AlertTitle2:"",
         }
         this._bootstrapAsync();
     }
@@ -64,6 +68,7 @@ class cambio_pseudonimos extends Component {
         this.getPseudonimos(); 
     };
      
+    //obtiene todas las solicitudes de camio de la unidad del dirigente
     getPseudonimos = () =>{
         fetch('http://www.mitra.cl/SS/getPseudonimo.php',{
             method: 'post',
@@ -89,14 +94,13 @@ class cambio_pseudonimos extends Component {
                     isLoading: false,
                 })
             }
-            //console.log("despues de guardar[1]")
-            //console.log(this.state.Pseudonimos["1"])//así se puede
         })
         .catch((error)=>{
             console.error(error);
         });
     }
 
+    //acepta o rechaza el cambio de 1 pseudonimo por vez
     cambiarPseudonimos = () =>{
         fetch('http://www.mitra.cl/SS/CambiarPseudonimo.php',{
             method: 'post',
@@ -143,28 +147,65 @@ class cambio_pseudonimos extends Component {
         })
     };
 
-    toggleAlert(){
+    toggleAlert1(){
         this.setState({
-            SendAlertState : !this.state.SendAlertState
+            SendAlertState : !this.state.SendAlertState,
+            cambiar: 1,
+        });
+        this.cambiarPseudonimos();
+    }
+
+    toggleAlertAceptar(){
+        this.setState({
+            SendAlertState : !this.state.SendAlertState,
+            cambiar: 1,
+        });
+        this.cambiarPseudonimos();
+    }
+
+    toggleAlertRechazar(){
+        this.setState({
+            SendAlertState : !this.state.SendAlertState,
+            cambiar:2,
+        });
+        this.cambiarPseudonimos();
+    }
+
+    toggleAlert2(){
+        this.setState({
+            SendAlertState2 : !this.state.SendAlertState
         })
     }
 
 
-    handleOpen = () => {
+    handleOpen1 = () => {
         this.setState({
             SendAlertState: true,
             isLoading : false
-            }, 
-        );
-        console.log("print handleOpen"),
-        console.log(this.state.usuarioCambio)
+        });
     }
 
-   handleClose = () => {
-        this.setState({ SendAlertState: false });
-        this.setState({isLoading : false})
-   }
+    handleClose1 = () => {
+        this.setState({ 
+            SendAlertState: false,
+            isLoading : false
+        });
+    }
 
+    handleOpen2 = () => {
+        this.setState({
+            SendAlertState2: true,
+            isLoading : false
+        });
+    }
+
+    handleClose2 = () => {
+        this.setState({ 
+            SendAlertState2: false,
+            isLoading : false
+        });
+    }
+ 
 
     render() {
         return (
@@ -205,18 +246,19 @@ class cambio_pseudonimos extends Component {
                                     onPress = {() => {this.setState({
                                         SendAlertMessage : "cambiar el pseudonimo de "+obj["actual"]+" por "+obj["Pseudonimo"]+"." ,
                                         usuarioCambio: obj["usuario"],
-                                    }),this.handleOpen()}}
+                                        nuevoPseudo: obj["Pseudonimo"]
+                                    }),this.handleOpen1()}}
                                     bottomDivider
                                     />
                                 ))
                             }
                         </View>                      
-                        <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}}
+                        <Alerta visible = {this.state.SendAlertState2} type = {this.state.TypeAlert2} titulo = {this.state.AlertTitle2} contenido = {this.state.SendAlertMessage2} rechazar = {() => {this.toggleAlert2()}}
                     />
                     </ScrollView>
                 
                 </View>
-                <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}}
+                <Alerta2B visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert1()}}//aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}}
                     />
 
                 <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >
