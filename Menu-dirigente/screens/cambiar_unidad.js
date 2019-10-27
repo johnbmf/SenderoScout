@@ -467,7 +467,6 @@ toggleAlert(){
 }
 
 toggleAlert2Botones(){
-  console.log("DASFGDGFDDGFDGF")
   this.setState({
       estadoAlerta2Botones : !this.state.estadoAlerta2Botones
   })
@@ -495,7 +494,7 @@ charge2(){
 }
 
 se_encuentra_en_busqueda(){
-  console.log(this.state.data)
+
     if(this.state.userToken.unidad1!=0){
       if(this.state.data!=undefined){
         return(

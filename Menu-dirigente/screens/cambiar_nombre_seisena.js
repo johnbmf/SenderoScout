@@ -103,7 +103,7 @@ class cambiar_nombre_seisena extends Component {
 
     cambiarNombreSeisena = () =>
     {   
-        if(this.state.nuevo_nombre_seisena==''){
+        if(this.state.nuevo_nombre==''){
             this.setState({
                 typeAlerta : 'Warning',
                 estadoAlerta: true,
@@ -214,6 +214,7 @@ seleccionar_seisena(item){
             seisena_seleccionada:true,
             boton_cancelar_seisena:'clear',
             data: [item],
+            id_seisena:item.id_seisena
         })
     }
     else{
@@ -221,6 +222,7 @@ seleccionar_seisena(item){
         this.setState({
             seisena_seleccionada:false,
             boton_cancelar_seisena:null,
+            id_seisena:null,
         })
     }
 }

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^9.0.0",
+    "@react-native-community/checkbox": "^0.2.1",
     "abort-controller": "^3.0.0",
     "expo": "^33.0.0",
     "lodash": "^4.17.15",
@@ -27,6 +28,7 @@
     "react-native-gradient-card-view": "github:WrathChaos/react-native-gradient-card-view#expo",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-modal": "^11.4.0",
+    "react-native-paper": "^3.0.0",
     "react-native-scl-alert": "^1.2.1",
     "react-native-touchable-scale": "^2.0.0",
     "react-native-vector-icons": "^6.6.0",

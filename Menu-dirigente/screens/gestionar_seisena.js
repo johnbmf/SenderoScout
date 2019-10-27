@@ -16,8 +16,11 @@ import {
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import { List, ListItem, Button} from "react-native-elements";
-import {Alerta2Botones} from './../CustomComponents/customalert copy'
 import {Alerta} from './../CustomComponents/customalert'
+import SearchBar from "react-native-dynamic-search-bar";
+import CheckBox from '@react-native-community/checkbox';
+import TouchableScale from 'react-native-touchable-scale';
+import { LinearGradient } from 'expo';
 
 const { width } = Dimensions.get("window");
 
@@ -31,28 +34,25 @@ class gestionar_seisena extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
       cancel:null,
-      data: [],
-      data2: [] ,
+      data_nines: [],
+      data_seisenas: [] ,
       error: null,
       nombre_n: '',
-      ide: null,
+      id_seisena: null,
       usuario:'',
-      refreshing: false,
       isLoading: true,
-      page: 1,
-      show1: false,
-      show2: false,
       userToken: "",
-      press: true,
       mostrarSearchBar: true,
-      cancel1: null,
+      boton_cancelar_buscador: null,
+      boton_cancelar_seisena:null,
       estadoAlerta: false,
-      tituloAlerta: "Cuidado",
-      mensajeAlerta: "Al cambiar de unidad, no podras revertir este cambio.",
+      tituloAlerta: "Éxito",
+      mensajeAlerta: "Cambio de seisena realizado con éxito",
       typeAlerta: 'Warning',
-      estadoAlerta2Botones: false,
+      filter: 1,
+      loading:false,
+      checked: true
       
     };
     if (Platform.OS === "android") {
@@ -68,7 +68,7 @@ class gestionar_seisena extends Component {
     this.setState({
         userToken : JSON.parse(Token),
     });
-    {{this.makeRemoteRequest("")}}
+    {{this.busqueda(this.state.filter,"")}}
     
   };
 
@@ -104,12 +104,12 @@ LoadingState(){
 }
 
 
-  makeRemoteRequest(text) {
+  busqueda(filtro, text) {
     this.setState({ loading: true,text:text});
     if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar informacion en los otros item.
       this.setState({ show1: false,show2:false});
     }
-    fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
+    fetch('http://www.mitra.cl/SS/filter_n_seisenas.php',
             {
                 method: 'POST',
                 headers: 
@@ -121,14 +121,16 @@ LoadingState(){
                 {
                     nombre_n: text,
  
-                    id_unidad:this.state.userToken.unidad1 
+                    id_unidad:this.state.userToken.unidad1,
+
+                    filter: filtro
                 })
  
             })
       .then(res => res.json())
       .then((responseData) => {
         this.setState({
-          data: responseData.data,
+          data_nines: responseData.data,
           message: responseData.message,
           error: null,
           loading: false,
@@ -140,14 +142,9 @@ LoadingState(){
       });
   };
   
-  makeRemoteRequest2(text) {
-    this.setState({ loading: true,
-    value2:this.state.value2,
-    text2:text});
-    if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar el boton cambiar.
-      this.setState({show2:false});
-    }
-    fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
+  entregar_seisenas() {
+    this.setState({isLoading: true});
+    fetch('http://www.mitra.cl/SS/get_nombres_seisenas.php',
             {
                 method: 'POST',
                 headers: 
@@ -157,9 +154,9 @@ LoadingState(){
                 },
                 body: JSON.stringify(
                 {
-                    nombre_u: text,
+                    id_seisena: null,
  
-                    grupo_u:this.state.userToken.grupo 
+                    id_unidad:this.state.userToken.unidad1
                 })
  
             })
@@ -167,23 +164,21 @@ LoadingState(){
       .then((responseData) => {
         console.log(responseData)
         this.setState({
-          data2: responseData.data,
+          data_seisenas: responseData.data,
           message2: responseData.message,
           error: null,
-          loading: false,
-          value2: text,
-          show1:true
+          isLoading: false,
         });
       })
       .catch(error => {
-        this.setState({ error, loading2: false });
+        this.setState({ error, isLoading: false });
       });
   };
 
     
-  makeRemoteRequest3(user,idU) {
+  cambiar_nine_seisena() {
     this.setState({ isLoading: true});
-    fetch('http://www.mitra.cl/SS/change_n_unidad.php',
+    fetch('http://www.mitra.cl/SS/change_n_seisena.php',
             {
                 method: 'POST',
                 headers: 
@@ -193,9 +188,9 @@ LoadingState(){
                 },
                 body: JSON.stringify(
                 {
-                    usuario: user,
+                    usuario: this.state.usuario,
  
-                    id_unidad:idU,
+                    id_seisena:this.state.id_seisena,
                 })
  
             })
@@ -219,19 +214,6 @@ LoadingState(){
       this.handleOpen();
   };
 
-
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: '86%',
-          backgroundColor: '#CED0CE',
-          marginLeft: '14%',
-        }}
-      />
-    );
-  };
  
   handleOpen = () => {
 
@@ -242,27 +224,7 @@ LoadingState(){
         console.log(this.state.SendAlertType);
     });
   }
- 
-    renderItem(item) {
-        return (
-        <View style={{ flex: 1 }}>
-        <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
-        data = {this.state.data}
-        renderItem={({ item }) => (
-            <ListItem
-              title={`${item.nombre}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-            />
-          )}
-          keyExtractor={item => item.user}         
-        />
-        </View>
-        );
-      }
     
-    
-
 
 
 toggleAlert(){
@@ -271,13 +233,143 @@ toggleAlert(){
   })
 }
 
-toggleAlert2Botones(){
-  console.log("DASFGDGFDDGFDGF")
-  this.setState({
-      estadoAlerta2Botones : !this.state.estadoAlerta2Botones
-  })
+//Muestra cargando en buscador.
+charge(){
+  if(this.state.loading){
+    return(
+    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
+  }
+  else{
+    return(null)
+  }
 }
 
+
+
+se_encuentra_en_busqueda(){
+
+  if(this.state.userToken.unidad1!=0){
+    if(this.state.data_nines!=undefined){
+      return(
+        <FlatList
+        data = {this.state.data_nines}
+
+        renderItem={({ item }) => (
+
+            <ListItem
+              rightIcon={{name : this.state.cancel1}}
+              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              title={`${item.nombre}`}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              //onPress={() => this.selectItem(item)}
+              Component={TouchableScale}
+              friction={90} //
+              tension={100} // 
+              activeScale={0.95} //
+              leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+              linearGradientProps={{
+                colors: ['#f2e6ff', '#F9F4FF'],
+                start: [1.5, 0],
+                end: [0.1, 0],
+              }}
+              subtitleStyle={{ color: '#104F55' }}
+              subtitle={`${item.seisena1}`}
+              ViewComponent={LinearGradient}
+
+            />
+        )}
+          keyExtractor={item => item.user} 
+                  
+        />
+      )
+    }
+    else{
+      return(
+        <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
+      )
+    }
+  }
+}
+
+
+
+//En el caso de tener unidad, muestra buscador.
+seleccion_nine(){
+  if(this.state.userToken.unidad1 != 0){
+    if(this.state.mostrarSearchBar){
+      return(
+        <View>
+        <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar o asignar a una seisena:</Text>
+  <SearchBar 
+              onPressToFocus
+              autoFocus={false}
+              fontColor="#ffffff"
+              fontSize={16}
+              iconColor="#ffffff"
+              shadowColor={null}
+              cancelIconComponent={this.charge()}
+              cancelIconColor="#ffffff"
+              backgroundColor="#8B4BC1"
+              placeholder="Ingresa nombre del niño o niña..."
+              onChangeText={text => {
+                this.busqueda(this.state.filter,text);
+              }}
+              value={this.state.text} 
+              onPressCancel={() => {
+                this.busqueda(this.state.filter,"");
+              }}
+
+              textInputValue={this.state.text}
+
+            />
+<View style={{ flexDirection: 'row'}}>
+<CheckBox
+    value={this.state.checked}
+    onChange={() => this.setState({ checked: !this.state.checked })}
+    tintColors={ {true: "#8B4BC1", false: "#8B4BC1" }}
+  />
+    <Text style={{marginTop: 5}}> Sin seisena</Text>
+  <CheckBox
+    value={this.state.checked}
+    onChange={() => this.setState({ checked: !this.state.checked })}
+    tintColors={ {true: "#8B4BC1", false: "#8B4BC1" }}
+  />
+    <Text style={{marginTop: 5}}> Seisena asignada</Text>
+  </View>
+</View>)
+    }
+    else{
+  return (<View>
+  <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
+  </View>);
+  }
+  }
+  else{
+    return(
+      <View>
+  <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+  <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center',marginTop:15,marginBottom:15}}>No formas parte de una unidad, crea una o unete a la de otro dirigente.</Text>
+  </View>
+  <View style = {styles.container}>
+  <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center',marginTop:15}}>
+                          <CustomButton
+                              onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
+                              title = "Crear nueva unidad"
+                              name = 'long-secondary-button'
+                  
+                          />
+  
+  <CustomButton
+                          onPress = {()=> this.props.navigation.navigate('Unidad')}
+                          title = "Volver"
+                          name = 'long-primary-button'
+
+                      />
+  </View>
+  </View>
+</View>);
+  }
+}
 
 
 
@@ -303,8 +395,16 @@ toggleAlert2Botones(){
                 
         
         <View style={styles.container}>
+        {this.seleccion_nine()}
+        <View style={{ flex: 1 }}>
+        <ScrollView > 
+                
+        {this.se_encuentra_en_busqueda()}
         
+            
         
+        </ScrollView >
+        </View>
         
         <View style={{ flex: 1 }}>
         <ScrollView > 
@@ -325,7 +425,7 @@ toggleAlert2Botones(){
       </ScrollView>
       
 
-            <Alerta2Botones visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
+            <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.cambiar_nine_seisena()} rechazar = {() => {this.toggleAlert()}}
                     />
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}

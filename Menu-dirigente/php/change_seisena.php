@@ -12,12 +12,12 @@
 
 
   $query = "SELECT Seisena WHERE nombre_seisena = '$nuevo_nombre'";
-  $result = $mysqli->query($query)
+  $result = $mysqli->query($query);
 if($result->num_rows==0){ // En el caso de que las seisenas no pueden tener el mismo nombre
   
   $query = "UPDATE Seisena SET nombre_seisena = '$nuevo_nombre'  WHERE id_seisena = $id_seisena";
   $result = $mysqli->query($query);
-  if($result){
+  if($result and $id_seisena!=NULL){
     $response -> message = "Cambio realizado con exito";
     echo json_encode($response);
     
