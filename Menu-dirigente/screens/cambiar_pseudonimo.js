@@ -32,7 +32,7 @@ class cambio_pseudonimos extends Component {
     constructor(props){
         super(props);
         this.state={
-            SendAlertMessage: "Debes rellenar todos los campos.",
+            SendAlertMessage: "",
             SendAlertState: false,
             SendAlertType: 0,// 0: ok / 1: usuario ya esta / 2:campo faltante /3: Email no valido   
             isLoading:false,
@@ -41,6 +41,12 @@ class cambio_pseudonimos extends Component {
             Pseudonimos: [],
             HayPseudonimos : false,
             isPseudonimoVisible: false,
+            cambiar : 0,//1: Aceptar / 2: rechazar
+            usuarioCambio:"",
+            nuevoPseudo: "",
+            TypeAlert2: 'Succsess',
+            SendAlertMessage2: "Pseudonimo cambiado con éxito.",
+            SendAlertType2: 0,//se cambio el pseudonimo
         }
         this._bootstrapAsync();
     }
@@ -71,9 +77,6 @@ class cambio_pseudonimos extends Component {
         })
         .then(response => response.json())
         .then((responseJson) =>{
-            console.log("pseudonimos")
-            //console.log(response)
-            console.log(responseJson)
             if(responseJson["response"]>0){
                 this.setState({
                     HayPseudonimos:true,
@@ -86,10 +89,50 @@ class cambio_pseudonimos extends Component {
                     isLoading: false,
                 })
             }
-            console.log("despues de guardar[1]")
-            console.log(this.state.Pseudonimos["1"])//así se puede
+            //console.log("despues de guardar[1]")
+            //console.log(this.state.Pseudonimos["1"])//así se puede
         })
         .catch((error)=>{
+            console.error(error);
+        });
+    }
+
+    cambiarPseudonimos = () =>{
+        fetch('http://www.mitra.cl/SS/CambiarPseudonimo.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+            },
+            body:JSON.stringify({
+                "cambio": this.state.cambiar,
+                "usuario": this.state.usuarioCambio,
+                "nuevo": this.state.nuevoPseudo,
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) =>{
+            if(responseJson["response"] == 0){//estamos ok
+                this.setState({
+                    TypeAlert2: 'Succsess',
+                    SendAlertMessage2: "Pseudonimo cambiado con éxito.",
+                    SendAlertType2: 0,
+                })
+            }else if(responseJson["response"] == 1){
+                this.setState({
+                    TypeAlert2: 'Succsess',
+                    SendAlertMessage2: this.state.usuarioCambio+" no ha cambiado su pseudonimo.",
+                    SendAlertType2: 1,
+                })
+            }else{
+                this.setState({
+                    TypeAlert2: 'Warning',
+                    SendAlertMessage2: "OOPS, ha ocurrido un error. intentalo más tarde.",
+                    SendAlertType2: -1,
+                })
+            }
+        })//llamar a un reload
+        .catch((error) =>{
             console.error(error);
         });
     }
@@ -113,6 +156,8 @@ class cambio_pseudonimos extends Component {
             isLoading : false
             }, 
         );
+        console.log("print handleOpen"),
+        console.log(this.state.usuarioCambio)
     }
 
    handleClose = () => {
@@ -143,8 +188,8 @@ class cambio_pseudonimos extends Component {
                     <ScrollView>
                         <View>
                             {
-                                console.log("pseudonnimos render"),
-                                console.log(this.state.Pseudonimos),
+                                //console.log("pseudonnimos render"),
+                                //console.log(this.state.Pseudonimos),
                                 this.state.Pseudonimos.map((obj,index) =>(
                                     <ListItem 
                                     key ={index}
@@ -156,12 +201,18 @@ class cambio_pseudonimos extends Component {
                                         />
                                     }
                                     title={obj["nino"]}
-                                    subtitle={"Pseudonimo actual: " + obj["actual"] + "      \nNuevo pseudonimo: " + obj["Pseudonimo"]}
+                                    subtitle={"Pseudonimo actual: " + obj["actual"] + "\nNuevo pseudonimo: " + obj["Pseudonimo"]}
+                                    onPress = {() => {this.setState({
+                                        SendAlertMessage : "cambiar el pseudonimo de "+obj["actual"]+" por "+obj["Pseudonimo"]+"." ,
+                                        usuarioCambio: obj["usuario"],
+                                    }),this.handleOpen()}}
                                     bottomDivider
                                     />
                                 ))
                             }
-                        </View>
+                        </View>                      
+                        <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}}
+                    />
                     </ScrollView>
                 
                 </View>

@@ -17,6 +17,7 @@ import Modal from "react-native-modal";
 import MenuItem from './../components/menuitems'
 import { ThemeConsumer } from "react-native-elements";
 import {Alerta} from './../CustomComponents/customalert'
+import CustomButton from "../CustomComponents/CustomButtons";
 
 
 
@@ -120,9 +121,9 @@ class HomeScreen extends Component {
         })
         .then(response => response.json())
         .then((responseJson) =>{
-            console.log("pseudonimos")
+            //console.log("pseudonimos")
             //console.log(response)
-            console.log(responseJson)
+            //console.log(responseJson)
             if(responseJson["response"]>0){
                 this.setState({
                     HayPseudonimos:true,
@@ -135,8 +136,8 @@ class HomeScreen extends Component {
                     isLoading: false,
                 })
             }
-            console.log("despues de guardar")
-            console.log(this.state.Pseudonimos["1"])//así se puede
+            //console.log("despues de guardar")
+            //console.log(this.state.Pseudonimos["1"])//así se puede
         })
         .catch((error)=>{
             console.error(error);
@@ -396,12 +397,12 @@ class HomeScreen extends Component {
                 </View>}
 
                 {(this.state.Pseudonimos.length > 0) &&
-                <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
-                    <TouchableOpacity
+                <View style = {{flexDirection:'row', alignItems:'center', height:90, paddingBottom:50}}>
+                    <CustomButton
                     onPress = {()=> this.props.navigation.navigate('CambioPseudos')}
-                    style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
-                        <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> {this.state.Pseudonimos.length} lobatos quieren cambiar su pseudonimo.</Text>
-                    </TouchableOpacity>
+                    title = "Algunos lobatos quieren cambiar su pseudonimo."
+                    name = 'long-primary-button'
+                    />  
                 </View>}
 
                 {this.state.invitaciones.length > 0 &&
