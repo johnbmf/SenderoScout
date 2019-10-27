@@ -3,53 +3,44 @@ import {
     View,
     Text,
     StyleSheet,
-    Picker,
-    TextInput,
     Modal,
-    Alert,
     ScrollView,
+    Dimensions,
+    SafeAreaView,
     ActivityIndicator,
+    FlatList,
+    Platform,
+    UIManager,
+    Image,
     AsyncStorage
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from '../CustomComponents/customalert'
+import { List, ListItem, Button} from "react-native-elements";
+import { LinearGradient } from 'expo';
+import TouchableScale from 'react-native-touchable-scale';
 
 
 class cambiar_nombre_seisena extends Component {
     constructor(props){
         super(props);
         this.state = {
-            grupo : '',
-            nombre_unidad : '',
-            distrito: '',
+            nuevo_nombre : '',
             estadoAlerta: false,
             tituloAlerta: "Este es el titulo de la alerta",
             mensajeAlerta: "Unidad creada con éxito",
             typeAlerta: 'Warning',
             isLoading:false,
-            isLoading:false,
             userToken: "",
+            id_seisena: null,
+            data:[]
         
         }
         this._bootstrapAsync()
     }
-    static navigationOptions = {
-        drawerLabel: 'Crear Unidad',
-        drawerIcon: ({tintColor}) => (
-            <Icon name='person-add' style = {{fontSize:24,color:tintColor}} />
-        )
-    }
-    clearText(){
-        this.setState(
-            {
-                grupo : '',
-                nombre_unidad: '',
-                distrito: ''
-            }
-        )
-    }
+ 
     toggleAlert(){
         this.setState({
             estadoAlerta : !this.state.estadoAlerta
@@ -60,36 +51,73 @@ class cambiar_nombre_seisena extends Component {
         this.setState({
             userToken : JSON.parse(Token),
         });
-        
+        {{this.mostrarSeisenas()}}
       };
-    crearUnidad = () =>
+      handleOpen = () => {
+
+        this.setState({ 
+            SendAlertState: true,
+            isLoading : false 
+        }, () => {
+            console.log(this.state.SendAlertType);
+        });
+      }
+    
+    handleClose = () => {
+
+        this.setState({ SendAlertState: false });
+        this.setState({isLoading : false})
+
+    }
+
+    mostrarSeisenas(){
+        this.setState({ loading: true});
+        fetch('http://www.mitra.cl/SS/get_nombres_seisenas.php',
+                {
+                    method: 'POST',
+                    headers: 
+                    {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(
+                    {
+                        id_seisena: this.state.id_seisena,
+     
+                        id_unidad:this.state.userToken.unidad1 
+                    })
+     
+                })
+          .then(res => res.json())
+          .then((responseData) => {
+            this.setState({
+              data: responseData.data,
+              message: responseData.message,
+              error: null,
+              loading: false,
+            });
+          })
+          console.log(this.state.data)
+          .catch(error => {
+            this.setState({ error, loading: false });
+          });
+      };
+
+
+    cambiarNombreSeisena = () =>
     {   
-        if(this.state.nombre_unidad==''){
+        if(this.state.nuevo_nombre_seisena==''){
             this.setState({
                 typeAlerta : 'Warning',
                 estadoAlerta: true,
                 tituloAlerta: "Campo faltante",
-                mensajeAlerta: "Por favor escriba un nombre de la nueva unidad"
+                mensajeAlerta: "Por favor escriba el nuevo nombre para la seisena"
             })
         }
-        else if (this.state.grupo=='') {
-            this.setState({
-                typeAlerta : 'Warning',
-                estadoAlerta: true,
-                tituloAlerta: "Campo faltante",
-                mensajeAlerta: "Por favor escriba el nombre de grupo"
-            })
-        }else if (this.state.distrito=='') {
-            this.setState({
-                typeAlerta : 'Warning',
-                estadoAlerta: true,
-                tituloAlerta: "Campo faltante",
-                mensajeAlerta: "Por favor escriba el nombre del distrito"
-            })
-        }else {
-        this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Unidad creada con éxito" }, () =>
+        else {
+        this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Nombre de seisena cambiado con éxito" }, () =>
         {
-            fetch('http://www.mitra.cl/SS/crearUnidad.php',
+            fetch('http://www.mitra.cl/SS/change_seisena.php',
             {
                 method: 'POST',
                 headers: 
@@ -99,35 +127,21 @@ class cambiar_nombre_seisena extends Component {
                 },
                 body: JSON.stringify(
                 {
-                    nombre_unidad: this.state.nombre_unidad,
+                    nuevo_nombre: this.state.nuevo_nombre,
  
-                    grupo: this.state.grupo,
+                    id_seisena: this.state.id_seisena,
 
-                    distrito: this.state.distrito,
-
-                    usuario: this.state.userToken.user //TOKEN
+                    //usuario: this.state.userToken.user //TOKEN
                 })
  
             }).then((response) => response.json()).then((responseJson) => {
                 this.setState({
                     message: responseJson.message,
-                    userToken : {
-                        user : this.state.userToken.user,
-                        nombre: this.state.userToken.nombre,
-                        pseudonimo : this.state.userToken.pseudonimo,
-                        edad : this.state.userToken.edad,
-                        email : this.state.userToken.email,
-                        seisena1 : this.state.userToken.seisena1,
-                        tipo: this.state.userToken.tipo,
-                        grupo : this.state.userToken.grupo,
-                        nombre_unidad:this.state.nombre_unidad,
-                        unidad1 : responseJson.id_unidad},
-                    usuario: responseJson.nombre_usuario,
                     isLoading : false,
                     typeAlerta: 'Succsess',
                     estadoAlerta: true,
                     tituloAlerta : "Éxito",
-                    mensajeAlerta : "La unidad fue creada correctamente"
+                    mensajeAlerta : "El cambio de nombre fue realizado correctamente"
                 }, ()=> {storeItem('userToken',this.state.userToken);this.handleOpen()})
             })
             .catch((error)=>{
@@ -141,48 +155,7 @@ class cambiar_nombre_seisena extends Component {
             });
         });}
     }
-            SendAlert = () => {
-            if(this.state.SendAlertType == -1){
-                Alert.alert("")
     
-            }
-            else if (this.SendAlertType == 1){
-    
-            }
-            else {
-                Alert.alert("",SendAlertMessage)
-            };
-        };
-    
-        SendAlert = () => {
-            if(this.state.SendAlertType == -1){
-                Alert.alert("")
-    
-            }
-            else if (this.SendAlertType == 1){
-    
-            }
-            else {
-    
-            };
-        };
-    
-        handleOpen = () => {
-
-            this.setState({ 
-                SendAlertState: true,
-                isLoading : false 
-            }, () => {
-                console.log(this.state.SendAlertType);
-            });
-          }
-        
-        handleClose = () => {
-
-            this.setState({ SendAlertState: false });
-            this.setState({isLoading : false})
-
-        }
     
         LoadingState(){
             console.log(this.state.isLoading)
@@ -207,18 +180,13 @@ class cambiar_nombre_seisena extends Component {
                 );   
             }
         }
-//puede(): Funcion que muestra paneles para crear unidad en caso de que la persona no tenga Unidad, en caso que no, muestra que la persona ya tiene unidad. 
-puede(){
-    console.log("Puede", this.state.userToken)
-if(this.state.userToken.unidad1 == 0){
-    return(
-        
-        <View style = {styles.container}>
-            <View >
 
-            </View>
+Ingresar_nuevo_nombre(){
+    if (this.state.seleccion_de_seisena){
+        return(
+            <View style = {styles.container}>
             <View style={{width: '100%', height: '7%'}} >
-            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese nombre de la unidad:</Text>
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese el nuevo nombre de la seisena:</Text>
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
@@ -226,73 +194,84 @@ if(this.state.userToken.unidad1 == 0){
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
-                        onChangeText={(valor) => this.setState({nombre_unidad : valor})}
+                        onChangeText={(valor) => this.setState({nuevo_nombre : valor})}
 
-                        value={this.state.nombre_unidad}
+                        value={this.state.nuevo_nombre}
                         />
             </View>
-            <View style={{width: '100%', height: '7%'}} >
-            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese nombre del grupo:</Text>             
-                    <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
-                        underlineColorAndroid = "transparent"
-                        maxLength = {60}
-
-                        //{...this.props}
-                        multiline = {true}
-                        numberOfLines = {4}
-                        onChangeText={(valor) => this.setState({grupo : valor})}
-
-                        value={this.state.grupo}
-                        />
-            </View>
-            <View style={{width: '100%', height: '7%'}} >
-            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese distrito:</Text>
-                    <TextInput 
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
-                        underlineColorAndroid = "transparent"
-                        maxLength = {60}
-
-                        //{...this.props}
-                        multiline = {true}
-                        numberOfLines = {4}
-                        onChangeText={(valor) => this.setState({distrito : valor})}
-
-                        value={this.state.distrito}
-                        />
-        </View>
         <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
         <CustomButton 
-        onPress = {() => {this.crearUnidad(() => {this.handleOpen()})}}
+        onPress = {() => {this.cambiarNombreSeisena()}}
         
-        title = "Crear"
+        title = "Cambiar Nombre"
         name = 'long-primary-button'
         />
         </View>
-        <View >
-
-</View>
-
         </View>
+        )
+    }
+}
+
+
+//puede(): Funcion que muestra paneles para cambiar el nombre de seisena en caso de que tenga Unidad, en caso que no, muestra que la persona no tiene unidad. 
+puede(){
+if(this.state.userToken.unidad1 != 0){
+    return(
+    <View>
+    <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione seisena que desea cambiar nombre:</Text>
+    <ScrollView>
+        <FlatList
+        data = {this.state.data}
+        renderItem={({ item }) => (
+            <ListItem
+              title={`${item.nombre_seisena}`}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              containerStyle={{ borderBottomWidth: 0}} 
+               //onPress={() => this.selectItem2(item)}
+               rightIcon={{name : this.state.cancel}}
+               Component={TouchableScale}
+              friction={90} //
+              tension={100} // 
+              activeScale={0.95} //
+              linearGradientProps={{
+                colors: ['#f2e6ff', '#F9F4FF'],
+                start: [1.5, 0],
+                end: [0.1, 0],
+              }}
+              ViewComponent={LinearGradient}
+              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+            />
+          )}
+          keyExtractor={item => item.id_seisena}         
+        />
+        </ScrollView>
+    </View>
 );
 }
 else{
     return(
         <View style = {styles.container}>
-        <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
-        <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Ya tienes tu unidad correspondiente.</Text>
-        </View>
-        <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
-        <CustomButton
-                                onPress = {()=> this.props.navigation.navigate('Unidad')}
-                                title = "Volver"
-                                name = 'long-primary-button'
-
-                            />
-        </View>
+    <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+    <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center',marginTop:15,marginBottom:15}}>No formas parte de una unidad, crea una o unete a la de otro dirigente.</Text>
     </View>
+    <View style = {styles.container}>
+    <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center',marginTop:15}}>
+                            <CustomButton
+                                onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
+                                title = "Crear nueva unidad"
+                                name = 'long-secondary-button'
+                    
+                            />
+    
+    <CustomButton
+                            onPress = {()=> this.props.navigation.navigate('Unidad')}
+                            title = "Volver"
+                            name = 'long-primary-button'
 
-    )
+                        />
+    </View>
+    </View>
+</View>);
 }
 }
     render() {
@@ -307,7 +286,7 @@ else{
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
                         <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
-                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Crear Unidad</Text>
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Cambiar nombre de seisena</Text>
                         </Body>
                         <Right></Right>
                     </Header >                    
