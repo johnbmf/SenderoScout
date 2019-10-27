@@ -14,10 +14,10 @@ import {
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import CustomButton from "../CustomComponents/CustomButtons";
-import {Alerta} from './../CustomComponents/customalert'
+import {Alerta} from '../CustomComponents/customalert'
 
 
-class crear_unidad extends Component {
+class cambiar_nombre_seisena extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -326,7 +326,7 @@ else{
 
     }
 }
-export default crear_unidad;
+export default cambiar_nombre_seisena;
 
 const styles = StyleSheet.create({
     container: {

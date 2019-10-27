@@ -3,15 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
-    Picker,
-    TextInput,
     Modal,
-    TouchableWithoutFeedback,
-    Keyboard,
-    Alert,
-    StatusBar,
-    TouchableOpacity,
-    KeyboardAvoidingView,
     ScrollView,
     Dimensions,
     SafeAreaView,
@@ -23,21 +15,13 @@ import {
     AsyncStorage
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
-import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
-import { NavigationEvents } from 'react-navigation';
 import { List, ListItem, Button} from "react-native-elements";
-import GradientCard from "react-native-gradient-card-view";
-import SearchBar from "react-native-dynamic-search-bar";
-import { CustomLayoutSpring } from "react-native-animation-layout";
-import { LinearGradient } from 'expo';
-import TouchableScale from 'react-native-touchable-scale';
-import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta2Botones} from './../CustomComponents/customalert copy'
 import {Alerta} from './../CustomComponents/customalert'
 
 const { width } = Dimensions.get("window");
 
-class cambiar_unidad extends Component {
+class gestionar_seisena extends Component {
     static navigationOptions = {
         drawerLabel: 'Cambiar Unidad',
         drawerIcon: ({tintColor}) => (
@@ -276,190 +260,11 @@ LoadingState(){
         </View>
         );
       }
-
-      
-      selectItem(item) {
-        if(this.state.mostrarSearchBar){
-        this.setState({
-          value:item.nombre,
-          text:item.nombre,
-          usuario:item.user,
-          data: [item],
-          mostrarSearchBar: false,
-          cancel1: 'clear',
-          cancel: null
-        });
-        this.makeRemoteRequest2(this.text2)}
-        else{
-          this.makeRemoteRequest("")
-          this.setState({
-            value:"",
-            text:"",
-            usuario:"",
-            data: this.state.data,
-            mostrarSearchBar: true,
-            cancel1: null,
-            show1:false
-          });
-          }
-        
-        }
-
-                
-      selectItem2(item) { 
-        if (this.state.press){
-        this.setState({
-          value2:item.nombre_unidad,
-          text2:item.nombre_unidad,
-          ide:item.id,
-          data2: [item],
-          cancel: 'clear', //backspace keyboard-backspace
-          show2:true,
-          press:false
-        });
-        }
-        else{
-          this.makeRemoteRequest2("")
-          this.setState({
-            value2:"",
-            text2:"",
-            ide:null,
-            data2: this.state.data2,
-            cancel: null,
-            show2:false,
-            press:true
-          });
-
-        }
-     
-      };
-
-show1() {
-    if (this.state.show1) {
-      return (
-        
-        <View> 
-        <Text style={{marginLeft:15,fontSize: 16, marginTop:15}}>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
-        <View style={{marginVertical:15}}> 
-        <ScrollView>
-        <FlatList
-        data = {this.state.data2}
-        renderItem={({ item }) => (
-            <ListItem
-              title={`${item.nombre_unidad}`}
-              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              containerStyle={{ borderBottomWidth: 0}} 
-               onPress={() => this.selectItem2(item)}
-               rightIcon={{name : this.state.cancel}}
-               Component={TouchableScale}
-              friction={90} //
-              tension={100} // 
-              activeScale={0.95} //
-              linearGradientProps={{
-                colors: ['#f2e6ff', '#F9F4FF'],
-                start: [1.5, 0],
-                end: [0.1, 0],
-              }}
-              ViewComponent={LinearGradient}
-              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
-            />
-          )}
-          keyExtractor={item => item.id}         
-        />
-        </ScrollView>
-        </View>
-        </View>
-
-      );
-  } else {
-      return null;
-  }
-}
-
-
-show2() {
-  
-  if(this.state.show2){
-    return(
-
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:15}} >
-                    <CustomButton
-                    //onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
-                    onPress = {() => {this.toggleAlert2Botones()}}
-                
-                    title = "Cambiar"
-                    name = 'long-primary-button'
-                    />
-                    </View>
-                 );
-                    
-
-  }
-  else{
-return null;
-  }
-}
-parte_inicial() {
-    if (this.state.userToken.unidad1!=0){
-      if(this.state.mostrarSearchBar){
-        return(
-          <View>
-          <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
-    <SearchBar 
-                onPressToFocus
-                autoFocus={false}
-                fontColor="#ffffff"
-                fontSize={16}
-                iconColor="#ffffff"
-                shadowColor={null}
-                cancelIconComponent={this.charge()}
-                cancelIconColor="#ffffff"
-                backgroundColor="#8B4BC1"
-                placeholder="Ingresa nombre del niño o niña..."
-                onChangeText={text => {
-                  this.makeRemoteRequest(text);
-                }}
-                value={this.state.text} 
-                onPressCancel={() => {
-                  this.makeRemoteRequest("");
-                }}
-
-                textInputValue={this.state.text}
-
-              /></View>)
-      }
-      else{
-    return (<View>
-    <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
-    </View>);
-    }
-  }
-  else{
-    return(
-    <View style = {styles.container}>
-    <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
-    <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center',marginTop:15,marginBottom:15}}>No formas parte de una unidad, crea una o unete a la de otro dirigente.</Text>
-    </View>
-    <View style = {styles.container}>
-    <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center',marginTop:15}}>
-                            <CustomButton
-                                onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
-                                title = "Crear nueva unidad"
-                                name = 'long-secondary-button'
-                    
-                            />
     
-    <CustomButton
-                            onPress = {()=> this.props.navigation.navigate('Unidad')}
-                            title = "Volver"
-                            name = 'long-primary-button'
+    
 
-                        />
-    </View>
-    </View>
-</View>);
-  }
-}
+
+
 toggleAlert(){
   this.setState({
       estadoAlerta : !this.state.estadoAlerta
@@ -473,71 +278,7 @@ toggleAlert2Botones(){
   })
 }
 
-//Mostrar simbolo de carga en la lista de nines
-charge(){
-  if(this.state.loading){
-    return(
-    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
-  }
-  else{
-    return(null)
-  }
-}
-//Mostrar simbolo de carga en la lista de unidades
-charge2(){
-  if(this.state.loading2){
-    return(
-    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
-  }
-  else{
-    return(null)
-  }
-}
 
-se_encuentra_en_busqueda(){
-  console.log(this.state.data)
-    if(this.state.userToken.unidad1!=0){
-      if(this.state.data!=undefined){
-        return(
-          <FlatList
-          data = {this.state.data}
-
-          renderItem={({ item }) => (
-
-              <ListItem
-                rightIcon={{name : this.state.cancel1}}
-                containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
-                title={`${item.nombre}`}
-                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-                onPress={() => this.selectItem(item)}
-                Component={TouchableScale}
-                friction={90} //
-                tension={100} // 
-                activeScale={0.95} //
-                leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
-                linearGradientProps={{
-                  colors: ['#f2e6ff', '#F9F4FF'],
-                  start: [1.5, 0],
-                  end: [0.1, 0],
-                }}
-                subtitleStyle={{ color: '#104F55' }}
-                subtitle={`${item.pseudonimo}`}
-                ViewComponent={LinearGradient}
-
-              />
-          )}
-            keyExtractor={item => item.user} 
-                    
-          />
-        )
-      }
-      else{
-        return(
-          <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
-        )
-      }
-    }
-}
 
 
   render() {
@@ -549,7 +290,7 @@ se_encuentra_en_busqueda(){
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
                         <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
-                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Cambiar Unidad</Text>
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Gestionar Seisena</Text>
                         </Body>
                         <Right></Right>
                     </Header >                    
@@ -564,23 +305,23 @@ se_encuentra_en_busqueda(){
         <View style={styles.container}>
         
         
-        {this.parte_inicial()}
+        
         <View style={{ flex: 1 }}>
         <ScrollView > 
                 
-        {this.se_encuentra_en_busqueda()}
+        
         
             
         
         </ScrollView >
         </View>
         
-        <View style={styles.container}>{this.show1()}</View>
+       
       
 
         </View>
       </SafeAreaView>
-      <View style={styles.container}>{this.show2()}</View>
+      
       </ScrollView>
       
 
@@ -594,7 +335,7 @@ se_encuentra_en_busqueda(){
     );
     }
 }
-export default cambiar_unidad;
+export default gestionar_seisena;
 
 const styles = StyleSheet.create({
     container: {
