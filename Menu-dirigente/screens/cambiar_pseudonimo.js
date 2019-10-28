@@ -150,7 +150,7 @@ class cambio_pseudonimos extends Component {
     toggleAlert1(){
         this.setState({
             SendAlertState : !this.state.SendAlertState,
-            cambiar: 1,
+            //cambiar: 2,
         });
         this.cambiarPseudonimos();
     }
@@ -250,7 +250,7 @@ class cambio_pseudonimos extends Component {
                                     }),this.handleOpen1()}}
                                     bottomDivider
                                     />
-                                ))
+                                )) 
                             }
                         </View>                      
                         <Alerta visible = {this.state.SendAlertState2} type = {this.state.TypeAlert2} titulo = {this.state.AlertTitle2} contenido = {this.state.SendAlertMessage2} rechazar = {() => {this.toggleAlert2()}}

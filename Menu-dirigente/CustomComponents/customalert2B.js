@@ -26,14 +26,15 @@ const Alerta2B = (props) => {
                     <View style={{width:'50%',height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'flex-start' }}>
                         <CustomButton 
                             onPress = {props.rechazar}
-                            name = 'long-primary-button'
-                            title = 'Aceptar'
-                        />
-                        <CustomButton 
-                            onPress = {props.rechazar}
                             name = 'long-secondary-button'
                             title = 'Rechazar'
                         />
+                        <CustomButton 
+                            onPress = {props.rechazar}
+                            name = 'long-primary-button'
+                            title = 'Aceptar'
+                        />
+                        
                     </View>                    
                 </View>
             </View>
