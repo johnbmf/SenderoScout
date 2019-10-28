@@ -238,6 +238,10 @@ class cambio_pseudonimos extends Component {
                 <View style={{width: '100%', height: '88%'}} >
                     <ScrollView>
                         <View>
+                            {(this.state.Pseudonimos.length < 1) &&//Pseudonimos.length > 0) &&
+                            <View><Text style={{color: 'red',fontSize:30,marginLeft:20, fontFamily:'Roboto'}}
+                            >No hay lobatos que quieran cambiar su pseudonimo en la aplicación.</Text>  
+                            </View>}
                             {
                                 console.log("pseudonnimos render"),
                                 console.log(this.state.Pseudonimos),
