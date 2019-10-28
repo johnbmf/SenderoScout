@@ -45,6 +45,8 @@ class cambio_pseudonimos extends Component {
             isPseudonimoVisible: false,
             cambiar : 0,//1: Aceptar / 2: rechazar
             usuarioCambio:"",
+            nombreNino:"",
+            idUser:-1,
             nuevoPseudo: "",
             TypeAlert2: 'Succsess',
             SendAlertMessage2: "Pseudonimo cambiado con éxito.",
@@ -112,27 +114,34 @@ class cambio_pseudonimos extends Component {
                 "cambio": this.state.cambiar,
                 "usuario": this.state.usuarioCambio,
                 "nuevo": this.state.nuevoPseudo,
+                "id": this.state.idUser,
             })
         })
         .then(response => response.json())
         .then((responseJson) =>{
-            if(responseJson["response"] == 0){//estamos ok
+            if(responseJson["response"] == 0){//estamos ok-- cambia estado y pseudonimo en usuario
                 this.setState({
                     TypeAlert2: 'Succsess',
-                    SendAlertMessage2: "Pseudonimo cambiado con éxito.",
+                    SendAlertMessage2: this.state.nombreNino+ "ha cambiado su pseudonimo a"+this.state.nuevoPseudo+".",
+                    AlertTitle2: "Pseudonimo cambiado con éxito",
                     SendAlertType2: 0,
+                    SendAlertState2: true,
                 })
-            }else if(responseJson["response"] == 1){
+            }else if(responseJson["response"] == 1){//solo cambia el estado
                 this.setState({
                     TypeAlert2: 'Succsess',
-                    SendAlertMessage2: this.state.usuarioCambio+" no ha cambiado su pseudonimo.",
+                    SendAlertMessage2: this.state.nombreNino+" no ha cambiado su pseudonimo.",
+                    AlertTitle2: "Pseudonimo no cambiado",
                     SendAlertType2: 1,
+                    SendAlertState2: true,
                 })
             }else{
-                this.setState({
+                this.setState({//algo pasó y no cambia nada o solo cambia el estado y no el pseudonimos
                     TypeAlert2: 'Warning',
-                    SendAlertMessage2: "OOPS, ha ocurrido un error. intentalo más tarde.",
+                    SendAlertMessage2: "Ha ocurrido un error. intentalo más tarde.",
+                    AlertTitle2: "OOPS",
                     SendAlertType2: -1,
+                    SendAlertState2: true,
                 })
             }
         })//llamar a un reload
@@ -150,7 +159,7 @@ class cambio_pseudonimos extends Component {
     toggleAlert1(){
         this.setState({
             SendAlertState : !this.state.SendAlertState,
-            //cambiar: 2,
+            cambiar: 2,
         });
         this.cambiarPseudonimos();
     }
@@ -173,12 +182,13 @@ class cambio_pseudonimos extends Component {
 
     toggleAlert2(){
         this.setState({
-            SendAlertState2 : !this.state.SendAlertState
+            SendAlertState2 : false,
         })
     }
 
 
     handleOpen1 = () => {
+        console.log("ID "+this.state.idUser)
         this.setState({
             SendAlertState: true,
             isLoading : false
@@ -229,8 +239,8 @@ class cambio_pseudonimos extends Component {
                     <ScrollView>
                         <View>
                             {
-                                //console.log("pseudonnimos render"),
-                                //console.log(this.state.Pseudonimos),
+                                console.log("pseudonnimos render"),
+                                console.log(this.state.Pseudonimos),
                                 this.state.Pseudonimos.map((obj,index) =>(
                                     <ListItem 
                                     key ={index}
@@ -246,11 +256,14 @@ class cambio_pseudonimos extends Component {
                                     onPress = {() => {this.setState({
                                         SendAlertMessage : "cambiar el pseudonimo de "+obj["actual"]+" por "+obj["Pseudonimo"]+"." ,
                                         usuarioCambio: obj["usuario"],
+                                        idUser: obj["id"],
+                                        nombreNino: obj["nino"],
                                         nuevoPseudo: obj["Pseudonimo"]
                                     }),this.handleOpen1()}}
                                     bottomDivider
                                     />
                                 )) 
+                                
                             }
                         </View>                      
                         <Alerta visible = {this.state.SendAlertState2} type = {this.state.TypeAlert2} titulo = {this.state.AlertTitle2} contenido = {this.state.SendAlertMessage2} rechazar = {() => {this.toggleAlert2()}}
@@ -258,7 +271,7 @@ class cambio_pseudonimos extends Component {
                     </ScrollView>
                 
                 </View>
-                <Alerta2B visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert1()}}//aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}}
+                <Alerta2B visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert1()} }//aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}}
                     />
 
                 <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >
@@ -270,7 +283,7 @@ class cambio_pseudonimos extends Component {
                 </View>
                 <View></View>
                 <View style={{width: '100%', height: '7%'}} >
-                <NavigationEvents onWillFocus={() => this.clearText()}/> 
+                <NavigationEvents onWillFocus={() => this.getPseudonimos()}/> 
                 </View>
             </View>
             </ScrollView>           
