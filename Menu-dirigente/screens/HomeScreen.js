@@ -59,10 +59,7 @@ class HomeScreen extends Component {
             tituloAlerta: "Este es el titulo de la alerta",
             mensajeAlerta: "Misión creada con éxito",
             typeAlerta: 'Warning',
-            Pseudonimos: [],//agregado para el camnio de pseudonimos
-            HayPseudonimos : false,//agregado para el camnio de pseudonimos
-            isPseudonimoVisible: false,//agregado para el camnio de pseudonimos
-
+            cantPseudos:0,//agregado para el cambio de pseudonimos
         }
         this._bootstrapAsync();
         
@@ -121,23 +118,9 @@ class HomeScreen extends Component {
         })
         .then(response => response.json())
         .then((responseJson) =>{
-            //console.log("pseudonimos")
-            //console.log(response)
-            //console.log(responseJson)
-            if(responseJson["response"]>0){
-                this.setState({
-                    HayPseudonimos:true,
-                    Pseudonimos: responseJson["solicitudes"],
-                    isLoading: false,
-                })
-            }else{
-                this.setState({
-                    HayPseudonimos:false,
-                    isLoading: false,
-                })
-            }
-            //console.log("despues de guardar")
-            //console.log(this.state.Pseudonimos["1"])//así se puede
+            this.setState({
+                cantPseudos: responseJson["response"]
+            })           
         })
         .catch((error)=>{
             console.error(error);
@@ -396,7 +379,7 @@ class HomeScreen extends Component {
                     <MenuItem itemImage = {require('./../assets/chart6.png')} />
                 </View>}
 
-                {(this.state.Pseudonimos.length > 0) &&
+                {(this.state.cantPseudos> 0) &&//Pseudonimos.length > 0) &&
                 <View style = {{flexDirection:'row', alignItems:'center', height:90, paddingBottom:50}}>
                     <CustomButton
                     onPress = {()=> this.props.navigation.navigate('CambioPseudos')}
