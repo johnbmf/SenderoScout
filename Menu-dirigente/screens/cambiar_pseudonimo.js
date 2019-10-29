@@ -119,6 +119,12 @@ class cambio_pseudonimos extends Component {
         })
         .then(response => response.json())
         .then((responseJson) =>{
+            console.log("############################+")
+            console.log("respondse "+responseJson["response"])
+            console.log("id "+responseJson["id"])
+            console.log("usuario "+responseJson["usuario"])
+            console.log("cambio "+responseJson["cambio"])
+            console.log("nuevo "+responseJson["nuevo"])
             if(responseJson["response"] == 0){//estamos ok-- cambia estado y pseudonimo en usuario
                 this.setState({
                     TypeAlert2: 'Succsess',
@@ -156,12 +162,12 @@ class cambio_pseudonimos extends Component {
         })
     };
 
-    toggleAlert1(){
+    toggleAlert1(){//* acá está fallando, no asigna el cambio antes de mandar a cambiar */
         this.setState({
             SendAlertState : !this.state.SendAlertState,
             cambiar: 2,
-        });
-        this.cambiarPseudonimos();
+        },() => {this.cambiarPseudonimos()})
+        return;
     }
 
     toggleAlertAceptar(){
@@ -244,7 +250,7 @@ class cambio_pseudonimos extends Component {
                             </View>}
                             {
                                 console.log("pseudonnimos render"),
-                                console.log(this.state.Pseudonimos),
+                                //console.log(this.state.Pseudonimos),
                                 this.state.Pseudonimos.map((obj,index) =>(
                                     <ListItem 
                                     key ={index}
@@ -258,7 +264,7 @@ class cambio_pseudonimos extends Component {
                                     title={obj["nino"]}
                                     subtitle={"Pseudonimo actual: " + obj["actual"] + "\nNuevo pseudonimo: " + obj["Pseudonimo"]}
                                     onPress = {() => {this.setState({
-                                        SendAlertMessage : "cambiar el pseudonimo de "+obj["actual"]+" por "+obj["Pseudonimo"]+"." ,
+                                        SendAlertMessage : "cambiar el pseudonimo de "+obj["nino"]+" por "+obj["Pseudonimo"]+"." ,
                                         usuarioCambio: obj["usuario"],
                                         idUser: obj["id"],
                                         nombreNino: obj["nino"],
