@@ -276,7 +276,15 @@ se_encuentra(item){
   
 }
 
+
+
+
+
+
+
+
 selectItem(item){
+    
     if(this.se_encuentra(item)){
       this.setState({
         nines_seleccionados: this.arrayRemove(this.state.nines_seleccionados, item)
@@ -284,6 +292,9 @@ selectItem(item){
     }
     else{
       this.state.nines_seleccionados.push(item)
+      this.setState({
+        nines_seleccionados: this.state.nines_seleccionados
+      })
   }
   this.se_encuentra_en_busqueda()
 }
@@ -293,16 +304,15 @@ selectItem(item){
 
 
 se_encuentra_en_busqueda(){
-  console.log(this.state.data_nines)
+  const ninos = this.state.nines_seleccionados;
   if(this.state.userToken.unidad1!=0){
     if(this.state.data_nines!=undefined){
       return(
         <FlatList
         data = {this.state.data_nines}
-        //extraData={this.state.da}
+        extraData={this.state.nines_seleccionados}
         renderItem={({ item }) => (
             <ListItem
-            
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
@@ -313,13 +323,13 @@ se_encuentra_en_busqueda(){
               tension={100} // 
               activeScale={0.95} //
               leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
-              linearGradientProps={this.se_encuentra(item) ?{
+              linearGradientProps={item.isSelect ?{colors: ['#cc99ff', '#d9b3ff'],
+              start: [1.5, 0],
+              end: [0.1, 0]}:{
                 colors: ['#f2e6ff', '#F9F4FF'],
                 start: [1.5, 0],
                 end: [0.1, 0],
-              }:{colors: ['#cc99ff', '#d9b3ff'],
-              start: [1.5, 0],
-              end: [0.1, 0]}}
+              }}
               subtitleStyle={{ color: '#104F55' }}
               subtitle={`${item.seisena1}`}
               ViewComponent={LinearGradient}
