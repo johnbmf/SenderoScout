@@ -52,7 +52,8 @@ class gestionar_seisena extends Component {
       typeAlerta: 'Warning',
       filter: 1,
       loading:false,
-      checked: true
+      checked: true,
+      nines_seleccionados: []
       
     };
     if (Platform.OS === "android") {
@@ -129,6 +130,8 @@ LoadingState(){
             })
       .then(res => res.json())
       .then((responseData) => {
+        responseData.data = responseData.data.map(item => {item.isSelect = false;
+           return item})
         this.setState({
           data_nines: responseData.data,
           message: responseData.message,
@@ -245,33 +248,78 @@ charge(){
 }
 
 
+arrayRemove(arr, value) {
+
+  return arr.filter(function(ele){
+      return ele != value;
+  });
+
+}
+
+
+marcar_revision_de_todo(dat){
+  for (i = 0; i < dat.length; i++){
+    se_encuentra(item);
+  }
+}
+
+se_encuentra(item){
+  index = this.state.data_nines.findIndex(i => i ==item)
+  for (i = 0; i < this.state.nines_seleccionados.length; i++) {
+    if(item == this.state.nines_seleccionados[i]){
+      this.state.data_nines[index].isSelect = true;
+      return true;
+    }
+  }
+  this.state.data_nines[index].isSelect = false;
+  return false;
+  
+}
+
+selectItem(item){
+    if(this.se_encuentra(item)){
+      this.setState({
+        nines_seleccionados: this.arrayRemove(this.state.nines_seleccionados, item)
+      })
+    }
+    else{
+      this.state.nines_seleccionados.push(item)
+  }
+  this.se_encuentra_en_busqueda()
+}
+
+
+
+
 
 se_encuentra_en_busqueda(){
-
+  console.log(this.state.data_nines)
   if(this.state.userToken.unidad1!=0){
     if(this.state.data_nines!=undefined){
       return(
         <FlatList
         data = {this.state.data_nines}
-
+        //extraData={this.state.da}
         renderItem={({ item }) => (
-
             <ListItem
-              rightIcon={{name : this.state.cancel1}}
+            
+              rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              //onPress={() => this.selectItem(item)}
+              onPress={() => this.selectItem(item)}
               Component={TouchableScale}
               friction={90} //
               tension={100} // 
               activeScale={0.95} //
               leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
-              linearGradientProps={{
+              linearGradientProps={this.se_encuentra(item) ?{
                 colors: ['#f2e6ff', '#F9F4FF'],
                 start: [1.5, 0],
                 end: [0.1, 0],
-              }}
+              }:{colors: ['#cc99ff', '#d9b3ff'],
+              start: [1.5, 0],
+              end: [0.1, 0]}}
               subtitleStyle={{ color: '#104F55' }}
               subtitle={`${item.seisena1}`}
               ViewComponent={LinearGradient}
@@ -323,18 +371,6 @@ seleccion_nine(){
 
             />
 <View style={{ flexDirection: 'row'}}>
-<CheckBox
-    value={this.state.checked}
-    onChange={() => this.setState({ checked: !this.state.checked })}
-    tintColors={ {true: "#8B4BC1", false: "#8B4BC1" }}
-  />
-    <Text style={{marginTop: 5}}> Sin seisena</Text>
-  <CheckBox
-    value={this.state.checked}
-    onChange={() => this.setState({ checked: !this.state.checked })}
-    tintColors={ {true: "#8B4BC1", false: "#8B4BC1" }}
-  />
-    <Text style={{marginTop: 5}}> Seisena asignada</Text>
   </View>
 </View>)
     }
