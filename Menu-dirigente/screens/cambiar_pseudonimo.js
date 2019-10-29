@@ -174,16 +174,16 @@ class cambio_pseudonimos extends Component {
         this.setState({
             SendAlertState : !this.state.SendAlertState,
             cambiar: 1,
-        });
-        this.cambiarPseudonimos();
+        },() => {this.cambiarPseudonimos()})
+        return;
     }
 
     toggleAlertRechazar(){
         this.setState({
             SendAlertState : !this.state.SendAlertState,
             cambiar:2,
-        });
-        this.cambiarPseudonimos();
+        },() => {this.cambiarPseudonimos()})
+        return;
     }
 
     toggleAlert2(){
@@ -281,7 +281,7 @@ class cambio_pseudonimos extends Component {
                     </ScrollView>
                 
                 </View>
-                <Alerta2B visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert1()} }//aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}}
+                <Alerta2B visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()} }//aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}}
                     />
 
                 <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >
@@ -293,7 +293,7 @@ class cambio_pseudonimos extends Component {
                 </View>
                 <View></View>
                 <View style={{width: '100%', height: '7%'}} >
-                <NavigationEvents onWillFocus={() => this.getPseudonimos()}/> 
+                <NavigationEvents onWillFocus={() => {this.setState({Pseudonimos:[]}),this.getPseudonimos()}}/> 
                 </View>
             </View>
             </ScrollView>           

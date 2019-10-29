@@ -30,7 +30,7 @@ const Alerta2B = (props) => {
                             title = 'Rechazar'
                         />
                         <CustomButton 
-                            onPress = {props.rechazar}
+                            onPress = {props.aceptar}
                             name = 'long-primary-button'
                             title = 'Aceptar'
                         />
