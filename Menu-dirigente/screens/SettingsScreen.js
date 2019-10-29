@@ -60,7 +60,7 @@ class SettingsScreen extends Component {
                         <Card>
                             <CardItem>
                             <Left>
-                                <Thumbnail source={{uri: './../assets/perfil.png'}} />
+                                <Thumbnail source = {require('./../assets/perfil.png')} />
                                 <Body>
                                 <Text>NativeBase</Text>
                                 <Text note>GeekyAnts</Text>
