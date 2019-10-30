@@ -152,6 +152,4 @@ const Insignias = [
         Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
         Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
     },
-    
-
 ];export default Insignias;

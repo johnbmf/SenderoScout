@@ -8,13 +8,16 @@ import {
     TouchableOpacity,
     AsyncStorage,
     Dimensions,
-    Image
+    Image,
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider, ListItem } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
+import {RFPercentage} from 'react-native-responsive-fontsize'
+
+//Custom
 import ActivityCard from '../CustomComponents/ActivityCard'
 import CustomButton from "../CustomComponents/CustomButtons";
 
@@ -24,16 +27,19 @@ class DetalleInsignia extends Component {
     constructor(props){
         super(props)
         this.state = {
+            //Datos de Usuario
+            userToken: "",
             unidad_dirigente: -1,
-            sisena: "",
+            seisena: 'default',
+
+            //Variables de estado
             setData: false, //si estan o no seteadas las recomendaciones ya sean locales o nuevas
-            setSmiles: false,
             isLoading: false,
             warningState: false,
-            recomendacionAutorizada: false,
-            //Datos usuario
-            userToken: {},
+            insigniaEntregada : false,
 
+
+            //variables funcionales
             dataInsignia : this.props.navigation.getParam('dataInsignia', {}),
             dataNino : this.props.navigation.getParam('dataNino', {})
         }
@@ -132,6 +138,7 @@ class DetalleInsignia extends Component {
 */
  
     render() {
+        console.log(this.state.dataNino.nombre)
         return (
             <View style={styles.container}>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >
@@ -146,11 +153,9 @@ class DetalleInsignia extends Component {
                     </Header >
                 </View>
                 <View style = {{width: '100%', height: '83%',alignItems: 'center'}}>
-                    <View style = {{width: '50%', height: '50%'}}>
+                    <View style = {{height: '70%', width: '100%'}}>
                         <Image style = {{ height: this.SetWidth(50), width: this.SetWidth(50), margin: 25, alignSelf: 'center'}} resizeMode ='cover' source = {this.state.dataInsignia.Icon}
                         />
-                    </View>
-                    <View style = {{width: '100%', height: '40%'}}>
                         <Text style = {styles.textdata}>
                             {this.state.dataInsignia.Descripcion}
                         </Text>
@@ -162,23 +167,49 @@ class DetalleInsignia extends Component {
                             />
                         </ScrollView>
                     </View>
-                    <View style = {{height: '10%', width: '100%'}}>
-                        <ListItem 
-                            leftIcon = {
+                    <View style={{height: '30%', width: '100%'}}>
+                        <ListItem
+
+                            containerStyle = {{width: '100%'}}
+                            leftElement = {
                                 <Icon
                                     name= 'user'
                                     type= 'FontAwesome'
                                     style={{fontSize: 25, alignContent: 'center' }}
                                 />
                             }
-                            title = {this.state.dataNino.Nombre}
-                            rightElement = {<Image style = {{ height: '100%'}} source = {this.state.dataInsignia.Icon} />}
-                            bottomDivider
-                        
-                        
+                            title = {this.state.dataNino.nombre}
+                            titleStyle= {styles.textlabel}
+                            rightElement = {
+                                this.state.insigniaEntregada? (
+                                    <Image style = {{height: this.SetHeight(83)*0.10, width: this.SetHeight(83)*0.10, aspectRatio: 1}} resizeMode= 'cover' source = {this.state.dataInsignia.Icon} />
+                                ):(
+                                    <View>
+                                        <Image style = {{height: this.SetHeight(83)*0.10, width: this.SetHeight(83)*0.10, aspectRatio: 1, tintColor : 'gray'}} resizeMode= 'cover' source = {this.state.dataInsignia.Icon} />
+
+                                        <Image style = {{height: this.SetHeight(83)*0.10, width: this.SetHeight(83)*0.10, aspectRatio: 1, position: 'absolute', opacity: 0.1}} resizeMode= 'cover' source = {this.state.dataInsignia.Icon} />
+                                    </View>
+                                    )
+                                } 
                         />
-
-
+                        {this.state.insigniaEntregada? (
+                            <View style = {{alignItems: 'center'}}>
+                                <CustomButton 
+                                    onPress = {() => {console.log("Insignia entregada")} }
+                                    title = 'Aceptar'
+                                    name = 'long-primary-button'  
+                                />
+                            </View>
+                        ):(
+                            <View style = {{alignItems: 'center'}}>
+                                <CustomButton 
+                                    onPress = {() => {console.log("Volver a Insignias")} }
+                                    title = 'Volver'
+                                    name = 'long-primary-button'  
+                                />
+                            </View>
+                        )
+                        }
                     </View>
                 </View>
                 <View style = {{height: '5%'}}>
@@ -222,7 +253,7 @@ const styles = StyleSheet.create({
 
     textlabel:{
         fontFamily:'Roboto',
-        fontSize:20,
+        fontSize:RFPercentage(3),
         fontWeight:'bold',
         marginLeft:20,
         alignContent: 'flex-start'
@@ -230,7 +261,7 @@ const styles = StyleSheet.create({
     },
     textdata:{
         fontFamily: 'Roboto',
-        fontSize: 15,
+        fontSize: RFPercentage(2.5),
         marginLeft:20,
         marginBottom: 10,
         alignContent: 'flex-start',
