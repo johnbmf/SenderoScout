@@ -9,7 +9,7 @@ const Alerta = (props) => {
     return (
         <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
             <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
-                <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#81C14B', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
+                <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#4BC150', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
                     {(props.type == 'Warning') && <View style = {{height:'25%', justifyContent:'center', paddingTop:15}}>
                         <Icon style = {{alignSelf:'center'}} type = "antdesign" name="exclamationcircle" color = '#FFA000' size = {65}/>
                     </View>}
