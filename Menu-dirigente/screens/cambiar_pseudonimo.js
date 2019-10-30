@@ -59,10 +59,7 @@ class cambio_pseudonimos extends Component {
     }
 
     static navigationOptions = {
-        drawerLabel: 'Cambio de Pseudonimos',
-        drawerIcon: ({tintColor}) => (//cambiar el icono
-            <Icon name='person-add' style = {{fontSize:24,color:tintColor}} />
-       )
+        drawerLabel: ()=>null,
     }
 
     _bootstrapAsync = async () => {
