@@ -41,6 +41,7 @@ class cambio_pseudonimos extends Component {
             TypeAlert: 'Warning', //agregado para alerta nueva
             userToken: '',
             Pseudonimos: [],
+            cantPseudos:3,
             HayPseudonimos : false,
             isPseudonimoVisible: false,
             cambiar : 0,//1: Aceptar / 2: rechazar
@@ -89,11 +90,13 @@ class cambio_pseudonimos extends Component {
                     HayPseudonimos:true,
                     Pseudonimos: responseJson["solicitudes"],
                     isLoading: false,
+                    cantPseudos: responseJson["response"],
                 })
             }else{
                 this.setState({
                     HayPseudonimos:false,
                     isLoading: false,
+                    cantPseudos: responseJson["response"],
                 })
             }
         })
@@ -244,7 +247,7 @@ class cambio_pseudonimos extends Component {
                 <View style={{width: '100%', height: '88%'}} >
                     <ScrollView>
                         <View>
-                            {(this.state.Pseudonimos.length < 1) &&//Pseudonimos.length > 0) &&
+                        {(this.state.cantPseudos< 1) &&//Pseudonimos.length > 0) &&
                             <View><Text style={{color: 'red',fontSize:30,marginLeft:20, fontFamily:'Roboto'}}
                             >No hay lobatos que quieran cambiar su pseudonimo en la aplicación.</Text>  
                             </View>}
