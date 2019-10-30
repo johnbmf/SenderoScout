@@ -41,3 +41,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 Menu-dirigente/.idea/workspace.xml
+*.json
