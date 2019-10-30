@@ -1075,6 +1075,8 @@ public class VerMisiones : MonoBehaviour
 
     IEnumerator MovePanel()
     {
+        //Bloqueamos animales
+        Aptitudes.isPanelOpen = true;
         PanelOverlay.SetActive(true);
         //Posiciones inicial y final del panel.
         Vector3 PanelMisionPosShow = new Vector2(0, 0);
@@ -1142,7 +1144,8 @@ public class VerMisiones : MonoBehaviour
         imagenMision4.SetActive(false);
         imagenMision5.SetActive(false);
         imagenMision6.SetActive(false);
-
+        //desbloqueamos animales
+        Aptitudes.isPanelOpen = false;
         yield break;
     }
 }

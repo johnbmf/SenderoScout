@@ -195,6 +195,8 @@ public class Spot1Mision : MonoBehaviour
 
             //Desactivamos movimiento de la camara.
             MainCamera.GetComponent<TouchCamera>().enabled = false;
+            //Bloqueamos animales
+            Aptitudes.isPanelOpen = true;
 
             //Activamos el canvas del detalle de la mision.
             DetalleMisionCanvas.SetActive(true);
@@ -229,6 +231,8 @@ public class Spot1Mision : MonoBehaviour
 
             //Desactivamos movimiento de la camara.
             MainCamera.GetComponent<TouchCamera>().enabled = false;
+            //Bloqueamos animales
+            Aptitudes.isPanelOpen = true;
 
             //Activamos el canvas del detalle de la mision.
             DetalleMisionCanvas.SetActive(true);
@@ -264,6 +268,8 @@ public class Spot1Mision : MonoBehaviour
 
             //Desactivamos movimiento de la camara.
             MainCamera.GetComponent<TouchCamera>().enabled = false;
+            //Bloqueamos animales
+            Aptitudes.isPanelOpen = true;
 
             //Activamos el canvas del detalle de la mision.
             DetalleMisionCanvas.SetActive(true);
@@ -338,6 +344,8 @@ public class Spot1Mision : MonoBehaviour
         isPanelActive = false;
         PanelOverlay.SetActive(false);
         MainCamera.GetComponent<TouchCamera>().enabled = true;
+        //desbloqueamos animales
+        Aptitudes.isPanelOpen = false;
         yield return null;
     }
 

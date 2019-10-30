@@ -201,6 +201,8 @@ public class Ranking : MonoBehaviour
         PanelOverlay.SetActive(false);
         //Activamos movimiento camara
         MainCamera.GetComponent<TouchCamera>().enabled = true;
+        //Activar monitos
+        Aptitudes.isPanelOpen = false;
         yield break;
     }
 
@@ -253,6 +255,7 @@ public class Ranking : MonoBehaviour
 
     IEnumerator MovePanel()
     {
+        Aptitudes.isPanelOpen = true;
         PanelOverlay.SetActive(true);
         //Posiciones inicial y final del panel.
         Vector3 PanelMisionPosShow = new Vector2(0, 0);

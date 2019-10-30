@@ -43,6 +43,7 @@ public class Aptitudes : MonoBehaviour
     #endregion
 
     public GameObject MainCamera;
+
     // Start is called before the first frame update
     void Start()
     {

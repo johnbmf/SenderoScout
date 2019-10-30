@@ -24,7 +24,7 @@ public class Akela : MonoBehaviour
         if (!Aptitudes.isPanelOpen)
         {
             float eval = Aptitudes.Evaluaciones[numAnimal];
-            string Mensaje = "Soy " + nombreAnimal + " un lobo sabio, generoso y jefe de la manada, represento al undo de la Sociabilidad.\n\n";
+            string Mensaje = "Soy " + nombreAnimal + " un lobo sabio, generoso y jefe de la manada, represento al mundo de la Sociabilidad.\n\n";
             //Mala evaluacion
             if (eval >= 0 && eval < 2)
             {

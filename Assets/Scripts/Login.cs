@@ -137,6 +137,7 @@ public class Login : MonoBehaviour{
             PlayerPrefs.SetString("pseudonimo", respuestaJson["pseudonimo"]);
             PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
             PlayerPrefs.SetString("grupo", respuestaJson["grupo"]);
+            PlayerPrefs.SetInt("avatar", 0);
 
             //Se carga escena del juego.
             OverlayCanvas.SetActive(false);
@@ -168,6 +169,7 @@ public class Login : MonoBehaviour{
             PlayerPrefs.SetString("tipo", respuestaJson["tipo"]);
             PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
             PlayerPrefs.SetString("grupo", respuestaJson["grupo"]);
+            PlayerPrefs.SetInt("avatar", 0);
             OverlayCanvas.SetActive(false);
             FirstLoginCanvas.SetActive(true);
             yield break;
