@@ -18,7 +18,6 @@ import { Header,Left,Right,Icon,Body } from 'native-base'
 import { List, ListItem, Button} from "react-native-elements";
 import {Alerta} from './../CustomComponents/customalert'
 import SearchBar from "react-native-dynamic-search-bar";
-import CheckBox from '@react-native-community/checkbox';
 import TouchableScale from 'react-native-touchable-scale';
 import { LinearGradient } from 'expo-linear-gradient';
 import CustomButton from "../CustomComponents/CustomButtons";

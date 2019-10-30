@@ -93,7 +93,7 @@ class Settings extends Component{
             </View>
         )
     }
-}export default SettingsScreen;
+}export default Settings;
 
 const styles = StyleSheet.create({
 
