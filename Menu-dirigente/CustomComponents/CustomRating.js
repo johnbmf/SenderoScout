@@ -42,7 +42,7 @@ class CustomRating extends Component{
         this._pan.flattenOffset();
         let offset = Math.max(0, this._pan._value + 0);
         if (offset < 0) return this._pan.setValue(0);
-        if (offset > this.state.END) return this._pan.setValue(END);
+        if (offset > this.state.END) return this._pan.setValue(this.state.END);
         const modulo = offset % this.state.DISTANCE;
         offset = (modulo >= this.state.DISTANCE/2) ? (offset+(this.state.DISTANCE-modulo)) : (offset-modulo);
         this.updatePan(offset);

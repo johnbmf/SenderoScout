@@ -21,7 +21,8 @@ import CrearUnidadScreen from './screens/crear_unidad'
 import CambiarUnidadScreen from './screens/cambiar_unidad'
 import UnidadScreen from './screens/unidad'
 import CerrarSesionScreen from './screens/cerrar_sesion'
-
+import EntregarInsigniaScreen from './screens/entrega_insignia'
+import DetalleInsigniaScreen from './screens/detalle_insignia'
 
 
 //const {width} = Dimensions.get('window')
@@ -106,6 +107,26 @@ const CrearUnidadStack = createStackNavigator({
       initialRouteName: 'Unidad'
     }
   );
+
+const EntregarInsigniaStack = createStackNavigator(
+  {
+    EntregarInsignia : EntregarInsigniaScreen,
+    DetalleInsignia: DetalleInsigniaScreen
+  },{
+    navigationOptions :
+    {
+      drawerLabel: 'Entrega Insignia',
+      drawerIcon : ({tintColor}) => (<Icon name ='star' style = {{fontSize : 24, color: tintColor}} />),
+      header: null
+    },
+    defaultNavigationOptions:{
+      header : null
+    }},
+    {
+      initialRouteName: 'Insignias'
+    }
+);
+
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
@@ -117,6 +138,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   AgregarUsuarios:AgregarUsuariosScreen,
   InvitarDirigente : InvitarDirigenteScreen,
   Unidad:CrearUnidadStack,
+  Insignias: EntregarInsigniaStack,
   Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
 },{

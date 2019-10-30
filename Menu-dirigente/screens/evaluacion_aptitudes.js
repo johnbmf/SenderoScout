@@ -11,7 +11,7 @@ import {
 import { Icon,Header,Left,Body,Picker, Right} from 'native-base'
 import {Rating, Button } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
-import { ScrollView} from "react-native-gesture-handler";
+import {ScrollView} from "react-native-gesture-handler";
 
 import CustomButton from "../CustomComponents/CustomButtons";
 import CustomRating from "../CustomComponents/CustomRating";
