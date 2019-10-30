@@ -22,14 +22,16 @@ import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents, StackRouter } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert'
-import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel } from "victory-native";
+import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea } from "victory-native";
+import Swiper from 'react-native-swiper'
 const Height = Dimensions.get('window').height;
 const Widht = Dimensions.get('window').width;
 const data = [
-    { quarter: 1, earnings: 13000 },
-    { quarter: 2, earnings: 16500 },
-    { quarter: 3, earnings: 14250 },
-    { quarter: 4, earnings: 19000 }
+    { quarter: 1, earnings: 1 },
+    { quarter: 2, earnings: 2 },
+    { quarter: 3, earnings: 3 },
+    { quarter: 4, earnings: 4 },
+    { quarter: 5, earnings: 5 }
   ];
 class estadisticas extends Component {
     static navigationOptions = {
@@ -65,49 +67,55 @@ class estadisticas extends Component {
                         alignItems: 'center',
 
                     }}>
-                        <View style = {{width:'90%', height:Height*0.45}} >
-                            <Text style = {styles.textlabel}>Mundos de Desarrollo</Text>
-                            <ScrollView 
-                            horizontal={true}
-                            pagingEnabled = {true}
-                            contentContainerStyle = {{      
-                                flexGrow: 1,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-        
-                            }}
-                            >
-                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center'}}>
-                                    <VictoryChart 
-                                        height={(Height*0.39)} width={(Widht*0.85)} 
-                                        theme={VictoryTheme.material} 
-                                        domain={{ x: [0, 4], y: [0, 20000] }}
-                                    >
-                                        <VictoryLabel text="Mundo Espiritual" x={Widht*0.5-20} y={30} textAnchor="middle"/>
-                                        <VictoryBar data={data} x="quarter" y="earnings" />
-                                    </VictoryChart>
+                        <View style = {{width:'99%', height:Height*0.55}} >
+                            <Text style = {styles.textlabel}>Áreas de Desarrollo</Text>
+                            <Swiper style={styles.wrapper} showsButtons={true}>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center', paddingLeft:10}}>
+                                    <VictoryLabel text="General" x={Widht*0.5-40} y={40} textAnchor="middle"/>
+                                    <VictoryChart polar
+                                        theme={VictoryTheme.material}
+                                        height={(Height*0.43)} width={(Widht*0.9)}
+                                        >
+                                        {
+                                            ["Corporalidad", "Creatividad", "Carácter", "Afectividad", "Sociabilidad", "Espiritualidad"].map((d, i) => {
+                                            return (
+                                                <VictoryPolarAxis dependentAxis
+                                                key={i}
+                                                label={d}
+                                                labelPlacement="perpendicular"
+                                                style={{ 
+                                                    tickLabels: { fill: "grey", padding:30},
+                                                    axisLabel: { padding: 15 },
+                                                    axis: { stroke: "grey", opacity: 0.5,strokeWidth: 0.25 },
+                                                    grid: { stroke: "grey", opacity: 0.25,strokeWidth: 0.25} 
+                                                }}
+                                                axisValue={d}
+                                                tickValues={[0,1,2,3,4,5]}
+                                                domain={{y: [0, 5]}}
+                                                innerRadius={20}
+                                                />
+                                            );
+                                            })
+                                        }
+                                        <VictoryArea                                
+                                            style={{ data: { fill: "tomato", alpha:0.25, fillOpacity: 0.2, strokeWidth: 2 } }}
+                                            data={[
+                                            { x: "Corporalidad", y: 1 },
+                                            { x: "Creatividad", y: 4 },
+                                            { x: "Carácter", y: 3 },
+                                            { x: "Afectividad", y: 5 },
+                                            { x: "Sociabilidad", y: 5 },
+                                            { x: "Espiritualidad", y: 3 }
+                                            ]}
+                                        />
+                                        </VictoryChart>
                                 </View>
-                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center'}}>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    domainPadding={10}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
-                                    domain={{ x: [0, 4], y: [0, 20000] }}
-                                    >
-                                    <VictoryLabel text="Mundo Mágico" x={Widht*0.5-20} y={30} textAnchor="middle"/>
-                                    <VictoryBar
-                                        style={{ data: { fill: "#c43a31" } }}
-                                        data={data}
-                                        x="quarter" y="earnings"
-                                    />
-                                </VictoryChart>
-                                </View>
-                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center'}}>
-                                <VictoryChart
-                                    theme={VictoryTheme.material}
                                     height={(Height*0.39)} width={(Widht*0.85)}
                                     >
-                                    <VictoryLabel text="Mundo Corporal" x={Widht*0.5-20} y={30} textAnchor="middle"/>
+                                    <VictoryLabel text="Corporalidad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
                                         style={{
                                         data: { stroke: "#c43a31" },
@@ -117,13 +125,102 @@ class estadisticas extends Component {
                                         { x: 1, y: 2 },
                                         { x: 2, y: 3 },
                                         { x: 3, y: 5 },
-                                        { x: 4, y: 7 }]} />
+                                        { x: 4, y: 5 }]} />
                                 </VictoryChart>
                                 </View>
-                
-                            </ScrollView>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
+                                <VictoryChart
+                                    theme={VictoryTheme.material}
+                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    >
+                                    <VictoryLabel text="Creatividad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
+                                    <VictoryLine
+                                        style={{
+                                        data: { stroke: "#c43a31" },
+                                        parent: { border: "1px solid #ccc"}
+                                        }}
+                                        data={[
+                                        { x: 1, y: 2 },
+                                        { x: 2, y: 3 },
+                                        { x: 3, y: 5 },
+                                        { x: 4, y: 5 }]} />
+                                </VictoryChart>
+                                </View>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
+                                <VictoryChart
+                                    theme={VictoryTheme.material}
+                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    >
+                                    <VictoryLabel text="Carácter" x={Widht*0.5-40} y={30} textAnchor="middle"/>
+                                    <VictoryLine
+                                        style={{
+                                        data: { stroke: "#c43a31" },
+                                        parent: { border: "1px solid #ccc"}
+                                        }}
+                                        data={[
+                                        { x: 1, y: 2 },
+                                        { x: 2, y: 3 },
+                                        { x: 3, y: 5 },
+                                        { x: 4, y: 5 }]} />
+                                </VictoryChart>
+                                </View>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
+                                <VictoryChart
+                                    theme={VictoryTheme.material}
+                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    >
+                                    <VictoryLabel text="Afectividad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
+                                    <VictoryLine
+                                        style={{
+                                        data: { stroke: "#c43a31" },
+                                        parent: { border: "1px solid #ccc"}
+                                        }}
+                                        data={[
+                                        { x: 1, y: 2 },
+                                        { x: 2, y: 3 },
+                                        { x: 3, y: 5 },
+                                        { x: 4, y: 5 }]} />
+                                </VictoryChart>
+                                </View>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
+                                <VictoryChart
+                                    theme={VictoryTheme.material}
+                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    >
+                                    <VictoryLabel text="Sociabilidad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
+                                    <VictoryLine
+                                        style={{
+                                        data: { stroke: "#c43a31" },
+                                        parent: { border: "1px solid #ccc"}
+                                        }}
+                                        data={[
+                                        { x: 1, y: 2 },
+                                        { x: 2, y: 3 },
+                                        { x: 3, y: 5 },
+                                        { x: 4, y: 5 }]} />
+                                </VictoryChart>
+                                </View>
+                                <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
+                                <VictoryChart
+                                    theme={VictoryTheme.material}
+                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    >
+                                    <VictoryLabel text="Espiritualidad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
+                                    <VictoryLine
+                                        style={{
+                                        data: { stroke: "#c43a31" },
+                                        parent: { border: "1px solid #ccc"}
+                                        }}
+                                        data={[
+                                        { x: 1, y: 2 },
+                                        { x: 2, y: 3 },
+                                        { x: 3, y: 5 },
+                                        { x: 4, y: 5 }]} />
+                                </VictoryChart>
+                                </View>
+                            </Swiper>
                         </View>
-                        <View style = {{width:Widht*0.9, height:Height*0.45, justifyContent: 'center', alignItems:'center'}}>
+                        <View style = {{width:Widht*0.99, height:Height*0.45, justifyContent: 'center', alignItems:'center'}}>
                         <Text style = {styles.textlabel}>Misiones Completadas</Text>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
@@ -148,9 +245,17 @@ class estadisticas extends Component {
         );
     }
 }
+
+
 export default estadisticas;
 
 const styles = StyleSheet.create({
+    wrapper : {
+        justifyContent: 'center',
+        alignItems:'center',
+        alignContent: 'center',
+        width : Widht*0.98
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -171,7 +276,7 @@ const styles = StyleSheet.create({
         marginTop:15,
         fontSize:20,
         fontWeight:'bold',
-        marginLeft:10,
+        marginLeft:25,
         alignContent: 'flex-start',
         alignSelf:"flex-start",
         color: 'black'
