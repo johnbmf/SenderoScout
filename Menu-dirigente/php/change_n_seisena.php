@@ -6,19 +6,24 @@
   $response = new stdClass;
   
   //Var
-  $usuario = $obj['usuario'];
+  $usuarios = $obj['usuarios'];
   $id_seisena = $obj['id_seisena'];
+  $nombre_seisena = $obj['nombre_seisena'];
 
-  $query = "UPDATE Usuario SET seisena1 = $id_seisena  WHERE user = '$usuario'";
-  $result = $mysqli->query($query);
-  if($result){
-    $response -> message = "Cambio realizado con exito";
-    echo json_encode($response);
-    
-  }else{   
-  $response -> message = "Error al realizar el cambio";
-  echo json_encode($response);  
+
+  foreach ($usuarios as $nine){
+    $usuario = $nine['user'];
+    $query = "UPDATE Usuario SET seisena1 = '$nombre_seisena'  WHERE user = '$usuario'";
+    $result = $mysqli->query($query);
+    if($result){
+      $response -> message = "Cambio realizado con exito";
+
+      
+    }else{   
+    $response -> message = "Error al realizar el cambio";
+
+    }
   }
-
+echo json_encode($response);
  mysqli_close($mysqli);
 ?>

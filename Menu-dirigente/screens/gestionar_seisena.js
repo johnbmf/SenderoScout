@@ -56,7 +56,8 @@ class gestionar_seisena extends Component {
       checked: true,
       nines_seleccionados: [],
       show_siguiente: false,
-      seleccion_seisena: false
+      seleccion_seisena: false,
+      nombre_seisena:''
       
     };
     if (Platform.OS === "android") {
@@ -73,7 +74,7 @@ class gestionar_seisena extends Component {
         userToken : JSON.parse(Token),
     });
     {{this.busqueda(this.state.filter,"")}}
-    
+    {{this.entregar_seisenas()}}
   };
 
           
@@ -194,9 +195,11 @@ LoadingState(){
                 },
                 body: JSON.stringify(
                 {
-                    usuario: this.state.usuario,
+                    usuarios: this.state.nines_seleccionados,
  
                     id_seisena:this.state.id_seisena,
+
+                    nombre_seisena: this.state.nombre_seisena
                 })
  
             })
@@ -245,8 +248,9 @@ seleccionar_seisena(item){
       this.setState({
           seisena_seleccionada:true,
           boton_cancelar_seisena:'clear',
-          data: [item],
-          id_seisena:item.id_seisena
+          data_seisenas: [item],
+          id_seisena:item.id_seisena,
+          nombre_seisena:item.nombre_seisena
       })
   }
   else{
@@ -255,21 +259,38 @@ seleccionar_seisena(item){
           seisena_seleccionada:false,
           boton_cancelar_seisena:null,
           id_seisena:null,
+          nombre_seisena: ''
       })
   }
 }
 
 
+boton_asignar(){
+if(this.state.seisena_seleccionada){
+  return(
+    <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
+                                <CustomButton
+                                    onPress = {()=> this.cambiar_nine_seisena()}
+                                    title = "Asignar"
+                                    name = 'long-primary-button'
+       
+                                />
+                                </View>)
+}
+}
+
+
+
 
 // Muestra seisenas disponibles para cambiar nines.
 seisenas_disponibles(){
-  if(this.state.userToken.unidad1 != 0 && this.state.seleccion_seisena){
+  if(this.state.seleccion_seisena){
       return(
       <View>
       <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena de asignación:</Text>
       <ScrollView>
           <FlatList
-          data = {this.state.data}
+          data = {this.state.data_seisenas}
           renderItem={({ item }) => (
               <ListItem
                 title={`${item.nombre_seisena}`}
@@ -308,7 +329,7 @@ avanzar_seisena(){
     return(
 <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
                             <CustomButton
-                                onPress = {()=> this.setState({seleccion_seisena:true, show_siguiente:false}), this.entregar_seisenas()}
+                                onPress = {()=> this.setState({seleccion_seisena:true, show_siguiente:false})}
                                 title = "Siguiente"
                                 name = 'long-primary-button'
    
@@ -526,8 +547,8 @@ seleccion_nine(){
                 
         {this.se_encuentra_en_busqueda()}
         {this.avanzar_seisena()}
-            
-        
+        {this.seisenas_disponibles()}    
+        {this.boton_asignar()}  
         </ScrollView >
         </View>
         
