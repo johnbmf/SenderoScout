@@ -19,7 +19,7 @@ import CustomButton from '../CustomComponents/CustomButtons'
 import {Alerta} from './../CustomComponents/customalert'
 import {CustomTextContainer} from './../CustomComponents/CustomTextContainer'
 
-class Settings extends Component{
+class SettingsScreen extends Component{
     constructor(props) {
         super(props);
         this.state = {
