@@ -20,7 +20,8 @@ import {Alerta} from './../CustomComponents/customalert'
 import SearchBar from "react-native-dynamic-search-bar";
 import CheckBox from '@react-native-community/checkbox';
 import TouchableScale from 'react-native-touchable-scale';
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
+import CustomButton from "../CustomComponents/CustomButtons";
 
 const { width } = Dimensions.get("window");
 
@@ -53,7 +54,9 @@ class gestionar_seisena extends Component {
       filter: 1,
       loading:false,
       checked: true,
-      nines_seleccionados: []
+      nines_seleccionados: [],
+      show_siguiente: false,
+      seleccion_seisena: false
       
     };
     if (Platform.OS === "android") {
@@ -236,6 +239,88 @@ toggleAlert(){
   })
 }
 
+//Marcar seisena.
+seleccionar_seisena(item){
+  if(!this.state.seisena_seleccionada){
+      this.setState({
+          seisena_seleccionada:true,
+          boton_cancelar_seisena:'clear',
+          data: [item],
+          id_seisena:item.id_seisena
+      })
+  }
+  else{
+      {this.mostrarSeisenas()}
+      this.setState({
+          seisena_seleccionada:false,
+          boton_cancelar_seisena:null,
+          id_seisena:null,
+      })
+  }
+}
+
+
+
+// Muestra seisenas disponibles para cambiar nines.
+seisenas_disponibles(){
+  if(this.state.userToken.unidad1 != 0 && this.state.seleccion_seisena){
+      return(
+      <View>
+      <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena de asignación:</Text>
+      <ScrollView>
+          <FlatList
+          data = {this.state.data}
+          renderItem={({ item }) => (
+              <ListItem
+                title={`${item.nombre_seisena}`}
+                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+                 onPress={() => this.seleccionar_seisena(item)}
+                 rightIcon={{name : this.state.boton_cancelar_seisena}}
+                 Component={TouchableScale}
+                friction={90} //
+                tension={100} // 
+                activeScale={0.95} //
+                linearGradientProps={{
+                  colors: ['#f2e6ff', '#F9F4FF'],
+                  start: [1.5, 0],
+                  end: [0.1, 0],
+                }}
+                ViewComponent={LinearGradient}
+                containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
+              />
+            )}
+            keyExtractor={item => item.id_seisena}         
+          />
+          </ScrollView>
+      </View>
+  );
+  }
+}
+
+
+
+
+
+
+//Muestra boton de avanzar
+avanzar_seisena(){
+  if(this.state.show_siguiente){
+    return(
+<View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
+                            <CustomButton
+                                onPress = {()=> this.setState({seleccion_seisena:true, show_siguiente:false}), this.entregar_seisenas()}
+                                title = "Siguiente"
+                                name = 'long-primary-button'
+   
+                            />
+                            </View>)
+  }
+}
+
+
+
+
+
 //Muestra cargando en buscador.
 charge(){
   if(this.state.loading){
@@ -257,67 +342,62 @@ arrayRemove(arr, value) {
 }
 
 
-marcar_revision_de_todo(dat){
-  for (i = 0; i < dat.length; i++){
-    se_encuentra(item);
-  }
-}
-
 se_encuentra(item){
-  index = this.state.data_nines.findIndex(i => i ==item)
-  for (i = 0; i < this.state.nines_seleccionados.length; i++) {
-    if(item == this.state.nines_seleccionados[i]){
-      this.state.data_nines[index].isSelect = true;
-      return true;
-    }
-  }
-  this.state.data_nines[index].isSelect = false;
-  return false;
-  
+    return new Promise((resolve) => {
+
+      index = this.state.data_nines.findIndex(i => i ==item)
+      for (i = 0; i < this.state.nines_seleccionados.length; i++) {
+        if(item == this.state.nines_seleccionados[i]){
+          //this.state.data_nines[index].isSelect = true;
+          resolve([true,index])
+        }
+      }
+      //this.state.data_nines[index].isSelect = false;
+      resolve([false,index])
+  })  
 }
 
 
-
-
-
-
-
-
-selectItem(item){
-    
-    if(this.se_encuentra(item)){
+marcar(flag,i,item){
+  
+    if(flag){
       this.setState({
         nines_seleccionados: this.arrayRemove(this.state.nines_seleccionados, item)
       })
+      this.state.data_nines[i].isSelect = false;
     }
     else{
       this.state.nines_seleccionados.push(item)
       this.setState({
         nines_seleccionados: this.state.nines_seleccionados
       })
+      this.state.data_nines[i].isSelect = true;
   }
-  this.se_encuentra_en_busqueda()
+  console.log(this.state.nines_seleccionados)
 }
 
 
 
+selectItem(item){
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({checked:!this.state.checked, show_siguiente:true}))
+}
+
 
 
 se_encuentra_en_busqueda(){
-  const ninos = this.state.nines_seleccionados;
-  if(this.state.userToken.unidad1!=0){
+  if(this.state.userToken.unidad1!=0 && !this.state.seleccion_seisena){
     if(this.state.data_nines!=undefined){
       return(
         <FlatList
         data = {this.state.data_nines}
-        extraData={this.state.nines_seleccionados}
+        extraData={this.state.checked}
         renderItem={({ item }) => (
             <ListItem
+              onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              onPress={() => this.selectItem(item)}
               Component={TouchableScale}
               friction={90} //
               tension={100} // 
@@ -333,7 +413,6 @@ se_encuentra_en_busqueda(){
               subtitleStyle={{ color: '#104F55' }}
               subtitle={`${item.seisena1}`}
               ViewComponent={LinearGradient}
-
             />
         )}
           keyExtractor={item => item.user} 
@@ -341,7 +420,7 @@ se_encuentra_en_busqueda(){
         />
       )
     }
-    else{
+    else if(this.state.seleccion_seisena){
       return(
         <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
       )
@@ -353,44 +432,44 @@ se_encuentra_en_busqueda(){
 
 //En el caso de tener unidad, muestra buscador.
 seleccion_nine(){
-  if(this.state.userToken.unidad1 != 0){
-    if(this.state.mostrarSearchBar){
-      return(
-        <View>
-        <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar o asignar a una seisena:</Text>
-  <SearchBar 
-              onPressToFocus
-              autoFocus={false}
-              fontColor="#ffffff"
-              fontSize={16}
-              iconColor="#ffffff"
-              shadowColor={null}
-              cancelIconComponent={this.charge()}
-              cancelIconColor="#ffffff"
-              backgroundColor="#8B4BC1"
-              placeholder="Ingresa nombre del niño o niña..."
-              onChangeText={text => {
-                this.busqueda(this.state.filter,text);
-              }}
-              value={this.state.text} 
-              onPressCancel={() => {
-                this.busqueda(this.state.filter,"");
-              }}
+  if(this.state.userToken.unidad1 != 0 && !this.state.seleccion_seisena){
+      if(this.state.mostrarSearchBar){
+        return(
+          <View>
+          <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar o asignar a una seisena:</Text>
+    <SearchBar 
+                onPressToFocus
+                autoFocus={false}
+                fontColor="#ffffff"
+                fontSize={16}
+                iconColor="#ffffff"
+                shadowColor={null}
+                cancelIconComponent={this.charge()}
+                cancelIconColor="#ffffff"
+                backgroundColor="#8B4BC1"
+                placeholder="Ingresa nombre del niño o niña..."
+                onChangeText={text => {
+                  this.busqueda(this.state.filter,text);
+                }}
+                value={this.state.text} 
+                onPressCancel={() => {
+                  this.busqueda(this.state.filter,"");
+                }}
 
-              textInputValue={this.state.text}
+                textInputValue={this.state.text}
 
-            />
-<View style={{ flexDirection: 'row'}}>
-  </View>
-</View>)
+              />
+  <View style={{ flexDirection: 'row'}}>
+    </View>
+  </View>)
+      }
+      else{
+    return (<View>
+    <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
+    </View>);
     }
-    else{
-  return (<View>
-  <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
-  </View>);
   }
-  }
-  else{
+  else if(!this.state.seleccion_seisena){
     return(
       <View>
   <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
@@ -446,7 +525,7 @@ seleccion_nine(){
         <ScrollView > 
                 
         {this.se_encuentra_en_busqueda()}
-        
+        {this.avanzar_seisena()}
             
         
         </ScrollView >
