@@ -30,7 +30,10 @@ import GradientCard from "react-native-gradient-card-view";
 import SearchBar from "react-native-dynamic-search-bar";
 import { CustomLayoutSpring } from "react-native-animation-layout";
 import { LinearGradient } from 'expo';
-
+import TouchableScale from 'react-native-touchable-scale';
+import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta2Botones} from './../CustomComponents/customalert copy'
+import {Alerta} from './../CustomComponents/customalert'
 
 const { width } = Dimensions.get("window");
 
@@ -45,6 +48,7 @@ class cambiar_unidad extends Component {
     super(props);
     this.state = {
       loading: false,
+      cancel:null,
       data: [],
       data2: [] ,
       error: null,
@@ -56,7 +60,15 @@ class cambiar_unidad extends Component {
       page: 1,
       show1: false,
       show2: false,
-      userToken: ""
+      userToken: "",
+      press: true,
+      mostrarSearchBar: true,
+      cancel1: null,
+      estadoAlerta: false,
+      tituloAlerta: "Cuidado",
+      mensajeAlerta: "Al cambiar de unidad, no podras revertir este cambio.",
+      typeAlerta: 'Warning',
+      estadoAlerta2Botones: false,
       
     };
     if (Platform.OS === "android") {
@@ -72,63 +84,47 @@ class cambiar_unidad extends Component {
     this.setState({
         userToken : JSON.parse(Token),
     });
+    {{this.makeRemoteRequest("")}}
     
   };
-  ShowSendAlert(){
 
-    if (this.state.SendAlertType == 0){
-        return(
-        <ActivityIndicator
-            animating = {this.state.SendAlertState}
-            size="large" 
-            color="#00ff00" 
-        />);
-    }
-    else if(this.state.SendAlertType == 1){
-        return(
-            <SCLAlert
-            theme="success"
-            show={this.state.SendAlertState}
-            title="Felicidades"
-            subtitle= {this.state.SendAlertMessage}
-            onRequestClose = {this.handleClose}
-            >
-            <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
-            </SCLAlert>
-        );
-    }
-    else if(this.state.SendAlertType == -1){
-        return(
-            <SCLAlert
-            theme="danger"
-            show={this.state.SendAlertState}
-            title="Ooops"
-            subtitle= {this.state.SendAlertMessage}
-            onRequestClose = {this.handleClose}
-            >
-            <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-            </SCLAlert>
-        );
-    }
-    else{
-        console.log("ALERTA DE ERROR NO IDENTIFICADO")
-        return(
-            <SCLAlert
-            theme="warning"
-            show={this.state.SendAlertState}
-            title="Estoy Confundido"
-            subtitle= {this.state.SendAlertMessage}
-            onRequestClose = {this.handleClose}
-            >
-            <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-            </SCLAlert>
-        );
-    }
+          
+  handleClose = () => {
+
+    this.setState({ SendAlertState: false });
+    this.setState({isLoading : false})
 
 }
+
+LoadingState(){
+  if(this.state.isLoading){
+      return(
+
+          <Modal
+
+              transparent = {true}
+              visible = {this.state.isLoading}
+              animationType = 'none'
+              onRequestClose = {()=>{console.log("Closing Modal")}}
+          > 
+              <View style = {{position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+                  <ActivityIndicator
+                  animating = {this.state.isLoading}
+                  size="large" 
+                  color="#00ff00" 
+                  />    
+              </View> 
+          </Modal>
+      );   
+  }
+}
+
+
   makeRemoteRequest(text) {
-    this.setState({ loading: true,
-    text:text});
+    this.setState({ loading: true,text:text});
+    if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar informacion en los otros item.
+      this.setState({ show1: false,show2:false});
+    }
     fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
             {
                 method: 'POST',
@@ -141,13 +137,12 @@ class cambiar_unidad extends Component {
                 {
                     nombre_n: text,
  
-                    id_unidad:this.state.userToken.unidad1 //Change this
+                    id_unidad:this.state.userToken.unidad1 
                 })
  
             })
       .then(res => res.json())
       .then((responseData) => {
-        console.log(responseData)
         this.setState({
           data: responseData.data,
           message: responseData.message,
@@ -165,6 +160,9 @@ class cambiar_unidad extends Component {
     this.setState({ loading: true,
     value2:this.state.value2,
     text2:text});
+    if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar el boton cambiar.
+      this.setState({show2:false});
+    }
     fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
             {
                 method: 'POST',
@@ -177,7 +175,7 @@ class cambiar_unidad extends Component {
                 {
                     nombre_u: text,
  
-                    id_unidad:this.state.userToken.unidad1 //Change this
+                    grupo_u:this.state.userToken.grupo 
                 })
  
             })
@@ -194,16 +192,13 @@ class cambiar_unidad extends Component {
         });
       })
       .catch(error => {
-        this.setState({ error, loading: false });
+        this.setState({ error, loading2: false });
       });
   };
 
     
   makeRemoteRequest3(user,idU) {
-    console.log('holi')
-    console.log(user)
-    console.log(idU)
-    this.setState({ loading: true});
+    this.setState({ isLoading: true});
     fetch('http://www.mitra.cl/SS/change_n_unidad.php',
             {
                 method: 'POST',
@@ -225,14 +220,19 @@ class cambiar_unidad extends Component {
         console.log(responseData)
         this.setState({
           data3: responseData.data,
-          message3: responseData.message,
+          SendAlertMessage: responseData.message,
           error: null,
-          loading: false,
+          isLoading:false,
+          typeAlerta: 'Succsess',
+          estadoAlerta: true,
+          tituloAlerta : "Éxito",
+          mensajeAlerta : "La unidad fue cambiada correctamente"
         });
       })
       .catch(error => {
-        this.setState({ error, loading: false });
+        this.setState({ error, isLoading: false });
       });
+      this.handleOpen();
   };
 
 
@@ -276,94 +276,98 @@ class cambiar_unidad extends Component {
         </View>
         );
       }
-    
-      onRefresh = () => {
-        this.setState({
-          dataSource: [],
-          isLoading: false,
-          refreshing: true,
-          seed: 1,
-          page: 1
-        });
-        // this.fetchData();
-      };
-    
-      loadMore = () => {
-        console.log('holi2')
-        this.setState({
-          // refreshing: true,
-          page: this.state.page + 1
-        });
-        // this.fetchData();
-      };
 
-          
-      selectItem(Ite, usu) {
+      
+      selectItem(item) {
+        if(this.state.mostrarSearchBar){
         this.setState({
-          value:Ite,
-          text:Ite,
-          usuario:usu,
-          data: []
+          value:item.nombre,
+          text:item.nombre,
+          usuario:item.user,
+          data: [item],
+          mostrarSearchBar: false,
+          cancel1: 'clear',
+          cancel: null
         });
-        console.log(this.state.text)
-        console.log(this.state.value)
-        console.log(this.state.value)
-        this.makeRemoteRequest2(this.text2)
-        // this.fetchData();
-      };
+        this.makeRemoteRequest2(this.text2)}
+        else{
+          this.makeRemoteRequest("")
+          this.setState({
+            value:"",
+            text:"",
+            usuario:"",
+            data: this.state.data,
+            mostrarSearchBar: true,
+            cancel1: null,
+            show1:false
+          });
+          }
+        
+        }
 
                 
-      selectItem2(Ite,ide) {
+      selectItem2(item) { 
+        if (this.state.press){
         this.setState({
-          value2:Ite,
-          text2:Ite,
-          ide:ide,
-          data2: []
+          value2:item.nombre_unidad,
+          text2:item.nombre_unidad,
+          ide:item.id,
+          data2: [item],
+          cancel: 'clear', //backspace keyboard-backspace
+          show2:true,
+          press:false
         });
-        // this.fetchData();
-        this.setState({
-        show2:true
-        });
+        }
+        else{
+          this.makeRemoteRequest2("")
+          this.setState({
+            value2:"",
+            text2:"",
+            ide:null,
+            data2: this.state.data2,
+            cancel: null,
+            show2:false,
+            press:true
+          });
+
+        }
+     
       };
 
 show1() {
     if (this.state.show1) {
       return (
-        <View style={{ flex: 1 }}>
-        <Text>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
-          <SearchBar 
-            onPressToFocus
-            autoFocus={false}
-            fontColor="#c6c6c6"
-            iconColor="#c6c6c6"
-            shadowColor="#002642"
-            cancelIconColor="#c6c6c6"
-            backgroundColor="#104F55"
-            placeholder="Ingresa nombre de la unidad..."
-            onChangeText={text2 => {
-              this.makeRemoteRequest2(text2);
-            }}
-            value2={this.state.value2} 
-            onPressCancel={() => {
-              this.makeRemoteRequest2("");
-            }}
-            onPress={() => alert("onPress")}
-            textInputValue={this.state.text2}
-          />
-<ScrollView>
+        
+        <View> 
+        <Text style={{marginLeft:15,fontSize: 16, marginTop:15}}>Seleccione unidad a la que se cambiará {this.state.value}:</Text>
+        <View style={{marginVertical:15}}> 
+        <ScrollView>
         <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
         data = {this.state.data2}
         renderItem={({ item }) => (
             <ListItem
               title={`${item.nombre_unidad}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem2(item.nombre_unidad,item.id)}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              containerStyle={{ borderBottomWidth: 0}} 
+               onPress={() => this.selectItem2(item)}
+               rightIcon={{name : this.state.cancel}}
+               Component={TouchableScale}
+              friction={90} //
+              tension={100} // 
+              activeScale={0.95} //
+              linearGradientProps={{
+                colors: ['#f2e6ff', '#F9F4FF'],
+                start: [1.5, 0],
+                end: [0.1, 0],
+              }}
+              ViewComponent={LinearGradient}
+              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
             />
           )}
           keyExtractor={item => item.id}         
         />
         </ScrollView>
+        </View>
         </View>
 
       );
@@ -372,33 +376,103 @@ show1() {
   }
 }
 
+
 show2() {
   
   if(this.state.show2){
     return(
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
-                    <Button 
-                    onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
-                    icon = {
-                        <Icon
-                        name= 'send'
-                        type= 'FontAwesome'
-                        style={{fontSize: 22, color: 'white'}}
-                        //color= '#ffffff'
-                        />
-                    }iconRight
+
+                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:15}} >
+                    <CustomButton
+                    //onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
+                    onPress = {() => {this.toggleAlert2Botones()}}
+                
                     title = "Cambiar"
-                    titleStyle = {{fontFamily: 'Roboto', fontSize: 22}}
-                    buttonStyle = {{backgroundColor: '#104F55',justifyContent:'center'}}
+                    name = 'long-primary-button'
                     />
-                    </View>);
+                    </View>
+                 );
+                    
 
   }
   else{
 return null;
   }
 }
+parte_inicial() {
+    if (this.state.userToken.unidad1!=0){
+      if(this.state.mostrarSearchBar){
+        return(
+          <View>
+          <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
+    <SearchBar 
+                onPressToFocus
+                autoFocus={false}
+                fontColor="#ffffff"
+                fontSize={16}
+                iconColor="#ffffff"
+                shadowColor={null}
+                cancelIconComponent={this.charge()}
+                cancelIconColor="#ffffff"
+                backgroundColor="#8B4BC1"
+                placeholder="Ingresa nombre del niño o niña..."
+                onChangeText={text => {
+                  this.makeRemoteRequest(text);
+                }}
+                value={this.state.text} 
+                onPressCancel={() => {
+                  this.makeRemoteRequest("");
+                }}
 
+                textInputValue={this.state.text}
+
+              /></View>)
+      }
+      else{
+    return (<View>
+    <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Seleccione niño o niña que desea cambiar de unidad:</Text>
+    </View>);
+    }
+  }
+  else{
+    return(
+    <View style = {styles.container}>
+    <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+    <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center',marginTop:15,marginBottom:15}}>No formas parte de una unidad, crea una o unete a la de otro dirigente.</Text>
+    </View>
+    <View style = {styles.container}>
+    <View style = {{ width:'90%', height:'40%', alignItems:'center',alignSelf:'center',marginTop:15}}>
+                            <CustomButton
+                                onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
+                                title = "Crear nueva unidad"
+                                name = 'long-secondary-button'
+                    
+                            />
+    
+    <CustomButton
+                            onPress = {()=> this.props.navigation.navigate('Unidad')}
+                            title = "Volver"
+                            name = 'long-primary-button'
+
+                        />
+    </View>
+    </View>
+</View>);
+  }
+}
+toggleAlert(){
+  this.setState({
+      estadoAlerta : !this.state.estadoAlerta
+  })
+}
+
+toggleAlert2Botones(){
+  this.setState({
+      estadoAlerta2Botones : !this.state.estadoAlerta2Botones
+  })
+}
+
+//Mostrar simbolo de carga en la lista de nines
 charge(){
   if(this.state.loading){
     return(
@@ -408,6 +482,63 @@ charge(){
     return(null)
   }
 }
+//Mostrar simbolo de carga en la lista de unidades
+charge2(){
+  if(this.state.loading2){
+    return(
+    <View><ActivityIndicator size="small" color="#81C14B" /></View>);
+  }
+  else{
+    return(null)
+  }
+}
+
+se_encuentra_en_busqueda(){
+
+    if(this.state.userToken.unidad1!=0){
+      if(this.state.data!=undefined){
+        return(
+          <FlatList
+          data = {this.state.data}
+
+          renderItem={({ item }) => (
+
+              <ListItem
+                rightIcon={{name : this.state.cancel1}}
+                containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                title={`${item.nombre}`}
+                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+                onPress={() => this.selectItem(item)}
+                Component={TouchableScale}
+                friction={90} //
+                tension={100} // 
+                activeScale={0.95} //
+                leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+                linearGradientProps={{
+                  colors: ['#f2e6ff', '#F9F4FF'],
+                  start: [1.5, 0],
+                  end: [0.1, 0],
+                }}
+                subtitleStyle={{ color: '#104F55' }}
+                subtitle={`${item.pseudonimo}`}
+                ViewComponent={LinearGradient}
+
+              />
+          )}
+            keyExtractor={item => item.user} 
+                    
+          />
+        )
+      }
+      else{
+        return(
+          <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
+        )
+      }
+    }
+}
+
+
   render() {
     return(
                 <View style = {styles.container}>
@@ -424,59 +555,40 @@ charge(){
                 </View>
                     <View style={{width: '100%', height: '5%', alignItems:'center'}} > 
                       
-                    </View>
-        <SafeAreaView style={{ flex: 1}}>
-        <StatusBar barStyle={"light-content"} />
-        <Text>Seleccione niño o niña que desea cambiar de unidad:</Text>
+                </View>
+                <ScrollView >
+                <SafeAreaView style={{ flex: 1}}>
+                
+        
         <View style={styles.container}>
-          <SearchBar 
-            onPressToFocus
-            autoFocus={false}
-            fontColor="#c6c6c6"
-            iconColor="#c6c6c6"
-            shadowColor="#002642"
-            cancelIconComponent={this.charge()}
-            cancelIconColor="#c6c6c6"
-            backgroundColor="#104F55"
-            placeholder="Ingresa nombre del niño o niña..."
-            onChangeText={text => {
-              this.makeRemoteRequest(text);
-            }}
-            value={this.state.text} 
-            onPressCancel={() => {
-              this.makeRemoteRequest('');
-            }}
-            onPress={() => alert("onPress")}
-            textInputValue={this.state.text}
-
-          />
+        
+        
+        {this.parte_inicial()}
         <View style={{ flex: 1 }}>
         <ScrollView > 
-        <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
-        data = {this.state.data}
-        renderItem={({ item }) => (
-            <ListItem
-            roundAvatar
-              title={`${item.nombre}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-               onPress={() => this.selectItem(item.nombre,item.user)}
-               avatar = {<Image source={require('../assets/perfil.png')}/>}
-            />
-          )}
-          keyExtractor={item => item.user}         
-        />
+                
+        {this.se_encuentra_en_busqueda()}
+        
+            
+        
         </ScrollView >
         </View>
         
         <View style={styles.container}>{this.show1()}</View>
       
-       <View style={styles.container}>{this.show2()}</View>
-       
-        
+
         </View>
       </SafeAreaView>
-      </View>
+      <View style={styles.container}>{this.show2()}</View>
+      </ScrollView>
+      
+
+            <Alerta2Botones visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
+                    />
+                    
+            <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
+                    />
+                </View>
       
     );
     }
@@ -522,5 +634,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         width: '100%',
         height: '100%'
-    }
+    },
+
 });

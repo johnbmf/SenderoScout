@@ -174,7 +174,7 @@ export default class invitar_dirigente extends Component {
                 }
                 {(this.state.userToken.unidad1 > 0) &&
                     <View style = {{width: '90%', height:'20%', alignSelf:'center', justifyContent:'center'}}>
-                        <Text style = {{color: 'black', fontSize:16, justifyContent:'center', fontFamily:'Roboto',textAlign: 'center'}}>Nota: Solo se muestran dirigentes pertenecientes a su grupo y que no pertenecen a alguna unidad.</Text>
+                        <Text style = {{color: 'black', fontSize:16, justifyContent:'center', fontFamily:'Roboto',textAlign: 'left'}}>Nota: Solo se muestran dirigentes pertenecientes a su grupo.</Text>
                     </View>
                 }
                 {(this.state.userToken.unidad1 > 0) &&

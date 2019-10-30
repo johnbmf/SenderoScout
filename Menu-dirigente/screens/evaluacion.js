@@ -18,6 +18,7 @@ import {
 import {Header,Left,Icon, Body} from 'native-base'
 import { Rating} from 'react-native-elements';
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
+import CustomButton from "../CustomComponents/CustomButtons";
 const paw_image = require('../assets/paw.png')
 
 class evaluacion extends Component { 
@@ -251,12 +252,11 @@ class evaluacion extends Component {
                             />
                     </View>
                     <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center', marginBottom:10}} >
-                        <TouchableOpacity 
-                        onPress = {() => {this.enviarEvaluacion(data, this.handleOpen())}}
-                        
-                        style = {{flex:1,width:'40%', height:'100%', backgroundColor: '#104F55', justifyContent:'center'}}>
-                            <Text style = {{color: 'white', textAlign:'center', fontSize:18}}> Enviar </Text>
-                        </TouchableOpacity>
+                    <CustomButton 
+                            onPress = {() => {this.enviarEvaluacion(data, this.handleOpen())}}
+                            name = 'long-primary-button'
+                            title = 'Enviar'
+                        />
                     </View>
                 </View>
                 </ScrollView>

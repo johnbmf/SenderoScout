@@ -10,10 +10,6 @@ import {
     Dimensions
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
-import {Rating, Button, Divider } from 'react-native-elements'
-import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
-import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
-import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 
 class Unidad extends Component {
@@ -41,7 +37,7 @@ class Unidad extends Component {
                 <View elevation = {5} style = {{width: '100%', height: '88%',alignItems: 'center'}}>
                     <View style = {{width: '70%', height: '30%', alignItems: 'center', alignSelf: 'center'}}></View>
                     <View style = {{width: '100%', height: '50%', alignItems: 'center', alignSelf: 'center'}} >
-                        <View style = {{width: '100%'}}>
+                        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                             <CustomButton
                                 onPress = {()=> this.props.navigation.navigate('CrearUnidad')}
                                 title = "Crear nueva unidad"
@@ -49,7 +45,7 @@ class Unidad extends Component {
                     
                             />
                         </View>
-                        <View style = {{width: '100%'}}>
+                        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                             <CustomButton
                                 onPress = {()=> this.props.navigation.navigate('CambiarUnidad')}
                                 title = "Cambiar niño de unidad"
@@ -57,7 +53,24 @@ class Unidad extends Component {
 
                             />
                         </View>
+                        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
+                            <CustomButton
+                                onPress = {()=> this.props.navigation.navigate('GestionarSeisena')}
+                                title = "Gestionar seisena"
+                                name = 'long-secondary-button'
+                    
+                            />
+                        </View>
+                        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
+                            <CustomButton
+                                onPress = {()=> this.props.navigation.navigate('CambiarNombreSeisena')}
+                                title = "Cambiar nombre seisena"
+                                name = 'long-secondary-button'
+
+                            />
+                        </View>
                     </View>
+                    
                     <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center',}}>
                             <CustomButton
                                 onPress = {()=> this.props.navigation.goBack(null)}

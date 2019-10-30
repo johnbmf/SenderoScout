@@ -39,7 +39,7 @@ class CustomButton extends Component{
                 //Caracteristicas estaticas
                     type = 'solid'
                     raised = {true}
-                    containerStyle = {{margin:5, width: '30%'}}
+                    containerStyle = {{margin:5, width: '40%'}}
                     buttonStyle = {{backgroundColor: '#8B4BC1', borderRadius: 15}}
                     titleStyle = {{alignContent: 'center',fontFamily: 'Roboto',fontSize: 18 , fontWeight: 'bold'}}
                 //Propiedades variables
@@ -72,7 +72,7 @@ class CustomButton extends Component{
                 //Caracteristicas estaticas
                     type = 'outline'
                     raised = {true}
-                    containerStyle = {{margin:5, width: '30%'}}
+                    containerStyle = {{margin:5, width: '40%'}}
                     buttonStyle = {{borderColor:'#8B4BC1', borderRadius: 15, borderWidth: 1}}
                     titleStyle = {{alignContent: 'center',fontFamily: 'Roboto',fontSize: 18 , color: '#ab47bc' , fontWeight: 'bold'}}
                 //Propiedades variables
@@ -87,7 +87,7 @@ class CustomButton extends Component{
                 <Button
                 //Caracteristicas estaticas
                     type = 'solid'
-                    containerStyle = {{margin:5, width: '30%'}}
+                    containerStyle = {{margin:5}}
                     buttonStyle = {{borderColor:'#8B4BC1', borderRadius: 15, borderWidth: 1}}
                     titleStyle = {{alignContent: 'center',fontFamily: 'Roboto',fontSize: 18, fontWeight: 'bold'}}
 

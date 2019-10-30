@@ -116,8 +116,8 @@ class mi_manada extends Component {
                                         type= 'FontAwesome'
                                         style={{fontSize: 25, alignContent: 'center' }}
                                     />
-                                 }
-                                title={obj["nombre"]}
+                                }
+                                title = {obj["nombre"]}
                                 subtitle={"Edad " + obj["edad"] + "      Seisena: " + obj["seisena1"]}
                                 bottomDivider
                             />

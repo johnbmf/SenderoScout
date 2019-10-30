@@ -23,6 +23,10 @@ import UnidadScreen from './screens/unidad'
 import CerrarSesionScreen from './screens/cerrar_sesion'
 import CambiarPseudonimo from './screens/cambiar_pseudonimo'
 
+import GestionarSeisenaScreen from './screens/gestionar_seisena'
+import CambiarNombreSeisenaScreen from './screens/cambiar_nombre_seisena'
+import EntregarInsigniaScreen from './screens/entrega_insignia'
+import DetalleInsigniaScreen from './screens/detalle_insignia'
 
 
 //const {width} = Dimensions.get('window')
@@ -90,7 +94,10 @@ const StackNavigator = createStackNavigator({
 const CrearUnidadStack = createStackNavigator({
   UnidadSwitch: UnidadScreen,
   CrearUnidad : CrearUnidadScreen,
-  CambiarUnidad : CambiarUnidadScreen
+  CambiarUnidad : CambiarUnidadScreen,
+  Unidad: UnidadScreen,
+  GestionarSeisena: GestionarSeisenaScreen,
+  CambiarNombreSeisena: CambiarNombreSeisenaScreen
   },{
     navigationOptions : {
         drawerLabel: 'Gestion unidad',
@@ -107,6 +114,26 @@ const CrearUnidadStack = createStackNavigator({
       initialRouteName: 'Unidad'
     }
   );
+
+const EntregarInsigniaStack = createStackNavigator(
+  {
+    EntregarInsignia : EntregarInsigniaScreen,
+    DetalleInsignia: DetalleInsigniaScreen
+  },{
+    navigationOptions :
+    {
+      drawerLabel: 'Entrega Insignia',
+      drawerIcon : ({tintColor}) => (<Icon name ='star' style = {{fontSize : 24, color: tintColor}} />),
+      header: null
+    },
+    defaultNavigationOptions:{
+      header : null
+    }},
+    {
+      initialRouteName: 'Insignias'
+    }
+);
+
 const AppDrawerNavigator = createDrawerNavigator({
   Home:HomeScreen,
   MiManada:MiManadaScreen,
@@ -119,6 +146,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   InvitarDirigente : InvitarDirigenteScreen,
   Unidad:CrearUnidadStack,
   CambioPseudos: CambiarPseudonimo,
+  Insignias: EntregarInsigniaStack,
   Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
   

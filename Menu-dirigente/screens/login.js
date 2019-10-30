@@ -11,10 +11,11 @@ import {
     KeyboardAvoidingView,
     ScrollView,
     Keyboard,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
 } from 'react-native'
 import { Button } from 'native-base'
 import CustomButton from '../CustomComponents/CustomButtons';
+import {CustomLoading} from '../CustomComponents/CustomLoading';
 const DismissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress = {()=> Keyboard.dismiss()}>
         {children}
@@ -55,7 +56,8 @@ export class login extends Component {
             usuario : "",
             password: "",
             dataSource:[],
-            error: false
+            error: false,
+            isLoading: false
         }
     }
     getUser(){
@@ -82,10 +84,12 @@ export class login extends Component {
                 console.log(this.state.dataSource);
                 storeItem('userToken',this.state.dataSource[0])
                 if(this.state.dataSource[0].user === this.state.usuario){
+                    this.setState({isLoading : false})
                     this.props.navigation.navigate('Home')
                 }
                 else{
                     this.setState({
+                        isLoading: false,
                         error: true
                     });
                 }
@@ -109,14 +113,14 @@ export class login extends Component {
                     <Text style= {styles.banner}>Bienvenido</Text>
                     </View>
 
-                    <View style = {{width:'100%', height:'50%', alignItems:'center', justifyContent:'space-between'}}>
+                    <View style = {{width:'100%', height:'50%', alignItems:'center', justifyContent:'space-between' }}>
                             {this.state.error ? <IsOK/> : null}
                             <TextInput 
                                 style = {{height:'20%', width:'90%',backgroundColor:'#edf1f5', paddingLeft:20}}
                                 underlineColorAndroid = "transparent"
                                 fontSize = {25}
                                 maxLength = {60}
-
+                                
                                 //{...this.props}
                                 multiline = {false}
                                 allowFontScaling = {true}
@@ -143,20 +147,18 @@ export class login extends Component {
                                 />
                             <View style = {{width : '100%', alignItems: 'center'}}>
                                 <CustomButton 
-                                    onPress = {() => {this.getUser()}}
+                                    onPress = {() => {this.getUser(); this.setState({isLoading: true})}}
                                     title = 'Iniciar Sesión'
                                     name = 'long-primary-button'
-                                />
+                                    />
                                 <CustomButton 
                                     onPress = {()=> this.props.navigation.navigate('CrearCuenta')}
                                     title = "Registrarse"
                                     name = 'long-secondary-button'
-                                />
+                                    />
                             </View>
                     </View>
-                    <View style = {{ width:'100%', height:'35%'}}>
-
-                    </View>
+                    {this.state.isLoading ? <CustomLoading visible = {true}/> : null}
                 </View>
                 </DismissKeyboard>
         )

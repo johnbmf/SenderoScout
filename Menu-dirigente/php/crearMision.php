@@ -36,7 +36,7 @@
 		}
 		else
 		{
-				$add = $mysqli->query("insert into mision (tipo_mision,nombre_mision,descripcion_mision) values('$tipo_mision','$nombre_mision','$descripcion_mision')");
+			$add = $mysqli->query("insert into mision (tipo_mision,nombre_mision,descripcion_mision) values('$tipo_mision','$nombre_mision','$descripcion_mision')");
 			if($add){
 				$query_id_mision = $mysqli->query("SELECT id_mision from mision where nombre_mision = '$nombre_mision'");
 					$id_mision = $query_id_mision->fetch_array();
