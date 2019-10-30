@@ -67,14 +67,14 @@ class estadisticas extends Component {
                         alignItems: 'center',
 
                     }}>
-                        <View style = {{width:'99%', height:Height*0.55}} >
+                        <View style = {{width:'99%', height:Height*0.70}} >
                             <Text style = {styles.textlabel}>Áreas de Desarrollo</Text>
                             <Swiper style={styles.wrapper} showsButtons={true}>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center', paddingLeft:10}}>
-                                    <VictoryLabel text="General" x={Widht*0.5-40} y={40} textAnchor="middle"/>
                                     <VictoryChart polar
                                         theme={VictoryTheme.material}
-                                        height={(Height*0.43)} width={(Widht*0.9)}
+                                        height={(Height*0.57)} width={(Widht*0.95)}
+                                        style = {{paddingBottom: 10}}
                                         >
                                         {
                                             ["Corporalidad", "Creatividad", "Carácter", "Afectividad", "Sociabilidad", "Espiritualidad"].map((d, i) => {
@@ -84,10 +84,10 @@ class estadisticas extends Component {
                                                 label={d}
                                                 labelPlacement="perpendicular"
                                                 style={{ 
-                                                    tickLabels: { fill: "grey", padding:30},
-                                                    axisLabel: { padding: 15 },
+                                                    tickLabels: { fill: "grey", padding:30, fontSize:10},
+                                                    axisLabel: { fontSize:15,padding: 10},
                                                     axis: { stroke: "grey", opacity: 0.5,strokeWidth: 0.25 },
-                                                    grid: { stroke: "grey", opacity: 0.25,strokeWidth: 0.25} 
+                                                    grid: { stroke: "grey", opacity: null,strokeWidth: 0.25} 
                                                 }}
                                                 axisValue={d}
                                                 tickValues={[0,1,2,3,4,5]}
@@ -98,7 +98,7 @@ class estadisticas extends Component {
                                             })
                                         }
                                         <VictoryArea                                
-                                            style={{ data: { fill: "tomato", alpha:0.25, fillOpacity: 0.2, strokeWidth: 2 } }}
+                                            style={{ data: { fill: "#C14B81", alpha:0.25, fillOpacity: 0.2, strokeWidth: 2 } }}
                                             data={[
                                             { x: "Corporalidad", y: 1 },
                                             { x: "Creatividad", y: 4 },
@@ -108,12 +108,26 @@ class estadisticas extends Component {
                                             { x: "Espiritualidad", y: 3 }
                                             ]}
                                         />
+                                        <VictoryLine
+                                            data={[
+                                                { x: 1, y: 5 },
+                                                { x: 2, y: 5 },
+                                                { x: 3, y: 5 },
+                                                { x: 4, y: 5 },
+                                                { x: 5, y: 5 },
+                                                { x: 6, y: 5 }
+
+                                            ]}
+                                            style={{
+                                            data: { stroke: "grey" },
+                                            }}
+                                        />
                                         </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    height={(Height*0.57)} width={(Widht*0.95)}
                                     >
                                     <VictoryLabel text="Corporalidad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
@@ -121,17 +135,23 @@ class estadisticas extends Component {
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
                                         }}
+                                        domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 5 }]} />
+                                        { x: '05-10', y: 2 },
+                                        { x: '12-10', y: 3 },
+                                        { x: '19-10', y: 5 },
+                                        { x: '26-10', y: 5 },
+                                        { x: '06-11', y: 3 },
+                                        { x: '07-11', y: 3 }
+
+                                    ]}
+                                         />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    height={(Height*0.57)} width={(Widht*0.95)}
                                     >
                                     <VictoryLabel text="Creatividad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
@@ -139,20 +159,27 @@ class estadisticas extends Component {
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
                                         }}
+                                        domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 5 }]} />
+                                        { x: '05-Oct', y: 2 },
+                                        { x: '12-Oct', y: 3 },
+                                        { x: '19-Oct', y: 5 },
+                                        { x: '26-Oct', y: 5 },
+                                        { x: '06-Nov', y: 3 },
+                                        { x: '07-Nov', y: 3 }
+
+                                    ]}
+                                         />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    height={(Height*0.57)} width={(Widht*0.95)}
                                     >
                                     <VictoryLabel text="Carácter" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
+                                        domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         style={{
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
@@ -161,16 +188,19 @@ class estadisticas extends Component {
                                         { x: 1, y: 2 },
                                         { x: 2, y: 3 },
                                         { x: 3, y: 5 },
-                                        { x: 4, y: 5 }]} />
+                                        { x: 4, y: 5 },
+                                        { x: 5, y: 5 },
+                                        ]} />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    height={(Height*0.57)} width={(Widht*0.95)}
                                     >
                                     <VictoryLabel text="Afectividad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
+                                        domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         style={{
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
@@ -179,16 +209,19 @@ class estadisticas extends Component {
                                         { x: 1, y: 2 },
                                         { x: 2, y: 3 },
                                         { x: 3, y: 5 },
-                                        { x: 4, y: 5 }]} />
+                                        { x: 4, y: 5 },
+                                        { x: 5, y: 5 }
+                                        ]} />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    height={(Height*0.57)} width={(Widht*0.95)}
                                     >
                                     <VictoryLabel text="Sociabilidad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
+                                        domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         style={{
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
@@ -197,16 +230,19 @@ class estadisticas extends Component {
                                         { x: 1, y: 2 },
                                         { x: 2, y: 3 },
                                         { x: 3, y: 5 },
-                                        { x: 4, y: 5 }]} />
+                                        { x: 4, y: 5 },
+                                        { x: 5, y: 5 }
+                                        ]} />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
                                 <VictoryChart
                                     theme={VictoryTheme.material}
-                                    height={(Height*0.39)} width={(Widht*0.85)}
+                                    height={(Height*0.57)} width={(Widht*0.95)}
                                     >
                                     <VictoryLabel text="Espiritualidad" x={Widht*0.5-40} y={30} textAnchor="middle"/>
                                     <VictoryLine
+                                        domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         style={{
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
@@ -215,7 +251,8 @@ class estadisticas extends Component {
                                         { x: 1, y: 2 },
                                         { x: 2, y: 3 },
                                         { x: 3, y: 5 },
-                                        { x: 4, y: 5 }]} />
+                                        { x: 4, y: 5 },
+                                        { x: 5, y: 5 }]} />
                                 </VictoryChart>
                                 </View>
                             </Swiper>
@@ -254,7 +291,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems:'center',
         alignContent: 'center',
-        width : Widht*0.98
+        width : Widht*0.98,
+        margin: 10
     },
     container: {
         flex: 1,
