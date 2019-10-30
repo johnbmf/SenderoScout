@@ -21,7 +21,8 @@ import CrearUnidadScreen from './screens/crear_unidad'
 import CambiarUnidadScreen from './screens/cambiar_unidad'
 import UnidadScreen from './screens/unidad'
 import CerrarSesionScreen from './screens/cerrar_sesion'
-
+import GestionarSeisenaScreen from './screens/gestionar_seisena'
+import CambiarNombreSeisenaScreen from './screens/cambiar_nombre_seisena'
 
 
 //const {width} = Dimensions.get('window')
@@ -90,7 +91,9 @@ const CrearUnidadStack = createStackNavigator({
   UnidadSwitch: UnidadScreen,
   CrearUnidad : CrearUnidadScreen,
   CambiarUnidad : CambiarUnidadScreen,
-  Unidad: UnidadScreen
+  Unidad: UnidadScreen,
+  GestionarSeisena: GestionarSeisenaScreen,
+  CambiarNombreSeisena: CambiarNombreSeisenaScreen
   },{
     navigationOptions : {
         drawerLabel: 'Gestion unidad',

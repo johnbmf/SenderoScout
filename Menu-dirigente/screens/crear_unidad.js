@@ -6,20 +6,17 @@ import {
     Picker,
     TextInput,
     Modal,
-    TouchableWithoutFeedback,
-    Keyboard,
     Alert,
-    TouchableOpacity,
-    KeyboardAvoidingView,
     ScrollView,
     ActivityIndicator,
     AsyncStorage
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
-import { NavigationEvents } from 'react-navigation';
-import {Rating, Button, ThemeConsumer } from 'react-native-elements'
 import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta} from './../CustomComponents/customalert'
+
+
 class crear_unidad extends Component {
     constructor(props){
         super(props);
@@ -27,12 +24,14 @@ class crear_unidad extends Component {
             grupo : '',
             nombre_unidad : '',
             distrito: '',
-            SendAlertState: false,
-            SendAlertMessage: "Unidad creada con éxito.",
-            SendAlertType: 2,
+            estadoAlerta: false,
+            tituloAlerta: "Este es el titulo de la alerta",
+            mensajeAlerta: "Unidad creada con éxito",
+            typeAlerta: 'Warning',
+            isLoading:false,
             isLoading:false,
             userToken: "",
-
+        
         }
         this._bootstrapAsync()
     }
@@ -51,6 +50,11 @@ class crear_unidad extends Component {
             }
         )
     }
+    toggleAlert(){
+        this.setState({
+            estadoAlerta : !this.state.estadoAlerta
+        })
+    }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({
@@ -62,29 +66,26 @@ class crear_unidad extends Component {
     {   
         if(this.state.nombre_unidad==''){
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario dar un nombre a la unidad"
-            }, ()=> {this.handleOpen()});
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor escriba un nombre de la nueva unidad"
+            })
         }
         else if (this.state.grupo=='') {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario agregar el grupo"
-            }, ()=> {this.handleOpen()});
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor escriba el nombre de grupo"
+            })
         }else if (this.state.distrito=='') {
             this.setState({
-                isLoading : true,
-                SendAlertType : 2,
-                SendAlertState: true,
-                SendAlertMessage: "Es necesario asignar el distrito de la unidad."
-            }, ()=> {this.handleOpen()});
-            return;
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Campo faltante",
+                mensajeAlerta: "Por favor escriba el nombre del distrito"
+            })
         }else {
         this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Unidad creada con éxito" }, () =>
         {
@@ -123,11 +124,20 @@ class crear_unidad extends Component {
                         unidad1 : responseJson.id_unidad},
                     usuario: responseJson.nombre_usuario,
                     isLoading : false,
-                    SendAlertType:1
+                    typeAlerta: 'Succsess',
+                    estadoAlerta: true,
+                    tituloAlerta : "Éxito",
+                    mensajeAlerta : "La unidad fue creada correctamente"
                 }, ()=> {storeItem('userToken',this.state.userToken);this.handleOpen()})
             })
             .catch((error)=>{
                 console.error(error);
+                this.setState({
+                    typeAlerta: 'Error',
+                    estadoAlerta: true,
+                    tituloAlerta: "Error",
+                    mensajeAlerta: "Algo a ocurrido, por favor intente nuevamente"
+                })
             });
         });}
     }
@@ -174,57 +184,6 @@ class crear_unidad extends Component {
 
         }
     
-        ShowSendAlert(){
-
-            if (this.state.SendAlertType == 0){
-                return(
-                <ActivityIndicator
-                    animating = {this.state.SendAlertState}
-                    size="large" 
-                    color="#00ff00" 
-                />);
-            }
-            else if(this.state.SendAlertType == 1){
-                return(
-                    <SCLAlert
-                    theme="success"
-                    show={this.state.SendAlertState}
-                    title="Felicidades"
-                    subtitle= {this.state.SendAlertMessage}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="success" onPress={() => {this.handleClose(); this.props.navigation.goBack()}}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-            else if(this.state.SendAlertType == -1){
-                return(
-                    <SCLAlert
-                    theme="danger"
-                    show={this.state.SendAlertState}
-                    title="Ooops"
-                    subtitle= {this.state.SendAlertMessage}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="danger" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-            else{
-                return(
-                    <SCLAlert
-                    theme="warning"
-                    show={this.state.SendAlertState}
-                    title="Estoy Confundido"
-                    subtitle= {this.state.SendAlertMessage}
-                    onRequestClose = {this.handleClose}
-                    >
-                    <SCLAlertButton theme="warning" onPress={this.handleClose}>Aceptar</SCLAlertButton>
-                    </SCLAlert>
-                );
-            }
-    
-        }
         LoadingState(){
             console.log(this.state.isLoading)
             if(this.state.isLoading){
@@ -259,44 +218,46 @@ if(this.state.userToken.unidad1 == 0){
 
             </View>
             <View style={{width: '100%', height: '7%'}} >
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese nombre de la unidad:</Text>
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
-                        fontSize = {20}
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
                         onChangeText={(valor) => this.setState({nombre_unidad : valor})}
-                        placeholder = "Ingrese nombre de la unidad"
+
                         value={this.state.nombre_unidad}
                         />
             </View>
-            <View style={{width: '100%', height: '7%'}} >             
+            <View style={{width: '100%', height: '7%'}} >
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese nombre del grupo:</Text>             
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
-                        fontSize = {20}
+
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
                         onChangeText={(valor) => this.setState({grupo : valor})}
-                        placeholder = "Ingrese nombre del grupo"
+
                         value={this.state.grupo}
                         />
             </View>
             <View style={{width: '100%', height: '7%'}} >
+            <Text style={{marginLeft:20,fontSize: 20, marginBottom:10}}>Ingrese distrito:</Text>
                     <TextInput 
                         style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
-                        fontSize = {20}
+
                         //{...this.props}
                         multiline = {true}
                         numberOfLines = {4}
                         onChangeText={(valor) => this.setState({distrito : valor})}
-                        placeholder = "Ingrese distrito"
+
                         value={this.state.distrito}
                         />
         </View>
@@ -355,7 +316,8 @@ else{
                 {this.puede()}
                 <View>
             {this.LoadingState()}
-            {this.ShowSendAlert()}
+            <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
+                    />
         </View>
                 </View>
                 </ScrollView>
