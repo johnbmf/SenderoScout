@@ -56,7 +56,8 @@ class gestionar_seisena extends Component {
       nines_seleccionados: [],
       show_siguiente: false,
       seleccion_seisena: false,
-      nombre_seisena:''
+      nombre_seisena:'',
+      mostrarnines: []
       
     };
     if (Platform.OS === "android") {
@@ -175,6 +176,7 @@ LoadingState(){
           error: null,
           isLoading: false,
         });
+        this.buscador("")
       })
       .catch(error => {
         this.setState({ error, isLoading: false });
@@ -240,6 +242,26 @@ toggleAlert(){
       estadoAlerta : !this.state.estadoAlerta
   })
 }
+
+//Buscador
+
+buscador(texto){
+  a=[]
+  for (i = 0; i < this.state.data_nines.length; i++) {
+    console.log('DSGGFDDGFGDF')
+    console.log(texto)
+    console.log(this.state.data_nines[i]['nombre'])
+    if(this.state.data_nines[i]['nombre'].toLowerCase().startsWith(texto.toLowerCase())){
+      console.log(this.state.data_nines[i]['nombre'])
+      
+      a.push(this.state.data_nines[i])
+    }
+  }
+  console.log(this.state.mostrarnines)
+  this.setState({mostrarnines: a, text: texto})
+  console.log(this.state.mostrarnines)
+}
+
 
 //Marcar seisena.
 seleccionar_seisena(item){
@@ -415,9 +437,6 @@ marcar(flag,i,item){
 
 selectItem(item){
     this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({show_siguiente:true}))
-    console.log('Happend')
-    console.log(this.state.nines_seleccionados)
-    console.log(this.state.checked)
 }
 
 
@@ -427,12 +446,8 @@ se_encuentra_en_busqueda(){
 
     if(this.state.data_nines!=undefined){
       return(
-        <View>
-          {console.log('CAMBIOO')}
-          {console.log(this.state.nines_seleccionados)}
-          {console.log(this.state.checked)}
         <FlatList
-        data = {this.state.data_nines}
+        data = {this.state.mostrarnines}
         extraData={this.state.checked}
         renderItem={({ item }) => (
             <ListItem
@@ -461,7 +476,6 @@ se_encuentra_en_busqueda(){
         )}
           keyExtractor={item => item.user}           
         />
-        </View>
       )
     }
     else if(this.state.seleccion_seisena){
@@ -494,11 +508,11 @@ seleccion_nine(){
                 backgroundColor="#8B4BC1"
                 placeholder="Ingresa nombre del niño o niña..."
                 onChangeText={text => {
-                  this.busqueda(this.state.filter,text);
+                  this.buscador(text);
                 }}
                 value={this.state.text} 
                 onPressCancel={() => {
-                  this.busqueda(this.state.filter,"");
+                  this.buscador("");
                 }}
 
                 textInputValue={this.state.text}
