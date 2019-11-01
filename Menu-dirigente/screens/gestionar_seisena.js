@@ -392,11 +392,11 @@ d_marcar(i,flag,item){
 })  
 }
 
-m_marcar(flag,item){
+m_marcar(i,flag,item){
   return new Promise((resolve) => {
   if(!flag){
-    this.state.nines_seleccionados.push(item)
     this.state.data_nines[i].isSelect = true;
+    this.state.nines_seleccionados.push(item)
     this.setState({
         nines_seleccionados: this.state.nines_seleccionados,
         checked: !this.state.checked
@@ -407,7 +407,7 @@ m_marcar(flag,item){
 }
 
 marcar(flag,i,item){
-  this.d_marcar(i,flag,item).then(result => {this.m_marcar(result,item)})
+  this.d_marcar(i,flag,item).then(result => {this.m_marcar(i,result,item)})
   }
 
 
