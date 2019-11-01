@@ -52,7 +52,7 @@ class gestionar_seisena extends Component {
       typeAlerta: 'Warning',
       filter: 1,
       loading:false,
-      checked: true,
+      checked: false,
       nines_seleccionados: [],
       show_siguiente: false,
       seleccion_seisena: false,
@@ -378,41 +378,65 @@ se_encuentra(item){
 }
 
 
-marcar(flag,i,item){
-  
-    if(flag){
-      this.setState({
-        nines_seleccionados: this.arrayRemove(this.state.nines_seleccionados, item)
-      })
+d_marcar(i,flag,item){
+  return new Promise((resolve) => {
+  if(flag){
+      del = this.arrayRemove(this.state.nines_seleccionados, item)
       this.state.data_nines[i].isSelect = false;
-    }
-    else{
-      this.state.nines_seleccionados.push(item)
       this.setState({
-        nines_seleccionados: this.state.nines_seleccionados
+        nines_seleccionados: del,
+        checked: !this.state.checked
       })
-      this.state.data_nines[i].isSelect = true;
   }
-  console.log(this.state.nines_seleccionados)
+  resolve(flag)
+})  
 }
+
+m_marcar(flag,item){
+  return new Promise((resolve) => {
+  if(!flag){
+    this.state.nines_seleccionados.push(item)
+    this.state.data_nines[i].isSelect = true;
+    this.setState({
+        nines_seleccionados: this.state.nines_seleccionados,
+        checked: !this.state.checked
+    })
+  }
+  resolve(flag)
+ })
+}
+
+marcar(flag,i,item){
+  this.d_marcar(i,flag,item).then(result => {this.m_marcar(result,item)})
+  }
+
 
 
 
 selectItem(item){
-    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({checked:!this.state.checked, show_siguiente:true}))
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({show_siguiente:true}))
+    console.log('Happend')
+    console.log(this.state.nines_seleccionados)
+    console.log(this.state.checked)
 }
 
 
 
 se_encuentra_en_busqueda(){
   if(this.state.userToken.unidad1!=0 && !this.state.seleccion_seisena){
+
     if(this.state.data_nines!=undefined){
       return(
+        <View>
+          {console.log('CAMBIOO')}
+          {console.log(this.state.nines_seleccionados)}
+          {console.log(this.state.checked)}
         <FlatList
         data = {this.state.data_nines}
         extraData={this.state.checked}
         renderItem={({ item }) => (
             <ListItem
+              //key={item.isSelect}
               onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
@@ -435,9 +459,9 @@ se_encuentra_en_busqueda(){
               ViewComponent={LinearGradient}
             />
         )}
-          keyExtractor={item => item.user} 
-                  
+          keyExtractor={item => item.user}           
         />
+        </View>
       )
     }
     else if(this.state.seleccion_seisena){
@@ -445,6 +469,7 @@ se_encuentra_en_busqueda(){
         <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
       )
     }
+
   }
 }
 

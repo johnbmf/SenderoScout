@@ -347,21 +347,22 @@ show1() {
         renderItem={({ item }) => (
             <ListItem
               title={`${item.nombre_unidad}`}
-              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              containerStyle={{ borderBottomWidth: 0}} 
+              titleStyle={{ color: 'black', fontWeight: 'bold' }}
+              //containerStyle={{ borderBottomWidth: 0}} 
+              containerStyle = {{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}}
                onPress={() => this.selectItem2(item)}
                rightIcon={{name : this.state.cancel}}
                Component={TouchableScale}
               friction={90} //
               tension={100} // 
               activeScale={0.95} //
-              linearGradientProps={{
-                colors: ['#f2e6ff', '#F9F4FF'],
-                start: [1.5, 0],
-                end: [0.1, 0],
-              }}
-              ViewComponent={LinearGradient}
-              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              //linearGradientProps={{
+               // colors: ['#f2e6ff', '#F9F4FF'],
+               // start: [1.5, 0],
+              //  end: [0.1, 0],
+              //}}
+              //ViewComponent={LinearGradient}
+              //containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
             />
           )}
           keyExtractor={item => item.id}         
@@ -505,24 +506,24 @@ se_encuentra_en_busqueda(){
 
               <ListItem
                 rightIcon={{name : this.state.cancel1}}
-                containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                //containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                containerStyle = {{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} // borderTopColor: '#E8E8E8', borderTopWidth: 1
                 title={`${item.nombre}`}
-                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+                titleStyle={{ fontWeight: 'bold' }} // color: '#104F55'
                 onPress={() => this.selectItem(item)}
                 Component={TouchableScale}
                 friction={90} //
                 tension={100} // 
                 activeScale={0.95} //
                 leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
-                linearGradientProps={{
-                  colors: ['#f2e6ff', '#F9F4FF'],
-                  start: [1.5, 0],
-                  end: [0.1, 0],
-                }}
-                subtitleStyle={{ color: '#104F55' }}
+                //linearGradientProps={{
+                //  colors: ['#f2e6ff', '#F9F4FF'],
+                //  start: [1.5, 0],
+                //  end: [0.1, 0],
+                // }}
+                //subtitleStyle={{ color: '#104F55' }}
                 subtitle={`${item.pseudonimo}`}
-                ViewComponent={LinearGradient}
-
+                //ViewComponent={LinearGradient}
               />
           )}
             keyExtractor={item => item.user} 
