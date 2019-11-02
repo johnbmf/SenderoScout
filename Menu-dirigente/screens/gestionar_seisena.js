@@ -16,12 +16,12 @@ import {
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import { List, ListItem, Button} from "react-native-elements";
-import {Alerta} from './../CustomComponents/customalert'
 import SearchBar from "react-native-dynamic-search-bar";
 import TouchableScale from 'react-native-touchable-scale';
 import { LinearGradient } from 'expo-linear-gradient';
 import CustomButton from "../CustomComponents/CustomButtons";
-
+import {Alerta} from './../CustomComponents/customalert';
+import {Alerta2B} from './../CustomComponents/customalert2B'
 const { width } = Dimensions.get("window");
 
 class gestionar_seisena extends Component {
@@ -607,10 +607,6 @@ seleccion_nine(){
       </SafeAreaView>
       
       </ScrollView>
-      
-
-            <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.cambiar_nine_seisena()} rechazar = {() => {this.toggleAlert()}}
-                    />
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />
