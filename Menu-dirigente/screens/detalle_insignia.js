@@ -170,11 +170,13 @@ class DetalleInsignia extends Component {
         if (tipo == 1 && this.state.alertState){
             return(
                 <Alerta
+                botones = {2}
                 type = "Succsess"
                 visible = {this.state.alertState}
                 titulo = "Éxito"
                 contenido = {mensaje}
                 titulo_boton_rechazar = "Aceptar"
+                titulo_boton_aceptar = "rechazar"
                 rechazar = {() => {this.toggleAlert()}}
                 />
             )
