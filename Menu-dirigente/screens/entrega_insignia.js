@@ -123,7 +123,6 @@ class EntregaInsignias extends Component {
             isLoading:true,    
         })
 
-        //fetch('http://www.mitra.cl/SS/GetMiembrosUnidad.php',{
         fetch('http://www.mitra.cl/SS/get_miembros_insignias.php',{
                 method: 'POST',
                 header:{
@@ -151,21 +150,7 @@ class EntregaInsignias extends Component {
                 console.error(error);
             });
     }
-/*
-    AddNino(nombre, seisena){
-        var temp = []
-        var nino = {"nombre": nombre, "seisena1": seisena}
 
-        if (this.state.ninoSeleccionado.length > 0) {
-            temp = this.state.ninoSeleccionado.slice()
-            temp.push(nino)  
-        } 
-        else {
-            temp.push(nino)
-        }
-        this.setState({ninoSeleccionado: temp, setNiño: true})
-    }
-*/
     IsInsigniaIn(NameKey, list){
         for (let i = 0; i < list.length; i++) {
             if(list[i]["id"]==NameKey){
@@ -188,6 +173,27 @@ class EntregaInsignias extends Component {
             }
         })
         return(primeras.concat(ultimas))
+    }
+
+    RenderLoadStatus(){
+        if(this.state.isLoading){
+            return(
+                <Modal
+                    transparent = {true}
+                    visible = {this.state.isLoading}
+                    animationType = 'none'
+                    onRequestClose = {()=>{console.log("Closing Modal")}}
+                > 
+                    <View style = {{ position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
+                        <ActivityIndicator
+                            animating = {this.state.isLoading}
+                            size="large" 
+                            color="#00ff00" 
+                        />    
+                    </View> 
+                </Modal>
+            );
+        }
     }
 
     RenderInsignia(item) {
@@ -319,7 +325,8 @@ class EntregaInsignias extends Component {
                     </Header>
                 </View>
                 <View style = {{width: '100%', height: '80%',alignItems: 'center'}}>
-                    {
+                    {this.RenderLoadStatus()}
+                    {   
                         (this.state.setNiño) ? this.SelectInsignia() : this.SelectNino()
                     }
                 </View>

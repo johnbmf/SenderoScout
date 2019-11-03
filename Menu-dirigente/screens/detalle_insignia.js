@@ -20,6 +20,7 @@ import {RFPercentage} from 'react-native-responsive-fontsize'
 //Custom
 import ActivityCard from '../CustomComponents/ActivityCard'
 import CustomButton from "../CustomComponents/CustomButtons";
+import {Alerta} from './../CustomComponents/customalert';
 
 class DetalleInsignia extends Component {
 
@@ -35,8 +36,8 @@ class DetalleInsignia extends Component {
             //Variables de estado
             setData: false, //si estan o no seteadas las recomendaciones ya sean locales o nuevas
             isLoading: false,
-            warningState: false,
-            insigniaEntregada : false,
+            alertState: false,
+            insigniaEntregada: false,
 
 
             //variables funcionales
@@ -44,8 +45,8 @@ class DetalleInsignia extends Component {
             dataNino : this.props.navigation.getParam('dataNino', {}),
 
             //respuesta php insert insignia
-            type: null,
-            message:"",
+            php_response_type: null,
+            php_response_message:"",
 
         }
         //AsyncStorage.clear()
@@ -108,8 +109,13 @@ class DetalleInsignia extends Component {
         return(Dimensions.get('window').height * (porcentaje/100))
     }
 
-    EntregarInsignia(){
+    toggleAlert(){
+        this.setState({
+            alertState: !this.state.alertState
+        })
+    }
 
+    EntregarInsignia(){
         this.setState({isLoading : true})
         fetch('http://www.mitra.cl/SS/EntregarInsignia.php',{
             method: 'POST',
@@ -125,8 +131,9 @@ class DetalleInsignia extends Component {
         .then(response => response.json())
         .then((responseJson) => {
             this.setState({
-                type: responseJson["type"],
-                message: responseJson["message"],
+                php_response_type: responseJson["type"],
+                php_response_message: responseJson["message"],
+                alertState: true,
                 isLoading:false,
             })
             console.log(responseJson["message"]);
@@ -134,6 +141,85 @@ class DetalleInsignia extends Component {
         .catch((error)=>{
             console.error(error);
         });
+    }
+
+    RenderLoadStatus(){
+        if(this.state.isLoading){
+            return(
+                <Modal
+                    transparent = {true}
+                    visible = {this.state.isLoading}
+                    animationType = 'none'
+                    onRequestClose = {()=>{console.log("Closing Modal")}}
+                > 
+                    <View style = {{ position:'absolute', top:0,left:0,right:0,bottom:0, alignContent: 'center', justifyContent: 'center',backgroundColor: 'rgba(52, 52, 52, 0.2)'}}>
+                        <ActivityIndicator
+                            animating = {this.state.isLoading}
+                            size="large" 
+                            color="#00ff00" 
+                        />    
+                    </View> 
+                </Modal>
+            );
+        }
+    }
+
+    RenderAlert(tipo,mensaje){
+
+        //exito
+        if (tipo == 1 && this.state.alertState){
+            return(
+                <Alerta
+                type = "Succsess"
+                visible = {this.state.alertState}
+                titulo = "Éxito"
+                contenido = {mensaje}
+                titulo_boton_rechazar = "Aceptar"
+                rechazar = {() => {this.toggleAlert()}}
+                />
+            )
+
+        }
+        else if(tipo == 2){
+            return(
+                <Alerta
+                type = "Warning"
+                visible = {this.state.alertState}
+                titulo = "Cuidado!"
+                contenido = {mensaje}
+                titulo_boton_rechazar = "Volver"
+                rechazar = {() => {this.toggleAlert()}}
+                />
+            )
+        }
+        //error
+        else if(tipo == -1){
+            return(
+                <Alerta
+                type = "Error"
+                visible = {this.state.alertState}
+                titulo = "Error de conexién "
+                contenido = {mensaje}
+                titulo_boton_rechazar = "Volver"
+                rechazar = {() => {this.toggleAlert()}}
+                />
+            )
+        }
+
+        //error desconocido
+        else{
+            return(
+                <Alerta
+                type = "Error"
+                visible = {this.state.alertState}
+                titulo = "Error"
+                contenido = "A ocurrido un error inesperado, intentelo nuevamente."
+                titulo_boton_rechazar = "Volver"
+                rechazar = {() => {this.toggleAlert()}}
+                />
+            )
+        }
+
     }
  
     render() {
@@ -153,6 +239,8 @@ class DetalleInsignia extends Component {
                     </Header >
                 </View>
                 <View style = {{width: '100%', height: '83%',alignItems: 'center'}}>
+                    {this.RenderLoadStatus()}
+                    {this.RenderAlert(this.state.php_response_type,this.state.php_response_message)}
                     <View style = {{height: '70%', width: '100%'}}>
                         <Image style = {{ height: this.SetWidth(50), width: this.SetWidth(50), margin: 25, alignSelf: 'center'}} resizeMode ='cover' source = {this.state.dataInsignia.Icon}
                         />
@@ -169,7 +257,7 @@ class DetalleInsignia extends Component {
                     </View>
                     <View style = {{width:'100%',alignItems: 'center'}}>
                         <CustomButton 
-                            onPress = {() => this.EntregarInsignia()}
+                            onPress = {() => {this.EntregarInsignia()}}
                             title = 'Entregar insignia'
                             name = 'long-primary-button'  
                         />

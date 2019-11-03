@@ -16,7 +16,7 @@
 
   if ($mysqli == NULL){
     $response["response"] = -1;
-    $response->message = "Error al establecer conexion";
+    $response->message = "Error al establecer conexion con el servidor";
     echo json_encode($response);
     exit;
   }
