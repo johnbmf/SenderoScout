@@ -41,7 +41,12 @@ class DetalleInsignia extends Component {
 
             //variables funcionales
             dataInsignia : this.props.navigation.getParam('dataInsignia', {}),
-            dataNino : this.props.navigation.getParam('dataNino', {})
+            dataNino : this.props.navigation.getParam('dataNino', {}),
+
+            //respuesta php insert insignia
+            type: null,
+            message:"",
+
         }
         //AsyncStorage.clear()
         //this._bootstrapAsync();
@@ -103,42 +108,37 @@ class DetalleInsignia extends Component {
         return(Dimensions.get('window').height * (porcentaje/100))
     }
 
-    /*
-    componentDidMount(){
-        this.setState({
-            isLoading:true,
+    EntregarInsignia(){
+
+        this.setState({isLoading : true})
+        fetch('http://www.mitra.cl/SS/EntregarInsignia.php',{
+            method: 'POST',
+            header:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',  
+            },
+            body:JSON.stringify({
+                "usuario":this.state.dataNino.user,
+                "insignia":this.state.dataInsignia.Id,
+            })
         })
-
-        fetch('http://www.mitra.cl/SS/get_actividades.php',{
-                method: 'POST',
-                header:{
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-
-                },
-                body:JSON.stringify({
-                    "unidad": this.state.unidad_dirigente,
-                    "seisena": this.state.sisena,
-
-                })
+        .then(response => response.json())
+        .then((responseJson) => {
+            this.setState({
+                type: responseJson["type"],
+                message: responseJson["message"],
+                isLoading:false,
             })
-            .then(response => response.json())
-            .then((responseJson) => {
-                this.setState({
-
-                    setSmiles: true,
-                    isLoading:false,
-                    RecomendacionesNuevas: RecomendadasTemplate
-                })
-            })
-            .catch((error)=>{
-                console.error(error);
-            });
+            console.log(responseJson["message"]);
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
     }
-*/
  
     render() {
-        console.log(this.state.dataNino.nombre)
+        console.log(this.state.dataNino)
+        console.log(this.state.dataInsignia)
         return (
             <View style={styles.container}>
                 <View style={{width: '100%', height: '12%', alignItems:'center'}} >
@@ -167,49 +167,17 @@ class DetalleInsignia extends Component {
                             />
                         </ScrollView>
                     </View>
-                    <View style={{height: '30%', width: '100%'}}>
-                        <ListItem
-
-                            containerStyle = {{width: '100%'}}
-                            leftElement = {
-                                <Icon
-                                    name= 'user'
-                                    type= 'FontAwesome'
-                                    style={{fontSize: 25, alignContent: 'center' }}
-                                />
-                            }
-                            title = {this.state.dataNino.nombre}
-                            titleStyle= {styles.textlabel}
-                            rightElement = {
-                                this.state.insigniaEntregada? (
-                                    <Image style = {{height: this.SetHeight(83)*0.10, width: this.SetHeight(83)*0.10, aspectRatio: 1}} resizeMode= 'cover' source = {this.state.dataInsignia.Icon} />
-                                ):(
-                                    <View>
-                                        <Image style = {{height: this.SetHeight(83)*0.10, width: this.SetHeight(83)*0.10, aspectRatio: 1, tintColor : 'gray'}} resizeMode= 'cover' source = {this.state.dataInsignia.Icon} />
-
-                                        <Image style = {{height: this.SetHeight(83)*0.10, width: this.SetHeight(83)*0.10, aspectRatio: 1, position: 'absolute', opacity: 0.1}} resizeMode= 'cover' source = {this.state.dataInsignia.Icon} />
-                                    </View>
-                                    )
-                                } 
+                    <View style = {{width:'100%',alignItems: 'center'}}>
+                        <CustomButton 
+                            onPress = {() => this.EntregarInsignia()}
+                            title = 'Entregar insignia'
+                            name = 'long-primary-button'  
                         />
-                        {this.state.insigniaEntregada? (
-                            <View style = {{alignItems: 'center'}}>
-                                <CustomButton 
-                                    onPress = {() => {console.log("Insignia entregada")} }
-                                    title = 'Aceptar'
-                                    name = 'long-primary-button'  
-                                />
-                            </View>
-                        ):(
-                            <View style = {{alignItems: 'center'}}>
-                                <CustomButton 
-                                    onPress = {() => {console.log("Volver a Insignias")} }
-                                    title = 'Volver'
-                                    name = 'long-primary-button'  
-                                />
-                            </View>
-                        )
-                        }
+                        <CustomButton 
+                            onPress = {() => this.props.navigation.goBack(null)}
+                            title = 'Volver'
+                            name = 'long-primary-button'  
+                        />
                     </View>
                 </View>
                 <View style = {{height: '5%'}}>

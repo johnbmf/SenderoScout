@@ -20,12 +20,12 @@
     
     
     //Obtencion unidad consultada.
-    //$unidad = $_POST["unidad"];
+    //$unidad = 1;
     $unidad = $input['unidad'];
     
-    $sql = "SELECT nombre, edad, seisena1 FROM `Usuario` INNER JOIN Unidad ON Usuario.unidad1 = Unidad.id WHERE unidad1 = '$unidad'";
+    $sql = "SELECT nombre, edad, seisena1 FROM `Usuario` INNER JOIN Unidad ON Usuario.unidad1 = Unidad.id WHERE unidad1 = '$unidad' AND tipo = 'nino'";
     $result = $conexion->query($sql);
-    
+
     if($result->num_rows > 0){
         $ObjetoJson["response"] = 1;
         $ObjetoJson["num_rows"] = $result->num_rows;
@@ -46,7 +46,7 @@
        echo json_encode($ObjetoJson);
     }
     
-    else if($result->num_rows = 0){
+    else if($result->num_rows == 0){
         $ObjetoJson["response"] = 0;
         $ObjetoJson["num_rows"] = 0;
         $ObjetoJson["miembros"] = array();

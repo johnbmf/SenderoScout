@@ -152,4 +152,68 @@ const Insignias = [
         Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
         Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
     },
+    {
+        Id : 18,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+    {
+        Id : 19,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+    {
+        Id : 20,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+    {
+        Id : 21,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+    {
+        Id : 22,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+    {
+        Id : 23,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+    {
+        Id : 24,
+        Nombre: 'Guitarra',
+        Tag: ["Musica", "Instrumento"],
+        Familia: "",
+        Icon : require('../assets/Insignias/acoustic-guitar.png'),
+        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
+        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+    },
+
 ];export default Insignias;

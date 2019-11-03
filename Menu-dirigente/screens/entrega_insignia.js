@@ -15,7 +15,7 @@ import {Rating, Button, Divider, ListItem} from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, ViewPagerAndroid, FlatList } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
-import {Svg} from 'react-native-svg'
+import {Svg, Circle} from 'react-native-svg'
 
 
 import ActivityCard from '../CustomComponents/ActivityCard'
@@ -66,7 +66,7 @@ class EntregaInsignias extends Component {
         this.setState({
             userToken : JSON.parse(Token),
             unidad_dirigente: JSON.parse(Token)["unidad1"],
-            seisena:JSON.parse(Token)["Seisena1"],
+            seisena:JSON.parse(Token)["seisena1"],
         });
         this.getMiembros()
       };
@@ -110,55 +110,30 @@ class EntregaInsignias extends Component {
         return(Dimensions.get('window').height * (porcentaje/100))
     }
 
-    /*
     componentDidMount(){
-        this.setState({
-            isLoading:true,
-        })
-
-        fetch('http://www.mitra.cl/SS/get_actividades.php',{
-                method: 'POST',
-                header:{
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-
-                },
-                body:JSON.stringify({
-                    "unidad": this.state.unidad_dirigente,
-                    "seisena": this.state.sisena,
-
-                })
-            })
-            .then(response => response.json())
-            .then((responseJson) => {
-                this.setState({
-
-                    setSmiles: true,
-                    isLoading:false,
-                    RecomendacionesNuevas: RecomendadasTemplate
-                })
-            })
-            .catch((error)=>{
-                console.error(error);
-            });
+        this.getMiembros()
     }
-*/
+
 
     getMiembros(){
         console.log("Mi manda tokn", this.state.userToken);
-        console.log("unidad dir" , this.state.userToken.unidad1)
+        console.log("unidad dir" , this.state.unidad_dirigente)
+        console.log("seisena dir" , this.state.seisena)
         this.setState({
             isLoading:true,    
         })
 
-        fetch('http://www.mitra.cl/SS/GetMiembrosUnidad.php',{
+        //fetch('http://www.mitra.cl/SS/GetMiembrosUnidad.php',{
+        fetch('http://www.mitra.cl/SS/get_miembros_insignias.php',{
                 method: 'POST',
                 header:{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body:JSON.stringify({
-                    "unidad": this.state.unidad_dirigente
+                    "unidad": this.state.unidad_dirigente,
+                    "seisena": this.state.seisena
+
                 })
             })
             .then(response => response.json())
@@ -191,19 +166,58 @@ class EntregaInsignias extends Component {
         this.setState({ninoSeleccionado: temp, setNiño: true})
     }
 */
-    RenderInsignia(item) {
-        //console.log(item)
-        return(
-            <TouchableOpacity 
-                style= {{flex: 1/4,  aspectRatio: 1, alignContent: 'space-between', margin: 10}}
-                onPress = {()=> {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}}>
-                <Image style = {{height: '100%', width: '100%'}} resizeMode ='cover' source = {item.Icon} />
-                <Text style = {{fontFamily: 'Roboto', fontSize: 12, textAlign: 'center',alignSelf:"center", margin:2}}>
-                {item.Nombre}
-                </Text>
-            </TouchableOpacity>
+    IsInsigniaIn(NameKey, list){
+        for (let i = 0; i < list.length; i++) {
+            if(list[i]["id"]==NameKey){
+                return true
+            }
+        }
+        return false
+    }
 
-        )
+    SortInsignias(total, adquiridas){
+        var primeras = []
+        var ultimas = []
+
+        total.forEach((obj, index) => {
+            if (this.IsInsigniaIn(obj.Id, adquiridas)){
+                ultimas.push(obj)
+            }
+            else{
+                primeras.push(obj)
+            }
+        })
+        return(primeras.concat(ultimas))
+    }
+
+    RenderInsignia(item) {
+        //console.log(this.state.ninoSeleccionado)    
+        if(this.IsInsigniaIn(item.Id, this.state.ninoSeleccionado["insignias"])){
+            return(
+                <TouchableOpacity 
+                    style= {{height: this.SetWidth(20), width: this.SetWidth(20), alignContent: 'space-between', margin: 10}}
+                    onPress = {()=> {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}}>
+                    <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1,tintColor:'gray'}} resizeMode ='cover' source = {item.Icon} />
+                    <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1, position: 'absolute', opacity: 0.1}} resizeMode= 'cover' source = {item.Icon} />
+                    <Text style = {{fontFamily: 'Roboto', fontSize: 12, textAlign: 'center',alignSelf:"center", margin:2}}>
+                    {item.Nombre}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }
+        else{
+            return(
+                <TouchableOpacity 
+                    style= {{height: this.SetWidth(20), width: this.SetWidth(20),  aspectRatio: 1, alignContent: 'space-between', margin: 10}}
+                    onPress = {()=> {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}}>
+                    <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1}} resizeMode ='cover' source = {item.Icon} />
+                    <Text style = {{fontFamily: 'Roboto', fontSize: 12, textAlign: 'center',alignSelf:"center", margin:2}}>
+                    {item.Nombre}
+                    </Text>
+                </TouchableOpacity>
+
+            )
+        }
     }
     RenderNino(nino){
         this.props.navi
@@ -254,36 +268,36 @@ class EntregaInsignias extends Component {
         console.log("seleccion de insignias")
         console.log(this.state.ninoSeleccionado)
         return(
-            <View style = {{width: '100%'}}>
-                <View style= {{width: '100%'}}>
-                        <ListItem
-                            leftIcon = {
-                                <Icon
-                                    name= 'user'
-                                    type= 'FontAwesome'
-                                    style={{fontSize: 25, alignContent: 'center' }}
-                                />
-                            }
-                            title = {this.state.ninoSeleccionado.nombre}
-                            bottomDivider
+            <View style = {{height: "100%",width: '100%', alignContent:'space-around',}}>
+                <ListItem
+                    leftIcon = {
+                        <Icon
+                            name= 'user'
+                            type= 'FontAwesome'
+                            style={{fontSize: 25, alignContent: 'center' }}
                         />
-                    <View style = {{alignItems: 'center'}}>
-                        <CustomButton 
-                            onPress = {() => this.setState({setNiño:false, ninoSeleccionado: {}})}
-                            title = 'Seleccionar otro niño'
-                            name = 'long-primary-button'  
-                        />
-                    </View>
-                </View>
-                <ScrollView style = {{width: '100%'}}>
-                    <FlatList
-                        style = {{width: '100%', alignContent: 'space-between'}}
-                        numColumns = {4}
-                        data = {Insignias}
-                        renderItem = {({item}) => this.RenderInsignia(item)}
-                        keyExtractor = {item => item.Id}
-                    />
+                    }
+                    title = {this.state.ninoSeleccionado.nombre}
+                    bottomDivider
+                />
+                <ScrollView style = {{flex:1}} contentContainerStyle={{flexGrow:1}}>
+                <FlatList
+                    contentContainerStyle={{ paddingBottom: 20}}
+                    style = {{alignContent: 'space-between'}}
+                    numColumns = {4}
+                    data = {this.SortInsignias(Insignias, this.state.ninoSeleccionado["insignias"])}
+                    renderItem = {({item}) => this.RenderInsignia(item)}
+                    keyExtractor = {item => item.Id}
+                />         
                 </ScrollView>
+                <View style = {{alignItems: 'center'}}>
+                <CustomButton 
+                    onPress = {() => this.setState({setNiño:false, ninoSeleccionado: {}})}
+                    title = 'Volver'
+                    name = 'long-primary-button'  
+                />
+                </View>
+                   
             </View>
         )
     }
