@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Modal, View, Text} from 'react-native';
+import {Modal, View, Text, TouchableWithoutFeedback} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import CustomButton from './CustomButtons'
 
@@ -9,10 +9,12 @@ const Alerta = (props) => {
 
     esVisible = false;
     if (props.botones == 2){
-        return (
+        return (        
             <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
+                <TouchableWithoutFeedback onPress= {props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
-                    <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#81C14B', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
+                    <TouchableWithoutFeedback onPress= {() => {null}}>
+                    <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#4BC150', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
                         {(props.type == 'Warning') && <View style = {{height:'25%', justifyContent:'center', paddingTop:15}}>
                             <Icon style = {{alignSelf:'center'}} type = "antdesign" name="exclamationcircle" color = '#FFA000' size = {65}/>
                         </View>}
@@ -26,27 +28,33 @@ const Alerta = (props) => {
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:30, fontFamily:'Roboto',textAlign: 'center', marginBottom:10}}>{props.titulo}</Text>
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                         </View>
-                        <View style={{width:'50%',height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'flex-start' }}>
+                        <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
                             <CustomButton 
                                 onPress = {props.aceptar}
-                                name = 'long-primary-button'
+                                name = 'primary-button'
                                 title = {props.titulo_boton_aceptar}
                             />
                             <CustomButton 
                                 onPress = {props.rechazar}
-                                name = 'long-secondary-button'
+                                name = 'secondary-button'
                                 title = {props.titulo_boton_rechazar}
                             />
-                        </View>                    
+                        </View>
                     </View>
+                    </TouchableWithoutFeedback>
                 </View>
-            </Modal>
-        )
+                </TouchableWithoutFeedback>
+        </Modal>
+    )
+
+
     }
     else {
-        return (
+        return (        
             <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
+                <TouchableWithoutFeedback onPress= {props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                    <TouchableWithoutFeedback onPress= {() => {null}}>
                     <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#4BC150', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
                         {(props.type == 'Warning') && <View style = {{height:'25%', justifyContent:'center', paddingTop:15}}>
                             <Icon style = {{alignSelf:'center'}} type = "antdesign" name="exclamationcircle" color = '#FFA000' size = {65}/>
@@ -69,9 +77,11 @@ const Alerta = (props) => {
                             />
                         </View>
                     </View>
+                    </TouchableWithoutFeedback>
                 </View>
-            </Modal>
-        )
+                </TouchableWithoutFeedback>
+        </Modal>
+        ) 
     }
 }
 export { Alerta };
