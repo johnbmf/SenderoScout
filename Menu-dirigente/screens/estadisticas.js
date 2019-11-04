@@ -15,7 +15,8 @@ import {
     ActivityIndicator,
     AsyncStorage,
     Dimensions,
-    ScrollView
+    ScrollView,
+    StatusBar
 } from "react-native";
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
@@ -24,6 +25,7 @@ import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert'
 import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea } from "victory-native";
 import Swiper from 'react-native-swiper'
+import {CustomLoading} from '../CustomComponents/CustomLoading';
 const Height = Dimensions.get('window').height;
 const Widht = Dimensions.get('window').width;
 const data = [
@@ -40,11 +42,75 @@ class estadisticas extends Component {
             <Icon name='pie' style = {{fontSize:24,color:tintColor}} />
         )
     }
-
-    render() {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            isLoading: true,
+            button:false,
+            dataSource: [],
+            isModalVisible: false,
+            hayInvitaciones: false,
+            userToken: ""
+        }
+        this._bootstrapAsync();
+        
+    }
+    loadingView(){
         return (
-            <View style={styles.container}>
+            <View style={{height:'82%',justifyContent:'center', alignItems:'center',backgroundColor: 'white'}}>
+                <ActivityIndicator 
+                    size="large" 
+                    color="#00ff00"
+                />
+                <StatusBar barStyle="default" />
+            </View>
+        )
+    }
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        this.setState({userToken : JSON.parse(Token)});
+        this.getEstadisticas();
+        
+      };
+      getEstadisticas = () => {
+        fetch('http://www.mitra.cl/SS/get_estadisticas.php',{
+            method: 'post',
+            header:{
+                'Accept': 'application/json',
+                'Content/Type': 'application/json',
+                
+            },
+            body:JSON.stringify({
+                "unidad":this.state.userToken.unidad1
+            })
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            if(responseJson.data != null){
+                //console.log((typeof(responseJson[0].fecha_expiracion)));
+                this.setState({
+                    dataSource: responseJson.data,
+                    isLoading: false
+                }, () => {console.log(this.state.dataSource);})
+                console.log("ASDASD");
+                
+                
+            }else{
+                this.setState({
+                    dataSource: [],
+                    isLoading: false
+                })
+                console.log("Respuesta no data" + responseJson.data + "Mensaje" + responseJson.message);
+            
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+    render() {
+        return (
+                <View style={styles.container}>
                     <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
 
                         <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
@@ -53,12 +119,12 @@ class estadisticas extends Component {
                             </Left>
 
                             <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
-                                <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Preferencias</Text>
+                                <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Estadísticas</Text>
                             </Body>
                             <Right></Right>
                         </Header >                    
                     </View>
-                <View style={{width:'100%', height:'88%'}}>
+                {this.state.isLoading ? <this.loadingView/> : <View style={{width:'100%', height:'88%'}}>
                     <ScrollView 
                     nestedScrollEnabled={true}
                     contentContainerStyle = {{      
@@ -277,7 +343,7 @@ class estadisticas extends Component {
                                 </VictoryChart>
                                 </View>
                     </ScrollView>
-                </View>
+                </View>}
                 </View>
         );
     }
