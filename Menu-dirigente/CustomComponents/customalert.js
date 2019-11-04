@@ -32,12 +32,12 @@ const Alerta = (props) => {
                             <CustomButton 
                                 onPress = {props.aceptar}
                                 name = 'primary-button'
-                                title = {props.titulo_boton_aceptar}
+                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Aceptar" }
                             />
                             <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'secondary-button'
-                                title = {props.titulo_boton_rechazar}
+                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Volver"}
                             />
                         </View>
                     </View>
@@ -73,7 +73,7 @@ const Alerta = (props) => {
                         <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'long-primary-button'
-                                title = {props.titulo_boton_rechazar}
+                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Volver" }
                             />
                         </View>
                     </View>
