@@ -176,7 +176,7 @@ class DetalleInsignia extends Component {
                 titulo = "Éxito"
                 contenido = {mensaje}
                 titulo_boton_rechazar = "Aceptar"
-                titulo_boton_aceptar = "rechazar"
+
                 rechazar = {() => {this.toggleAlert()}}
                 />
             )
@@ -243,21 +243,22 @@ class DetalleInsignia extends Component {
                 <View style = {{width: '100%', height: '83%',alignItems: 'center'}}>
                     {this.RenderLoadStatus()}
                     {this.RenderAlert(this.state.php_response_type,this.state.php_response_message)}
-                    <View style = {{height: '70%', width: '100%'}}>
-                        <Image style = {{ height: this.SetWidth(50), width: this.SetWidth(50), margin: 25, alignSelf: 'center'}} resizeMode ='cover' source = {this.state.dataInsignia.Icon}
+                    <View style = {{height: '80%', width: '100%'}}>
+                        <Image style = {{ height: this.SetWidth(42), width: this.SetWidth(42), margin:10, alignSelf: 'center'}} resizeMode ='cover' source = {this.state.dataInsignia.Icon}
                         />
                         <Text style = {styles.textdata}>
                             {this.state.dataInsignia.Descripcion}
                         </Text>
                         <ScrollView style= {{width: '100%'}}>
                             <FlatList
+                            contentContainerStyle={{ paddingBottom: 20}}
                             data={this.state.dataInsignia.Requisitos}
                             keyExtractor = {(item,index) => index.toString()}
                             renderItem = {({item}) => <Text style = {styles.textdata}>{'\u2022'} {item}</Text>}
                             />
                         </ScrollView>
                     </View>
-                    <View style = {{width:'100%',alignItems: 'center'}}>
+                    <View style = {{height: '20%' ,width:'100%',alignItems: 'center'}}>
                         <CustomButton 
                             onPress = {() => {this.EntregarInsignia()}}
                             title = 'Entregar insignia'

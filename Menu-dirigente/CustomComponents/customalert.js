@@ -32,12 +32,12 @@ const Alerta = (props) => {
                             <CustomButton 
                                 onPress = {props.aceptar}
                                 name = 'primary-button'
-                                title = {props.titulo_boton_aceptar}
+                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Aceptar" }
                             />
                             <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'secondary-button'
-                                title = {props.titulo_boton_rechazar}
+                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_rechazar: "Voler"} 
                             />
                         </View>
                     </View>
@@ -45,9 +45,7 @@ const Alerta = (props) => {
                 </View>
                 </TouchableWithoutFeedback>
         </Modal>
-    )
-
-
+        )
     }
     else {
         return (        
@@ -70,10 +68,10 @@ const Alerta = (props) => {
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                         </View>
                         <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
-                        <CustomButton 
+                            <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'long-primary-button'
-                                title = {props.titulo_boton_rechazar}
+                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_rechazar: "Voler"}
                             />
                         </View>
                     </View>

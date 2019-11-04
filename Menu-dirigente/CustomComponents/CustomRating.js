@@ -72,8 +72,6 @@ class CustomRating extends Component{
     
   }
 
-
-
   updatePan(toValue) {
     Animated.spring(this._pan, { toValue, friction: 7 }).start();
     console.log(toValue)
