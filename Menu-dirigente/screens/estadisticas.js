@@ -50,6 +50,19 @@ class estadisticas extends Component {
             dataSource: [],
             isModalVisible: false,
             hayInvitaciones: false,
+            // corporalidad : [],
+            // creatividad  : [],
+            // caracter : [],
+            // afectividad: [],
+            // sociabilidad : [],
+            // espiritualidad : [],
+            testData : [
+                { x: '05-Oct', y: 2 },
+                { x: '12-Oct', y: 3 },
+                { x: '19-Oct', y: 5 },
+                { x: '26-Oct', y: 5 },
+
+            ],
             userToken: ""
         }
         this._bootstrapAsync();
@@ -70,8 +83,19 @@ class estadisticas extends Component {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({userToken : JSON.parse(Token)});
         this.getEstadisticas();
-        
       };
+    //   formatData = (data) => {
+    //       aux = data.map((obj,i) => {
+    //           return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.corporalidad,10)}
+    //       })
+    //       this.setState({
+    //           corporalidad : aux
+    //       }, () => {console.log(this.state.corporalidad);
+    //         console.log(this.state.testData);
+            
+    //       })
+
+    //   }
       getEstadisticas = () => {
         fetch('http://www.mitra.cl/SS/get_estadisticas.php',{
             method: 'post',
@@ -91,8 +115,10 @@ class estadisticas extends Component {
                 this.setState({
                     dataSource: responseJson.data,
                     isLoading: false
-                }, () => {console.log(this.state.dataSource);})
-                console.log("ASDASD");
+                }, () => {
+                    console.log(this.state.dataSource);
+                    //this.formatData(this.state.dataSource);
+                })
                 
                 
             }else{
@@ -152,8 +178,8 @@ class estadisticas extends Component {
                                                 style={{ 
                                                     tickLabels: { fill: "grey", padding:30, fontSize:10},
                                                     axisLabel: { fontSize:15,padding: 10},
-                                                    axis: { stroke: "grey", opacity: 0.5,strokeWidth: 0.25 },
-                                                    grid: { stroke: "grey", opacity: null,strokeWidth: 0.25} 
+                                                    axis: { stroke: "grey", opacity: 0.5,strokeWidth: 0.5 },
+                                                    grid: { stroke: "grey", opacity: null,strokeWidth: 0.5} 
                                                 }}
                                                 axisValue={d}
                                                 tickValues={[0,1,2,3,4,5]}
@@ -185,7 +211,63 @@ class estadisticas extends Component {
 
                                             ]}
                                             style={{
-                                            data: { stroke: "grey" },
+                                            data: { stroke: "grey", strokeWidth: 0.5 },
+                                            }}
+                                        />
+                                        <VictoryLine
+                                            data={[
+                                                { x: 1, y: 4 },
+                                                { x: 2, y: 4 },
+                                                { x: 3, y: 4 },
+                                                { x: 4, y: 4 },
+                                                { x: 5, y: 4 },
+                                                { x: 6, y: 4 }
+
+                                            ]}
+                                            style={{
+                                            data: { stroke: "grey", strokeWidth: 0.5 },
+                                            }}
+                                        />
+                                        <VictoryLine    
+                                        data={[
+                                                { x: 1, y: 3 },
+                                                { x: 2, y: 3 },
+                                                { x: 3, y: 3 },
+                                                { x: 4, y: 3 },
+                                                { x: 5, y: 3 },
+                                                { x: 6, y: 3 }
+
+                                            ]}
+                                            style={{
+                                            data: { stroke: "grey", strokeWidth: 0.5 },
+                                            }}
+                                        />
+                                        <VictoryLine
+                                        data={[
+                                                { x: 1, y: 2 },
+                                                { x: 2, y: 2 },
+                                                { x: 3, y: 2 },
+                                                { x: 4, y: 2 },
+                                                { x: 5, y: 2 },
+                                                { x: 6, y: 2 }
+
+                                            ]}
+                                            style={{
+                                            data: { stroke: "grey", strokeWidth: 0.5 },
+                                            }}
+                                        />
+                                                                                <VictoryLine
+                                        data={[
+                                                { x: 1, y: 1 },
+                                                { x: 2, y: 1 },
+                                                { x: 3, y: 1 },
+                                                { x: 4, y: 1 },
+                                                { x: 5, y: 1 },
+                                                { x: 6, y: 1 }
+
+                                            ]}
+                                            style={{
+                                            data: { stroke: "grey", strokeWidth: 0.5 },
                                             }}
                                         />
                                         </VictoryChart>
@@ -202,15 +284,9 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
-                                        data={[
-                                        { x: '05-10', y: 2 },
-                                        { x: '12-10', y: 3 },
-                                        { x: '19-10', y: 5 },
-                                        { x: '26-10', y: 5 },
-                                        { x: '06-11', y: 3 },
-                                        { x: '07-11', y: 3 }
-
-                                    ]}
+                                        data={this.state.dataSource.map((obj,i) => {
+                                            return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.corporalidad,10)}
+                                        })}
                                          />
                                 </VictoryChart>
                                 </View>
@@ -226,15 +302,9 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
-                                        data={[
-                                        { x: '05-Oct', y: 2 },
-                                        { x: '12-Oct', y: 3 },
-                                        { x: '19-Oct', y: 5 },
-                                        { x: '26-Oct', y: 5 },
-                                        { x: '06-Nov', y: 3 },
-                                        { x: '07-Nov', y: 3 }
-
-                                    ]}
+                                        data={this.state.dataSource.map((obj,i) => {
+                                            return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.creatividad,10)}
+                                        })}
                                          />
                                 </VictoryChart>
                                 </View>
@@ -250,13 +320,9 @@ class estadisticas extends Component {
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
                                         }}
-                                        data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 5 },
-                                        { x: 5, y: 5 },
-                                        ]} />
+                                        data={this.state.dataSource.map((obj,i) => {
+                                            return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.caracter,10)}
+                                        })} />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
@@ -271,13 +337,9 @@ class estadisticas extends Component {
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
                                         }}
-                                        data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 5 },
-                                        { x: 5, y: 5 }
-                                        ]} />
+                                        data={this.state.dataSource.map((obj,i) => {
+                                            return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.afectividad,10)}
+                                        })} />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
@@ -292,13 +354,9 @@ class estadisticas extends Component {
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
                                         }}
-                                        data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 5 },
-                                        { x: 5, y: 5 }
-                                        ]} />
+                                        data={this.state.dataSource.map((obj,i) => {
+                                            return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.sociabilidad,10)}
+                                        })} />
                                 </VictoryChart>
                                 </View>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center',paddingLeft:10}}>
@@ -313,12 +371,9 @@ class estadisticas extends Component {
                                         data: { stroke: "#c43a31" },
                                         parent: { border: "1px solid #ccc"}
                                         }}
-                                        data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 5 },
-                                        { x: 5, y: 5 }]} />
+                                        data={this.state.dataSource.map((obj,i) => {
+                                            return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.espiritualidad,10)}
+                                        })} />
                                 </VictoryChart>
                                 </View>
                             </Swiper>
