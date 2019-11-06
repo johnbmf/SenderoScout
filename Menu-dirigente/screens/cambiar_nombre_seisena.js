@@ -182,9 +182,9 @@ Ingresar_nuevo_nombre(){
         return(
             <View style={{alignItems: 'flex-start'}}>
 
-            <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Ingrese el nuevo nombre de la seisena:</Text>
+            <Text style={{ marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Ingrese el nuevo nombre de la seisena:</Text>
                     <TextInput 
-                        style = {{height:'15%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:15}}
+                        style = {{height:'30%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:30}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
@@ -234,7 +234,7 @@ puede(){
 if(this.state.userToken.unidad1 != 0){
     return(
     <View>
-    <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena que desea cambiar nombre:</Text>
+    <Text style={{ marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena que desea cambiar nombre:</Text>
     <ScrollView>
         <FlatList
         data = {this.state.data}
@@ -259,6 +259,7 @@ if(this.state.userToken.unidad1 != 0){
           )}
           keyExtractor={item => item.id_seisena}         
         />
+        {this.Ingresar_nuevo_nombre()}
         </ScrollView>
     </View>
 );
@@ -308,7 +309,6 @@ else{
                 </View >
                 <View style = {styles.container}>
                 {this.puede()}
-                {this.Ingresar_nuevo_nombre()}
                 </View>
                 <View>
             {this.LoadingState()}
