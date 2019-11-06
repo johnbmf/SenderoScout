@@ -275,12 +275,14 @@ seleccionar_seisena(item){
       })
   }
   else{
-      {this.mostrarSeisenas()}
+      {this.entregar_seisenas()}
       this.setState({
           seisena_seleccionada:false,
           boton_cancelar_seisena:null,
           id_seisena:null,
-          nombre_seisena: ''
+          nombre_seisena: '',
+          seleccion_seisena: false,
+          show_siguiente:true
       })
   }
 }
@@ -308,6 +310,23 @@ seisenas_disponibles(){
   if(this.state.seleccion_seisena){
       return(
       <View>
+      <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Personas seleccionadas:</Text>
+      <FlatList
+        data = {this.state.nines_seleccionados}
+        extraData={this.state.checked}
+        renderItem={({ item }) => (
+            <ListItem
+              //key={item.isSelect}
+              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              title={`${item.nombre}`}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+              subtitleStyle={{ color: '#104F55' }}
+              subtitle={`${item.seisena1}`}
+            />
+        )}
+          keyExtractor={item => item.user}           
+        />
       <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena de asignación:</Text>
       <ScrollView>
           <FlatList
