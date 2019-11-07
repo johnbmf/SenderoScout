@@ -26,7 +26,19 @@ GROUP BY WEEK(EvaluacionSemanal.fecha)")){
         $response -> type = 1;
         $response -> message = "Datos obtenidos con exito";
 
-        echo json_encode($response);
+        if ($result= $mysqli->query("SELECT AVG(EvaluacionSemanal.corporalidad) as corporalidad,AVG(EvaluacionSemanal.creatividad) as creatividad, AVG(EvaluacionSemanal.caracter) as caracter, AVG(EvaluacionSemanal.afectividad) as afectividad, AVG(EvaluacionSemanal.sociabilidad) as sociabilidad, AVG(EvaluacionSemanal.espiritualidad) as espiritualidad 
+        from EvaluacionSemanal 
+            LEFT JOIN Usuario on Usuario.unidad1 = '$unidad'
+            WHERE Usuario.user = EvaluacionSemanal.usuario AND YEAR(EvaluacionSemanal.fecha) = YEAR(NOW())
+        GROUP BY Usuario.unidad1")){
+            while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
+            $myArray2[] = $row;
+            }
+            if (!is_null($myArray2)){
+                $response -> radar = $myArray2;
+        }
+                echo json_encode($response);
+    }
     }
     else{
         $response -> data = null;

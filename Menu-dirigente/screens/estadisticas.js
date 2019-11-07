@@ -63,6 +63,7 @@ class estadisticas extends Component {
                 { x: '26-Oct', y: 5 },
 
             ],
+            radar : [],
             userToken: ""
         }
         this._bootstrapAsync();
@@ -114,6 +115,7 @@ class estadisticas extends Component {
                 //console.log((typeof(responseJson[0].fecha_expiracion)));
                 this.setState({
                     dataSource: responseJson.data,
+                    radar : responseJson.radar,
                     isLoading: false
                 }, () => {
                     console.log(this.state.dataSource);
@@ -189,15 +191,16 @@ class estadisticas extends Component {
                                             );
                                             })
                                         }
+                                        {console.log(this.state.radar)}
                                         <VictoryArea                                
                                             style={{ data: { fill: "#C14B81", alpha:0.25, fillOpacity: 0.2, strokeWidth: 2 } }}
                                             data={[
-                                            { x: "Corporalidad", y: 1 },
-                                            { x: "Creatividad", y: 4 },
-                                            { x: "Carácter", y: 3 },
-                                            { x: "Afectividad", y: 5 },
-                                            { x: "Sociabilidad", y: 5 },
-                                            { x: "Espiritualidad", y: 3 }
+                                            { x: "Corporalidad",  y:  parseFloat(this.state.radar[0].Corporalidad   )  },
+                                            { x: "Creatividad",   y:  parseFloat(this.state.radar[0].Creatividad    )  },
+                                            { x: "Carácter",      y:  parseFloat(this.state.radar[0].Caracter       )  },
+                                            { x: "Afectividad",   y:  parseFloat(this.state.radar[0].Afectividad    )  },
+                                            { x: "Sociabilidad",  y:  parseFloat(this.state.radar[0].Sociabilidad   )  },
+                                            { x: "Espiritualidad",y:  parseFloat(this.state.radar[0].Espiritualidad )  }
                                             ]}
                                         />
                                         <VictoryLine
