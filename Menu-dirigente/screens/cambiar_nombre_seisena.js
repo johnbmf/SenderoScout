@@ -184,7 +184,7 @@ Ingresar_nuevo_nombre(){
 
             <Text style={{ marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Ingrese el nuevo nombre de la seisena:</Text>
                     <TextInput 
-                        style = {{height:'30%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:30}}
+                        style = {{height:'30%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:30,fontSize: 16}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
