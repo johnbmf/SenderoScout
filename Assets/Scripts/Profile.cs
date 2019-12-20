@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using UnityEngine.Networking;
 
 public class Profile : MonoBehaviour
 {
@@ -20,14 +22,22 @@ public class Profile : MonoBehaviour
     public GameObject[] Paneles;
     public GameObject[] ElementosInsigniaInfo;
     public GameObject[] AvatarChange;
+    public GameObject[] ElementosCambiarPseudo;
     public Sprite[] Avatares;
     public GameObject SelectImageBorder;
     public GameObject MainCamera;
+    public static JSONNode PersonasInsignias;
 
     // Start is called before the first frame update
     void Start()
     {
         InfoInsigniasJSON = JSONNode.Parse(Resources.Load<TextAsset>("info").text);
+        ElementosComun[2].GetComponent<Image>().sprite = Avatares[PlayerPrefs.GetInt("avatar", 0)];
+        ElementosPerfil[2].GetComponent<Text>().text = PlayerPrefs.GetString("nombre_unidad", "UNIDAD_NOT_FOUND");
+        ElementosPerfil[4].GetComponent<Text>().text = PlayerPrefs.GetString("grupo", "GRUPO_NOT_FOUND");
+        ElementosPerfil[6].GetComponent<Text>().text = PlayerPrefs.GetString("nombre", "NOMBRE_NOT_FOUND");
+        ElementosPerfil[8].GetComponent<Text>().text = PlayerPrefs.GetInt("edad", -1).ToString();
+        ElementosComun[4].GetComponent<Text>().text = PlayerPrefs.GetString("pseudonimo", "PSEUDONIMO_NOT_FOUND");
     }
 
     // Update is called once per frame
@@ -51,13 +61,6 @@ public class Profile : MonoBehaviour
             //Se deben activar los elementos que pertenecen al perfil.
             ActivateGameObjects(ref ElementosPerfil);
 
-            //Se debe cambiar el estilo de la tab actual.
-            ElementosComun[1].GetComponent<Text>().text = "Mi Perfil";  //Titulo
-            ElementosComun[3].GetComponent<Image>().color = colorTabActive; //Color fondo del boton perfil del menu.
-            ElementosComun[4].GetComponent<Text>().color = colorTabActiveText; //Color de la fuente del boton perfil del menu.
-            ElementosComun[5].GetComponent<Image>().color = colorTabInactive; //Color fondo del boton insignias del menu.
-            ElementosComun[6].GetComponent<Text>().color = colorTabInactiveText; //Color de la fuente del boton insignias del menu.
-
             //Se cambia la currentTab a perfil
             currentTab = "perfil";
         }
@@ -69,13 +72,6 @@ public class Profile : MonoBehaviour
 
             //Se deben activar los elementos que pertenecen a las insignias.
             ActivateGameObjects(ref ElementosInsignias);
-
-            //Se debe cambiar el estilo de la tab actual.
-            ElementosComun[1].GetComponent<Text>().text = "Mis Insignias";  //Titulo
-            ElementosComun[3].GetComponent<Image>().color = colorTabInactive; //Color fondo del boton perfil del menu.
-            ElementosComun[4].GetComponent<Text>().color = colorTabInactiveText; //Color de la fuente del boton perfil del menu.
-            ElementosComun[5].GetComponent<Image>().color = colorTabActive; //Color fondo del boton insignias del menu.
-            ElementosComun[6].GetComponent<Text>().color = colorTabActiveText; //Color de la fuente del boton insignias del menu.
 
             //Se cambia la currentTab a insignias.
             currentTab = "insignias";
@@ -94,12 +90,100 @@ public class Profile : MonoBehaviour
         Paneles[1].SetActive(false);
     }
 
+    public void OpenPseudoPanel()
+    {
+        Paneles[3].SetActive(true);
+    }
+
+    public void ClosePseudoPanel()
+    {
+        ElementosCambiarPseudo[0].GetComponent<Text>().text = "";
+        ElementosCambiarPseudo[1].SetActive(true);
+        ElementosCambiarPseudo[2].GetComponent<Text>().text = "";
+        Paneles[3].SetActive(false);
+    }
+
+    public void SendPseudo()
+    {
+        StartCoroutine(SendPseudoCoroutine());
+    }
+
+    IEnumerator SendPseudoCoroutine()
+    {
+        //LOADING
+        WWWForm form = new WWWForm();
+
+        //GET PSEUDO FROM INPUT
+        form.AddField("pseudoNuevo", ElementosCambiarPseudo[0].GetComponent<Text>().text);
+        form.AddField("pseudoActual", PlayerPrefs.GetString("pseudonimo", "PSEUDONIMO_NOT_FOUND"));
+        form.AddField("unidad", PlayerPrefs.GetInt("unidad1", -1));
+        form.AddField("nombre", PlayerPrefs.GetString("nombre", "NOMBRE_NOT_FOUND"));
+        form.AddField("user", PlayerPrefs.GetString("user", "USER_NOT_FOUND"));
+
+        //SET LINK_TO_POST
+        UnityWebRequest www = UnityWebRequest.Post("http://mitra.cl/SS/SetPseudoRequest.php", form);
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log("Error de conexion en Profile.cs Line 138");
+            ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión. Comprueba tu conexión a internet.";
+            Debug.Log(www.error);
+            yield break;
+        }
+
+        else
+        {
+            string respuesta = www.downloadHandler.text;
+            var RespuestaJson = JSON.Parse(respuesta);
+
+            //HANDLE RESPONSES.
+            if (RespuestaJson["response"] == 0)
+            {
+                ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión. Inténtalo más tarde.";
+            }
+
+            else if (RespuestaJson["response"] == 1)
+            {
+                ElementosCambiarPseudo[2].GetComponent<Text>().text = "Enhorabuena!. Se ha enviado tu nuevo pseudónimo a tu dirigente para que sea aprobado.";
+            }
+
+            else if (RespuestaJson["response"] == 2)
+            {
+                ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión (I). Inténtalo más tarde.";
+            }
+
+            else if (RespuestaJson["response"] == -1)
+            {
+                ElementosCambiarPseudo[2].GetComponent<Text>().text = "Ya has solicitado un cambio de pseudónimo previamente. Espera la aprobación de tu dirigente.";
+            }
+
+            yield break;
+        }
+        
+    }
+
     public void OpenInsigniaInfoPanel(int numInsignia)
     {
+        string personasQueTienenInsignia = "Personas que tienen esta insignia: ";
         ElementosInsigniaInfo[1].GetComponent<Text>().text = InfoInsigniasJSON[numInsignia.ToString()]["nombre"];
         //AQUI CAMBIAR EL ESTADO DE OBTENIDA O NO OBTENIDA.
+        foreach (JSONNode node in PersonasInsignias[numInsignia.ToString()])
+        {
+            string nombreInLista = (string)node.ToString().Replace("\"", string.Empty);
+            personasQueTienenInsignia += nombreInLista + ", ";
+            if (nombreInLista == PlayerPrefs.GetString("user", "USER_NOT_FOUND"))
+            {
+                ElementosInsigniaInfo[2].GetComponent<Text>().text = "obtenida";
+                ElementosInsigniaInfo[2].GetComponent<Text>().color = new Color32(22, 176, 0, 255);
+            } 
+        }
         ElementosInsigniaInfo[3].GetComponent<Text>().text = InfoInsigniasJSON[numInsignia.ToString()]["obtencion"];
         //AQUI CAMBIAR EL TEXTO QUE MUESTRA A LAS OTRAS PERSONAS QUE TIENEN LA INSIGNIA.
+        personasQueTienenInsignia = personasQueTienenInsignia.Remove(personasQueTienenInsignia.Length - 2);
+        personasQueTienenInsignia += ".";
+        ElementosInsigniaInfo[4].GetComponent<Text>().text = personasQueTienenInsignia;
         Paneles[2].SetActive(true);
     }
 
@@ -134,6 +218,9 @@ public class Profile : MonoBehaviour
 
     IEnumerator ClosePanelCoroutine()
     {
+        DeactivateGameObjects(ref ElementosInsignias);
+        ActivateGameObjects(ref ElementosPerfil);
+        currentTab = "perfil";
         Paneles[0].SetActive(false);
         //Desactivar movimiento de camara.
         MainCamera.GetComponent<TouchCamera>().enabled = true;

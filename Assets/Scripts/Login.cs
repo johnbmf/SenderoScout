@@ -33,7 +33,7 @@ public class Login : MonoBehaviour{
     #endregion
     public GameObject OverlayCanvas;
     //Debug mode: Permite saltarse el login usando datos STUB.
-    private bool debugMode = false;
+    private bool debugMode = true;
 
     void Start(){
         if (debugMode)
@@ -58,18 +58,23 @@ public class Login : MonoBehaviour{
     }
 
     public void StartDebugMode() {
+        //Se registran las variables en PlayerPrefs para recordarlos.
         PlayerPrefs.SetInt("sesion", 1);
         PlayerPrefs.SetString("user", "miembrounidad1");
-        //PlayerPrefs.SetString("pass", "123456");
-        PlayerPrefs.SetString("email", "n1@gmail.com");
-        //PlayerPrefs.SetString("confirmacion_email", "1");
-        PlayerPrefs.SetInt("unidad1", 1);
+        PlayerPrefs.SetString("password", "123456");
+        PlayerPrefs.SetString("email", "mu1@hamm.cl");
+        PlayerPrefs.SetInt("unidad1", 49);
         PlayerPrefs.SetInt("unidad2", 2);
-        PlayerPrefs.SetInt("edad", 10);
+        PlayerPrefs.SetString("seisena1", "lalalal123");
+        PlayerPrefs.SetString("seisena2", "cacas");
+        PlayerPrefs.SetInt("edad", 11);
         PlayerPrefs.SetString("tipo", "nino");
-        PlayerPrefs.SetString("nombre", "Petercito Chaconcito");
-        PlayerPrefs.SetString("pseudonimo", "Petercito");
-        PlayerPrefs.SetInt("puntos", 265);
+        PlayerPrefs.SetString("nombre", "Diego Montecinos");
+        PlayerPrefs.SetString("pseudonimo", "Pseudo");
+        PlayerPrefs.SetInt("puntos", 684);
+        PlayerPrefs.SetString("grupo", "Las Calilas");
+        PlayerPrefs.SetInt("avatar", 0);
+        PlayerPrefs.SetString("nombre_unidad", "Unidad1");
 
         //Se carga escena del juego.
         SceneManager.LoadScene("EscenaMapa");
@@ -138,6 +143,7 @@ public class Login : MonoBehaviour{
             PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
             PlayerPrefs.SetString("grupo", respuestaJson["grupo"]);
             PlayerPrefs.SetInt("avatar", 0);
+            PlayerPrefs.SetString("nombre_unidad", respuestaJson["nombre_unidad"]);
 
             //Se carga escena del juego.
             OverlayCanvas.SetActive(false);
@@ -170,6 +176,8 @@ public class Login : MonoBehaviour{
             PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
             PlayerPrefs.SetString("grupo", respuestaJson["grupo"]);
             PlayerPrefs.SetInt("avatar", 0);
+            PlayerPrefs.SetString("nombre_unidad", respuestaJson["nombre_unidad"]);
+
             OverlayCanvas.SetActive(false);
             FirstLoginCanvas.SetActive(true);
             yield break;
