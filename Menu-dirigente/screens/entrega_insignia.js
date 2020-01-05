@@ -20,7 +20,7 @@ import {Svg, Circle} from 'react-native-svg'
 
 import ActivityCard from '../CustomComponents/ActivityCard'
 import CustomButton from "../CustomComponents/CustomButtons";
-import Insignias from "../Local/Index"
+import Insignias from "../Local/Insignias"
 
 var _ = require('lodash');
 
@@ -201,7 +201,7 @@ class EntregaInsignias extends Component {
         if(this.IsInsigniaIn(item.Id, this.state.ninoSeleccionado["insignias"])){
             return(
                 <TouchableOpacity 
-                    style= {{height: this.SetWidth(20), width: this.SetWidth(20), alignContent: 'space-between', margin: 10}}
+                    style= {{height: this.SetWidth(20), width: this.SetWidth(20), alignContent: 'space-between', margin: 10, marginBottom: 25}}
                     onPress = {()=> {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}}>
                     <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1,tintColor:'gray'}} resizeMode ='cover' source = {item.Icon} />
                     <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1, position: 'absolute', opacity: 0.1}} resizeMode= 'cover' source = {item.Icon} />
@@ -214,7 +214,7 @@ class EntregaInsignias extends Component {
         else{
             return(
                 <TouchableOpacity 
-                    style= {{height: this.SetWidth(20), width: this.SetWidth(20),  aspectRatio: 1, alignContent: 'space-between', margin: 10}}
+                    style= {{height: this.SetWidth(20), width: this.SetWidth(20),  aspectRatio: 1, alignContent: 'space-between', margin: 10,marginBottom: 25}}
                     onPress = {()=> {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}}>
                     <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1}} resizeMode ='cover' source = {item.Icon} />
                     <Text style = {{fontFamily: 'Roboto', fontSize: 12, textAlign: 'center',alignSelf:"center", margin:2}}>

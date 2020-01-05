@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="" />
+    <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Local/Index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Local/Insignias.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/acoustic-guitar.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/alarm-clock.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/alerts.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/book.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/brainstorm.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/fire-truck.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/football.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/learning.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/lecture-1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/painting-palette.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/police-car.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/policeman.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/violin.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Insignias/writing.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/entrega_insignia.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/entrega_insignia.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,10 +31,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-1866" />
-    <option name="y" value="86" />
-    <option name="width" value="1874" />
-    <option name="height" value="1096" />
+    <option name="x" value="294" />
+    <option name="y" value="135" />
+    <option name="width" value="1394" />
+    <option name="height" value="810" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -23,8 +42,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -70,10 +89,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1866" y="86" width="1874" height="1096" extended-state="7" />
+    <frame x="54" y="-8" width="1874" height="1096" extended-state="7" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1339581" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.09812569" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -84,13 +103,13 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" visible="true" weight="0.23987539" />
+      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" visible="true" weight="0.1682243" />
       <window_info anchor="bottom" id="Logcat" order="4" />
       <window_info anchor="bottom" id="Android Profiler" order="5" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
-      <window_info active="true" anchor="right" id="Assistant" order="3" visible="true" weight="0.33507463" />
+      <window_info anchor="right" id="Assistant" order="3" weight="0.3346196" />
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
     </layout>
   </component>

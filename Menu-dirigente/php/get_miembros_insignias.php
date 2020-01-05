@@ -46,6 +46,7 @@
             if($fila_miembros["seisena1"] == null){
                 $fila_miembros["seisena1"] = "Sin seisena";
             }
+
             $obj["user"] = $fila_miembros["user"];
             $obj["nombre"] = $fila_miembros["nombre"];
             $obj["edad"] = $fila_miembros["edad"];
