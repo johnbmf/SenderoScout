@@ -22,6 +22,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert';
 import {Alerta2B} from './../CustomComponents/customalert2B'
+//import { white } from "react-native-paper/lib/typescript/src/styles/colors";
 const { width } = Dimensions.get("window");
 
 class gestionar_seisena extends Component {
@@ -473,8 +474,10 @@ se_encuentra_en_busqueda(){
               //key={item.isSelect}
               onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
+              //containerStyle={item.isSelect ? {backgroundColor: '#f2e6ff',borderBottomColor : '#E8E8E8', borderBottomWidth: 1}:{backgroundColor: '#FFFFFF', borderBottomColor:'#E8E8E8', borderBottomWidth: 1}} 
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
+              //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
               Component={TouchableScale}
               friction={90} //

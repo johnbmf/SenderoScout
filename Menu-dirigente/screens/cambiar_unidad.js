@@ -280,7 +280,14 @@ LoadingState(){
             mostrarSearchBar: true,
             cancel1: false,
             show1:false,
-            cancel:false
+            cancel:false,
+            value2:"",
+            text2:"",
+            ide:null,
+            data2: this.state.data2,
+            cancel: !this.state.cancel,
+            show2:false,
+            press:true
           });
           }
         
@@ -328,9 +335,10 @@ show1() {
         renderItem={({ item }) => (
             <ListItem
               title={`${item.nombre_unidad}`}
-              titleStyle={{ color: 'black', fontWeight: 'bold' }}
-              containerStyle={{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} 
-              //containerStyle = {this.state.cancel?{borderBottomColor : '#E8E8E8', borderBottomWidth: 1, backgroundColor : '#cc99ff'}:{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}}
+              //titleStyle={{ color: 'black', fontWeight: 'bold' }}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              //containerStyle={{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} 
+              containerStyle = {this.state.cancel?{borderBottomColor : '#E8E8E8', borderBottomWidth: 1, backgroundColor : '#cc99ff'}:{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}}
               
                onPress={() => this.selectItem2(item)}
                rightIcon={this.state.cancel?{name : 'clear'}:{name : null}}
@@ -338,13 +346,13 @@ show1() {
               friction={90} //
               tension={100} // 
               activeScale={0.95} //
-              //linearGradientProps={{
-               // colors: ['#f2e6ff', '#F9F4FF'],
-               // start: [1.5, 0],
-              //  end: [0.1, 0],
-              //}}
-              //ViewComponent={LinearGradient}
-              //containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              linearGradientProps={{
+                colors: ['#f2e6ff', '#F9F4FF'],
+                start: [1.5, 0],
+               end: [0.1, 0],
+              }}
+              ViewComponent={LinearGradient}
+              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
             />
           )}
           keyExtractor={item => item.id}         
@@ -487,24 +495,24 @@ se_encuentra_en_busqueda(){
 
               <ListItem
                 rightIcon={this.state.cancel1?{name : 'clear'}:{name : null}}
-                //containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
-                containerStyle = {{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} // borderTopColor: '#E8E8E8', borderTopWidth: 1
+                containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                //containerStyle = {{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} // borderTopColor: '#E8E8E8', borderTopWidth: 1
                 title={`${item.nombre}`}
-                titleStyle={{ fontWeight: 'bold' }} // color: '#104F55'
+                titleStyle={{ color: '#104F55',fontWeight: 'bold' }} // color: '#104F55'
                 onPress={() => this.selectItem(item)}
                 Component={TouchableScale}
                 friction={90} //
                 tension={100} // 
                 activeScale={0.95} //
                 leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
-                //linearGradientProps={{
-                //  colors: ['#f2e6ff', '#F9F4FF'],
-                //  start: [1.5, 0],
-                //  end: [0.1, 0],
-                // }}
-                //subtitleStyle={{ color: '#104F55' }}
+                linearGradientProps={{
+                  colors: ['#f2e6ff', '#F9F4FF'],
+                  start: [1.5, 0],
+                  end: [0.1, 0],
+                 }}
+                subtitleStyle={{ color: '#104F55' }}
                 subtitle={`${item.pseudonimo}`}
-                //ViewComponent={LinearGradient}
+                ViewComponent={LinearGradient}
               />
           )}
             keyExtractor={item => item.user} 
