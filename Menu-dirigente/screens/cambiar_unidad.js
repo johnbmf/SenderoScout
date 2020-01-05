@@ -32,8 +32,8 @@ import { CustomLayoutSpring } from "react-native-animation-layout";
 import { LinearGradient } from 'expo';
 import TouchableScale from 'react-native-touchable-scale';
 import CustomButton from "../CustomComponents/CustomButtons";
-import {Alerta2Botones} from './../CustomComponents/customalert copy'
-import {Alerta} from './../CustomComponents/customalert'
+import {Alerta} from './../CustomComponents/customalert';
+import {Alerta2B} from './../CustomComponents/customalert2B'
 
 const { width } = Dimensions.get("window");
 
@@ -48,7 +48,7 @@ class cambiar_unidad extends Component {
     super(props);
     this.state = {
       loading: false,
-      cancel:null,
+      cancel:false,
       data: [],
       data2: [] ,
       error: null,
@@ -63,7 +63,7 @@ class cambiar_unidad extends Component {
       userToken: "",
       press: true,
       mostrarSearchBar: true,
-      cancel1: null,
+      cancel1: false,
       estadoAlerta: false,
       tituloAlerta: "Cuidado",
       mensajeAlerta: "Al cambiar de unidad, no podras revertir este cambio.",
@@ -181,7 +181,6 @@ LoadingState(){
             })
       .then(res => res.json())
       .then((responseData) => {
-        console.log(responseData)
         this.setState({
           data2: responseData.data,
           message2: responseData.message,
@@ -217,7 +216,6 @@ LoadingState(){
             })
       .then(res => res.json())
       .then((responseData) => {
-        console.log(responseData)
         this.setState({
           data3: responseData.data,
           SendAlertMessage: responseData.message,
@@ -259,24 +257,6 @@ LoadingState(){
     });
   }
  
-    renderItem(item) {
-        return (
-        <View style={{ flex: 1 }}>
-        <FlatList
-        ItemSeparatorComponent={this.renderSeparator}
-        data = {this.state.data}
-        renderItem={({ item }) => (
-            <ListItem
-              title={`${item.nombre}`}
-              containerStyle={{ borderBottomWidth: 0 }} 
-            />
-          )}
-          keyExtractor={item => item.user}         
-        />
-        </View>
-        );
-      }
-
       
       selectItem(item) {
         if(this.state.mostrarSearchBar){
@@ -286,8 +266,8 @@ LoadingState(){
           usuario:item.user,
           data: [item],
           mostrarSearchBar: false,
-          cancel1: 'clear',
-          cancel: null
+          cancel1: !this.state.cancel1,
+          cancel: false
         });
         this.makeRemoteRequest2(this.text2)}
         else{
@@ -298,8 +278,16 @@ LoadingState(){
             usuario:"",
             data: this.state.data,
             mostrarSearchBar: true,
-            cancel1: null,
-            show1:false
+            cancel1: false,
+            show1:false,
+            cancel:false,
+            value2:"",
+            text2:"",
+            ide:null,
+            data2: this.state.data2,
+            cancel: !this.state.cancel,
+            show2:false,
+            press:true
           });
           }
         
@@ -313,7 +301,7 @@ LoadingState(){
           text2:item.nombre_unidad,
           ide:item.id,
           data2: [item],
-          cancel: 'clear', //backspace keyboard-backspace
+          cancel: !this.state.cancel, //backspace keyboard-backspace
           show2:true,
           press:false
         });
@@ -325,7 +313,7 @@ LoadingState(){
             text2:"",
             ide:null,
             data2: this.state.data2,
-            cancel: null,
+            cancel: !this.state.cancel,
             show2:false,
             press:true
           });
@@ -347,10 +335,13 @@ show1() {
         renderItem={({ item }) => (
             <ListItem
               title={`${item.nombre_unidad}`}
+              //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-              containerStyle={{ borderBottomWidth: 0}} 
+              //containerStyle={{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} 
+              containerStyle = {this.state.cancel?{borderBottomColor : '#E8E8E8', borderBottomWidth: 1, backgroundColor : '#cc99ff'}:{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}}
+              
                onPress={() => this.selectItem2(item)}
-               rightIcon={{name : this.state.cancel}}
+               rightIcon={this.state.cancel?{name : 'clear'}:{name : null}}
                Component={TouchableScale}
               friction={90} //
               tension={100} // 
@@ -358,7 +349,7 @@ show1() {
               linearGradientProps={{
                 colors: ['#f2e6ff', '#F9F4FF'],
                 start: [1.5, 0],
-                end: [0.1, 0],
+               end: [0.1, 0],
               }}
               ViewComponent={LinearGradient}
               containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
@@ -382,11 +373,10 @@ show2() {
   if(this.state.show2){
     return(
 
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:15}} >
+                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:20}} >
                     <CustomButton
                     //onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
                     onPress = {() => {this.toggleAlert2Botones()}}
-                
                     title = "Cambiar"
                     name = 'long-primary-button'
                     />
@@ -470,6 +460,7 @@ toggleAlert2Botones(){
   this.setState({
       estadoAlerta2Botones : !this.state.estadoAlerta2Botones
   })
+  console.log(this.state.estadoAlerta2Botones)
 }
 
 //Mostrar simbolo de carga en la lista de nines
@@ -494,7 +485,6 @@ charge2(){
 }
 
 se_encuentra_en_busqueda(){
-
     if(this.state.userToken.unidad1!=0){
       if(this.state.data!=undefined){
         return(
@@ -504,10 +494,11 @@ se_encuentra_en_busqueda(){
           renderItem={({ item }) => (
 
               <ListItem
-                rightIcon={{name : this.state.cancel1}}
+                rightIcon={this.state.cancel1?{name : 'clear'}:{name : null}}
                 containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                //containerStyle = {{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} // borderTopColor: '#E8E8E8', borderTopWidth: 1
                 title={`${item.nombre}`}
-                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+                titleStyle={{ color: '#104F55',fontWeight: 'bold' }} // color: '#104F55'
                 onPress={() => this.selectItem(item)}
                 Component={TouchableScale}
                 friction={90} //
@@ -518,11 +509,10 @@ se_encuentra_en_busqueda(){
                   colors: ['#f2e6ff', '#F9F4FF'],
                   start: [1.5, 0],
                   end: [0.1, 0],
-                }}
+                 }}
                 subtitleStyle={{ color: '#104F55' }}
                 subtitle={`${item.pseudonimo}`}
                 ViewComponent={LinearGradient}
-
               />
           )}
             keyExtractor={item => item.user} 
@@ -583,7 +573,7 @@ se_encuentra_en_busqueda(){
       </ScrollView>
       
 
-            <Alerta2Botones visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
+            <Alerta2B visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
                     />
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}

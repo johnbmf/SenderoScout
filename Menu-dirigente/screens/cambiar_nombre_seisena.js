@@ -13,11 +13,11 @@ import {
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import CustomButton from "../CustomComponents/CustomButtons";
-import {Alerta} from '../CustomComponents/customalert'
 import { List, ListItem, Button} from "react-native-elements";
 import { LinearGradient } from 'expo';
 import TouchableScale from 'react-native-touchable-scale';
-
+import {Alerta} from './../CustomComponents/customalert';
+import {Alerta2B} from './../CustomComponents/customalert2B'
 
 class cambiar_nombre_seisena extends Component {
     constructor(props){
@@ -32,6 +32,7 @@ class cambiar_nombre_seisena extends Component {
             userToken: "",
             id_seisena: null,
             data:[],
+            data2:[],
             seisena_seleccionada:false,
             boton_cancelar_seisena:null,
 
@@ -49,7 +50,7 @@ class cambiar_nombre_seisena extends Component {
         this.setState({
             userToken : JSON.parse(Token),
         });
-        {{this.mostrarSeisenas()}}
+        this.mostrarSeisenas()
       };
       handleOpen = () => {
 
@@ -80,7 +81,7 @@ class cambiar_nombre_seisena extends Component {
                     },
                     body: JSON.stringify(
                     {
-                        id_seisena: this.state.id_seisena,
+                        id_seisena: null, //this.state.id_seisena
      
                         id_unidad:this.state.userToken.unidad1 
                     })
@@ -90,6 +91,7 @@ class cambiar_nombre_seisena extends Component {
           .then((responseData) => {
             this.setState({
               data: responseData.data,
+              data2: responseData.data,
               message: responseData.message,
               error: null,
               isLoading: false,
@@ -101,8 +103,26 @@ class cambiar_nombre_seisena extends Component {
       };
 
 
+    nombre_existe(n){
+        for (i = 0; i < this.state.data2.length; i++) {
+            if(n == this.state.data2[i].nombre_seisena){
+                return 1
+            }
+        }
+        return 0
+    }
+
+
     cambiarNombreSeisena = () =>
     {   
+        if(this.nombre_existe(this.state.nuevo_nombre)==1){
+            this.setState({
+                typeAlerta : 'Warning',
+                estadoAlerta: true,
+                tituloAlerta: "Nombre ya existe en otra seisena",
+                mensajeAlerta: "Por favor escriba un nuevo nombre para la seisena"
+            })
+        }else{
         if(this.state.nuevo_nombre==''){
             this.setState({
                 typeAlerta : 'Warning',
@@ -151,10 +171,11 @@ class cambiar_nombre_seisena extends Component {
                 })
             });
         });}
+        }
     }
     
     
-        LoadingState(){
+    LoadingState(){
             if(this.state.isLoading){
                 return(
     
@@ -182,9 +203,9 @@ Ingresar_nuevo_nombre(){
         return(
             <View style={{alignItems: 'flex-start'}}>
 
-            <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Ingrese el nuevo nombre de la seisena:</Text>
+            <Text style={{ marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Ingrese el nuevo nombre de la seisena:</Text>
                     <TextInput 
-                        style = {{height:'15%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:15}}
+                        style = {{height:'30%', width:'93%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10,marginBottom:30,fontSize: 16}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
@@ -218,12 +239,12 @@ seleccionar_seisena(item){
         })
     }
     else{
-        {this.mostrarSeisenas()}
         this.setState({
             seisena_seleccionada:false,
             boton_cancelar_seisena:null,
             id_seisena:null,
         })
+        {this.mostrarSeisenas()}
     }
 }
 
@@ -234,7 +255,7 @@ puede(){
 if(this.state.userToken.unidad1 != 0){
     return(
     <View>
-    <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena que desea cambiar nombre:</Text>
+    <Text style={{ marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena que desea cambiar nombre:</Text>
     <ScrollView>
         <FlatList
         data = {this.state.data}
@@ -259,6 +280,7 @@ if(this.state.userToken.unidad1 != 0){
           )}
           keyExtractor={item => item.id_seisena}         
         />
+        {this.Ingresar_nuevo_nombre()}
         </ScrollView>
     </View>
 );
@@ -308,7 +330,6 @@ else{
                 </View >
                 <View style = {styles.container}>
                 {this.puede()}
-                {this.Ingresar_nuevo_nombre()}
                 </View>
                 <View>
             {this.LoadingState()}

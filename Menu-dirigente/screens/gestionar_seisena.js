@@ -16,12 +16,13 @@ import {
 } from "react-native";
 import { Header,Left,Right,Icon,Body } from 'native-base'
 import { List, ListItem, Button} from "react-native-elements";
-import {Alerta} from './../CustomComponents/customalert'
 import SearchBar from "react-native-dynamic-search-bar";
 import TouchableScale from 'react-native-touchable-scale';
 import { LinearGradient } from 'expo-linear-gradient';
 import CustomButton from "../CustomComponents/CustomButtons";
-
+import {Alerta} from './../CustomComponents/customalert';
+import {Alerta2B} from './../CustomComponents/customalert2B'
+//import { white } from "react-native-paper/lib/typescript/src/styles/colors";
 const { width } = Dimensions.get("window");
 
 class gestionar_seisena extends Component {
@@ -52,11 +53,12 @@ class gestionar_seisena extends Component {
       typeAlerta: 'Warning',
       filter: 1,
       loading:false,
-      checked: true,
+      checked: false,
       nines_seleccionados: [],
       show_siguiente: false,
       seleccion_seisena: false,
-      nombre_seisena:''
+      nombre_seisena:'',
+      mostrarnines: []
       
     };
     if (Platform.OS === "android") {
@@ -175,6 +177,7 @@ LoadingState(){
           error: null,
           isLoading: false,
         });
+        this.buscador("")
       })
       .catch(error => {
         this.setState({ error, isLoading: false });
@@ -241,6 +244,26 @@ toggleAlert(){
   })
 }
 
+//Buscador
+
+buscador(texto){
+  a=[]
+  for (i = 0; i < this.state.data_nines.length; i++) {
+    console.log('DSGGFDDGFGDF')
+    console.log(texto)
+    console.log(this.state.data_nines[i]['nombre'])
+    if(this.state.data_nines[i]['nombre'].toLowerCase().startsWith(texto.toLowerCase())){
+      console.log(this.state.data_nines[i]['nombre'])
+      
+      a.push(this.state.data_nines[i])
+    }
+  }
+  console.log(this.state.mostrarnines)
+  this.setState({mostrarnines: a, text: texto})
+  console.log(this.state.mostrarnines)
+}
+
+
 //Marcar seisena.
 seleccionar_seisena(item){
   if(!this.state.seisena_seleccionada){
@@ -253,12 +276,14 @@ seleccionar_seisena(item){
       })
   }
   else{
-      {this.mostrarSeisenas()}
+      {this.entregar_seisenas()}
       this.setState({
           seisena_seleccionada:false,
           boton_cancelar_seisena:null,
           id_seisena:null,
-          nombre_seisena: ''
+          nombre_seisena: '',
+          seleccion_seisena: false,
+          show_siguiente:true
       })
   }
 }
@@ -286,6 +311,23 @@ seisenas_disponibles(){
   if(this.state.seleccion_seisena){
       return(
       <View>
+      <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Personas seleccionadas:</Text>
+      <FlatList
+        data = {this.state.nines_seleccionados}
+        extraData={this.state.checked}
+        renderItem={({ item }) => (
+            <ListItem
+              //key={item.isSelect}
+              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              title={`${item.nombre}`}
+              titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+              subtitleStyle={{ color: '#104F55' }}
+              subtitle={`${item.seisena1}`}
+            />
+        )}
+          keyExtractor={item => item.user}           
+        />
       <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena de asignación:</Text>
       <ScrollView>
           <FlatList
@@ -378,45 +420,64 @@ se_encuentra(item){
 }
 
 
-marcar(flag,i,item){
-  
-    if(flag){
-      this.setState({
-        nines_seleccionados: this.arrayRemove(this.state.nines_seleccionados, item)
-      })
+d_marcar(i,flag,item){
+  return new Promise((resolve) => {
+  if(flag){
+      del = this.arrayRemove(this.state.nines_seleccionados, item)
       this.state.data_nines[i].isSelect = false;
-    }
-    else{
-      this.state.nines_seleccionados.push(item)
       this.setState({
-        nines_seleccionados: this.state.nines_seleccionados
+        nines_seleccionados: del,
+        checked: !this.state.checked
       })
-      this.state.data_nines[i].isSelect = true;
   }
-  console.log(this.state.nines_seleccionados)
+  resolve(flag)
+})  
 }
+
+m_marcar(i,flag,item){
+  return new Promise((resolve) => {
+  if(!flag){
+    this.state.data_nines[i].isSelect = true;
+    this.state.nines_seleccionados.push(item)
+    this.setState({
+        nines_seleccionados: this.state.nines_seleccionados,
+        checked: !this.state.checked
+    })
+  }
+  resolve(flag)
+ })
+}
+
+marcar(flag,i,item){
+  this.d_marcar(i,flag,item).then(result => {this.m_marcar(i,result,item)})
+  }
+
 
 
 
 selectItem(item){
-    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({checked:!this.state.checked, show_siguiente:true}))
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({show_siguiente:true}))
 }
 
 
 
 se_encuentra_en_busqueda(){
   if(this.state.userToken.unidad1!=0 && !this.state.seleccion_seisena){
+
     if(this.state.data_nines!=undefined){
       return(
         <FlatList
-        data = {this.state.data_nines}
+        data = {this.state.mostrarnines}
         extraData={this.state.checked}
         renderItem={({ item }) => (
             <ListItem
+              //key={item.isSelect}
               onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
+              //containerStyle={item.isSelect ? {backgroundColor: '#f2e6ff',borderBottomColor : '#E8E8E8', borderBottomWidth: 1}:{backgroundColor: '#FFFFFF', borderBottomColor:'#E8E8E8', borderBottomWidth: 1}} 
               containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
               title={`${item.nombre}`}
+              //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
               Component={TouchableScale}
               friction={90} //
@@ -435,8 +496,7 @@ se_encuentra_en_busqueda(){
               ViewComponent={LinearGradient}
             />
         )}
-          keyExtractor={item => item.user} 
-                  
+          keyExtractor={item => item.user}           
         />
       )
     }
@@ -445,6 +505,7 @@ se_encuentra_en_busqueda(){
         <Text style={{marginLeft:15,fontSize: 16, marginTop:5}}>No se encuentran personas con ese nombre.</Text>
       )
     }
+
   }
 }
 
@@ -469,11 +530,11 @@ seleccion_nine(){
                 backgroundColor="#8B4BC1"
                 placeholder="Ingresa nombre del niño o niña..."
                 onChangeText={text => {
-                  this.busqueda(this.state.filter,text);
+                  this.buscador(text);
                 }}
                 value={this.state.text} 
                 onPressCancel={() => {
-                  this.busqueda(this.state.filter,"");
+                  this.buscador("");
                 }}
 
                 textInputValue={this.state.text}
@@ -568,10 +629,6 @@ seleccion_nine(){
       </SafeAreaView>
       
       </ScrollView>
-      
-
-            <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.cambiar_nine_seisena()} rechazar = {() => {this.toggleAlert()}}
-                    />
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />
