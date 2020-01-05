@@ -14,7 +14,8 @@ import {
     KeyboardAvoidingView,
     ScrollView,
     ActivityIndicator,
-    AsyncStorage
+    AsyncStorage,
+    RefreshControl
 } from "react-native";
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert';
 import base64 from 'react-native-base64';
@@ -54,6 +55,7 @@ class cambio_pseudonimos extends Component {
             SendAlertType2: 0,//se cambio el pseudonimo
             SendAlertState2: false,
             AlertTitle2:"",
+            refreshing:false,
         }
         this._bootstrapAsync();
     }
@@ -128,7 +130,7 @@ class cambio_pseudonimos extends Component {
             if(responseJson["response"] == 0){//estamos ok-- cambia estado y pseudonimo en usuario
                 this.setState({
                     TypeAlert2: 'Succsess',
-                    SendAlertMessage2: this.state.nombreNino+ "ha cambiado su pseudonimo a"+this.state.nuevoPseudo+".",
+                    SendAlertMessage2: this.state.nombreNino+ "ha cambiado su pseudonimo a "+this.state.nuevoPseudo+".",
                     AlertTitle2: "Pseudonimo cambiado con éxito",
                     SendAlertType2: 0,
                     SendAlertState2: true,
@@ -221,6 +223,13 @@ class cambio_pseudonimos extends Component {
             isLoading : false
         });
     }
+
+    onRefresh() {
+        this.setState({
+            Pseudonimos: [],
+        },() => {this._bootstrapAsync()})
+        return;
+    }
  
 
     render() {
@@ -242,12 +251,12 @@ class cambio_pseudonimos extends Component {
                 </View>
                 
                 <View style={{width: '100%', height: '88%'}} >
-                    <ScrollView>
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+                    refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
+                    }>
                         <View>
-                        {(this.state.cantPseudos< 1) &&//Pseudonimos.length > 0) &&
-                            <View><Text style={{color: 'red',fontSize:30,marginLeft:20, fontFamily:'Roboto'}}
-                            >No hay lobatos que quieran cambiar su pseudonimo en la aplicación.</Text>  
-                            </View>}
+                        
                             {
                                 console.log("pseudonnimos render"),
                                 //console.log(this.state.Pseudonimos),
@@ -275,6 +284,10 @@ class cambio_pseudonimos extends Component {
                                 )) 
                                 
                             }
+                            {(this.state.cantPseudos == 0) &&//Pseudonimos.length > 0) &&
+                            <View><Text style={{color: 'gray',fontSize:30,marginLeft:10,marginRight:5, fontFamily:'Roboto'}}
+                            >No hay lobatos que quieran cambiar su pseudonimo en la aplicación.</Text>  
+                            </View>}
                         </View>                      
                         <Alerta visible = {this.state.SendAlertState2} type = {this.state.TypeAlert2} titulo = {this.state.AlertTitle2} contenido = {this.state.SendAlertMessage2} rechazar = {() => {this.toggleAlert2()}}
                     />
