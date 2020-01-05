@@ -373,7 +373,7 @@ show2() {
   if(this.state.show2){
     return(
 
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:20}} >
+                    <View style={{alignItems:'center',marginTop:20}} >
                     <CustomButton
                     //onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
                     onPress = {() => {this.toggleAlert2Botones()}}
@@ -573,7 +573,7 @@ se_encuentra_en_busqueda(){
       </ScrollView>
       
 
-            <Alerta2B visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
+            <Alerta botones = {2} visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
                     />
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
