@@ -37,8 +37,8 @@ const Alerta = (props) => {
                             <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'secondary-button'
-                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_rechazar: "Voler"} 
-                            />
+
+                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Volver"}/>
                         </View>
                     </View>
                     </TouchableWithoutFeedback>
@@ -71,8 +71,8 @@ const Alerta = (props) => {
                             <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'long-primary-button'
-                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_rechazar: "Voler"}
-                            />
+
+                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Volver" }/>
                         </View>
                     </View>
                     </TouchableWithoutFeedback>
