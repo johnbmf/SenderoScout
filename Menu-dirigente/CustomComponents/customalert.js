@@ -31,7 +31,7 @@ const Alerta = (props) => {
                         <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
                             <CustomButton 
                                 onPress = {props.aceptar}
-                                name = 'primary-button'
+                                name = 'primary-button' 
                                 title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Aceptar" }
                             />
                             <CustomButton 
