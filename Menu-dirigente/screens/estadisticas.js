@@ -18,12 +18,15 @@ import {
     ScrollView,
     StatusBar
 } from "react-native";
+import {
+    G
+  } from 'react-native-svg';
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents, StackRouter } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert'
-import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea } from "victory-native";
+import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea, VictoryPie, VictoryTooltip, VictoryContainer } from "victory-native";
 import Swiper from 'react-native-swiper'
 import {CustomLoading} from '../CustomComponents/CustomLoading';
 const Height = Dimensions.get('window').height;
@@ -79,6 +82,41 @@ class estadisticas extends Component {
                 <StatusBar barStyle="default" />
             </View>
         )
+    }
+    noDataMsj(){
+        return (
+            <View style={{height:'82%',justifyContent:'center', alignItems:'center',backgroundColor: 'white'}}>
+                <Text style = {{ 
+                    fontFamily:'Roboto',
+                    fontSize:20,
+                    color: 'grey',
+                    }}>
+                    Evalue niños para poder ver</Text>    
+                    <Text style = {{ 
+                    fontFamily:'Roboto',
+                    fontSize:20,
+                    color: 'grey',
+                    }}>
+                    sus estadísticas</Text>            
+            </View>
+        )
+    }
+    CustomLabel(){
+        return (
+            <G>
+              <VictoryLabel {...this.props}/>
+              <VictoryTooltip
+                {...this.props}
+                x={200} y={250}
+                orientation="top"
+                pointerLength={0}
+                cornerRadius={50}
+                flyoutWidth={100}
+                flyoutHeight={100}
+                flyoutStyle={{ fill: "black" }}
+              />
+            </G>
+          )
     }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
@@ -150,7 +188,7 @@ class estadisticas extends Component {
                                 <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Estadísticas</Text>
                             </Body>
                             <Right></Right>
-                        </Header >                    
+                        </Header>                    
                     </View>
                 {this.state.isLoading ? <this.loadingView/> : <View style={{width:'100%', height:'88%'}}>
                     <ScrollView 
@@ -163,7 +201,8 @@ class estadisticas extends Component {
                     }}>
                         <View style = {{width:'99%', height:Height*0.70}} >
                             <Text style = {styles.textlabel}>Áreas de Desarrollo</Text>
-                            <Swiper style={styles.wrapper} showsButtons={true}>
+                        {console.log(this.state.dataSource.length)}
+                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <Swiper style={styles.wrapper} showsButtons={true}>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center', paddingLeft:10}}>
                                     <VictoryChart polar
                                         theme={VictoryTheme.material}
@@ -380,25 +419,25 @@ class estadisticas extends Component {
                                 </VictoryChart>
                                 </View>
                             </Swiper>
+                        }
                         </View>
-                        <View style = {{width:Widht*0.99, height:Height*0.45, justifyContent: 'center', alignItems:'center'}}>
+                        <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
                         <Text style = {styles.textlabel}>Misiones Completadas</Text>
-                                <VictoryChart
-                                    theme={VictoryTheme.material}
-                                    height={(Height*0.36)} width={(Widht*0.85)}
-                                    >
-                                    <VictoryLabel text="Misiones completadas por unidad" x={Widht*0.5-20} y={30} textAnchor="middle"/>
-                                    <VictoryLine
-                                        style={{
-                                        data: { stroke: "#c43a31" },
-                                        parent: { border: "1px solid #ccc"}
-                                        }}
-                                        data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 3 },
-                                        { x: 3, y: 5 },
-                                        { x: 4, y: 7 }]} />
-                                </VictoryChart>
+                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> :
+                                <VictoryPie
+                                style={{ labels: { fill: "white" } }}
+                                innerRadius={100}
+                                labelRadius={120}
+                                labels={({ datum }) => `# ${datum.y}`}
+                                labelComponent={<this.CustomLabel />}
+                                data={[
+                                    { x: 1, y: 5 },
+                                    { x: 2, y: 4 },
+                                    { x: 3, y: 2 },
+                                    { x: 4, y: 3 },
+                                    { x: 5, y: 1 }
+                                ]}/>
+                                }
                                 </View>
                     </ScrollView>
                 </View>}
