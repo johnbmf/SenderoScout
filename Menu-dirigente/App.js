@@ -21,7 +21,7 @@ import CrearUnidadScreen from './screens/crear_unidad'
 import CambiarUnidadScreen from './screens/cambiar_unidad'
 import UnidadScreen from './screens/unidad'
 import CerrarSesionScreen from './screens/cerrar_sesion'
-import CambiarPseudonimo from './screens/cambiar_pseudonimo'
+import CambiarPseudonimoScreen from './screens/cambiar_pseudonimo'
 
 import GestionarSeisenaScreen from './screens/gestionar_seisena'
 import CambiarNombreSeisenaScreen from './screens/cambiar_nombre_seisena'
@@ -145,7 +145,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   AgregarUsuarios:AgregarUsuariosScreen,
   InvitarDirigente : InvitarDirigenteScreen,
   Unidad:CrearUnidadStack,
-  CambioPseudos: CambiarPseudonimo,
+  CambioPseudos: CambiarPseudonimoScreen,
   Insignias: EntregarInsigniaStack,
   Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
@@ -170,6 +170,15 @@ const RegisterStack = createStackNavigator({
     header: null
   }}
 );
+
+const Pseudonimos = createStackNavigator({
+  CambioPseudos: CambiarPseudonimoScreen,
+}, {
+  defaultNavigationOptions:{
+    header: null
+  }}
+);
+
 
 const LoginNavigator = createSwitchNavigator({
   Autenticar: AutenticarScreen,

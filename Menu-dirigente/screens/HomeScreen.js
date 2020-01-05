@@ -380,7 +380,7 @@ class HomeScreen extends Component {
                 {(this.state.cantPseudos> 0) &&//Pseudonimos.length > 0) &&
                 <View style = {{flexDirection:'row', alignItems:'center', height:90, paddingBottom:50}}>
                     <CustomButton
-                    onPress = {()=> this.props.navigation.navigate('CambioPseudos')}
+                    onPress = {()=> this.props.navigation.navigate("CambioPseudos")}
                     title = "Algunos lobatos quieren cambiar su pseudonimo."
                     name = 'long-primary-button'
                     />  
