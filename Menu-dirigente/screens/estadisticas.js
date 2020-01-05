@@ -422,7 +422,7 @@ class estadisticas extends Component {
                         }
                         </View>
                         <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
-                        <Text style = {styles.textlabel}>Misiones Completadas</Text>
+                        <Text style = {styles.textlabel}>Desarrollo de misiones por seisena</Text>
                         {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> :
                                 <VictoryPie
                                 style={{ labels: { fill: "white" } }}
