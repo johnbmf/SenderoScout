@@ -373,7 +373,7 @@ show2() {
   if(this.state.show2){
     return(
 
-                    <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center',marginTop:20}} >
+                    <View style={{alignItems:'center',marginTop:20}} >
                     <CustomButton
                     //onPress = {() => {this.makeRemoteRequest3(this.state.usuario,this.state.ide)}}
                     onPress = {() => {this.toggleAlert2Botones()}}
