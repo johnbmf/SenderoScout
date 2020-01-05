@@ -38,7 +38,7 @@ const Alerta = (props) => {
                                 onPress = {props.rechazar}
                                 name = 'secondary-button'
 
-                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_aceptar: "Volver"}/>
+                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_rechazar: "Volver"}/>
                         </View>
                     </View>
                     </TouchableWithoutFeedback>
