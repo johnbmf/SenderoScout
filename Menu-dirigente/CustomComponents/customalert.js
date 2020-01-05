@@ -11,7 +11,7 @@ const Alerta = (props) => {
     if (props.botones == 2){
         return (        
             <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
-                <TouchableWithoutFeedback onPress= {props.rechazar}>
+                <TouchableWithoutFeedback onPress= {props.hide != null ? props.hide : props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <TouchableWithoutFeedback onPress= {() => {null}}>
                     <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#4BC150', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
@@ -38,7 +38,7 @@ const Alerta = (props) => {
                                 onPress = {props.rechazar}
                                 name = 'secondary-button'
 
-                                title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Volver"}/>
+                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_aceptar: "Volver"}/>
                         </View>
                     </View>
                     </TouchableWithoutFeedback>
@@ -50,7 +50,7 @@ const Alerta = (props) => {
     else {
         return (        
             <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
-                <TouchableWithoutFeedback onPress= {props.rechazar}>
+                <TouchableWithoutFeedback onPress= {props.hide != null ? props.hide : props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <TouchableWithoutFeedback onPress= {() => {null}}>
                     <View style={{ felx:1, backgroundColor:'white', flexDirection:'column', justifyContent:'space-between', borderWidth:2.5, borderColor:'#4BC150', width:'95%', height:'60%', alignSelf:'center', borderRadius:8}}>
