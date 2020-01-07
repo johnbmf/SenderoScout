@@ -573,7 +573,7 @@ se_encuentra_en_busqueda(){
       </ScrollView>
       
 
-            <Alerta2B visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
+            <Alerta botones = {2} visible = {this.state.estadoAlerta2Botones} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} aceptar = {() => this.makeRemoteRequest3(this.state.usuario,this.state.ide)} rechazar = {() => {this.toggleAlert2Botones()}}
                     />
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
