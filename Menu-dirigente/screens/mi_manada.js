@@ -14,6 +14,7 @@ import {Rating, Button, Divider, ListItem } from 'react-native-elements'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { ScrollView, FlatList, ViewPagerAndroid } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
+import { LinearGradient } from 'expo';
 
 class mi_manada extends Component {
 
@@ -102,7 +103,7 @@ class mi_manada extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <View style = {{width: '100%', height: '88%'}}>
+                <View style = {{width: '100%', height: '88%',marginTop:3}}>
                     <ScrollView>
                         <View>
                         {
@@ -110,16 +111,19 @@ class mi_manada extends Component {
                         this.state.miembros.map((obj, index) => (
                             <ListItem
                                 key={index}
-                                leftIcon = {
-                                    <Icon
-                                        name= 'user'
-                                        type= 'FontAwesome'
-                                        style={{fontSize: 25, alignContent: 'center' }}
-                                    />
-                                }
+                                leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
                                 title = {obj["nombre"]}
+                                titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
                                 subtitle={"Edad " + obj["edad"] + "      Seisena: " + obj["seisena1"]}
-                                bottomDivider
+                                subtitleStyle = {{color: '#104F55'}}
+                                linearGradientProps={{
+                                    colors: ['#f2e6ff', '#F9F4FF'],
+                                    start: [1.5, 0],
+                                    end: [0.1, 0],
+                                }}
+                                ViewComponent={LinearGradient}
+                                containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
+                                
                             />
                         ))
                         }
