@@ -33,7 +33,7 @@ public class Login : MonoBehaviour{
     #endregion
     public GameObject OverlayCanvas;
     //Debug mode: Permite saltarse el login usando datos STUB.
-    private bool debugMode = true;
+    private bool debugMode = false;
 
     void Start(){
         if (debugMode)

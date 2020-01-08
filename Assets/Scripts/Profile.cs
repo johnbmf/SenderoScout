@@ -151,7 +151,7 @@ public class Profile : MonoBehaviour
 
             else if (RespuestaJson["response"] == 2)
             {
-                ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión (I). Inténtalo más tarde.";
+                ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión. Inténtalo más tarde.";
             }
 
             else if (RespuestaJson["response"] == -1)

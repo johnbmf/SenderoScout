@@ -11,6 +11,11 @@ public class PerfilOpener : MonoBehaviour
     public Sprite[] Avatares;
     public GameObject PerfilCanvas;
     public GameObject MainCamera;
+
+    //Variables cambio de color insignia
+    public GameObject[] BotonesInsignia;
+    public Sprite[] InsigniasColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +68,18 @@ public class PerfilOpener : MonoBehaviour
 
             Debug.Log("PerfilOpenerResponse: " + RespuestaJson);
 
+            //Cambio de color de cada insignia en caso de obtenerla.
+            for (int i = 1; i <= 15; i++) {
+                foreach (JSONNode node in RespuestaJson[i.ToString()])
+                {
+                    string nombreInLista = (string)node.ToString().Replace("\"", string.Empty);
+                    if (nombreInLista == PlayerPrefs.GetString("user", "USER_NOT_FOUND"))
+                    {
+                        BotonesInsignia[i-1].GetComponent<Image>().sprite = InsigniasColor[i-1];
+                    }
+                }
+            }
+            
             Aptitudes.isPanelOpen = true;
             MainCamera.GetComponent<TouchCamera>().enabled = false;
             PerfilCanvas.SetActive(true);

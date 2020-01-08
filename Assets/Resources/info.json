@@ -1,12 +1,77 @@
 {
   "1":
   {
-    "nombre": "Insignia de cuidado de mascotas",
-    "obtencion": "Esta insignia se obtiene al mostrar una actitud de respeto hacia las mascotas y animales. Puedes pedir a tu dirigente realizar una exposición acerca de tu animal favorito y los cuidados que necesita ese animal para tener más oportunidades de obtener esta insignia."
+    "nombre": "Insignia de la Guitarra",
+    "obtencion": "Solo los guitarristas más avezados son dignos de esta insignia. Para obtenerla debes aprender una canción en guitarra y animar el ambiente con el sonido de ella."
   },
   "2":
   {
+    "nombre": "Insignia de cuidado de mascotas",
+    "obtencion": "Esta es una insignia que demuestra que tanto compromiso tienes en el cuidado de las mascotas y animales. Para obtenerla debes demostrar el cuidado que tienes con los animales."
+  },
+  "3":
+  {
     "nombre": "Insignia de armado de carpas",
-    "obtencion": "Esta insignia se obtiene al demostrar la capacidad que tienes para armar carpas. Intenta participar y destacarte en los campamentos Scout armando carpas para tener más oportunidades de obtener esta insignia."
-  }
+    "obtencion": "Los aventureros deben saber armar el lugar donde se quedarán durante la aventura. Para obtenerla debes destacarte durante el armado de carpas durante los campamentos."
+  },
+  "4":
+  {
+    "nombre": "Insignia de pintura",
+    "obtencion": "Esta es una insignia para aquellos que se expresan mediante el color y las formas. Para obtenerla debes dibujar y pintar una pintura y luego dejarla de recuerdo para tu manada."
+  },
+  "5":
+  {
+    "nombre": "Insignia de teatro",
+    "obtencion": "Esta es una insignia para quienes representan historias frente a otras personas usando una combinación de discurso, gestos, escenografía, música, sonido y espectáculo. Para obtenerla debes organizar una obra de teatro con tu seisena."
+  },
+  "6":
+  {
+    "nombre": "Insignia de fogata",
+    "obtencion": "Armar y encender una fogata es una de las actividades cotidianas de todo aventurero. Para obtener esta insignia, debes compartir con tus compañeros y dirigente la experiencia de encender una fogata."
+  },
+  "7":
+  {
+    "nombre": "Insignia de orientación",
+    "obtencion": "Tener un buen sentido de la otientación permitirá que toda tu seisena llegue sana y salva a campamento. Para obtener esta insignia debes saber utilizar una brújula y ser capaz de seguir un camino con ella."
+  },
+  "8":
+  {
+    "nombre": "Insignia de rastreador",
+    "obtencion": "Cuando un lobezno es capaz de rastrear y cazar su propia presa, los viejos lobos lo reconocerán como un cazador. Para obtener esta insignia debes saber reconocer pistas e identificar rastros."
+  },
+  "9":
+  {
+    "nombre": "Insignia de astronomía",
+    "obtencion": "En el inmenso firmamento se encuentran los secretos del universo, astrónomos son aquellos que lo observan buscando la verdad. Para obtener esta insignia debes demostrar conocimientos acerca de las constelaciones más importantes."
+  },
+  "10":
+  {
+    "nombre": "Insignia de vida sana",
+    "obtencion": "Una vida sana basada en una alimentación y en la práctica de deportes, son grandes cualidades de un lobato. Para obtener esta insignia debes demostrar una alimentación saludable y practicar algún deporte."
+  },
+  "11":
+  {
+    "nombre": "Insignia de puntería",
+    "obtencion": "Para obtener esta insignia debes acertar 3 veces a un blanco a una distancia mínima de 5 metros. Recuerda pedir ayuda a tu dirigente."
+  },
+  "12":
+  {
+    "nombre": "Insignia de maestro pokemon",
+    "obtencion": "Tengo que ser siempre el mejor, Mejor que nadie más, Atraparlos mi prueba es. Ser un gran maestro pokemon es parte de nuestro lema Siempre Mejor!. Para obtener esta insignia debes poseer al menos un pokemon legendario en Pokemon Go!."
+  },
+  "13":
+  {
+    "nombre": "Insignia de cantante",
+    "obtencion": "Un cantante es una persona que produce melodías con su voz. Los lobatos que la poseen son grandes artistas y con gran personalidad. Para obtener esta insignia debes cantar 1 canción durante El Gran Fogón."
+  },
+  "14":
+  {
+    "nombre": "Insignia de fotografía",
+    "obtencion": "Un fotógrafo es capaz de capturar grandes momentos y guardarlos para la posteridad. Para obtener esta insignia debes capturar y presentar una foto de tipo retrato y una foto de tipo paisaje."
+  },
+  "15":
+  {
+    "nombre": "Insignia de ajedrez",
+    "obtencion": "Solo un genio y gran estratega logra sobreponerse a los diversos desafíos. Para obtener esta insignia debes ganar 5 partidas de ajedrez."
+  },
 }
