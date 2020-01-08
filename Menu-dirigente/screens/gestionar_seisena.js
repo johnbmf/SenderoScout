@@ -14,8 +14,8 @@ import {
     Image,
     AsyncStorage
 } from "react-native";
-import { Header,Left,Right,Icon,Body } from 'native-base'
-import { List, ListItem, Button} from "react-native-elements";
+import { Header,Left,Right,Body } from 'native-base'
+import { List, ListItem, Button, Icon} from "react-native-elements";
 import SearchBar from "react-native-dynamic-search-bar";
 import TouchableScale from 'react-native-touchable-scale';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -38,6 +38,7 @@ class gestionar_seisena extends Component {
       cancel:null,
       data_nines: [],
       data_seisenas: [] ,
+      data_seisenas_sin_actual: [],
       error: null,
       nombre_n: '',
       id_seisena: null,
@@ -74,8 +75,8 @@ class gestionar_seisena extends Component {
     this.setState({
         userToken : JSON.parse(Token),
     });
-    {{this.busqueda(this.state.filter,"")}}
-    {{this.entregar_seisenas()}}
+    this.busqueda(this.state.filter,"")
+    this.entregar_seisenas()
   };
 
           
@@ -184,6 +185,25 @@ LoadingState(){
       });
   };
 
+  entregar_seisenas_menosactual(){
+      a = []
+      for (b = 0; b < this.state.data_seisenas.length; b++) {
+        flag = false
+        for (i = 0; i < this.state.nines_seleccionados.length; i++) {
+            if(this.state.nines_seleccionados[i]['seisena1'] == this.state.data_seisenas[b]['nombre_seisena']){
+              flag = true
+            }
+        }
+        if(flag==false){
+          a.push(this.state.data_seisenas[b])
+        }
+      }
+      console.log('HOLI')
+      console.log(a)
+      this.setState({
+        data_seisenas_sin_actual: a
+      })
+  }
     
   cambiar_nine_seisena() {
     this.setState({ isLoading: true});
@@ -249,7 +269,6 @@ toggleAlert(){
 buscador(texto){
   a=[]
   for (i = 0; i < this.state.data_nines.length; i++) {
-    console.log('DSGGFDDGFGDF')
     console.log(texto)
     console.log(this.state.data_nines[i]['nombre'])
     if(this.state.data_nines[i]['nombre'].toLowerCase().startsWith(texto.toLowerCase())){
@@ -270,20 +289,20 @@ seleccionar_seisena(item){
       this.setState({
           seisena_seleccionada:true,
           boton_cancelar_seisena:'clear',
-          data_seisenas: [item],
+          data_seisenas_sin_actual: [item],
           id_seisena:item.id_seisena,
           nombre_seisena:item.nombre_seisena
       })
   }
   else{
-      {this.entregar_seisenas()}
+      {this.entregar_seisenas_menosactual()}
       this.setState({
           seisena_seleccionada:false,
           boton_cancelar_seisena:null,
           id_seisena:null,
           nombre_seisena: '',
-          seleccion_seisena: false,
-          show_siguiente:true
+          /*seleccion_seisena: false,
+          show_siguiente:true*/
       })
   }
 }
@@ -292,7 +311,7 @@ seleccionar_seisena(item){
 boton_asignar(){
 if(this.state.seisena_seleccionada){
   return(
-    <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
+    <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center',alignSelf:'flex-end', marginTop:15}}>
                                 <CustomButton
                                     onPress = {()=> this.cambiar_nine_seisena()}
                                     title = "Asignar"
@@ -303,7 +322,10 @@ if(this.state.seisena_seleccionada){
 }
 }
 
-
+//<View style={{ width:'90%', flex: 1, marginBottom:15, flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginRight:15}}>
+//<Text style={{fontSize: 16}}>Personas seleccionadas:</Text>
+//<Icon name="reply" size={40} color='#ab47bc' onPress={() => console.log('hello')}/>
+//</View>
 
 
 // Muestra seisenas disponibles para cambiar nines.
@@ -311,27 +333,50 @@ seisenas_disponibles(){
   if(this.state.seleccion_seisena){
       return(
       <View>
-      <Text style={{marginLeft:15,fontSize: 16, marginBottom:15}}>Personas seleccionadas:</Text>
+        <View style={{ width:'90%', flex: 1, marginBottom:15, flexDirection: 'row', alignItems: 'center', alignSelf: 'center'}}>
+        <Text style={{fontSize: 16}}>Personas seleccionadas:</Text>
+        </View>
+
       <FlatList
         data = {this.state.nines_seleccionados}
         extraData={this.state.checked}
         renderItem={({ item }) => (
             <ListItem
               //key={item.isSelect}
-              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              onPress={() => this.selectItem(item)}
+              rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
+              //containerStyle={item.isSelect ? {backgroundColor: '#f2e6ff',borderBottomColor : '#E8E8E8', borderBottomWidth: 1}:{backgroundColor: '#FFFFFF', borderBottomColor:'#E8E8E8', borderBottomWidth: 1}} 
+              
+              containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
               title={`${item.nombre}`}
+              //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
+              Component={TouchableScale}
+              friction={90} //
+              tension={100} // 
+              activeScale={0.95} //
               leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
+              linearGradientProps={item.isSelect ?{colors: ['#cc99ff', '#d9b3ff'],
+              start: [1.5, 0],
+              end: [0.1, 0]}:{
+                colors: ['#f2e6ff', '#F9F4FF'],
+                start: [1.5, 0],
+                end: [0.1, 0],
+              }}
               subtitleStyle={{ color: '#104F55' }}
               subtitle={`${item.seisena1}`}
+              ViewComponent={LinearGradient}
             />
         )}
           keyExtractor={item => item.user}           
         />
+
+
       <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena de asignación:</Text>
-      <ScrollView>
+
           <FlatList
-          data = {this.state.data_seisenas}
+          data = {this.state.data_seisenas_sin_actual}
+          extraData={this.state.nines_seleccionados}
           renderItem={({ item }) => (
               <ListItem
                 title={`${item.nombre_seisena}`}
@@ -348,12 +393,12 @@ seisenas_disponibles(){
                   end: [0.1, 0],
                 }}
                 ViewComponent={LinearGradient}
-                containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
+                containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
               />
             )}
             keyExtractor={item => item.id_seisena}         
           />
-          </ScrollView>
+         
       </View>
   );
   }
@@ -370,7 +415,7 @@ avanzar_seisena(){
     return(
 <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
                             <CustomButton
-                                onPress = {()=> this.setState({seleccion_seisena:true, show_siguiente:false})}
+                                onPress = {()=> {this.entregar_seisenas_menosactual(),this.setState({seleccion_seisena:true, show_siguiente:false})}}
                                 title = "Siguiente"
                                 name = 'long-primary-button'
    
@@ -456,7 +501,7 @@ marcar(flag,i,item){
 
 
 selectItem(item){
-    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({show_siguiente:true}))
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(result=> {console.log('CAMBIO'),this.entregar_seisenas_menosactual()},this.setState({seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})).then(result => {if(this.state.nines_seleccionados.length == 0){this.setState({show_siguiente:false,seleccion_seisena:false,seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})}}).then(result =>{if(this.state.seleccion_seisena==false){this.setState({show_siguiente:true})}})
 }
 
 
@@ -475,7 +520,7 @@ se_encuentra_en_busqueda(){
               onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               //containerStyle={item.isSelect ? {backgroundColor: '#f2e6ff',borderBottomColor : '#E8E8E8', borderBottomWidth: 1}:{backgroundColor: '#FFFFFF', borderBottomColor:'#E8E8E8', borderBottomWidth: 1}} 
-              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
               title={`${item.nombre}`}
               //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
@@ -596,39 +641,29 @@ seleccion_nine(){
                     <View style={{width: '100%', height: '5%', alignItems:'center'}} > 
                       
                 </View>
-                <ScrollView >
+                
                 <SafeAreaView style={{ flex: 1}}>
                 
-        
+                
         <View style={styles.container}>
         {this.seleccion_nine()}
         <View style={{ flex: 1 }}>
-        <ScrollView > 
-                
+       
         {this.se_encuentra_en_busqueda()}
         {this.avanzar_seisena()}
         {this.seisenas_disponibles()}    
+
+
+        </View>
+        
         {this.boton_asignar()}  
-        </ScrollView >
-        </View>
-        
-        <View style={{ flex: 1 }}>
-        <ScrollView > 
-                
-        
-        
-            
-        
-        </ScrollView >
-        </View>
-        
        
       
 
         </View>
       </SafeAreaView>
       
-      </ScrollView>
+      
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />

@@ -161,11 +161,11 @@ class crear_mision extends Component {
                             </Body>
                         </Header >                    
                     </View>
-                    <View style={{width: '100%', height: '7%'}} > 
+                    <View style={{width: '90%', height: '7%',borderColor:'gray', borderWidth:1,alignSelf: 'center',flexDirection: 'row',borderRadius:10}} > 
                     <NavigationEvents onWillFocus={() => this.clearText()}/> 
                         <View style= {styles.pickerMenu}>
                             <Picker 
-                                style = {{width:'70%', borderColor:'gray', borderWidth:1,alignSelf: 'center',flexDirection: 'row'}}
+                                style = {{width:'100%', borderColor:'gray', borderWidth:1,alignSelf: 'center',flexDirection: 'row'}}
                                 mode = 'dropdown'
                                 selectedValue = {this.state.TipoMision}
                                 onValueChange ={ (itemValue,itemIndex) => this.setState({TipoMision: itemValue}) }>
@@ -176,10 +176,10 @@ class crear_mision extends Component {
                     </View>
                     <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />
-                    <View style={{width: '100%', height: '7%'}} > 
+                    <View style={{width: '90%', height: '7%',borderColor:'gray', borderWidth:1,alignSelf: 'center',flexDirection: 'row',borderRadius:10}} > 
                         <View style= {styles.pickerMenu}>
                             <Picker 
-                                style = {{width:'70%', borderColor:'gray', borderWidth:1,alignItems: 'center',flexDirection: 'row'}}
+                                style = {{width:'100%', borderColor:'gray', borderWidth:1,alignItems: 'center',flexDirection: 'row',borderRadius:10}}
                                 mode = 'dropdown'
                                 selectedValue = {this.state.Spot}
                                 onValueChange ={ (itemValue,itemIndex) => this.setState({Spot: itemValue}) }>
@@ -190,10 +190,10 @@ class crear_mision extends Component {
                             </Picker>
                         </View>
                     </View>
-                    <View style={{width: '100%', height: '7%'}} > 
+                    <View style={{width: '90%', height: '7%',borderColor:'gray', borderWidth:1,alignSelf: 'center',flexDirection: 'row',borderRadius:10}} > 
                         <View style= {styles.pickerMenu}>
                             <Picker 
-                                style = {{width:'70%', borderColor:'gray', borderWidth:1,alignItems: 'center',flexDirection: 'row'}}
+                                style = {{width:'100%', borderColor:'gray', borderWidth:1,alignItems: 'center',flexDirection: 'row',borderRadius:10}}
                                 mode = 'dropdown'
                                 selectedValue = {this.state.Expiracion}
                                 onValueChange ={ (itemValue,itemIndex) => this.setState({Expiracion: itemValue}) }>
@@ -206,7 +206,7 @@ class crear_mision extends Component {
                     </View>
                     <View style={{width: '100%', height: '7%'}} >
                                 <TextInput 
-                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                                     underlineColorAndroid = "transparent"
                                     maxLength = {60}
                                     //{...this.props}
@@ -219,7 +219,7 @@ class crear_mision extends Component {
                     </View>
                     <View style={{width: '100%', height: '30%'}} >
                                 <TextInput 
-                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center'}}
+                                    style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, textAlign:'center', justifyContent:'center',alignSelf:'center',borderRadius:10}}
                                     placeholder = "Descripción de la misión"
                                     maxLength = {240}
                                     //{...this.props}
@@ -284,7 +284,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        borderRadius:10
     },
     misionInput:{
         flex:1,

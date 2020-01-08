@@ -6,11 +6,11 @@ import React, { Component } from 'react';
 import { PixelRatio, StyleSheet, Text, View, PanResponder, Animated, TouchableOpacity } from 'react-native';
 
 const REACTIONS = [
-  { label: "Worried", src: require('../assets/Rating/worried.png'), bigSrc: require('../assets/Rating/worried_big.png'), value: 1 },
-  { label: "Sad", src: require('../assets/Rating/sad.png'), bigSrc: require('../assets/Rating/sad_big.png'), value: 2 },
-  { label: "Strong", src: require('../assets/Rating/ambitious.png'), bigSrc: require('../assets/Rating/ambitious_big.png'), value: 3 },
-  { label: "Happy", src: require('../assets/Rating/smile.png'), bigSrc: require('../assets/Rating/smile_big.png'), value: 4 },
-  { label: "Surprised", src: require('../assets/Rating/surprised.png'), bigSrc: require('../assets/Rating/surprised_big.png'), value: 5 },
+  { label: "Muy mal", src: require('../assets/Rating/worried.png'), bigSrc: require('../assets/Rating/worried_big.png'), value: 1 },
+  { label: "Mal", src: require('../assets/Rating/sad.png'), bigSrc: require('../assets/Rating/sad_big.png'), value: 2 },
+  { label: "Regular", src: require('../assets/Rating/ambitious.png'), bigSrc: require('../assets/Rating/ambitious_big.png'), value: 3 },
+  { label: "Bueno", src: require('../assets/Rating/smile.png'), bigSrc: require('../assets/Rating/smile_big.png'), value: 4 },
+  { label: "Excelente", src: require('../assets/Rating/surprised.png'), bigSrc: require('../assets/Rating/surprised_big.png'), value: 5 },
 ];
 //const WIDTH = 320;
 //const DISTANCE =  WIDTH / REACTIONS.length;
@@ -156,7 +156,7 @@ class CustomRating extends Component{
                   </View>
 
                   <Animated.Text style={[{
-                    fontSize: 12,
+                    fontSize: 10,
                     textAlign: 'center',
                     color: '#999',
                     fontWeight: '400',
@@ -178,6 +178,7 @@ class CustomRating extends Component{
                   </Animated.Text>
                 </TouchableOpacity>
               );
+              
             })}
             <Animated.View {...this._panResponder.panHandlers} style={[{
               width: this.state.DISTANCE,

@@ -333,7 +333,7 @@ class agregar_usuarios extends Component {
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
                         <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
-                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Agregar usuarios</Text>
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()} >Agregar usuarios</Text>
                         </Body>
                         <Right></Right>
                     </Header >                    
@@ -341,12 +341,12 @@ class agregar_usuarios extends Component {
                 
                 <View style={{width: '100%', height: '7%'}} >
                     <Text style={{width: '90%'}}>
-                        <Text style={{width: '90%', paddingLeft:20}}>
+                        <Text style={{width: '90%', paddingLeft:20, fontSize:16}}>
                             {"      Nombre de Usuario:"}
                         </Text>
                     </Text>
                     <TextInput
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1,  justifyContent:'center',alignSelf:'center', paddingLeft:10}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1,  justifyContent:'center',alignSelf:'center', paddingLeft:10,borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
@@ -361,12 +361,12 @@ class agregar_usuarios extends Component {
                            
                 <View style={{width: '100%', height: '7%'}} >
                     <Text style={{width: '90%'}}>
-                        <Text style={{width: '90%'}}>
+                        <Text style={{width: '90%',fontSize:16}}>
                             {"      Email Apoderado:"}
                         </Text>
                     </Text>
                     <TextInput
-                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, justifyContent:'center',alignSelf:'center', paddingLeft:10}}
+                        style = {{height:'100%', width:'90%', borderColor: 'gray', borderWidth:1, justifyContent:'center',alignSelf:'center', paddingLeft:10,borderRadius:10}}
                         underlineColorAndroid = "transparent"
                         maxLength = {60}
                         //{...this.props}
