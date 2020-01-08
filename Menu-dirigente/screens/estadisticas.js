@@ -31,13 +31,28 @@ import Swiper from 'react-native-swiper'
 import {CustomLoading} from '../CustomComponents/CustomLoading';
 const Height = Dimensions.get('window').height;
 const Widht = Dimensions.get('window').width;
-const data = [
-    { quarter: 1, earnings: 1 },
-    { quarter: 2, earnings: 2 },
-    { quarter: 3, earnings: 3 },
-    { quarter: 4, earnings: 4 },
-    { quarter: 5, earnings: 5 }
-  ];
+class CustomLabel extends React.Component {
+    render() {
+      return (
+        <G>
+          <VictoryLabel {...this.props}/>
+          <VictoryTooltip
+            {...this.props}
+            x={200} y={250}
+            orientation="top"
+            pointerLength={0}
+            cornerRadius={50}
+            flyoutWidth={100}
+            flyoutHeight={100}
+            flyoutStyle={{ fill: "black" }}
+            active={true}
+          />
+        </G>
+      );
+    }
+  }
+  
+CustomLabel.defaultEvents = VictoryTooltip.defaultEvents;
 class estadisticas extends Component {
     static navigationOptions = {
         drawerLabel: 'Estadísticas',
@@ -102,23 +117,7 @@ class estadisticas extends Component {
             </View>
         )
     }
-    CustomLabel(){
-        return (
-            <G>
-              <VictoryLabel {...this.props}/>
-              <VictoryTooltip
-                {...this.props}
-                x={200} y={250}
-                orientation="top"
-                pointerLength={0}
-                cornerRadius={50}
-                flyoutWidth={100}
-                flyoutHeight={100}
-                flyoutStyle={{ fill: "black" }}
-              />
-            </G>
-          )
-    }
+
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({userToken : JSON.parse(Token)});
@@ -440,11 +439,11 @@ class estadisticas extends Component {
                         <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
                         <Text style = {styles.textlabel}>Desarrollo de misiones por seisena</Text>
                         {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <VictoryPie
-                                style={{ labels: { fill: "white" } }}
+                                style={{ labels: { fill: "green" } }}
                                 innerRadius={100}
                                 labelRadius={120}
-                                labels={({ datum }) => `# ${datum.y}`}
-                                labelComponent={<this.CustomLabel />}
+                                labels={({ datum }) => (datum.x != null) ? `# ${datum.x}` : null}
+                                labelComponent={<CustomLabel/>}
                                 data={this.state.barra.map((obj,i) => {
                                             return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
                                         })}/>
