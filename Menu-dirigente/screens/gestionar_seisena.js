@@ -38,6 +38,7 @@ class gestionar_seisena extends Component {
       cancel:null,
       data_nines: [],
       data_seisenas: [] ,
+      data_seisenas_sin_actual: [],
       error: null,
       nombre_n: '',
       id_seisena: null,
@@ -74,8 +75,8 @@ class gestionar_seisena extends Component {
     this.setState({
         userToken : JSON.parse(Token),
     });
-    {{this.busqueda(this.state.filter,"")}}
-    {{this.entregar_seisenas()}}
+    this.busqueda(this.state.filter,"")
+    this.entregar_seisenas()
   };
 
           
@@ -184,6 +185,25 @@ LoadingState(){
       });
   };
 
+  entregar_seisenas_menosactual(){
+      a = []
+      for (b = 0; b < this.state.data_seisenas.length; b++) {
+        flag = false
+        for (i = 0; i < this.state.data_nines.length; i++) {
+            if(this.state.data_nines[i]['seisena1'] == this.state.data_seisenas[b]['nombre_seisena']){
+              flag = true
+            }
+        }
+        if(flag==false){
+          a.push(this.state.data_seisenas[b])
+        }
+      }
+      console.log('HOLI')
+      console.log(a)
+      this.setState({
+        data_seisenas_sin_actual: a
+      })
+  }
     
   cambiar_nine_seisena() {
     this.setState({ isLoading: true});
@@ -249,7 +269,6 @@ toggleAlert(){
 buscador(texto){
   a=[]
   for (i = 0; i < this.state.data_nines.length; i++) {
-    console.log('DSGGFDDGFGDF')
     console.log(texto)
     console.log(this.state.data_nines[i]['nombre'])
     if(this.state.data_nines[i]['nombre'].toLowerCase().startsWith(texto.toLowerCase())){
@@ -270,20 +289,20 @@ seleccionar_seisena(item){
       this.setState({
           seisena_seleccionada:true,
           boton_cancelar_seisena:'clear',
-          data_seisenas: [item],
+          data_seisenas_sin_actual: [item],
           id_seisena:item.id_seisena,
           nombre_seisena:item.nombre_seisena
       })
   }
   else{
-      {this.entregar_seisenas()}
+      {this.entregar_seisenas_menosactual()}
       this.setState({
           seisena_seleccionada:false,
           boton_cancelar_seisena:null,
           id_seisena:null,
           nombre_seisena: '',
-          seleccion_seisena: false,
-          show_siguiente:true
+          /*seleccion_seisena: false,
+          show_siguiente:true*/
       })
   }
 }
@@ -292,7 +311,7 @@ seleccionar_seisena(item){
 boton_asignar(){
 if(this.state.seisena_seleccionada){
   return(
-    <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
+    <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center',alignSelf:'flex-end', marginTop:15}}>
                                 <CustomButton
                                     onPress = {()=> this.cambiar_nine_seisena()}
                                     title = "Asignar"
@@ -329,9 +348,9 @@ seisenas_disponibles(){
           keyExtractor={item => item.user}           
         />
       <Text style={{alignSelf: 'flex-start', marginLeft:15,fontSize: 16, marginBottom:15, marginTop:15}}>Seleccione seisena de asignación:</Text>
-      <ScrollView>
+
           <FlatList
-          data = {this.state.data_seisenas}
+          data = {this.state.data_seisenas_sin_actual}
           renderItem={({ item }) => (
               <ListItem
                 title={`${item.nombre_seisena}`}
@@ -353,7 +372,7 @@ seisenas_disponibles(){
             )}
             keyExtractor={item => item.id_seisena}         
           />
-          </ScrollView>
+         
       </View>
   );
   }
@@ -370,7 +389,7 @@ avanzar_seisena(){
     return(
 <View style = {{width: '100%', height: '20%', justifyContent: 'center', alignItems: 'center', marginTop:15}}>
                             <CustomButton
-                                onPress = {()=> this.setState({seleccion_seisena:true, show_siguiente:false})}
+                                onPress = {()=> {this.setState({seleccion_seisena:true, show_siguiente:false}),  this.entregar_seisenas_menosactual()}}
                                 title = "Siguiente"
                                 name = 'long-primary-button'
    
@@ -456,7 +475,7 @@ marcar(flag,i,item){
 
 
 selectItem(item){
-    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(this.setState({show_siguiente:true}))
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(result => {if(this.state.nines_seleccionados.length == 0){console.log('MIAUUUUUUU'),this.setState({show_siguiente:false})}else{this.setState({show_siguiente:true})}})
 }
 
 
@@ -596,39 +615,30 @@ seleccion_nine(){
                     <View style={{width: '100%', height: '5%', alignItems:'center'}} > 
                       
                 </View>
-                <ScrollView >
+                
                 <SafeAreaView style={{ flex: 1}}>
                 
-        
+                
         <View style={styles.container}>
         {this.seleccion_nine()}
         <View style={{ flex: 1 }}>
-        <ScrollView > 
+        
                 
         {this.se_encuentra_en_busqueda()}
         {this.avanzar_seisena()}
         {this.seisenas_disponibles()}    
+
+
+        </View>
+        
         {this.boton_asignar()}  
-        </ScrollView >
-        </View>
-        
-        <View style={{ flex: 1 }}>
-        <ScrollView > 
-                
-        
-        
-            
-        
-        </ScrollView >
-        </View>
-        
        
       
 
         </View>
       </SafeAreaView>
       
-      </ScrollView>
+      
                     
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />
