@@ -67,6 +67,7 @@ class estadisticas extends Component {
 
             ],
             radar : [],
+            barra : [],
             userToken: ""
         }
         this._bootstrapAsync();
@@ -154,6 +155,7 @@ class estadisticas extends Component {
                 this.setState({
                     dataSource: responseJson.data,
                     radar : responseJson.radar,
+                    barra : responseJson.barra,
                     isLoading: false
                 }, () => {
                     console.log(this.state.dataSource);
@@ -212,7 +214,8 @@ class estadisticas extends Component {
                                         {
                                             ["Corporalidad", "Creatividad", "Carácter", "Afectividad", "Sociabilidad", "Espiritualidad"].map((d, i) => {
                                             return (
-                                                <VictoryPolarAxis dependentAxis
+                                                <VictoryPolarAxis 
+                                                dependentAxis
                                                 key={i}
                                                 label={d}
                                                 labelPlacement="perpendicular"
@@ -230,16 +233,17 @@ class estadisticas extends Component {
                                             );
                                             })
                                         }
+                                        {console.log("RADAR!!!!")}
                                         {console.log(this.state.radar)}
                                         <VictoryArea                                
                                             style={{ data: { fill: "#C14B81", alpha:0.25, fillOpacity: 0.2, strokeWidth: 2 } }}
                                             data={[
-                                            { x: "Corporalidad",  y:  parseFloat(this.state.radar[0].Corporalidad   )  },
-                                            { x: "Creatividad",   y:  parseFloat(this.state.radar[0].Creatividad    )  },
-                                            { x: "Carácter",      y:  parseFloat(this.state.radar[0].Caracter       )  },
-                                            { x: "Afectividad",   y:  parseFloat(this.state.radar[0].Afectividad    )  },
-                                            { x: "Sociabilidad",  y:  parseFloat(this.state.radar[0].Sociabilidad   )  },
-                                            { x: "Espiritualidad",y:  parseFloat(this.state.radar[0].Espiritualidad )  }
+                                            { x: "Corporalidad",  y:  parseFloat(this.state.radar[0].corporalidad   )  },
+                                            { x: "Creatividad",   y:  parseFloat(this.state.radar[0].creatividad    )  },
+                                            { x: "Carácter",      y:  parseFloat(this.state.radar[0].caracter       )  },
+                                            { x: "Afectividad",   y:  parseFloat(this.state.radar[0].afectividad    )  },
+                                            { x: "Sociabilidad",  y:  parseFloat(this.state.radar[0].sociabilidad   )  },
+                                            { x: "Espiritualidad",y:  parseFloat(this.state.radar[0].espiritualidad )  }
                                             ]}
                                         />
                                         <VictoryLine
@@ -327,6 +331,8 @@ class estadisticas extends Component {
                                         }}
                                         domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ1")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.corporalidad,10)}
                                         })}
                                          />
@@ -345,6 +351,8 @@ class estadisticas extends Component {
                                         }}
                                         domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ1")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.creatividad,10)}
                                         })}
                                          />
@@ -363,6 +371,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ2")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.caracter,10)}
                                         })} />
                                 </VictoryChart>
@@ -380,6 +390,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ3")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.afectividad,10)}
                                         })} />
                                 </VictoryChart>
@@ -397,6 +409,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ4")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.sociabilidad,10)}
                                         })} />
                                 </VictoryChart>
@@ -414,6 +428,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ5")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.espiritualidad,10)}
                                         })} />
                                 </VictoryChart>
@@ -423,21 +439,17 @@ class estadisticas extends Component {
                         </View>
                         <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
                         <Text style = {styles.textlabel}>Desarrollo de misiones por seisena</Text>
-                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> :
-                                <VictoryPie
+                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <VictoryPie
                                 style={{ labels: { fill: "white" } }}
                                 innerRadius={100}
                                 labelRadius={120}
                                 labels={({ datum }) => `# ${datum.y}`}
                                 labelComponent={<this.CustomLabel />}
-                                data={[
-                                    { x: 1, y: 5 },
-                                    { x: 2, y: 4 },
-                                    { x: 3, y: 2 },
-                                    { x: 4, y: 3 },
-                                    { x: 5, y: 1 }
-                                ]}/>
+                                data={this.state.barra.map((obj,i) => {
+                                            return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
+                                        })}/>
                                 }
+
                                 </View>
                     </ScrollView>
                 </View>}

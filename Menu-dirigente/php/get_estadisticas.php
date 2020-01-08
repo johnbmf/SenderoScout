@@ -37,9 +37,21 @@ GROUP BY WEEK(EvaluacionSemanal.fecha)")){
             if (!is_null($myArray2)){
                 $response -> radar = $myArray2;
         }
-                echo json_encode($response);
+        if ($result= $mysqli->query("SELECT Usuario.unidad1 as unidad, Usuario.seisena1 as seisena, IFNULL(SUM(Usuario.puntos),0) as puntaje
+        FROM Usuario
+        WHERE Usuario.unidad1 = '$unidad'
+        GROUP BY seisena1")){
+            while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
+                $myArray2[] = $row;
+                }
+                if (!is_null($myArray2)){
+                    $response -> barra = $myArray2;
+                }
+            }
+        echo json_encode($response);
     }
     }
+
     else{
         $response -> data = null;
         $response -> type = -1;
