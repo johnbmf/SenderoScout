@@ -103,26 +103,28 @@ class mi_manada extends Component {
                         <Right></Right>
                     </Header >                    
                 </View>
-                <View style = {{width: '100%', height: '88%',marginTop:3}}>
+                <View style = {{width: '100%', height: '88%',marginTop:5}}>
                     <ScrollView>
                         <View>
                         {
                         console.log(this.state.miembros),
                         this.state.miembros.map((obj, index) => (
+                            
                             <ListItem
                                 key={index}
                                 leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
                                 title = {obj["nombre"]}
                                 titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
-                                subtitle={"Edad " + obj["edad"] + "      Seisena: " + obj["seisena1"]}
+                                subtitle={"Edad: " + obj["edad"] + "      Seisena: " + obj["seisena1"]}
                                 subtitleStyle = {{color: '#104F55'}}
                                 linearGradientProps={{
                                     colors: ['#f2e6ff', '#F9F4FF'],
                                     start: [1.5, 0],
                                     end: [0.1, 0],
                                 }}
+                                
                                 ViewComponent={LinearGradient}
-                                containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
+                                containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
                                 
                             />
                         ))

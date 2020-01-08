@@ -346,7 +346,8 @@ seisenas_disponibles(){
               onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               //containerStyle={item.isSelect ? {backgroundColor: '#f2e6ff',borderBottomColor : '#E8E8E8', borderBottomWidth: 1}:{backgroundColor: '#FFFFFF', borderBottomColor:'#E8E8E8', borderBottomWidth: 1}} 
-              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              
+              containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
               title={`${item.nombre}`}
               //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
@@ -392,7 +393,7 @@ seisenas_disponibles(){
                   end: [0.1, 0],
                 }}
                 ViewComponent={LinearGradient}
-                containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
+                containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
               />
             )}
             keyExtractor={item => item.id_seisena}         
@@ -500,7 +501,7 @@ marcar(flag,i,item){
 
 
 selectItem(item){
-    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(result=> {console.log('CAMBIO'),this.entregar_seisenas_menosactual()}).then(result => {if(this.state.nines_seleccionados.length == 0){this.setState({show_siguiente:false,seleccion_seisena:false,seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})}}).then(result =>{if(this.state.seleccion_seisena==false){this.setState({show_siguiente:true})}})
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(result=> {console.log('CAMBIO'),this.entregar_seisenas_menosactual()},this.setState({seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})).then(result => {if(this.state.nines_seleccionados.length == 0){this.setState({show_siguiente:false,seleccion_seisena:false,seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})}}).then(result =>{if(this.state.seleccion_seisena==false){this.setState({show_siguiente:true})}})
 }
 
 
@@ -519,7 +520,7 @@ se_encuentra_en_busqueda(){
               onPress={() => this.selectItem(item)}
               rightIcon={item.isSelect?{name : 'clear'}:{name:null}}
               //containerStyle={item.isSelect ? {backgroundColor: '#f2e6ff',borderBottomColor : '#E8E8E8', borderBottomWidth: 1}:{backgroundColor: '#FFFFFF', borderBottomColor:'#E8E8E8', borderBottomWidth: 1}} 
-              containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
               title={`${item.nombre}`}
               //titleStyle={{ color: 'black', fontWeight: 'bold' }}
               titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
