@@ -312,14 +312,16 @@ else{
                         <Right></Right>
                     </Header >                    
                 </View>
-                
                 {this.puede()}
+                
                 <View>
             {this.LoadingState()}
             <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
                     />
         </View>
+        
                 </View>
+                
                 </ScrollView>
 
     );

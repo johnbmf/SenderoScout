@@ -25,6 +25,7 @@ import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert';
 import {Alerta2B} from './../CustomComponents/customalert2B'
+import { LinearGradient } from 'expo';
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}
@@ -250,7 +251,7 @@ class cambio_pseudonimos extends Component {
                     </Header >                    
                 </View>
                 
-                <View style={{width: '100%', height: '88%'}} >
+                <View style={{width: '100%', height: '80%', marginTop:5}} >
                     <ScrollView contentContainerStyle={{ flexGrow: 1 }}
                     refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
@@ -263,15 +264,19 @@ class cambio_pseudonimos extends Component {
                                 this.state.Pseudonimos.map((obj,index) =>(
                                     <ListItem 
                                     key ={index}
-                                    leftIcon={
-                                        <Icon
-                                        name= 'user'
-                                        type= 'FontAwesome'
-                                        style={{fontSize: 25, alignContent: 'center' }}
-                                        />
-                                    }
+                                    leftAvatar={{ rounded: true, source: require('../assets/perfil.png') }}
                                     title={obj["nino"]}
+                                    titleStyle={{ color: '#104F55', fontWeight: 'bold' }}
                                     subtitle={"Pseudonimo actual: " + obj["actual"] + "\nNuevo pseudonimo: " + obj["Pseudonimo"]}
+                                    subtitleStyle = {{color: '#104F55'}}
+                                    linearGradientProps={{
+                                        colors: ['#f2e6ff', '#F9F4FF'],
+                                        start: [1.5, 0],
+                                        end: [0.1, 0],
+                                    }}
+                                    
+                                    ViewComponent={LinearGradient}
+                                    containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
                                     onPress = {() => {this.setState({
                                         SendAlertMessage : "cambiar el pseudonimo de "+obj["nino"]+" por "+obj["Pseudonimo"]+"." ,
                                         usuarioCambio: obj["usuario"],
@@ -282,7 +287,7 @@ class cambio_pseudonimos extends Component {
                                     bottomDivider
                                     />
                                 )) 
-                                
+
                             }
                             {(this.state.cantPseudos == 0) &&//Pseudonimos.length > 0) &&
                             <View><Text style={{color: 'gray',fontSize:30,marginLeft:10,marginRight:5, fontFamily:'Roboto'}}
