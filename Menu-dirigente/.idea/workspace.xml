@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ad40f69-a76d-489f-a6fe-c207df1855ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Local/Index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Local/Insignias.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/acoustic-guitar.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/alarm-clock.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/alerts.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/book.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/brainstorm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/fire-truck.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/football.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/learning.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/lecture-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/painting-palette.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/police-car.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/policeman.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/violin.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/Insignias/writing.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/detalle_insignia.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/detalle_insignia.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/entrega_insignia.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/entrega_insignia.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,9 +28,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -56,6 +39,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">

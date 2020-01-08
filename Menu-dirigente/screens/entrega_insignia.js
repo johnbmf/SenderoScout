@@ -9,6 +9,7 @@ import {
     AsyncStorage,
     Dimensions,
     Image,
+    RefreshControl,
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider, ListItem} from 'react-native-elements'
@@ -39,6 +40,8 @@ class EntregaInsignias extends Component {
             //Variables de estado
             setData: false, //si estan o no seteadas las recomendaciones ya sean locales o nuevas
             isLoading: false,
+            refreshing: false,
+            toRefresh:false,
             warningState: false,
             setNiño: false,
             
@@ -70,7 +73,7 @@ class EntregaInsignias extends Component {
         });
         this.getMiembros()
       };
-
+/*
     GetRecomendaciones = async () =>{
         try {
             const value = await AsyncStorage.getItem('Recomendaciones');
@@ -97,7 +100,7 @@ class EntregaInsignias extends Component {
 
         console.log("Recomendaciones guardads con exito en AsyncStorage")
     }
-
+*/
     FormatData(fecha){
         return (fecha.split("-").reverse().join("-"))
     }
@@ -114,6 +117,25 @@ class EntregaInsignias extends Component {
         this.getMiembros()
     }
 
+
+    onGoBack(){        
+        if(this.state.toRefresh){
+            this.getMiembros()
+            this.setState({
+                setNiño:false, 
+                ninoSeleccionado: {},
+                toRefresh: false,
+            })
+            this.forceUpdate()
+        }
+    }
+
+    onRefresh() {
+        //Clear old data of the list
+        //Call the Service to get the latest data
+        this._bootstrapAsync();
+        this.forceUpdate()
+      }
 
     getMiembros(){
         console.log("Mi manda tokn", this.state.userToken);
@@ -202,7 +224,7 @@ class EntregaInsignias extends Component {
             return(
                 <TouchableOpacity 
                     style= {{height: this.SetWidth(20), width: this.SetWidth(20), alignContent: 'space-between', margin: 10, marginBottom: 25}}
-                    onPress = {()=> {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}}>
+                    onPress = {this.props.navigation.navigate('DetalleInsignia', {dataInsignia : item, dataNino: this.state.ninoSeleccionado})}>
                     <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1,tintColor:'gray'}} resizeMode ='cover' source = {item.Icon} />
                     <Image style = {{height: this.SetWidth(20), width: this.SetWidth(20), aspectRatio: 1, position: 'absolute', opacity: 0.1}} resizeMode= 'cover' source = {item.Icon} />
                     <Text style = {{fontFamily: 'Roboto', fontSize: 12, textAlign: 'center',alignSelf:"center", margin:2}}>
@@ -248,18 +270,27 @@ class EntregaInsignias extends Component {
             console.log("Seleccionar niño")
             return(
                 <View>
-                    <Text style = {{fontFamily: 'Roboto', fontSize: 20, marginLeft: 10, marginTop: 5, marginBottom: 5}}>
-                    Seleccione un niño para entregarle insignias
-                    </Text>
-                    <ScrollView>
-                        <View style= {{width: '100%'}}>
-                            <FlatList
-                                data = {this.state.miembros}
-                                keyExtractor = {(item, index) => item.nombre}
-                                renderItem = {({item}) => this.RenderNino(item)}
-                            />
-                        </View>
-                    </ScrollView>
+                    <View style ={{height:'89%'}}>
+                        <Text style = {{fontFamily: 'Roboto', fontSize: 20, marginLeft: 10, marginTop: 5, marginBottom: 5}}>
+                        Seleccione un niño para entregarle insignias
+                        </Text>
+                        <ScrollView>
+                            <View style= {{width: '100%'}}>
+                                <FlatList
+                                    data = {this.state.miembros}
+                                    keyExtractor = {(item, index) => item.nombre}
+                                    renderItem = {({item}) => this.RenderNino(item)}
+                                />
+                            </View>
+                        </ScrollView>
+                    </View>
+                    <View style ={{height:'11%', alignItems:"center"}}>
+                        <CustomButton 
+                            onPress = {() => this.props.navigation.goBack(null)}
+                            title = 'Volver'
+                            name = 'long-primary-button'  
+                        />
+                    </View>
                 </View>
             )
         }
@@ -286,7 +317,9 @@ class EntregaInsignias extends Component {
                     title = {this.state.ninoSeleccionado.nombre}
                     bottomDivider
                 />
-                <ScrollView style = {{flex:1}} contentContainerStyle={{flexGrow:1}}>
+                <ScrollView style = {{flex:1}} contentContainerStyle={{flexGrow:1}} refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
+                    }>
                 <FlatList
                     contentContainerStyle={{ paddingBottom: 20}}
                     style = {{alignContent: 'space-between'}}

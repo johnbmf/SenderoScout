@@ -170,12 +170,11 @@ class DetalleInsignia extends Component {
         if (tipo == 1 && this.state.alertState){
             return(
                 <Alerta
-                botones = {2}
                 type = "Succsess"
                 visible = {this.state.alertState}
                 titulo = "Éxito"
                 contenido = {mensaje}
-                titulo_boton_rechazar = "Aceptar"
+                titulo_boton_aceptar = "Aceptar"
 
                 rechazar = {() => {this.toggleAlert()}}
                 />
@@ -189,7 +188,7 @@ class DetalleInsignia extends Component {
                 visible = {this.state.alertState}
                 titulo = "Cuidado!"
                 contenido = {mensaje}
-                titulo_boton_rechazar = "Volver"
+                titulo_boton_aceptar = "Volver"
                 rechazar = {() => {this.toggleAlert()}}
                 />
             )
@@ -202,7 +201,7 @@ class DetalleInsignia extends Component {
                 visible = {this.state.alertState}
                 titulo = "Error de conexién "
                 contenido = {mensaje}
-                titulo_boton_rechazar = "Volver"
+                titulo_boton_aceptar = "Volver"
                 rechazar = {() => {this.toggleAlert()}}
                 />
             )
@@ -216,7 +215,7 @@ class DetalleInsignia extends Component {
                 visible = {this.state.alertState}
                 titulo = "Error"
                 contenido = "A ocurrido un error inesperado, intentelo nuevamente."
-                titulo_boton_rechazar = "Volver"
+                titulo_boton_aceptar = "Volver"
                 rechazar = {() => {this.toggleAlert()}}
                 />
             )
