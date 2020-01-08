@@ -340,6 +340,12 @@ class HomeScreen extends Component {
                                     Tienes {this.state.dataSource.length} misiones sin evaluar.
                                 </Text>
                             </Body>
+                            <Right>
+                                <Icon
+                                    type = 'Feather'
+                                    name = {'chevron-right'}
+                                />
+                            </Right>
                         </CardItem>:null
                 }
                 {
@@ -350,6 +356,12 @@ class HomeScreen extends Component {
                                 Algunos lobatos quieren cambiar su pseudónimo.
                                 </Text>
                             </Body>
+                            <Right>
+                                <Icon
+                                    type = 'Feather'
+                                    name = {'chevron-right'}
+                                />
+                            </Right>
                          </CardItem>:null
 
                 }
@@ -361,6 +373,12 @@ class HomeScreen extends Component {
                                     Has sido invitado a una unidad.
                                 </Text>
                             </Body>
+                            <Right>
+                                <Icon
+                                    type = 'Feather'
+                                    name = {'chevron-right'}
+                                />
+                            </Right>
                         </CardItem>:null
                 }
             </Card>
@@ -379,12 +397,12 @@ class HomeScreen extends Component {
                         </Left>
                         <Right >
                             <Icon
-                            type = 'Feather'
-                            name = {'edit'}
-                            //style = {styles.AccordeonIcon}
+                                type = 'Feather'
+                                name = {'edit'}
                             />
                         </Right>
                     </CardItem>
+
                     <CardItem bordered>
                         <Left>
                             <Text>
@@ -400,7 +418,7 @@ class HomeScreen extends Component {
                     <CardItem bordered>
                         <Left>
                             <Text>
-                                Perteneces a unidad:
+                                Perteneces a unidad
                             </Text>
                         </Left>
                         <Right>
@@ -410,16 +428,14 @@ class HomeScreen extends Component {
                         </Right>
                     </CardItem>
                     <CardItem bordered>
-                        <Left>
-                            <Text >
-                                Gestionas la seisena:
-                            </Text>
-                        </Left>
+                        <Text style = {{alignContent:'flex-start'}}>
+                                Gestionas la seisena
+                        </Text>
                         <Body style ={{alignContent:"center", justifyContent: 'center',alignItems:'flex-end'}}>
                             <Button 
                                 onPress={()=> console.log("Cambiar seisena")}
                                 type = 'clear'
-                                style
+                                style = {{height:'50%'}}
                                 icon = {
                                     <Icon
                                         type = 'Feather'

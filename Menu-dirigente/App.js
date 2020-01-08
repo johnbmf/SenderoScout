@@ -25,6 +25,7 @@ import CambiarPseudonimoScreen from './screens/cambiar_pseudonimo'
 
 import GestionarSeisenaScreen from './screens/gestionar_seisena'
 import CambiarNombreSeisenaScreen from './screens/cambiar_nombre_seisena'
+import SeleccionarNinoInsigniaScreen from './screens/seleccionar_nino_insignia'
 import EntregarInsigniaScreen from './screens/entrega_insignia'
 import DetalleInsigniaScreen from './screens/detalle_insignia'
 import InvitacionesUnidadScreen from './screens/invitaciones_unidad'
@@ -118,6 +119,7 @@ const CrearUnidadStack = createStackNavigator({
 
 const EntregarInsigniaStack = createStackNavigator(
   {
+    SeleccionarNino:SeleccionarNinoInsigniaScreen,
     EntregarInsignia : EntregarInsigniaScreen,
     DetalleInsignia: DetalleInsigniaScreen
   },{

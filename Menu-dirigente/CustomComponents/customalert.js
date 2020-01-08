@@ -10,7 +10,7 @@ const Alerta = (props) => {
     esVisible = false;
     if (props.botones == 2){
         return (        
-            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
+            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}} onRequestClose = {props.onRequestClose}>
                 <TouchableWithoutFeedback onPress= {props.hide != null ? props.hide : props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <TouchableWithoutFeedback onPress= {() => {null}}>
@@ -49,7 +49,7 @@ const Alerta = (props) => {
     }
     else {
         return (        
-            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
+            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}} onRequestClose = {props.onRequestClose}>
                 <TouchableWithoutFeedback onPress= {props.hide != null ? props.hide : props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <TouchableWithoutFeedback onPress= {() => {null}}>

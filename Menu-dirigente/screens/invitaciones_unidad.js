@@ -9,6 +9,7 @@ import {
     AsyncStorage,
     Dimensions,
     Image,
+    BackHandler,
 } from "react-native";
 import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider, ListItem} from 'react-native-elements'
@@ -48,7 +49,7 @@ class InvitacionesUnidad extends Component {
             tempReclutador: Reclutador
         });
     };
-
+    
     responderInvitacion(estado,nombre_unidad1, id){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
             this.setState({
@@ -129,6 +130,8 @@ class InvitacionesUnidad extends Component {
                 Aceptar = {() => {this.responderInvitacion(1, this.state.tempUnidad,this.state.tempId);this.toggleAlert()}}
                 titulo_boton_rechazar = "Rechazar"
                 Rechazar = {() => {this.responderInvitacion(-1,this.state.tempUnidad,this.state.tempId);this.toggleAlert()}}
+                hide = {()=>{this.toggleAlert()}}
+                onRequestClose={() => {this.toggleAlert()}}
             />
         )
     }

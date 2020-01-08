@@ -49,10 +49,6 @@ class DetalleInsignia extends Component {
             php_response_message:"",
 
         }
-        //AsyncStorage.clear()
-        //this._bootstrapAsync();
-        //this.GetRecomendaciones()
-        
     }
     static navigationOptions = {
         drawerLabel: 'Recomendaciones',
@@ -69,37 +65,6 @@ class DetalleInsignia extends Component {
             seisena:JSON.parse(Token)["Seisena1"],
         });
       };
-
-    GetRecomendaciones = async () =>{
-        try {
-            const value = await AsyncStorage.getItem('Recomendaciones');
-
-            if (value !== null){
-                console.log("Datos obtenidos con exito AsyncStorage")
-                //console.log(value)
-                this.setState({RecomendacionesGuardadas: JSON.parse(value)})
-            }
-        }catch (error) {
-            console.log("Error al obtener datos AsyncStorage")
-        }
-
-
-    };
-
-    StoreRecomendaciones = async (data) => {
-        try {
-            await AsyncStorage.setItem('Recomendaciones',JSON.stringify(data))
-        } catch (error){
-            console.log("Error al gruardar los datos en AsyncStorage")
-
-        }
-
-        console.log("Recomendaciones guardads con exito en AsyncStorage")
-    }
-
-    FormatData(fecha){
-        return (fecha.split("-").reverse().join("-"))
-    }
 
     SetWidth(porcentaje){
         return(Dimensions.get('window').width * (porcentaje/100))
@@ -176,7 +141,7 @@ class DetalleInsignia extends Component {
                 contenido = {mensaje}
                 titulo_boton_aceptar = "Aceptar"
 
-                rechazar = {() => {this.toggleAlert()}}
+                rechazar = {() => {this.toggleAlert(), this.props.navigation.navigate('SeleccionarNino', {toRefresh : true})}}
                 />
             )
 
@@ -189,7 +154,7 @@ class DetalleInsignia extends Component {
                 titulo = "Cuidado!"
                 contenido = {mensaje}
                 titulo_boton_aceptar = "Volver"
-                rechazar = {() => {this.toggleAlert()}}
+                rechazar = {() => {this.toggleAlert(),this.props.navigation.navigate('SeleccionarNino', {toRefresh : true})}}
                 />
             )
         }
@@ -202,7 +167,7 @@ class DetalleInsignia extends Component {
                 titulo = "Error de conexién "
                 contenido = {mensaje}
                 titulo_boton_aceptar = "Volver"
-                rechazar = {() => {this.toggleAlert()}}
+                rechazar = {() => {this.toggleAlert(),this.props.navigation.navigate('SeleccionarNino', {toRefresh : true})}}
                 />
             )
         }
@@ -216,7 +181,7 @@ class DetalleInsignia extends Component {
                 titulo = "Error"
                 contenido = "A ocurrido un error inesperado, intentelo nuevamente."
                 titulo_boton_aceptar = "Volver"
-                rechazar = {() => {this.toggleAlert()}}
+                rechazar = {() => {this.toggleAlert(), this.props.navigation.navigate('SeleccionarNino', {toRefresh: true})}}
                 />
             )
         }
