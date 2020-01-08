@@ -70,7 +70,7 @@ class evalaptitudes extends Component {
     };
 
     SetWidth(porcentaje){
-        return(Dimensions.get('window').width * (porcentaje/100))
+        return(Dimensions.get('window').width * (porcentaje/130))
     }
 
     SetHeight(porcentaje){
@@ -303,13 +303,16 @@ class evalaptitudes extends Component {
                     <View>
                         {this.LoadingState()}
                     </View>
-
-                    <View style ={{width: '100%', height: '10%'}}>
+                    
+                    <View style ={ {width: '100%', height: '80%'}}>
+                        <ScrollView>
+                            
+                    <View style ={{width: '95%', height: '7%', borderColor:'gray', borderWidth:1,alignSelf: 'center',borderRadius:10, marginVertical:20}}>
                         
                         <View syle ={styles.Picker}>
                             <Picker 
                                 selectedValue = {this.state.PickerValue}
-                                style = {{width: '60%', height: '50%', borderColor:'gray', borderWidth: 5, alignItems:'center', justifyContent:'center' /*, alignSelf:'center'*/}}
+                                style = {{width: '100%', height: '100%', borderColor:'gray', borderWidth: 5, alignItems:'center', justifyContent:'center' , alignSelf:'center'}}
                                 itemStyle={{height: '50%', width:'100%',fontSize: 20}}
                                 onValueChange = {(itemValue, itemIndex) => this.setState({PickerValue : itemValue})}>
                                 <Picker.Item label = 'Seleccione un Lobato' value = {'default'}/>
@@ -317,9 +320,7 @@ class evalaptitudes extends Component {
                             </Picker>
                         </View>
                     </View>
-                    
-                    <View style ={ {width: '100%', height: '80%'}}>
-                        <ScrollView>
+                
                         
                         <View style = {styles.AreasContainer}>
                             <View style = {styles.RatingContainer}>
@@ -457,6 +458,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     Picker:{
+
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -478,13 +480,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     TextArea: {
-        width: '45%',
+        width: '40%',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        paddingLeft: 5
+        paddingLeft: 5,
+        height: '80%'
     },
     Rating:{
-        width: '55%',
+        width: '53%',
         justifyContent:'flex-start',
         //alignItems: 'flex-start',
         alignSelf:'flex-start',

@@ -236,9 +236,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
         width: '90%',
-        height: '10%',
+        height: '7%',
         borderBottomColor: 'gray',
-        borderBottomWidth:1,
+        borderBottomWidth:1,borderColor:'gray',
+        borderWidth:1,alignSelf: 'center',flexDirection: 'row',borderRadius:10
     }
 
 });
