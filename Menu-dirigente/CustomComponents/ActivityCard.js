@@ -18,7 +18,7 @@ class ActivityCard extends Component{
     render(){
         return(
 
-            <Card style = {{width: '98%',borderWidth:2, borderRadius:10,marginTop:2,borderColor : '#e4ccff', backgroundColor: '#F9F4FF'}}> 
+            <Card style = {{width: '99%',borderWidth:2, borderRadius:1,marginTop:2,borderColor : '#e4ccff', backgroundColor: '#F9F4FF'}}> 
                 <CardItem style = {{backgroundColor: '#F9F4FF'}} header bordered button onPress={() => {this.setState({expanded: !this.state.expanded})}}>
                 <Left>
                     <Text>{this.props.actividad["Nombre"]}</Text>
