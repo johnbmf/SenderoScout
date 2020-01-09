@@ -56,16 +56,18 @@ class evalaptitudes extends Component {
             SendAlertMessage: "Ha Ocurrido un error inesperado, Intentelo nuevamente.",
             SendAlertType: 0,
         };
-        this._bootstrapAsync
+        this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         console.log("Token ",JSON.parse(Token))
-        this.state.userToken = JSON.parse(Token)
-        this.state.unidad_dirigente = JSON.parse(Token)["unidad1"]
-        this.state.seisena = JSON.parse(Token)["seisena1"]
-        console.log("TEst", JSON.parse(Token)["unidad1"])
+        this.setState({
+            userToken : JSON.parse(Token),
+            unidad_dirigente : JSON.parse(Token)["unidad1"],
+            seisena : JSON.parse(Token)["seisena1"],
+        });
+        this.GetUsers(JSON.parse(Token)["seisena1"],JSON.parse(Token)["unidad1"])
     };
 
     SetWidth(porcentaje){
@@ -76,13 +78,14 @@ class evalaptitudes extends Component {
         return(Dimensions.get('window').height * (porcentaje/100))
     }
     
-    GetUsers =(SeisenaValue) => {
-        this.setState({seisena: SeisenaValue})
-        
+    GetUsers =(SeisenaValue, UnidadValue) => {
+        //this.setState({seisena: SeisenaValue})
+        console.log("LA SeisenaValue", this.state.seisena)
         if(SeisenaValue == 'default'){
             this.setState({dataSource: []})
         }
         else{
+            console.log()
             this.setState({isLoading : true})
             //fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
             fetch('http://www.mitra.cl/SS/GetNinosSeisena.php',{    
@@ -93,6 +96,7 @@ class evalaptitudes extends Component {
                 },
                 body: JSON.stringify({
                     "seisena" : SeisenaValue,
+                    "unida": UnidadValue,
                 }),
             }).then((Response) => Response.json())
             .then((responseJson) =>{
@@ -109,11 +113,12 @@ class evalaptitudes extends Component {
             });
         }
     }
+ /*   
     componentDidMount(){
         console.log("recomendacion",this.state.userToken)
         this.GetUsers(this.state.seisena)
     }
-
+*/
     EnviarEvaluacion = () =>{
 
         if(this.state.PickerValue == 'default'){

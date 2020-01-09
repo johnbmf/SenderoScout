@@ -75,27 +75,27 @@ class CustomRating extends Component{
   updatePan(toValue) {
     Animated.spring(this._pan, { toValue, friction: 7 }).start();
     console.log(toValue)
-    if(0 <= toValue && toValue < 64){
+    if(0 <= toValue && toValue < 41){ //64
       console.log("Valor"+1)
       this.setState({value: 1})
       this.SendData(1)
     }
-    else if (64 <= toValue && toValue<128){
+    else if (41 <= toValue && toValue<82){ //64-128
       console.log("Valor"+2)
       this.setState({value: 2})
       this.SendData(2)
     }
-    else if (128 <= toValue && toValue <192){
+    else if (82 <= toValue && toValue <124){
       console.log("Valor"+3)
       this.setState({value: 3})
       this.SendData(3)
     }
-    else if (192 <= toValue && toValue <256){
+    else if (124 <= toValue && toValue <165){
       console.log("Valor"+4)
       this.setState({value: 4})
       this.SendData(4)
     }
-    else if (256 <= toValue && toValue <320){
+    else if (165 <= toValue && toValue <320){
       console.log("Valor"+5)
       this.setState({value: 5})
       this.SendData(5)
