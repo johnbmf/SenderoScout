@@ -19,25 +19,42 @@ import {
     StatusBar
 } from "react-native";
 import {
-    G
+    G,
+    Svg,
+    Circle
   } from 'react-native-svg';
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents, StackRouter } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert'
-import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea, VictoryPie, VictoryTooltip, VictoryContainer } from "victory-native";
+import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea, VictoryPie, VictoryTooltip, VictoryContainer, VictoryLegend } from "victory-native";
 import Swiper from 'react-native-swiper'
 import {CustomLoading} from '../CustomComponents/CustomLoading';
 const Height = Dimensions.get('window').height;
 const Widht = Dimensions.get('window').width;
-const data = [
-    { quarter: 1, earnings: 1 },
-    { quarter: 2, earnings: 2 },
-    { quarter: 3, earnings: 3 },
-    { quarter: 4, earnings: 4 },
-    { quarter: 5, earnings: 5 }
-  ];
+class CustomLabel extends React.Component {
+    render() {
+      return (
+        <G>
+          <VictoryLabel {...this.props}/>
+          <VictoryTooltip
+            {...this.props}
+            x={200} y={250}
+            orientation="top"
+            pointerLength={0}
+            cornerRadius={50}
+            flyoutWidth={100}
+            flyoutHeight={100}
+            flyoutStyle={{ fill: "black" }}
+            active={true}
+          />
+        </G>
+      );
+    }
+  }
+  
+CustomLabel.defaultEvents = VictoryTooltip.defaultEvents;
 class estadisticas extends Component {
     static navigationOptions = {
         drawerLabel: 'Estadísticas',
@@ -60,13 +77,12 @@ class estadisticas extends Component {
             // sociabilidad : [],
             // espiritualidad : [],
             testData : [
-                { x: '05-Oct', y: 2 },
-                { x: '12-Oct', y: 3 },
-                { x: '19-Oct', y: 5 },
-                { x: '26-Oct', y: 5 },
-
-            ],
+                { x: 'Amarilla', y: 2 },
+                { x: 'Lalala23', y: 3 },
+                { x: 'asdasd', y: 5 },
+                ],
             radar : [],
+            barra : [],
             userToken: ""
         }
         this._bootstrapAsync();
@@ -101,23 +117,7 @@ class estadisticas extends Component {
             </View>
         )
     }
-    CustomLabel(){
-        return (
-            <G>
-              <VictoryLabel {...this.props}/>
-              <VictoryTooltip
-                {...this.props}
-                x={200} y={250}
-                orientation="top"
-                pointerLength={0}
-                cornerRadius={50}
-                flyoutWidth={100}
-                flyoutHeight={100}
-                flyoutStyle={{ fill: "black" }}
-              />
-            </G>
-          )
-    }
+
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({userToken : JSON.parse(Token)});
@@ -154,6 +154,7 @@ class estadisticas extends Component {
                 this.setState({
                     dataSource: responseJson.data,
                     radar : responseJson.radar,
+                    barra : responseJson.barra,
                     isLoading: false
                 }, () => {
                     console.log(this.state.dataSource);
@@ -212,7 +213,8 @@ class estadisticas extends Component {
                                         {
                                             ["Corporalidad", "Creatividad", "Carácter", "Afectividad", "Sociabilidad", "Espiritualidad"].map((d, i) => {
                                             return (
-                                                <VictoryPolarAxis dependentAxis
+                                                <VictoryPolarAxis 
+                                                dependentAxis
                                                 key={i}
                                                 label={d}
                                                 labelPlacement="perpendicular"
@@ -230,16 +232,17 @@ class estadisticas extends Component {
                                             );
                                             })
                                         }
+                                        {console.log("RADAR!!!!")}
                                         {console.log(this.state.radar)}
                                         <VictoryArea                                
                                             style={{ data: { fill: "#C14B81", alpha:0.25, fillOpacity: 0.2, strokeWidth: 2 } }}
                                             data={[
-                                            { x: "Corporalidad",  y:  parseFloat(this.state.radar[0].Corporalidad   )  },
-                                            { x: "Creatividad",   y:  parseFloat(this.state.radar[0].Creatividad    )  },
-                                            { x: "Carácter",      y:  parseFloat(this.state.radar[0].Caracter       )  },
-                                            { x: "Afectividad",   y:  parseFloat(this.state.radar[0].Afectividad    )  },
-                                            { x: "Sociabilidad",  y:  parseFloat(this.state.radar[0].Sociabilidad   )  },
-                                            { x: "Espiritualidad",y:  parseFloat(this.state.radar[0].Espiritualidad )  }
+                                            { x: "Corporalidad",  y:  parseFloat(this.state.radar[0].corporalidad   )  },
+                                            { x: "Creatividad",   y:  parseFloat(this.state.radar[0].creatividad    )  },
+                                            { x: "Carácter",      y:  parseFloat(this.state.radar[0].caracter       )  },
+                                            { x: "Afectividad",   y:  parseFloat(this.state.radar[0].afectividad    )  },
+                                            { x: "Sociabilidad",  y:  parseFloat(this.state.radar[0].sociabilidad   )  },
+                                            { x: "Espiritualidad",y:  parseFloat(this.state.radar[0].espiritualidad )  }
                                             ]}
                                         />
                                         <VictoryLine
@@ -327,6 +330,8 @@ class estadisticas extends Component {
                                         }}
                                         domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ1")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.corporalidad,10)}
                                         })}
                                          />
@@ -345,6 +350,8 @@ class estadisticas extends Component {
                                         }}
                                         domain={{ x: [0.5, 5.5], y: [0, 5.5] }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ1")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.creatividad,10)}
                                         })}
                                          />
@@ -363,6 +370,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ2")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.caracter,10)}
                                         })} />
                                 </VictoryChart>
@@ -380,6 +389,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ3")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.afectividad,10)}
                                         })} />
                                 </VictoryChart>
@@ -397,6 +408,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ4")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.sociabilidad,10)}
                                         })} />
                                 </VictoryChart>
@@ -414,6 +427,8 @@ class estadisticas extends Component {
                                         parent: { border: "1px solid #ccc"}
                                         }}
                                         data={this.state.dataSource.map((obj,i) => {
+                                            {console.log("DATA OBJ5")}
+                                            {console.log(obj)}
                                             return {x : obj.dia + "-" + obj.mes, y : parseInt(obj.espiritualidad,10)}
                                         })} />
                                 </VictoryChart>
@@ -423,22 +438,20 @@ class estadisticas extends Component {
                         </View>
                         <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
                         <Text style = {styles.textlabel}>Desarrollo de misiones por seisena</Text>
-                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> :
-                                <VictoryPie
-                                style={{ labels: { fill: "white" } }}
-                                innerRadius={100}
-                                labelRadius={120}
-                                labels={({ datum }) => `# ${datum.y}`}
-                                labelComponent={<this.CustomLabel />}
-                                data={[
-                                    { x: 1, y: 5 },
-                                    { x: 2, y: 4 },
-                                    { x: 3, y: 2 },
-                                    { x: 4, y: 3 },
-                                    { x: 5, y: 1 }
-                                ]}/>
-                                }
-                                </View>
+                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <VictoryChart
+                            theme = {VictoryTheme.material}
+                            height={(Height*0.57)} 
+                            width={(Widht*0.95)}
+                            >
+                            <VictoryBar 
+                                data={this.state.barra.map((obj,i) => {
+                                    console.log({x : i, y : parseInt(obj.puntaje,10)})
+                                    return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
+                                })}
+                                alignment="start"
+                                />
+                            </VictoryChart>}
+                         </View>
                     </ScrollView>
                 </View>}
                 </View>
