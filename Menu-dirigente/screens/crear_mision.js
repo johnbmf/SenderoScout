@@ -13,7 +13,8 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    AsyncStorage
 } from "react-native";
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import { NavigationEvents } from 'react-navigation';
@@ -39,9 +40,13 @@ class crear_mision extends Component {
             mensajeAlerta: "Misión creada con éxito",
             typeAlerta: 'Warning',
             isLoading:false,
+            userToken: ""
+
 
         }
+        this._bootstrapAsync();
     }
+
     static navigationOptions = {
         drawerLabel: 'Crear Misión',
         drawerIcon: ({tintColor}) => (
@@ -59,6 +64,10 @@ class crear_mision extends Component {
             }
         )
     }
+    _bootstrapAsync = async () => {
+        const Token = await AsyncStorage.getItem('userToken');
+        this.setState({userToken : JSON.parse(Token)});
+      };
     toggleAlert(){
         this.setState({
             estadoAlerta : !this.state.estadoAlerta
@@ -117,7 +126,12 @@ class crear_mision extends Component {
                     "nombre_mision":this.state.nombre_mision,
                     "descripcion_mision":this.state.desc_mision,
                     "spot":this.state.Spot,
-                    "expiracion":this.state.Expiracion
+                    "expiracion":this.state.Expiracion,
+                    //"unidad" : this.state.userToken.unidad1,
+                    //"seisena" : this.state.userToken.seisena1,
+                    "dirigente" : this.state.userToken.user
+
+
                 })
             })
             .then(response => response.json())
@@ -128,7 +142,8 @@ class crear_mision extends Component {
                         estadoAlerta: true,
                         tituloAlerta : "Éxito",
                         mensajeAlerta : "La misión fue creada correctamente"
-                    })
+                    }, () => {this.clearText();})
+                    
                 }else{
                     this.setState({
                         typeAlerta: 'Error',
