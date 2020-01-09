@@ -25,7 +25,7 @@ import { NavigationEvents } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert';
 import {Alerta2B} from './../CustomComponents/customalert2B'
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 const DimissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         {children}

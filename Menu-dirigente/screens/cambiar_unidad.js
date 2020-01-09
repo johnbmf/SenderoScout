@@ -29,7 +29,7 @@ import { List, ListItem, Button} from "react-native-elements";
 import GradientCard from "react-native-gradient-card-view";
 import SearchBar from "react-native-dynamic-search-bar";
 import { CustomLayoutSpring } from "react-native-animation-layout";
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import TouchableScale from 'react-native-touchable-scale';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert';
