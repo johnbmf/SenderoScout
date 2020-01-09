@@ -48,7 +48,6 @@ class evalaptitudes extends Component {
             afectividad: DEFAULT_RATING,
             sociabilidad:DEFAULT_RATING,
             espiritualidad:DEFAULT_RATING,
-
             GetAlertState: false,
             GetAlertMessage: "",
             GetAlertType:0, //-1 error 0 esperando 1 exito etoc error inesperado
@@ -65,7 +64,7 @@ class evalaptitudes extends Component {
         console.log("Token ",JSON.parse(Token))
         this.state.userToken = JSON.parse(Token)
         this.state.unidad_dirigente = JSON.parse(Token)["unidad1"]
-        this.state.seisena = JSON.parse(Token)["Seisena1"]
+        this.state.seisena = JSON.parse(Token)["seisena1"]
         console.log("TEst", JSON.parse(Token)["unidad1"])
     };
 

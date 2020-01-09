@@ -16,7 +16,7 @@
 if ($result= $mysqli->query("SELECT Usuario.unidad1, EvaluacionSemanal.fecha, WEEK(EvaluacionSemanal.fecha) as semana , DAY(EvaluacionSemanal.fecha) as dia, DATE_FORMAT(EvaluacionSemanal.fecha, '%b') as mes, YEAR(EvaluacionSemanal.fecha) as anio ,AVG(EvaluacionSemanal.corporalidad) as corporalidad,AVG(EvaluacionSemanal.creatividad) as creatividad, AVG(EvaluacionSemanal.caracter) as caracter, AVG(EvaluacionSemanal.afectividad) as afectividad, AVG(EvaluacionSemanal.sociabilidad) as sociabilidad, AVG(EvaluacionSemanal.espiritualidad) as espiritualidad 
 from EvaluacionSemanal 
 	LEFT JOIN Usuario on Usuario.unidad1 = '$unidad'
-    WHERE Usuario.user = EvaluacionSemanal.usuario AND YEAR(EvaluacionSemanal.fecha) = YEAR(NOW())
+    WHERE Usuario.user = EvaluacionSemanal.usuario AND YEAR(EvaluacionSemanal.fecha) = YEAR(NOW() - INTERVAL 1 YEAR)
 GROUP BY WEEK(EvaluacionSemanal.fecha)")){
     while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
     $myArray[] = $row;
@@ -29,7 +29,7 @@ GROUP BY WEEK(EvaluacionSemanal.fecha)")){
         if ($result= $mysqli->query("SELECT AVG(EvaluacionSemanal.corporalidad) as corporalidad,AVG(EvaluacionSemanal.creatividad) as creatividad, AVG(EvaluacionSemanal.caracter) as caracter, AVG(EvaluacionSemanal.afectividad) as afectividad, AVG(EvaluacionSemanal.sociabilidad) as sociabilidad, AVG(EvaluacionSemanal.espiritualidad) as espiritualidad 
         from EvaluacionSemanal 
             LEFT JOIN Usuario on Usuario.unidad1 = '$unidad'
-            WHERE Usuario.user = EvaluacionSemanal.usuario AND YEAR(EvaluacionSemanal.fecha) = YEAR(NOW())
+            WHERE Usuario.user = EvaluacionSemanal.usuario AND YEAR(EvaluacionSemanal.fecha) = YEAR(NOW() - INTERVAL 1 YEAR)
         GROUP BY Usuario.unidad1")){
             while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
             $myArray2[] = $row;

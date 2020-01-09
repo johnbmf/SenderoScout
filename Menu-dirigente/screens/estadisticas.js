@@ -16,7 +16,8 @@ import {
     AsyncStorage,
     Dimensions,
     ScrollView,
-    StatusBar
+    StatusBar,
+    RefreshControl
 } from "react-native";
 import {
     G,
@@ -83,7 +84,8 @@ class estadisticas extends Component {
                 ],
             radar : [],
             barra : [],
-            userToken: ""
+            userToken: "",
+            update: false
         }
         this._bootstrapAsync();
         
@@ -122,6 +124,7 @@ class estadisticas extends Component {
         const Token = await AsyncStorage.getItem('userToken');
         this.setState({userToken : JSON.parse(Token)});
         this.getEstadisticas();
+        this.setState({update:false})
       };
     //   formatData = (data) => {
     //       aux = data.map((obj,i) => {
@@ -175,6 +178,12 @@ class estadisticas extends Component {
             console.error(error);
         });
     }
+    onRefresh() {
+        //Clear old data of the list
+        //Call the Service to get the latest data
+        this._bootstrapAsync();
+
+    }
     render() {
         return (
                 <View style={styles.container}>
@@ -203,7 +212,7 @@ class estadisticas extends Component {
                         <View style = {{width:'99%', height:Height*0.70}} >
                             <Text style = {styles.textlabel}>Áreas de Desarrollo</Text>
                         {console.log(this.state.dataSource.length)}
-                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <Swiper style={styles.wrapper} showsButtons={true}>
+                        {(this.state.dataSource.length <= 1) ? <this.noDataMsj/> : <Swiper style={styles.wrapper} showsButtons={true}>
                                 <View style = {{width:Widht*0.9, height:'95%', justifyContent: 'center', alignItems:'center', paddingLeft:10}}>
                                     <VictoryChart polar
                                         theme={VictoryTheme.material}
@@ -437,18 +446,19 @@ class estadisticas extends Component {
                         }
                         </View>
                         <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
-                        <Text style = {styles.textlabel}>Desarrollo de misiones por seisena</Text>
-                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <VictoryChart
+                        <Text style = {styles.textlabel}>Puntaje de misiones por seisena</Text>
+                        {(this.state.dataSource.length <= 1) ? <this.noDataMsj/> : <VictoryChart
                             theme = {VictoryTheme.material}
                             height={(Height*0.57)} 
                             width={(Widht*0.95)}
+                            domainPadding={40}
                             >
                             <VictoryBar 
                                 data={this.state.barra.map((obj,i) => {
                                     console.log({x : i, y : parseInt(obj.puntaje,10)})
                                     return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
                                 })}
-                                alignment="start"
+                                alignment="middle"
                                 style={{
                                     labels: {
                                         fontSize: 15
