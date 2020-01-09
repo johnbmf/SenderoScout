@@ -9,8 +9,8 @@
   $id_unidad = $obj['id_unidad'];
   $grupo_u = $obj['grupo_u'];
 
-  $query = "SELECT * FROM Unidad WHERE id <> '$id_unidad' AND grupo = '$grupo_u'";
-
+  //$query = "SELECT * FROM Unidad WHERE id <> '$id_unidad' AND grupo = '$grupo_u'";
+  $query = "SELECT * FROM Unidad WHERE id <> '$id_unidad'";
   if($result = $mysqli->query($query)){
     if($result->num_rows==0){
       echo json_encode('No se encuentran otras unidades.');  
