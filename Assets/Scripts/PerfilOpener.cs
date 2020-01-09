@@ -16,6 +16,8 @@ public class PerfilOpener : MonoBehaviour
     public GameObject[] BotonesInsignia;
     public Sprite[] InsigniasColor;
 
+    public GameObject[] Loading;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,9 @@ public class PerfilOpener : MonoBehaviour
     IEnumerator GetInsignias()
     {
         //LOADING
+        Loading[0].SetActive(true);
+        Loading[1].SetActive(true);
+
         WWWForm form = new WWWForm();
         form.AddField("unidad", PlayerPrefs.GetInt("unidad1", -1));
 
@@ -57,6 +62,8 @@ public class PerfilOpener : MonoBehaviour
             Debug.Log("Error de conexion en PerfilOpener.cs Line 49");
             //Handle
             Debug.Log(www.error);
+            Loading[0].SetActive(false);
+            Loading[1].SetActive(false);
             yield break;
         }
 
@@ -83,6 +90,8 @@ public class PerfilOpener : MonoBehaviour
             Aptitudes.isPanelOpen = true;
             MainCamera.GetComponent<TouchCamera>().enabled = false;
             PerfilCanvas.SetActive(true);
+            Loading[0].SetActive(false);
+            Loading[1].SetActive(false);
             yield break;
         }
     }

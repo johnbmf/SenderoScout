@@ -27,6 +27,7 @@ public class Profile : MonoBehaviour
     public static JSONNode PersonasInsignias;
 
     public Sprite[] InsigniasLista;
+    public GameObject[] Loading;
 
     // Start is called before the first frame update
     void Start()
@@ -111,6 +112,8 @@ public class Profile : MonoBehaviour
     IEnumerator SendPseudoCoroutine()
     {
         //LOADING
+        Loading[0].SetActive(true);
+        Loading[1].SetActive(true);
         WWWForm form = new WWWForm();
 
         //GET PSEUDO FROM INPUT
@@ -130,6 +133,8 @@ public class Profile : MonoBehaviour
             Debug.Log("Error de conexion en Profile.cs Line 138");
             ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión. Comprueba tu conexión a internet.";
             Debug.Log(www.error);
+            Loading[0].SetActive(false);
+            Loading[1].SetActive(false);
             yield break;
         }
 
@@ -162,7 +167,8 @@ public class Profile : MonoBehaviour
                 ElementosCambiarPseudo[2].GetComponent<Text>().text = "Ya has solicitado un cambio de pseudónimo previamente. Espera la aprobación de tu dirigente.";
                 ElementosCambiarPseudo[2].GetComponent<Text>().color = colorRojo;
             }
-
+            Loading[0].SetActive(false);
+            Loading[1].SetActive(false);
             yield break;
         }
         
