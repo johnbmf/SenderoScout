@@ -157,6 +157,7 @@ LoadingState(){
   };
   
   makeRemoteRequest2(text) {
+    console.log("HOLA")
     this.setState({ loading: true,
     value2:this.state.value2,
     text2:text});
@@ -173,7 +174,7 @@ LoadingState(){
                 },
                 body: JSON.stringify(
                 {
-                    nombre_u: text,
+                    id_unidad: text,
  
                     grupo_u:this.state.userToken.grupo 
                 })
@@ -264,6 +265,7 @@ LoadingState(){
           value:item.nombre,
           text:item.nombre,
           usuario:item.user,
+          unidad:item.unidad1,
           data: [item],
           mostrarSearchBar: false,
           cancel1: !this.state.cancel1,
