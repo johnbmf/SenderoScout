@@ -377,18 +377,19 @@ class recomendaciones extends Component {
         return(
             <View style = {{width: '100%', height: '100%', marginTop: 5}}>
                 <ScrollView>
-                    <Text>Area Peor Evaluada</Text>
+                <Text style = {{fontWeight:'bold', margin : 10}}>Area Peor Evaluada</Text>
                     <View>{this.state.peor_recomendadas.map(((obj,i) =>
                         <View key = {i}>{
                             <ActivityCard
                                 actividad = {obj}
                                 navegacion = {this.props.navigation}
+                                
                            />
                         }
                         </View>
                         ))}
                     </View>
-                    <Text>Area Mal Evaluada</Text>
+                    <Text style = {{fontWeight:'bold', margin : 10}}>Area Mal Evaluada</Text>
                     <View>{this.state.mal_recomendadas.map(((obj,i) =>
                         <View key = {i}>{
                             <ActivityCard
@@ -399,8 +400,8 @@ class recomendaciones extends Component {
                         </View>
                         ))}
                     </View>
-                    <Text>Area Mejor Evaluada</Text>
-                    <View>{this.state.mejor_recomendadas.map(((obj,i) =>
+                    <Text style = {{fontWeight:'bold', margin : 10}}>Area Mejor Evaluada</Text>
+                    <View >{this.state.mejor_recomendadas.map(((obj,i) =>
                         <View key = {i}>{
                             <ActivityCard
                             actividad = {obj}
@@ -617,6 +618,7 @@ const styles = StyleSheet.create({
     observacion:{
         fontFamily: 'Roboto',
         fontSize: 9,
+        marginTop: 5
 
     },
 
