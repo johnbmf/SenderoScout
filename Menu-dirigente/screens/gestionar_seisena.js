@@ -503,9 +503,9 @@ marcar(flag,i,item){
 
 
 
-
+//,this.entregar_seisenas_menosactual()
 selectItem(item){
-    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(result=> {console.log('CAMBIO'),this.entregar_seisenas_menosactual()},this.setState({seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})).then(result => {if(this.state.nines_seleccionados.length == 0){this.setState({show_siguiente:false,seleccion_seisena:false,seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})}}).then(result =>{if(this.state.seleccion_seisena==false && this.state.nines_seleccionados.length != 0){this.setState({show_siguiente:true})}})
+    this.se_encuentra(item).then(result=>{this.marcar(result[0],result[1],item)}).then(result=> {console.log('CAMBIO')},this.setState({seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})).then(result => {if(this.state.nines_seleccionados.length == 0){this.setState({show_siguiente:false,seleccion_seisena:false,seisena_seleccionada:false, boton_cancelar_seisena:null, id_seisena:null, nombre_seisena: ''})}}).then(result =>{if(this.state.seleccion_seisena==false && this.state.nines_seleccionados.length != 0){this.setState({show_siguiente:true})}})
 }
 
 
