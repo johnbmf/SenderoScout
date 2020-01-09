@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView,ScrollView,Dimensions,Image, Butto
 import {createDrawerNavigator, createAppContainer, DrawerItems, createStackNavigator, createSwitchNavigator} from 'react-navigation'
 import { Header,Left,Right,Icon} from 'native-base'
 import HomeScreen from './screens/HomeScreen'
-import SettingsScreen from './screens/SettingsScreen'
+//import SettingsScreen from './screens/SettingsScreen'
 import EvaluacionScreen from './screens/evaluacion'
 import CrearMisionScreen from './screens/crear_mision'
 import RecomendacionesScreen from './screens/recomendiaciones'
@@ -77,7 +77,7 @@ const StackNavigator = createStackNavigator({
     navigationOptions : {
         drawerLabel: 'Cacerías',
         drawerIcon: ({tintColor}) => (
-            <Icon name='star' style = {{fontSize:24,color:tintColor}} />
+            <Icon name='pine-tree' type = 'MaterialCommunityIcons' style = {{fontSize:24,color:tintColor}} />
         ),
         header: null
 
@@ -102,7 +102,7 @@ const CrearUnidadStack = createStackNavigator({
     navigationOptions : {
         drawerLabel: 'Gestion unidad',
         drawerIcon: ({tintColor}) => (
-            <Icon name='star' style = {{fontSize:24,color:tintColor}} />
+          <Icon name='users' type= 'FontAwesome' style = {{fontSize:24,color:tintColor}} />
         ),
         header: null
 
@@ -123,7 +123,7 @@ const EntregarInsigniaStack = createStackNavigator(
     navigationOptions :
     {
       drawerLabel: 'Entrega Insignia',
-      drawerIcon : ({tintColor}) => (<Icon name ='star' style = {{fontSize : 24, color: tintColor}} />),
+      drawerIcon : ({tintColor}) => (<Icon name ='badge' type = 'SimpleLineIcons' style = {{fontSize : 24, color: tintColor}} />),
       header: null
     },
     defaultNavigationOptions:{
@@ -147,7 +147,7 @@ const AppDrawerNavigator = createDrawerNavigator({
   Unidad:CrearUnidadStack,
   CambioPseudos: CambiarPseudonimoScreen,
   Insignias: EntregarInsigniaStack,
-  Settings:SettingsScreen,
+  //Settings:SettingsScreen,
   CerrarSesion:CerrarSesionScreen
   
 },{

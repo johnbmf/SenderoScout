@@ -44,7 +44,7 @@ export default class invitar_dirigente extends Component {
     static navigationOptions = {
         drawerLabel: 'Invitar Dirigente',
         drawerIcon: ({tintColor}) => (
-            <Icon name='users' type= 'FontAwesome' style = {{fontSize:24,color:tintColor}} />
+            <Icon name='handshake' type= 'FontAwesome5' style = {{fontSize:24,color:tintColor}} />
         )
     };
     getInvitados(){
