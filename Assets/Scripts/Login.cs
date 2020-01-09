@@ -40,21 +40,6 @@ public class Login : MonoBehaviour{
         {
             StartDebugMode();
         }
-
-        else
-        {
-            PlayerPrefs.DeleteAll();
-
-            inicioSesion = PlayerPrefs.GetInt("sesion", 0);// (string clave, valor por defecto si es que no existe)
-            user = PlayerPrefs.GetString("user", "");
-            tipo = PlayerPrefs.GetString("tipo", "");
-            /* saltarse el login si ya inició sesión
-            if (inicioSesion == 1){
-                SceneManager.LoadScene("EscenaMapa");
-                SceneManager.UnloadSceneAsync("LoginMenu");
-            }*/
-        }
-
     }
 
     public void StartDebugMode() {

@@ -173,12 +173,14 @@ public class Profile : MonoBehaviour
         ElementosInsigniaInfo[0].GetComponent<Image>().sprite = InsigniasLista[numInsignia - 1];
 
         string personasQueTienenInsignia = "Personas que tienen esta insignia: ";
+        bool hayPersonas = false;
         ElementosInsigniaInfo[1].GetComponent<Text>().text = InfoInsigniasJSON[numInsignia.ToString()]["nombre"];
         //AQUI CAMBIAR EL ESTADO DE OBTENIDA O NO OBTENIDA.
         foreach (JSONNode node in PersonasInsignias[numInsignia.ToString()])
         {
             string nombreInLista = (string)node.ToString().Replace("\"", string.Empty);
             personasQueTienenInsignia += nombreInLista + ", ";
+            hayPersonas = true;
             if (nombreInLista == PlayerPrefs.GetString("user", "USER_NOT_FOUND"))
             {
                 ElementosInsigniaInfo[2].GetComponent<Text>().text = "obtenida";
@@ -187,9 +189,19 @@ public class Profile : MonoBehaviour
         }
         ElementosInsigniaInfo[3].GetComponent<Text>().text = InfoInsigniasJSON[numInsignia.ToString()]["obtencion"];
         //AQUI CAMBIAR EL TEXTO QUE MUESTRA A LAS OTRAS PERSONAS QUE TIENEN LA INSIGNIA.
-        personasQueTienenInsignia = personasQueTienenInsignia.Remove(personasQueTienenInsignia.Length - 2);
-        personasQueTienenInsignia += ".";
+        if (hayPersonas)
+        {
+            personasQueTienenInsignia = personasQueTienenInsignia.Remove(personasQueTienenInsignia.Length - 2);
+            personasQueTienenInsignia += ".";
+        }
+
+        else
+        {
+            personasQueTienenInsignia = personasQueTienenInsignia.Remove(0) + "Nadie en tu unidad posee esta insignia.";
+        }
+
         ElementosInsigniaInfo[4].GetComponent<Text>().text = personasQueTienenInsignia;
+
         Paneles[2].SetActive(true);
     }
 
