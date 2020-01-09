@@ -142,7 +142,7 @@ public class Login : MonoBehaviour{
             PlayerPrefs.SetString("pseudonimo", respuestaJson["pseudonimo"]);
             PlayerPrefs.SetInt("puntos", respuestaJson["puntos"]);
             PlayerPrefs.SetString("grupo", respuestaJson["grupo"]);
-            PlayerPrefs.SetInt("avatar", 0);
+            //PlayerPrefs.SetInt("avatar", 0);
             PlayerPrefs.SetString("nombre_unidad", respuestaJson["nombre_unidad"]);
 
             //Se carga escena del juego.

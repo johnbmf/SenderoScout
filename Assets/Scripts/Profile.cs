@@ -9,10 +9,8 @@ using UnityEngine.Networking;
 public class Profile : MonoBehaviour
 {
     private string currentTab = "perfil";
-    private Color32 colorTabActive = new Color32(254, 247, 215, 255);
-    private Color32 colorTabActiveText = new Color32(147, 76, 33, 255);
-    private Color32 colorTabInactive = new Color32(184, 101, 83, 255);
-    private Color32 colorTabInactiveText = new Color32(254, 247, 215, 255);
+    private Color32 colorRojo = new Color32(255, 0, 0, 255);
+    private Color32 colorVerde = new Color32(22, 176, 0, 255);
     private JSONNode InfoInsigniasJSON;
     private int currentAvatar = 0;
 
@@ -28,11 +26,13 @@ public class Profile : MonoBehaviour
     public GameObject MainCamera;
     public static JSONNode PersonasInsignias;
 
+    public Sprite[] InsigniasLista;
+
     // Start is called before the first frame update
     void Start()
     {
         InfoInsigniasJSON = JSONNode.Parse(Resources.Load<TextAsset>("info").text);
-        ElementosComun[2].GetComponent<Image>().sprite = Avatares[PlayerPrefs.GetInt("avatar", 0)];
+        ElementosComun[2].GetComponent<Image>().sprite = Avatares[PlayerPrefs.GetInt(PlayerPrefs.GetString("user", "USER_NOT_FOUND") + "avatar", 0)];
         ElementosPerfil[2].GetComponent<Text>().text = PlayerPrefs.GetString("nombre_unidad", "UNIDAD_NOT_FOUND");
         ElementosPerfil[4].GetComponent<Text>().text = PlayerPrefs.GetString("grupo", "GRUPO_NOT_FOUND");
         ElementosPerfil[6].GetComponent<Text>().text = PlayerPrefs.GetString("nombre", "NOMBRE_NOT_FOUND");
@@ -142,21 +142,25 @@ public class Profile : MonoBehaviour
             if (RespuestaJson["response"] == 0)
             {
                 ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión. Inténtalo más tarde.";
+                ElementosCambiarPseudo[2].GetComponent<Text>().color = colorRojo;
             }
 
             else if (RespuestaJson["response"] == 1)
             {
                 ElementosCambiarPseudo[2].GetComponent<Text>().text = "Enhorabuena!. Se ha enviado tu nuevo pseudónimo a tu dirigente para que sea aprobado.";
+                ElementosCambiarPseudo[2].GetComponent<Text>().color = colorVerde;
             }
 
             else if (RespuestaJson["response"] == 2)
             {
                 ElementosCambiarPseudo[2].GetComponent<Text>().text = "Error de conexión. Inténtalo más tarde.";
+                ElementosCambiarPseudo[2].GetComponent<Text>().color = colorRojo;
             }
 
             else if (RespuestaJson["response"] == -1)
             {
                 ElementosCambiarPseudo[2].GetComponent<Text>().text = "Ya has solicitado un cambio de pseudónimo previamente. Espera la aprobación de tu dirigente.";
+                ElementosCambiarPseudo[2].GetComponent<Text>().color = colorRojo;
             }
 
             yield break;
@@ -166,6 +170,8 @@ public class Profile : MonoBehaviour
 
     public void OpenInsigniaInfoPanel(int numInsignia)
     {
+        ElementosInsigniaInfo[0].GetComponent<Image>().sprite = InsigniasLista[numInsignia - 1];
+
         string personasQueTienenInsignia = "Personas que tienen esta insignia: ";
         ElementosInsigniaInfo[1].GetComponent<Text>().text = InfoInsigniasJSON[numInsignia.ToString()]["nombre"];
         //AQUI CAMBIAR EL ESTADO DE OBTENIDA O NO OBTENIDA.
@@ -197,7 +203,7 @@ public class Profile : MonoBehaviour
     public void ConfirmarAvatar()
     {
         //Set avatar playerpfrefs
-        PlayerPrefs.SetInt("avatar", currentAvatar);
+        PlayerPrefs.SetInt(PlayerPrefs.GetString("user", "USER_NOT_FOUND") + "avatar", currentAvatar);
         //Set avatar pantalla mapa
         AvatarChange[1].GetComponent<Image>().sprite = Avatares[currentAvatar];
         //SETEAR AVATAR DE PANEL PERFIL.

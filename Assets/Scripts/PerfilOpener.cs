@@ -20,7 +20,7 @@ public class PerfilOpener : MonoBehaviour
     void Start()
     {
         //Set avatar
-        Datos[0].GetComponent<Image>().sprite = Avatares[PlayerPrefs.GetInt("avatar", 0)];
+        Datos[0].GetComponent<Image>().sprite = Avatares[PlayerPrefs.GetInt(PlayerPrefs.GetString("user", "USER_NOT_FOUND") + "avatar", 0)];
         //Set pseudonimo + unidad
         Datos[1].GetComponent<Text>().text = PlayerPrefs.GetString("pseudonimo", "undefined") + "\n" + PlayerPrefs.GetString("nombre_unidad", "UNIDAD_NOT_FOUND");
     }
