@@ -449,6 +449,12 @@ class estadisticas extends Component {
                                     return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
                                 })}
                                 alignment="start"
+                                style={{
+                                    labels: {
+                                        fontSize: 15
+                                    }
+                                    }}
+                                    labels={({ datum }) => parseInt(datum.y,10)}
                                 />
                             </VictoryChart>}
                          </View>

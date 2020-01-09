@@ -305,13 +305,6 @@ class cambio_pseudonimos extends Component {
                     />
                 
 
-                <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >
-                    <CustomButton 
-                    onPress = {() => this.ValidarMail()}
-                    title = "Agregar"
-                    name = 'long-primary-button'
-                    />
-                </View>
                 <View></View>
                 <View style={{width: '100%', height: '7%'}} >
                 <NavigationEvents onWillFocus={() => {this.setState({Pseudonimos:[]}),this.getPseudonimos()}}/> 
@@ -332,7 +325,7 @@ const styles = StyleSheet.create({
     },
     banner:{
         color:'white',
-        fontSize:28,
+        fontSize:26,
         justifyContent:'center',
         alignItems:'center',
         alignContent:'center',
