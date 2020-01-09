@@ -299,8 +299,11 @@ class cambio_pseudonimos extends Component {
                     </ScrollView>
                 
                 </View>
-                <Alerta2B visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()} }//aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}}
+                <Alerta botones = {2} visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} aceptar = {() => {this.toggleAlertAceptar()}} rechazar = {() => {this.toggleAlertRechazar()}} titulo_boton_rechazar={"Rechazar"} hide = {() => {this.setState({
+                    SendAlertState:false
+                })}}
                     />
+                
 
                 <View></View>
                 <View style={{width: '100%', height: '7%'}} >

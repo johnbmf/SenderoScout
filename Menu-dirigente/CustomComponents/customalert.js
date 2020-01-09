@@ -10,7 +10,7 @@ const Alerta = (props) => {
     esVisible = false;
     if (props.botones == 2){
         return (        
-            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
+            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}} onRequestClose = {props.onRequestClose}>
                 <TouchableWithoutFeedback onPress= {props.hide != null ? props.hide : props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <TouchableWithoutFeedback onPress= {() => {null}}>
@@ -28,17 +28,17 @@ const Alerta = (props) => {
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:30, fontFamily:'Roboto',textAlign: 'center', marginBottom:10}}>{props.titulo}</Text>
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                         </View>
-                        <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
+                        <View style={{height:'20%', flexDirection: 'row-reverse', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
                             <CustomButton 
                                 onPress = {props.aceptar}
-                                name = 'primary-button'
+                                name = 'primary-button' 
                                 title = {props.titulo_boton_aceptar != null? props.titulo_boton_aceptar: "Aceptar" }
                             />
                             <CustomButton 
                                 onPress = {props.rechazar}
                                 name = 'secondary-button'
 
-                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_aceptar: "Volver"}/>
+                                title = {props.titulo_boton_rechazar != null? props.titulo_boton_rechazar: "Volver"}/>
                         </View>
                     </View>
                     </TouchableWithoutFeedback>
@@ -49,7 +49,7 @@ const Alerta = (props) => {
     }
     else {
         return (        
-            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}}>
+            <Modal visible={props.visible} transparent = {true} style = {{justifyContent:'center'}} onRequestClose = {props.onRequestClose}>
                 <TouchableWithoutFeedback onPress= {props.hide != null ? props.hide : props.rechazar}>
                 <View style={{height:'100%',justifyContent:'center', alignItems:'center',backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <TouchableWithoutFeedback onPress= {() => {null}}>

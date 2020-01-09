@@ -10,7 +10,7 @@ import {
     RefreshControl
 
 } from "react-native";
-import { Header,Icon, Body, Right, Card, CardItem, Left, Container} from 'native-base';
+import { Header,Left,Right,Icon, Body} from 'native-base'
 import { Button } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
 import Modal from "react-native-modal";
@@ -21,13 +21,20 @@ import CustomButton from "../CustomComponents/CustomButtons";
 
 
 
+const CModal = ({ nombre, value }) => (                    
+    <Modal isVisible={value}>
+        <View style={{ flex: 1 , backgroundColor:'white'}}>
+            <Text> {nombre}</Text>
+            <Button title="Hide modal" onPress={() => {HomeScreen.toggleModal()}} />
+        </View>
+    </Modal>
+);
 class HomeScreen extends Component {
     static navigationOptions = {
         drawerLabel: 'Inicio',
         drawerIcon: ({tintColor}) => (
             <Icon name='home' style = {{fontSize:24,color:tintColor}} />
-        ),
-        header: null
+        )
     }
     constructor(props){
         super(props);
@@ -53,9 +60,6 @@ class HomeScreen extends Component {
             mensajeAlerta: "Misión creada con éxito",
             typeAlerta: 'Warning',
             cantPseudos:0,//agregado para el cambio de pseudonimos
-
-            //Props diego
-            modalInvitaciones: false,
         }
         this._bootstrapAsync();
         
@@ -194,8 +198,6 @@ class HomeScreen extends Component {
         this.getInvitaciones();
         this.getPseudonimos();
       };
-
-/*
     responderInvitacion(estado,nombre_unidad1, id){
         if(this.state.userToken.unidad1 > 0 && estado == 1){
             this.setState({
@@ -264,7 +266,7 @@ class HomeScreen extends Component {
             console.error(error);
         });
     }
- */  
+   
     getPendientes(){
         fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
             method: 'post',
@@ -307,191 +309,116 @@ class HomeScreen extends Component {
             return false;
         }
     }
-
+    CModal = () => (              
+        <Modal isVisible={this.state.isModalVisible}>
+            <View style={{ flex: 1 , backgroundColor:'white', flexDirection:'column', justifyContent:'space-around', borderWidth:5, borderColor:'#81C14B'}}>
+                <View style = {{height:'20%'}}>
+                    <Text style={{fontSize:48, fontFamily:'Roboto', color: 'black', alignSelf:'center',borderBottomWidth:1}}>Invitacion</Text>
+                </View>
+                <View style = {{width:'90%', alignSelf:'center', height:'40%',justifyContent:'center', alignContent:"center", alignItems:'center'}}>
+                    <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:25, fontFamily:'Roboto',textAlign: 'center'}}>{this.state.user_reclutador} que pertenece a tu grupo acaba de invitarte a su unidad, aceptando podrás empezar a crear misiones y evaluar a los niños que pertenescan a ella.</Text>
+                </View>
+                <View style={{height:'20%', paddingBottom:80}}>
+                    <Button titleStyle={{color:'#00AB66'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#00AB66'}} type = "outline" title="Aceptar" onPress={() => {this.responderInvitacion(1, this.state.nombre_unidad,this.state.id_unidad);this.toggleModal();this.setState({update:true})}} />
+                    <Button titleStyle={{color:'#d9534f'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#d9534f'}} type = "outline" title="Rechazar" onPress={() => {this.responderInvitacion(-1,this.state.nombre_unidad,this.state.id_unidad);this.toggleModal();this.setState({update:true})}} />
+                    <Button titleStyle={{color:'#428bca'}} buttonStyle = {{width:'70%' , marginHorizontal:10, marginBottom:5, alignSelf:'center', borderColor:'#428bca'}} type = "outline" title="Cancelar" onPress={() => {this.toggleModal()}} />
+                </View>
+            </View>
+        </Modal>
+    );
     onRefresh() {
         //Clear old data of the list
         //Call the Service to get the latest data
         this._bootstrapAsync();
 
-    }
+      }
 
-    NotificationCard(){
-        return(
-            <Card style = {{width: '90%',borderWidth:2, borderRadius:1,marginTop:20,borderColor : '#e4ccff', backgroundColor: '#F9F4FF', alignSelf:'center', margin:10}}>
-                <CardItem style = {{backgroundColor: '#F9F4FF'}} header bordered>
-                    <Left>
-                        <Text style = {{fontWeight:'bold'}}>
-                            Notificaciones
-                        </Text>
-                    </Left>
-                    <Right >
-                        <Icon
-                        type = 'Feather'
-                        name = {'bell'}
-                        //style = {styles.AccordeonIcon}
-                        />
-                    </Right>
-                </CardItem>
-                {
-                    (this.state.dataSource.length > 0) ? 
-                        <CardItem bordered button onPress={()=> this.props.navigation.navigate('Pendientes')} >
-                            <Body>
-                                <Text>
-                                    Tienes {this.state.dataSource.length} misiones sin evaluar.
-                                </Text>
-                            </Body>
-                            <Right>
-                                <Icon
-                                    type = 'Feather'
-                                    name = {'chevron-right'}
-                                />
-                            </Right>
-                        </CardItem>:null
-                }
-                {
-                    (this.state.cantPseudos> 0) ?                         
-                        <CardItem bordered button onPress={()=> this.props.navigation.navigate("CambioPseudos")} >
-                            <Body>
-                                <Text>
-                                Algunos lobatos quieren cambiar su pseudónimo.
-                                </Text>
-                            </Body>
-                            <Right>
-                                <Icon
-                                    type = 'Feather'
-                                    name = {'chevron-right'}
-                                />
-                            </Right>
-                         </CardItem>:null
-
-                }
-                {
-                    (this.state.invitaciones.length > 0) ?                  
-                        <CardItem bordered button onPress={()=> this.props.navigation.navigate("InvitacionesUnidad", {dataInvitaciones: this.state.invitaciones})}>
-                            <Body>
-                                <Text>
-                                    Has sido invitado a una unidad.
-                                </Text>
-                            </Body>
-                            <Right>
-                                <Icon
-                                    type = 'Feather'
-                                    name = {'chevron-right'}
-                                />
-                            </Right>
-                        </CardItem>:null
-                }
-            </Card>
-        )
-    }
-    
-    InformativeCard(){
-        if (this.state.userToken != ""){
-            return(
-                <Card style = {{width: '90%',borderWidth:2, borderRadius:1,marginTop:10,borderColor : '#e4ccff', backgroundColor: '#F9F4FF', alignSelf:'center', margin:10}}>
-                    <CardItem style = {{backgroundColor: '#F9F4FF'}} header bordered>
-                        <Left>
-                            <Text style = {{fontWeight:'bold'}}>
-                                Información
-                            </Text>
-                        </Left>
-                        <Right >
-                            <Icon
-                                type = 'Feather'
-                                name = {'edit'}
-                            />
-                        </Right>
-                    </CardItem>
-
-                    <CardItem  bordered>
-                        <Left>
-                            <Text>
-                                {this.state.userToken.nombre}
-                            </Text>
-                        </Left>
-                        <Right>
-                            <Text>
-                                {this.state.userToken.pseudonimo}
-                            </Text>
-                        </Right>
-                    </CardItem>
-                    <CardItem bordered>
-                        <Left>
-                            <Text>
-                                Perteneces a unidad
-                            </Text>
-                        </Left>
-                        <Right>
-                            <Text style= {{}}>
-                                {this.state.userToken.nombre_unidad}
-                            </Text>
-                        </Right>
-                    </CardItem>
-                    <CardItem bordered>
-                        <Text style = {{alignContent:'flex-start'}}>
-                                Gestionas la seisena
-                        </Text>
-                        <Body style ={{alignContent:"center", justifyContent: 'center',alignItems:'flex-end'}}>
-                            <Button 
-                                onPress={()=> console.log("Cambiar seisena")}
-                                type = 'clear'
-                                style = {{height:'50%'}}
-                                icon = {
-                                    <Icon
-                                        type = 'Feather' //FontAwesome
-                                        name = {'repeat'}  //exchange
-                                        style = {{fontSize: 20}}
-                                    />
-                                }
-                            />
-                        </Body>
-                        <Right>
-                            <Text>
-                                {this.state.userToken.seisena1}
-                            </Text>
-                        </Right>
-                    </CardItem>
-                </Card>
-            )
-        }
-    }
-
-    RenderCards(){
-        return(
-            <View>
-            {this.NotificationCard()}
-            {this.InformativeCard()}
-            </View>
-        )
-
-    }
-
+    //desde 397-406 agregado para el camnio de pseudonimos
     render() {
         return (
             <View style={styles.container}>
-                <View style={{width: '100%', height: '12%', alignItems:'center'}} >
-                    <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
-                        <Left>
-                            <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
-                        </Left>
-                        <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}>
-                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Sendero Scout</Text>
-                        </Body>
-                        <Right></Right>
-                    </Header>
+                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
+                <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
+                    <Left>
+                        <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
+                    </Left>
+
+                    <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
+                        <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Sendero Scout</Text>
+                    </Body>
+                    <Right></Right>
+                </Header >                    
                 </View>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }} refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)}/>}>
-                    <View>
-                        {
-                        (this.state.userToken.unidad1 != 0) ? this.RenderCards() :
-                            <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
-                                <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>
-                                    Cree una unidad o únase a alguna existente para poder iniciar a utilizar la aplicación.
-                                </Text>
-                        </View>
-                        }
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+                    refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
+                    }
+    >   
+
+                {this.state.userToken.unidad1 == 0 &&
+                    <View style = {{flexDirection : 'row', width:'90%', height:'40%', alignItems:'center',alignSelf:'center'}}>
+                            <Text style ={{color:'#d7576b',fontFamily:'Roboto',fontSize:30, textAlign: 'center'}}>Cree una unidad o únase a alguna existente para poder iniciar a utilizar la aplicación.</Text>
                     </View>
-                </ScrollView>
+                }
+                
+                {(this.state.dataSource.length > 0) &&
+                <View style = {{flexDirection:'row', alignItems:'center', height:60, paddingBottom:50}}>
+                    <TouchableOpacity
+                    onPress = {()=> this.props.navigation.navigate('Pendientes')}
+                    style = {{margin:10, flex:1, height:60, backgroundColor: '#104F55', justifyContent:'center'}}>
+                        <Text style = {{color: 'white', textAlign:'center', fontSize:18}}>Tienes {this.state.dataSource.length} misiones sin evaluar</Text>
+                    </TouchableOpacity>
+                </View>}
+                {(this.state.userToken.unidad1) > 0 &&
+                <View style = {styles.menuContainer } >
+                    <MenuItem itemImage = {require('./../assets/chart1.png')} />
+                    <MenuItem itemImage = {require('./../assets/chart2.png')} />
+                    <MenuItem itemImage = {require('./../assets/chart4.png')} />
+                    <MenuItem itemImage = {require('./../assets/chart6.png')} />
+                </View>}
+
+                {(this.state.cantPseudos> 0) &&//Pseudonimos.length > 0) &&
+                <View style = {{flexDirection:'row', alignItems:'center', height:90, paddingBottom:50}}>
+                    <CustomButton
+                    onPress = {()=> this.props.navigation.navigate("CambioPseudos")}
+                    title = "Algunos lobatos quieren cambiar su pseudonimo."
+                    name = 'long-primary-button'
+                    />  
+                </View>}
+
+                {this.state.invitaciones.length > 0 &&
+                <View style={{ width:'90%', height:'30%' , justifyContent : 'center', alignItems:'center', alignSelf:'center'}}>
+                    {this.state.invitaciones.map(((obj,i) => 
+                        <View style={{flexDirection:'row', marginBottom:10}} key = {i}>
+                        {
+                        <View key = {i}>
+                        <Button
+                        buttonStyle = {{marginHorizontal:10, marginBottom:5, alignSelf:'center'}}
+                        onPress = {() => {this.toggleModal(obj.nombre_unidad,obj.user_reclutador,obj.id)}}
+                        icon={
+                            <Icon
+                            style = {{color:'red', marginRight:20}}
+                            type = "Octicons"
+                            name="primitive-dot"
+                            color="white"
+                            />
+                            
+                        }
+                        iconRight
+                        title={"Tienes una invitación para unirte a la unidad "+ obj.nombre_unidad}
+                        />   
+                        </View>
+                        }</View>))
+                    }
+                </View>}
+                
+                
+
+                <this.CModal/>
+                    <Alerta visible = {this.state.estadoAlerta} type = {this.state.typeAlerta} titulo = {this.state.tituloAlerta} contenido = {this.state.mensajeAlerta} rechazar = {() => {this.toggleAlert()}}
+                    />
+
+            </ScrollView>
             </View>
 
         );

@@ -25,8 +25,10 @@ import CambiarPseudonimoScreen from './screens/cambiar_pseudonimo'
 
 import GestionarSeisenaScreen from './screens/gestionar_seisena'
 import CambiarNombreSeisenaScreen from './screens/cambiar_nombre_seisena'
+import SeleccionarNinoInsigniaScreen from './screens/seleccionar_nino_insignia'
 import EntregarInsigniaScreen from './screens/entrega_insignia'
 import DetalleInsigniaScreen from './screens/detalle_insignia'
+import InvitacionesUnidadScreen from './screens/invitaciones_unidad'
 
 
 //const {width} = Dimensions.get('window')
@@ -117,6 +119,7 @@ const CrearUnidadStack = createStackNavigator({
 
 const EntregarInsigniaStack = createStackNavigator(
   {
+    SeleccionarNino:SeleccionarNinoInsigniaScreen,
     EntregarInsignia : EntregarInsigniaScreen,
     DetalleInsignia: DetalleInsigniaScreen
   },{
@@ -134,8 +137,30 @@ const EntregarInsigniaStack = createStackNavigator(
     }
 );
 
+const HomeScreenStack = createStackNavigator({
+  Home: HomeScreen,
+  InvitacionesUnidad: InvitacionesUnidadScreen,
+  }, {
+    navigationOptions : {
+        drawerLabel: 'Inicio',
+        drawerIcon: ({tintColor}) => (
+            <Icon name='home' style = {{fontSize:24,color:tintColor}} />
+        ),
+        header: null
+
+    }
+  },{
+    defaultNavigationOptions:{
+      header: null
+    }
+  },
+    {
+      initialRouteName: 'Home'
+    }
+);
+
 const AppDrawerNavigator = createDrawerNavigator({
-  Home:HomeScreen,
+  Home:HomeScreenStack,
   MiManada:MiManadaScreen,
   CrearMision:CrearMisionScreen,
   Pendientes: StackNavigator,

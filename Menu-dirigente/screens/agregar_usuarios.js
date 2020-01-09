@@ -379,7 +379,7 @@ class agregar_usuarios extends Component {
                         value={this.state.Email}                       
                     />
                 </View>
-                <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}}
+                <Alerta visible = {this.state.SendAlertState} type = {this.state.TypeAlert} titulo = {this.state.AlertTitle} contenido = {this.state.SendAlertMessage} rechazar = {() => {this.toggleAlert()}} hide = {() => {this.toggleAlert()}}
                     />
 
                 <View style={{width: '100%', height: '7%',alignItems:'center', justifyContent:'center'}} >

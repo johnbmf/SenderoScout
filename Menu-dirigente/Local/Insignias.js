@@ -82,57 +82,57 @@ const Insignias = [
     },
     {
         Id : 10,
-        Nombre: 'Guitarra',
-        Tag: ["Musica", "Instrumento"],
+        Nombre: 'Vida sana',
+        Tag: ["salud","deporte","buena alimentación"],
         Familia: "",
-        Icon : require('../assets/Insignias/acoustic-guitar.png'),
-        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
-        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+        Icon : require('../assets/Insignias/apple.png'),
+        Descripcion: "Una vida sana basada en una alimentación y en la práctica de deportes, son grandes cualidades de un lobato.",
+        Requisitos: ["practicar algún deporte","comer saludable"]
     },
     {
         Id : 11,
-        Nombre: 'Guitarra',
-        Tag: ["Musica", "Instrumento"],
+        Nombre: 'Arquería',
+        Tag: ["Puntería","lanzamiento"],
         Familia: "",
-        Icon : require('../assets/Insignias/acoustic-guitar.png'),
-        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
-        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+        Icon : require('../assets/Insignias/target.png'),
+        Descripcion: "La precisión es una cualidad esencial para todo cazador..",
+        Requisitos: ["acertar 3 veces a un blanco a una distancia mínima de 5 metros"]
     },
     {
         Id : 12,
-        Nombre: 'Guitarra',
-        Tag: ["Musica", "Instrumento"],
+        Nombre: "Maestro pokémon",
+        Tag: ["maestro","pokémon","app","juego"],
         Familia: "",
-        Icon : require('../assets/Insignias/acoustic-guitar.png'),
-        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
-        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+        Icon : require('../assets/Insignias/pokemon.png'),
+        Descripcion: "Tengo que ser siempre el mejor, Mejor que nadie más, Atraparlos mi prueba es. Ser un gran maestro pokémon es parte de nuestro lema Siempre Mejor!",
+        Requisitos: ["Tener 1 pokemon legendario"]
     },
     {
         Id : 13,
-        Nombre: 'Guitarra',
-        Tag: ["Musica", "Instrumento"],
+        Nombre: "Cantante",
+        Tag: ["Cantar","Música","Arte"],
         Familia: "",
-        Icon : require('../assets/Insignias/acoustic-guitar.png'),
-        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
-        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+        Icon : require('../assets/Insignias/sing.png'),
+        Descripcion: "Un cantante es una persona que produce melodías con su voz. Los lobatos que la poseen son grandes artistas y con gran personalidad.",
+        Requisitos: ["Cantar 1 canción durante el Gran Fogón"]
     },
     {
         Id : 14,
-        Nombre: 'Guitarra',
-        Tag: ["Musica", "Instrumento"],
+        Nombre: "Fotografía",
+        Tag: ["Arte","Foto","Paisaje"],
         Familia: "",
-        Icon : require('../assets/Insignias/acoustic-guitar.png'),
-        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
-        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+        Icon : require('../assets/Insignias/picture.png'),
+        Descripcion: "Un fotógrafo es capaz de capturar grandes momentos y guardarlos para la posteridad.",
+        Requisitos: ["Tomar 1 foto tipo retrato", "Tomar una foto de un paisaje"]
     },
     {
         Id : 15,
-        Nombre: 'Guitarra',
-        Tag: ["Musica", "Instrumento"],
+        Nombre: 'Ajedrez',
+        Tag: ["Ajedrez", "Juego de mesa","Tablero"],
         Familia: "",
-        Icon : require('../assets/Insignias/acoustic-guitar.png'),
-        Descripcion: "Solo los guitarristas mas avezados son dignos de esta insignia.",
-        Requisitos: ["Aprendan una cancion en guitarra", "Animen el ambiente con el sonido de su guitarra."]
+        Icon : require('../assets/Insignias/chess.png'),
+        Descripcion: "Solo un genio y gran estratega logra conseguir esta insignia.",
+        Requisitos: ["Ganar 5 partidas de ajedrez"]
     },
     {
         Id : 16,
