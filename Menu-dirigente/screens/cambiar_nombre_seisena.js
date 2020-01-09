@@ -44,6 +44,9 @@ class cambiar_nombre_seisena extends Component {
         this.setState({
             estadoAlerta : !this.state.estadoAlerta
         })
+        if(this.state.typeAlerta!=='Warning'){
+        const { goBack } = this.props.navigation
+        goBack()}
     }
     _bootstrapAsync = async () => {
         const Token = await AsyncStorage.getItem('userToken');
@@ -216,7 +219,7 @@ Ingresar_nuevo_nombre(){
                         value={this.state.nuevo_nombre}
                         />
 
-        <View style={{width: '100%', height: '8%',alignItems:'center', justifyContent:'center'}} >
+        <View style={{width: '100%', alignItems:'center', justifyContent:'center'}} >
         <CustomButton 
         onPress = {() => {this.cambiarNombreSeisena()}}
         
@@ -275,7 +278,7 @@ if(this.state.userToken.unidad1 != 0){
                 end: [0.1, 0],
               }}
               ViewComponent={LinearGradient}
-              containerStyle = {{width: '93%',borderRadius:10,marginTop:2, marginLeft:15}}
+              containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
             />
           )}
           keyExtractor={item => item.id_seisena}         
@@ -357,7 +360,7 @@ const styles = StyleSheet.create({
     },
     banner:{
         color:'white',
-        fontSize:28,
+        fontSize:26,
         justifyContent:'center', 
         alignItems:'center',
         alignContent:'center',

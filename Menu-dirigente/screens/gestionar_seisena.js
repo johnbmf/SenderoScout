@@ -75,7 +75,7 @@ class gestionar_seisena extends Component {
     this.setState({
         userToken : JSON.parse(Token),
     });
-    this.busqueda(this.state.filter,"")
+    this.busqueda(1,"")
     this.entregar_seisenas()
   };
 
@@ -112,6 +112,7 @@ LoadingState(){
 
 
   busqueda(filtro, text) {
+    console.log('HOLI ESTAMOS AQUI')
     this.setState({ loading: true,text:text});
     if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar informacion en los otros item.
       this.setState({ show1: false,show2:false});
@@ -262,6 +263,9 @@ toggleAlert(){
   this.setState({
       estadoAlerta : !this.state.estadoAlerta
   })
+  if(this.state.typeAlerta!=='Warning'){
+    const { goBack } = this.props.navigation
+    goBack()}
 }
 
 //Buscador
