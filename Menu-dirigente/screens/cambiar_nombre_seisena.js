@@ -14,7 +14,7 @@ import { Header,Left,Right,Icon,Body } from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import CustomButton from "../CustomComponents/CustomButtons";
 import { List, ListItem, Button} from "react-native-elements";
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import TouchableScale from 'react-native-touchable-scale';
 import {Alerta} from './../CustomComponents/customalert';
 import {Alerta2B} from './../CustomComponents/customalert2B'
