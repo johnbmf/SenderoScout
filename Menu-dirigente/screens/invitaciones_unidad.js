@@ -15,6 +15,8 @@ import { Icon,Header,Left,Body,Picker, Right, Card, CardItem} from 'native-base'
 import {Rating, Button, Divider, ListItem} from 'react-native-elements'
 import { ScrollView, ViewPagerAndroid, FlatList } from "react-native-gesture-handler";
 import { NavigationEvents } from 'react-navigation';
+import { LinearGradient } from 'expo-linear-gradient';
+
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert';
 
@@ -151,29 +153,49 @@ class InvitacionesUnidad extends Component {
                         <Right></Right>
                     </Header>
                 </View>
-                <View style = {{width: '100%', height: '80%',alignItems: 'center'}}>
-                    {this.state.dataInvitaciones.map(((obj,i) => 
-                        <View style={{flexDirection:'row', marginBottom:10}} key = {i}>
-                        {
-                            <View key = {i}>
-                                <Button
-                                    buttonStyle = {{marginHorizontal:10, marginBottom:5, alignSelf:'center'}}
-                                    onPress = {() => {this.toggleAlert(obj.nombre_unidad,obj.user_reclutador,obj.id)}}
-                                    icon={
-                                        <Icon
-                                        style = {{color:'red', marginRight:20}}
-                                        type = "Octicons"
-                                        name="primitive-dot"
-                                        color="white"
-                                        />
-                                        
-                                    }
-                                    iconRight
-                                    title={"Tienes una invitación para unirte a la unidad "+ obj.nombre_unidad}
-                                />   
+                <View style = {{width: '100%', height: '80%',alignItems: 'center',paddingTop: 10}}>
+                    <Text style = {{fontFamily:'Roboto', fontSize:15, margin:10}}>
+                        Has recibido algunas invitaciones para comenzar a trabajar en otra unidad.
+                    </Text>
+                    {this.state.dataInvitaciones.map(((obj,i) => (
+
+                        <ListItem
+                        key={i}
+                        containerStyle = {{width: '90%',borderWidth:1, borderRadius:10, marginTop:2, margin:15,borderColor : '#e4ccff', marginBottom:2}}
+                        
+                        rightIcon={
+                            <View style = {{marginLeft:25, flexDirection: 'row', alignItems:'stretch' ,alignContent:'center', justifyContent: 'center'}}>
+                            <Icon
+                                type = 'Feather'
+                                name = 'mail'
+                                style = {{fontSize: 30}}
+                            />
+                            <Icon
+                                type = 'FontAwesome' //FontAwesome
+                                name = {'exclamation'}  //exchange
+                                style = {{fontSize: 15}}
+                            />
                             </View>
-                        }</View>))
-                    }
+                        }
+                        
+                        title = {"Unete a la unidad "+obj.nombre_unidad}
+                        titleStyle={{ color: '#104F55', fontWeight: 'bold', marginLeft:5}}
+                        
+                        subtitle={"Has sido invitado por "+obj.user_reclutador}
+                        subtitleStyle = {{color: '#104F55',marginLeft:5}}
+                        
+                        linearGradientProps={{
+                            colors: ['#f2e6ff', '#F9F4FF'],
+                            start: [1.5, 0],
+                            end: [0.1, 0],
+                        }}
+
+                        ViewComponent={LinearGradient}
+                        onPress = {() => {this.toggleAlert(obj.nombre_unidad,obj.user_reclutador,obj.id)}}
+
+                        />
+
+                    )))}
                     {this.RenderAlert()}
 
                 </View>
