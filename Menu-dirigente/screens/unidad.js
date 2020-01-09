@@ -23,16 +23,17 @@ class Unidad extends Component {
         return(
 
         <View style={styles.container}>
-                <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
+                   <View style={{width: '100%', height: '12%', alignItems:'center'}} >     
                     <Header style={{width: '100%', height: '100%',backgroundColor: '#81C14B',font:'Roboto'}}>
                         <Left>
                             <Icon name="menu" style = {{paddingTop:20}} onPress = {()=> this.props.navigation.openDrawer()}/>
                         </Left>
+
                         <Body style = {{position:'absolute', justifyContent:'center',alignContent: 'flex-start', alignItems: 'flex-start', flexWrap:'nowrap'}}> 
-                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Gestión de Unidad</Text>
+                            <Text numberOfLines={1} style= {styles.banner} onPress = {()=> this.props.navigation.openDrawer()}>Gestion Unidad</Text>
                         </Body>
                         <Right></Right>
-                    </Header >                    
+                    </Header>                  
                 </View>
                 <View elevation = {5} style = {{width: '100%', height: '88%',alignItems: 'center'}}>
                     <View style = {{width: '70%', height: '30%', alignItems: 'center', alignSelf: 'center'}}></View>
