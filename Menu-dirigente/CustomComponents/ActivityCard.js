@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text,} from "react-native";
 import { Icon,Body, Right, Card, CardItem, Left} from 'native-base'
 import { withNavigation } from 'react-navigation';
-
+import { LinearGradient } from 'expo';
 class ActivityCard extends Component{
 
     constructor(props){
@@ -18,8 +18,8 @@ class ActivityCard extends Component{
     render(){
         return(
 
-            <Card>
-                <CardItem header bordered button onPress={() => {this.setState({expanded: !this.state.expanded})}}>
+            <Card style = {{width: '99%',borderWidth:2, borderRadius:1,marginTop:2,borderColor : '#e4ccff', backgroundColor: '#F9F4FF'}}> 
+                <CardItem style = {{backgroundColor: '#F9F4FF'}} header bordered button onPress={() => {this.setState({expanded: !this.state.expanded})}}>
                 <Left>
                     <Text>{this.props.actividad["Nombre"]}</Text>
                 </Left>
@@ -33,14 +33,14 @@ class ActivityCard extends Component{
                 </CardItem>
 
                 {this.state.expanded? 
-                <CardItem bordered>
+                <CardItem style = {{backgroundColor: '#F9F4FF'}} bordered>
                     <Body>
                         <Text>{this.props.actividad["Resumen"]}</Text>
                     </Body>
                 </CardItem> : null
                 }
                 
-                <CardItem footer bordered button onPress ={ ()=> {this.props.navegacion.navigate('DetalleActividad', {data : this.props.actividad})}}>
+                <CardItem style = {{backgroundColor: '#F9F4FF'}} footer bordered button onPress ={ ()=> {this.props.navegacion.navigate('DetalleActividad', {data : this.props.actividad})}}>
                     <Left>
                         <Text>Ver Detalles</Text>
                     </Left>
