@@ -33,7 +33,7 @@ import { LinearGradient } from 'expo';
 import TouchableScale from 'react-native-touchable-scale';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert';
-import {Alerta2B} from './../CustomComponents/customalert2B'
+
 
 const { width } = Dimensions.get("window");
 
@@ -352,7 +352,7 @@ show1() {
                end: [0.1, 0],
               }}
               ViewComponent={LinearGradient}
-              containerStyle = {{width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+              containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
             />
           )}
           keyExtractor={item => item.id}         
@@ -454,6 +454,9 @@ toggleAlert(){
   this.setState({
       estadoAlerta : !this.state.estadoAlerta
   })
+  if(this.state.typeAlerta!=='Warning'){
+    const { goBack } = this.props.navigation
+    goBack()}
 }
 
 toggleAlert2Botones(){
@@ -495,7 +498,7 @@ se_encuentra_en_busqueda(){
 
               <ListItem
                 rightIcon={this.state.cancel1?{name : 'clear'}:{name : null}}
-                containerStyle = { {width: '93%', alignSelf: 'center',borderRadius:10,marginTop:2}}
+                containerStyle = {{width: '93%',borderWidth:1, borderRadius:10,marginTop:2, marginLeft:15,borderColor : '#e4ccff', marginBottom:2}}
                 //containerStyle = {{borderBottomColor : '#E8E8E8', borderBottomWidth: 1}} // borderTopColor: '#E8E8E8', borderTopWidth: 1
                 title={`${item.nombre}`}
                 titleStyle={{ color: '#104F55',fontWeight: 'bold' }} // color: '#104F55'
