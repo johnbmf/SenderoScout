@@ -317,8 +317,8 @@ class HomeScreen extends Component {
 
     NotificationCard(){
         return(
-            <Card style = {{width:"90%", alignSelf:'center', margin:15}}>
-                <CardItem header bordered>
+            <Card style = {{width: '90%',borderWidth:2, borderRadius:1,marginTop:20,borderColor : '#e4ccff', backgroundColor: '#F9F4FF', alignSelf:'center', margin:10}}>
+                <CardItem style = {{backgroundColor: '#F9F4FF'}} header bordered>
                     <Left>
                         <Text style = {{fontWeight:'bold'}}>
                             Notificaciones
@@ -388,8 +388,8 @@ class HomeScreen extends Component {
     InformativeCard(){
         if (this.state.userToken != ""){
             return(
-                <Card style = {{width:"90%", alignSelf:'center', margin:15}}>
-                    <CardItem header bordered>
+                <Card style = {{width: '90%',borderWidth:2, borderRadius:1,marginTop:10,borderColor : '#e4ccff', backgroundColor: '#F9F4FF', alignSelf:'center', margin:10}}>
+                    <CardItem style = {{backgroundColor: '#F9F4FF'}} header bordered>
                         <Left>
                             <Text style = {{fontWeight:'bold'}}>
                                 Información
@@ -403,7 +403,7 @@ class HomeScreen extends Component {
                         </Right>
                     </CardItem>
 
-                    <CardItem bordered>
+                    <CardItem  bordered>
                         <Left>
                             <Text>
                                 {this.state.userToken.nombre}
@@ -438,8 +438,8 @@ class HomeScreen extends Component {
                                 style = {{height:'50%'}}
                                 icon = {
                                     <Icon
-                                        type = 'Feather'
-                                        name = {'refresh-cw'}
+                                        type = 'Feather' //FontAwesome
+                                        name = {'repeat'}  //exchange
                                         style = {{fontSize: 20}}
                                     />
                                 }

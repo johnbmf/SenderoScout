@@ -28,7 +28,7 @@ const Alerta = (props) => {
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:30, fontFamily:'Roboto',textAlign: 'center', marginBottom:10}}>{props.titulo}</Text>
                             <Text style = {{width:'90%', justifyContent:'center',alignContent:'center', fontSize:22, fontFamily:'Roboto',textAlign: 'center'}}>{props.contenido}</Text>
                         </View>
-                        <View style={{height:'20%', flexDirection:'row', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
+                        <View style={{height:'20%', flexDirection: 'row-reverse', justifyContent:'space-between', marginHorizontal:5, alignItems:'center', alignSelf:'center' }}>
                             <CustomButton 
                                 onPress = {props.aceptar}
                                 name = 'primary-button' 
