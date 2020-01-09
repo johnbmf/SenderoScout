@@ -19,14 +19,16 @@ import {
     StatusBar
 } from "react-native";
 import {
-    G
+    G,
+    Svg,
+    Circle
   } from 'react-native-svg';
 import {Header,Left,Right,Icon, Body} from 'native-base'
 import {SCLAlert, SCLAlertButton} from 'react-native-scl-alert'
 import { NavigationEvents, StackRouter } from 'react-navigation';
 import CustomButton from "../CustomComponents/CustomButtons";
 import {Alerta} from './../CustomComponents/customalert'
-import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea, VictoryPie, VictoryTooltip, VictoryContainer } from "victory-native";
+import { VictoryBar, VictoryChart, VictoryTheme,VictoryLine, VictoryLabel, VictoryPolarAxis, VictoryArea, VictoryPie, VictoryTooltip, VictoryContainer, VictoryLegend } from "victory-native";
 import Swiper from 'react-native-swiper'
 import {CustomLoading} from '../CustomComponents/CustomLoading';
 const Height = Dimensions.get('window').height;
@@ -75,12 +77,10 @@ class estadisticas extends Component {
             // sociabilidad : [],
             // espiritualidad : [],
             testData : [
-                { x: '05-Oct', y: 2 },
-                { x: '12-Oct', y: 3 },
-                { x: '19-Oct', y: 5 },
-                { x: '26-Oct', y: 5 },
-
-            ],
+                { x: 'Amarilla', y: 2 },
+                { x: 'Lalala23', y: 3 },
+                { x: 'asdasd', y: 5 },
+                ],
             radar : [],
             barra : [],
             userToken: ""
@@ -438,18 +438,20 @@ class estadisticas extends Component {
                         </View>
                         <View style = {{width:Widht*0.99, height:Height*0.65, justifyContent: 'center', alignItems:'center'}}>
                         <Text style = {styles.textlabel}>Desarrollo de misiones por seisena</Text>
-                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <VictoryPie
-                                style={{ labels: { fill: "green" } }}
-                                innerRadius={100}
-                                labelRadius={120}
-                                labels={({ datum }) => (datum.x != null) ? `# ${datum.x}` : null}
-                                labelComponent={<CustomLabel/>}
+                        {(this.state.dataSource.length <= 0) ? <this.noDataMsj/> : <VictoryChart
+                            theme = {VictoryTheme.material}
+                            height={(Height*0.57)} 
+                            width={(Widht*0.95)}
+                            >
+                            <VictoryBar 
                                 data={this.state.barra.map((obj,i) => {
-                                            return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
-                                        })}/>
-                                }
-
-                                </View>
+                                    console.log({x : i, y : parseInt(obj.puntaje,10)})
+                                    return {x : obj.seisena, y : parseInt(obj.puntaje,10)}
+                                })}
+                                alignment="start"
+                                />
+                            </VictoryChart>}
+                         </View>
                     </ScrollView>
                 </View>}
                 </View>

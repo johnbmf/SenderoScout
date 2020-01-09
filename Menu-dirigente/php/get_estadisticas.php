@@ -42,10 +42,10 @@ GROUP BY WEEK(EvaluacionSemanal.fecha)")){
         WHERE Usuario.unidad1 = '$unidad'
         GROUP BY seisena1")){
             while( $row = $result -> fetch_array(MYSQLI_ASSOC)){
-                $myArray2[] = $row;
+                $myArray3[] = $row;
                 }
-                if (!is_null($myArray2)){
-                    $response -> barra = $myArray2;
+                if (!is_null($myArray3)){
+                    $response -> barra = $myArray3;
                 }
             }
         echo json_encode($response);
