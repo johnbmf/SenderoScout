@@ -115,7 +115,7 @@ class agregar_usuarios extends Component {
    //funcion crear usuario
     crearUsuario = () =>{
         this.setState({isLoading:true});
-        fetch('http://www.mitra.cl/SS/AgregarUsuario.php',{
+        fetch('https://www.mitra.cl/SS/AgregarUsuario.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

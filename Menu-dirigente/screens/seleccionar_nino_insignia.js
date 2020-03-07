@@ -89,7 +89,7 @@ class SeleccionarNino extends Component {
             isLoading:true,    
         })
 
-        fetch('http://www.mitra.cl/SS/get_miembros_insignias.php',{
+        fetch('https://www.mitra.cl/SS/get_miembros_insignias.php',{
                 method: 'POST',
                 header:{
                     'Accept': 'application/json',

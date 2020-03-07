@@ -125,7 +125,7 @@ LoadingState(){
     if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar informacion en los otros item.
       this.setState({ show1: false,show2:false});
     }
-    fetch('http://www.mitra.cl/SS/get_nombres_unidades.php',
+    fetch('https://www.mitra.cl/SS/get_nombres_unidades.php',
             {
                 method: 'POST',
                 headers: 
@@ -163,7 +163,7 @@ LoadingState(){
     if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar el boton cambiar.
       this.setState({show2:false});
     }
-    fetch('http://www.mitra.cl/SS/get_nombres_unidades2.php',
+    fetch('https://www.mitra.cl/SS/get_nombres_unidades2.php',
             {
                 method: 'POST',
                 headers: 
@@ -198,7 +198,7 @@ LoadingState(){
     
   makeRemoteRequest3(user,idU) {
     this.setState({ isLoading: true});
-    fetch('http://www.mitra.cl/SS/change_n_unidad.php',
+    fetch('https://www.mitra.cl/SS/change_n_unidad.php',
             {
                 method: 'POST',
                 headers: 

@@ -63,7 +63,7 @@ class HomeScreen extends Component {
 
 
     getInvitaciones = () => {
-        fetch('http://www.mitra.cl/SS/get_invitaciones.php',{
+        fetch('https://www.mitra.cl/SS/get_invitaciones.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -102,7 +102,7 @@ class HomeScreen extends Component {
 
     //cambiar pseudonimos
     getPseudonimos = () =>{
-        fetch('http://www.mitra.cl/SS/getPseudonimo.php',{
+        fetch('https://www.mitra.cl/SS/getPseudonimo.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -152,7 +152,7 @@ class HomeScreen extends Component {
 
     componentDidMount(){
 
-        fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+        fetch('https://www.mitra.cl/SS/get_misiones_pendientes.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -211,7 +211,7 @@ class HomeScreen extends Component {
                 nombre_unidad:nombre_unidad1
             });
         }
-        fetch('http://www.mitra.cl/SS/aceptar_invitacion.php',{
+        fetch('https://www.mitra.cl/SS/aceptar_invitacion.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -266,7 +266,7 @@ class HomeScreen extends Component {
     }
  */  
     getPendientes(){
-        fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+        fetch('https://www.mitra.cl/SS/get_misiones_pendientes.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

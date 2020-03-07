@@ -117,7 +117,7 @@ LoadingState(){
     if(text==""){ //si es vacio, se esta aprentando cancelar busqueda por lo que vuelve a no mostrar informacion en los otros item.
       this.setState({ show1: false,show2:false});
     }
-    fetch('http://www.mitra.cl/SS/filter_n_seisenas.php',
+    fetch('https://www.mitra.cl/SS/filter_n_seisenas.php',
             {
                 method: 'POST',
                 headers: 
@@ -154,7 +154,7 @@ LoadingState(){
   
   entregar_seisenas() {
     this.setState({isLoading: true});
-    fetch('http://www.mitra.cl/SS/get_nombres_seisenas.php',
+    fetch('https://www.mitra.cl/SS/get_nombres_seisenas.php',
             {
                 method: 'POST',
                 headers: 
@@ -208,7 +208,7 @@ LoadingState(){
     
   cambiar_nine_seisena() {
     this.setState({ isLoading: true});
-    fetch('http://www.mitra.cl/SS/change_n_seisena.php',
+    fetch('https://www.mitra.cl/SS/change_n_seisena.php',
             {
                 method: 'POST',
                 headers: 

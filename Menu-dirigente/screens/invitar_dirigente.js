@@ -48,7 +48,7 @@ export default class invitar_dirigente extends Component {
         )
     };
     getInvitados(){
-        fetch('http://www.mitra.cl/SS/get_invitados.php',{
+        fetch('https://www.mitra.cl/SS/get_invitados.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -92,7 +92,7 @@ export default class invitar_dirigente extends Component {
     crearInvitacion(){
         console.log("User reclutador:" + this.state.userToken.user);
         console.log("User invitado:" + this.state.usuarioElegido);
-        fetch('http://www.mitra.cl/SS/generar_invitacion.php',{
+        fetch('https://www.mitra.cl/SS/generar_invitacion.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

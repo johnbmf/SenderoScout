@@ -73,7 +73,7 @@ class cambio_pseudonimos extends Component {
      
     //obtiene todas las solicitudes de camio de la unidad del dirigente
     getPseudonimos = () =>{
-        fetch('http://www.mitra.cl/SS/getPseudonimo.php',{
+        fetch('https://www.mitra.cl/SS/getPseudonimo.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
@@ -107,7 +107,7 @@ class cambio_pseudonimos extends Component {
 
     //acepta o rechaza el cambio de 1 pseudonimo por vez
     cambiarPseudonimos = () =>{
-        fetch('http://www.mitra.cl/SS/CambiarPseudonimo.php',{
+        fetch('https://www.mitra.cl/SS/CambiarPseudonimo.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

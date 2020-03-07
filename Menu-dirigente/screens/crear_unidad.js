@@ -89,7 +89,7 @@ class crear_unidad extends Component {
         }else {
         this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Unidad creada con éxito" }, () =>
         {
-            fetch('http://www.mitra.cl/SS/crearUnidad.php',
+            fetch('https://www.mitra.cl/SS/crearUnidad.php',
             {
                 method: 'POST',
                 headers: 
