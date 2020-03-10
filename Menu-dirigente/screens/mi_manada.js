@@ -63,7 +63,7 @@ class mi_manada extends Component {
             isLoading:true,    
         })
 
-        fetch('http://www.mitra.cl/SS/GetMiembrosUnidad.php',{
+        fetch('https://www.mitra.cl/SS/GetMiembrosUnidad.php',{
                 method: 'POST',
                 header:{
                     'Accept': 'application/json',

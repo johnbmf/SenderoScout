@@ -114,7 +114,7 @@ class crear_mision extends Component {
         })} 
         else {
             this.setState({isLoading:true});
-            fetch('http://www.mitra.cl/SS/crearMision.php',{
+            fetch('https://www.mitra.cl/SS/crearMision.php',{
                 method: 'post',
                 header:{
                     'Accept': 'application/json',

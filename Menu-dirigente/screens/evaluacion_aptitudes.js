@@ -87,8 +87,8 @@ class evalaptitudes extends Component {
         else{
             console.log()
             this.setState({isLoading : true})
-            //fetch('http://192.168.50.65/SS/GetNinosSeisena.php',{
-            fetch('http://www.mitra.cl/SS/GetNinosSeisena.php',{    
+            //fetch('https://192.168.50.65/SS/GetNinosSeisena.php',{
+            fetch('https://www.mitra.cl/SS/GetNinosSeisena.php',{    
                 method: 'POST',
                 headers:{
                     'Accept': 'application/json',
@@ -127,8 +127,8 @@ class evalaptitudes extends Component {
         else{
             this.setState({isLoading : true})
             
-            //fetch('http://192.168.50.65/SS/EvaluarAptitudes.php',{
-            fetch('http://www.mitra.cl/SS/EvaluarAptitudes.php',{
+            //fetch('https://192.168.50.65/SS/EvaluarAptitudes.php',{
+            fetch('https://www.mitra.cl/SS/EvaluarAptitudes.php',{
                 method: 'POST',
                 header:{
                     'Accept': 'application/json',

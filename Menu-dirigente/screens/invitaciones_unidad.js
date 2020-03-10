@@ -67,7 +67,7 @@ class InvitacionesUnidad extends Component {
                 nombre_unidad:nombre_unidad1
             });
         }
-        fetch('http://www.mitra.cl/SS/aceptar_invitacion.php',{
+        fetch('https://www.mitra.cl/SS/aceptar_invitacion.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

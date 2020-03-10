@@ -139,7 +139,7 @@ class estadisticas extends Component {
 
     //   }
       getEstadisticas = () => {
-        fetch('http://www.mitra.cl/SS/get_estadisticas.php',{
+        fetch('https://www.mitra.cl/SS/get_estadisticas.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

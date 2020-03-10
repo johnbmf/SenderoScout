@@ -74,7 +74,7 @@ class cambiar_nombre_seisena extends Component {
 
     mostrarSeisenas(){
         this.setState({ isLoading: true});
-        fetch('http://www.mitra.cl/SS/get_nombres_seisenas.php',
+        fetch('https://www.mitra.cl/SS/get_nombres_seisenas.php',
                 {
                     method: 'POST',
                     headers: 
@@ -137,7 +137,7 @@ class cambiar_nombre_seisena extends Component {
         else {
         this.setState({ isLoading: true, disabled: true, SendAlertMessage: "Nombre de seisena cambiado con éxito" }, () =>
         {
-            fetch('http://www.mitra.cl/SS/change_seisena.php',
+            fetch('https://www.mitra.cl/SS/change_seisena.php',
             {
                 method: 'POST',
                 headers: 

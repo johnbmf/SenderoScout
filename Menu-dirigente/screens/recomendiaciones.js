@@ -135,7 +135,7 @@ class recomendaciones extends Component {
             isLoading:true,
         })
 
-        fetch('http://www.mitra.cl/SS/get_actividades.php',{
+        fetch('https://www.mitra.cl/SS/get_actividades.php',{
                 method: 'POST',
                 header:{
                     'Accept': 'application/json',

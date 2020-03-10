@@ -61,7 +61,7 @@ export class login extends Component {
         }
     }
     getUser(){
-        fetch('http://www.mitra.cl/SS/get_user.php',{
+        fetch('https://www.mitra.cl/SS/get_user.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',

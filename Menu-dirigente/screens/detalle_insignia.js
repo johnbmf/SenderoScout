@@ -82,7 +82,7 @@ class DetalleInsignia extends Component {
 
     EntregarInsignia(){
         this.setState({isLoading : true})
-        fetch('http://www.mitra.cl/SS/EntregarInsignia.php',{
+        fetch('https://www.mitra.cl/SS/EntregarInsignia.php',{
             method: 'POST',
             header:{
                 'Accept': 'application/json',

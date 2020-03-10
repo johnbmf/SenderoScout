@@ -41,7 +41,7 @@ class crear_mision extends Component {
             header: null
         }
         componentDidMount(){        
-            fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+            fetch('https://www.mitra.cl/SS/get_misiones_pendientes.php',{
                 method: 'post',
                 header:{
                     'Accept': 'application/json',
@@ -73,7 +73,7 @@ class crear_mision extends Component {
             });
         }
         getPendientes(){
-            fetch('http://www.mitra.cl/SS/get_misiones_pendientes.php',{
+            fetch('https://www.mitra.cl/SS/get_misiones_pendientes.php',{
                 method: 'post',
                 header:{
                     'Accept': 'application/json',

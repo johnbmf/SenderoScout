@@ -45,7 +45,7 @@ export class crear_cuenta extends Component {
     }
     Crear_dirigente =() => {        
         this.setState({isLoading : true})
-        fetch('http://www.mitra.cl/SS/crear_dirigente.php',{    
+        fetch('https://www.mitra.cl/SS/crear_dirigente.php',{    
             method: 'POST',
             headers:{
                 'Accept': 'application/json',

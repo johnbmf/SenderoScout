@@ -44,7 +44,7 @@ class evaluacion extends Component {
     enviarEvaluacion = (data, callback) =>{   
         console.log(data);
         this.setState({isLoading : true})
-        fetch('http://www.mitra.cl/SS/evluar_mision.php',{
+        fetch('https://www.mitra.cl/SS/evluar_mision.php',{
             method: 'post',
             header:{
                 'Accept': 'application/json',
